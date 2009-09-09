@@ -6,18 +6,23 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <name>lhj project parent</name>
+    <url>http://code.google.com/p/lhj-project/</url>
 
     <contributors>
     </contributors>
     <scm>
-    	<connection>scm:svn:http://dept1-svr:8227/svn/springweb/trunk/springweb/</connection>
-    	<developerConnection>scm:svn:http://dept1-svr:8227/svn/springweb/trunk/springweb/</developerConnection>
-    	<url>http://dept1-svr:8227/svn/springweb/trunk/springweb/</url>
+    	<connection>scm:svn:https://lhj-project.googlecode.com/svn/trunk/</connection>
+    	<developerConnection>scm:svn:http://lhj-project.googlecode.com/svn/trunk/</developerConnection>
+    	<url>http://lhj-project.googlecode.com/svn/trunk/</url>
     </scm>
     <organization>
         <name>ustcsoft</name>
         <url>www.ustcsoft.com</url>
     </organization>
+    <issueManagement>
+    	<system>googlecode</system>
+    	<url>http://code.google.com/p/lhj-project/issues/list</url>
+    </issueManagement>
     <developers>
         <developer>
             <id>hjliang</id>
