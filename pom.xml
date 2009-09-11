@@ -224,6 +224,6 @@
     </distributionManagement>
 
     <modules>
-        <module>../lhj-jaxws</module>
+        <module>lhj-jaxws</module>
     </modules>
 </project>
