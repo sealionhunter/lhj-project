@@ -8,33 +8,6 @@
     <name>lhj project</name>
     <url>http://code.google.com/p/lhj-project/</url>
 
-    <contributors>
-    </contributors>
-    <scm>
-    	<connection>scm:svn:https://lhj-project.googlecode.com/svn/trunk/</connection>
-    	<developerConnection>scm:svn:http://lhj-project.googlecode.com/svn/trunk/</developerConnection>
-    	<url>http://lhj-project.googlecode.com/svn/trunk/</url>
-    </scm>
-    <organization>
-        <name>ustcsoft</name>
-        <url>www.ustcsoft.com</url>
-    </organization>
-    <issueManagement>
-    	<system>googlecode</system>
-    	<url>http://code.google.com/p/lhj-project/issues/list</url>
-    </issueManagement>
-    <developers>
-        <developer>
-            <id>hjliang</id>
-            <name>Liang Haijin</name>
-            <email>lianghaijin@ustcsoft.com</email>
-            <organization>USTCSOFT </organization>
-            <organizationUrl>www.ustcsoft.com</organizationUrl>
-            <roles>
-                <role>Owner</role>
-            </roles>
-        </developer>
-    </developers>
     <modules>
         <module>lhj-parent</module>
     </modules>
