@@ -8,16 +8,14 @@
     <name>lhj project parent</name>
     <url>http://code.google.com/p/lhj-project/</url>
 
-    <contributors>
-    </contributors>
     <scm>
     	<connection>scm:svn:https://lhj-project.googlecode.com/svn/trunk/</connection>
     	<developerConnection>scm:svn:http://lhj-project.googlecode.com/svn/trunk/</developerConnection>
     	<url>http://lhj-project.googlecode.com/svn/trunk/</url>
     </scm>
     <organization>
-        <name>ustcsoft</name>
-        <url>www.ustcsoft.com</url>
+        <name>JKRX</name>
+        <url>www.jkrx.org</url>
     </organization>
     <issueManagement>
     	<system>googlecode</system>
@@ -25,11 +23,11 @@
     </issueManagement>
     <developers>
         <developer>
-            <id>hjliang</id>
-            <name>Liang Haijin</name>
-            <email>lianghaijin@ustcsoft.com</email>
-            <organization>USTCSOFT </organization>
-            <organizationUrl>www.ustcsoft.com</organizationUrl>
+            <id>sealion.hunter</id>
+            <name>Sealion Hunter</name>
+            <email>sealion.hunter@gmail.com</email>
+            <organization>JKRX</organization>
+            <organizationUrl>www.jkrx.org</organizationUrl>
             <roles>
                 <role>Owner</role>
             </roles>
@@ -210,18 +208,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <distributionManagement>
-        <repository>
-            <id>lhjrepo</id>
-            <uniqueVersion>true</uniqueVersion>
-            <url>http://dept1-svr:8434/nexus/content/repositories/lhjrepo</url>
-        </repository>
-        <snapshotRepository>
-            <id>lhjsnapshot</id>
-            <uniqueVersion>false</uniqueVersion>
-            <url>http://dept1-svr:8434/nexus/content/repositories/lhjsnapshot</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <modules>
         <module>../lhj-jaxws</module>

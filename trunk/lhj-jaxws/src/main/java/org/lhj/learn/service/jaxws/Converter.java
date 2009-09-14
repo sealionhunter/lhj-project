@@ -1,5 +1,5 @@
 /*
- * All Rights Reserved. Copyright(C) LHJ 2009. 
+ * All Rights Reserved. Copyright(C) LHJ 2009.
  */
 package org.lhj.learn.service.jaxws;
 
