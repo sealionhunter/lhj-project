@@ -17,8 +17,7 @@ import javax.jws.WebService;
         serviceName = "ConverterService",
         portName = "ConverterPortType")
 public class ConverterService implements Converter {
-    private BigDecimal rate = new BigDecimal(0.8);
-    private static final BigDecimal ZERO = new BigDecimal(0);
+    private BigDecimal rate = new BigDecimal("0.8");
 
     /**
      * converte dollar to euro
@@ -27,7 +26,7 @@ public class ConverterService implements Converter {
      */
     @Override
     public BigDecimal dollarToEuro(BigDecimal dollars) {
-        BigDecimal result = dollars == null ? ZERO : dollars.multiply(rate);
+        BigDecimal result = dollars == null ? BigDecimal.ZERO : dollars.multiply(rate);
         return result;
     }
 
