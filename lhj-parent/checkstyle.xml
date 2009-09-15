@@ -87,12 +87,8 @@
         </module>
         <module name="TodoComment"/>
         <module name="UpperEll"/>
-        <module name="RegexpHeader">
-            <property name="header" value="^/\*$\n^ \* \(C\) LHJ (\d\d\d\d-)?\d\d\d\d$"/>
-        </module>
         <module name="FileContentsHolder"/>
     </module>
-    <module name="PackageHtml"/>
     <module name="NewlineAtEndOfFile">
         <property name="severity" value="ignore"/>
     </module>
