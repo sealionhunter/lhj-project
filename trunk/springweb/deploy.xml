@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<project name="spring web app" basedir="." default="deploy">
+
+    <target name="deploy">
+        <copy todir="${tomcat.home}/webapps" overwrite="true">
+            <fileset dir="${targetdir}">
+                <include name="${project.build.finalName}.${project.packaging}"/>
+            </fileset>
+        </copy>
+        
+    </target>
+</project>

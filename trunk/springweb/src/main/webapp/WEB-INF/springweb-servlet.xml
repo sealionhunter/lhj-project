@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!-- the application context definition for the springweb DispatcherServlet -->
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
+	<bean name="/hello.htm" class="lhj.web.learn.springweb.InventoryController" >
+		<property name="productManager" ref="productManager" />
+	</bean>
+	
+	<bean name="/priceincrease.htm" class="lhj.web.learn.springweb.PriceIncreaseFormController">
+		<property name="sessionForm" value="true"/>
+		<property name="commandName" value="priceIncrease" />
+		<property name="commandClass" value="lhj.web.learn.springweb.service.PriceIncrease" />
+		<property name="validator">
+			<bean class="lhj.web.learn.springweb.service.PriceIncreaseValidator" />
+		</property>
+		<property name="formView" value="priceincrease"/>
+		<property name="successView" value="hello.htm" />
+		<property name="productManager" ref="productManager" />		
+	</bean>
+	
+	<bean name="/detail.htm" class="lhj.web.learn.springweb.ProductDetailController">
+	   <property name="commandName" value="productDetail"/>
+	   <property name="commandClass" value="lhj.web.learn.springweb.service.ProductDetail"/>
+       <property name="productManager" ref="productManager" />
+	</bean>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+</beans>
