@@ -81,4 +81,13 @@ public class UserInfoEntity implements Serializable {
         this.birthday = birthday;
     }
 
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("userId:").append(this.getUserId());
+        sb.append("|name:").append(this.getName());
+        sb.append("|sex:").append(this.getSex());
+        sb.append("|birthday:").append(this.getBirthday());
+        return sb.toString();
+    }
 }
