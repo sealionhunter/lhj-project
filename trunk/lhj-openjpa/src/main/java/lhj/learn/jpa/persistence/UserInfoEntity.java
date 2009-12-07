@@ -18,7 +18,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USER_INFO")
-@NamedQueries( { @NamedQuery(name = "UserInfoEntity.list", query = "select u from UserInfoEntity u") })
+@NamedQueries({
+    @NamedQuery(name = "UserInfoEntity.list", query = "select u from UserInfoEntity u")
+})
 public class UserInfoEntity implements Serializable {
     private long id;
     private String userId;

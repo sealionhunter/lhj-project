@@ -4,7 +4,7 @@ GO
 CREATE DATABASE [lhj-db]
 GO
 
-CREATE LOGIN [lhj] WITH PASSWORD=N'lhj', DEFAULT_DATABASE=[lhj-db]
+CREATE LOGIN [lhj] WITH PASSWORD=N'lhj-db', DEFAULT_DATABASE=[lhj-db]
 GO
 
 EXEC sys.sp_addsrvrolemember @loginame = N'lhj', @rolename = N'sysadmin'
