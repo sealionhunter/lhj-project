@@ -5,6 +5,9 @@
         <non-jta-data-source>java:openejb/Resource/lhj/datasource</non-jta-data-source>
         <class>lhj.learn.jpa.persistence.UserInfoEntity</class>
         <properties>
+            <!--
+            <property name="openjpa.Log" value="DefaultLevel = TRACE" />
+            -->
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
         </properties>
     </persistence-unit>
