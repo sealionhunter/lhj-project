@@ -1,0 +1,6 @@
+<openejb-jar>
+    <ejb-deployment ejb-name="UserInfoFacade">
+        <!-- applies to LocalOne, LocalTwo, RemoteOne, RemoteTwo, FooHome, and FooLocalHome -->
+        <jndi name="UserInfoFacade" />
+    </ejb-deployment>
+</openejb-jar>

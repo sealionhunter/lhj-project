@@ -3,24 +3,24 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>lhj.learn</groupId>
     <artifactId>lhj-parent</artifactId>
-    <version>1.0</version>
+    <version>${learnVersion}</version>
     <packaging>pom</packaging>
     <name>lhj learning projects parent</name>
     <description>Some learning projects</description>
     <url>http://code.google.com/p/lhj-project/</url>
 
     <scm>
-    	<connection>scm:svn:https://lhj-project.googlecode.com/svn/trunk/</connection>
-    	<developerConnection>scm:svn:http://lhj-project.googlecode.com/svn/trunk/</developerConnection>
-    	<url>http://lhj-project.googlecode.com/svn/trunk/</url>
+        <connection>scm:svn:https://lhj-project.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:http://lhj-project.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://lhj-project.googlecode.com/svn/trunk/</url>
     </scm>
     <organization>
         <name>JKRX</name>
         <url>www.jkrx.org</url>
     </organization>
     <issueManagement>
-    	<system>googlecode</system>
-    	<url>http://code.google.com/p/lhj-project/issues/list</url>
+        <system>googlecode</system>
+        <url>http://code.google.com/p/lhj-project/issues/list</url>
     </issueManagement>
     <developers>
         <developer>
@@ -37,9 +37,11 @@
     <properties>
         <!-- source Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <target.version>1.6</target.version>
+        <learnVersion>1.0</learnVersion>
+        <targetVersion>1.6</targetVersion>
+        <javaagentVersion>3.1.2</javaagentVersion>
         <!-- dependency versions -->
-        <spring.version>2.5.6</spring.version>
+        <springVersion>2.5.6</springVersion>
         <!-- java docs -->
         <jdkJavadocURL>http://java.sun.com/javase/6/docs/api/</jdkJavadocURL>
         <javaEEJavadocURL>http://java.sun.com/javaee/6/docs/api/</javaEEJavadocURL>
@@ -93,8 +95,8 @@
                 <configuration>
                     <linkXRef>true</linkXRef>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <sourceJdk>${target.version}</sourceJdk>
-                    <targetJdk>${target.version}</targetJdk>
+                    <sourceJdk>${targetVersion}</sourceJdk>
+                    <targetJdk>${targetVersion}</targetJdk>
                 </configuration>
             </plugin>
             <plugin>
@@ -107,9 +109,9 @@
                 <version>2.3</version>
             </plugin>
             <plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>javancss-maven-plugin</artifactId>
-            	<version>2.0</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.0</version>
             </plugin>
         </plugins>
     </reporting>
@@ -121,8 +123,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>2.0.2</version>
                     <configuration>
-                        <source>${target.version}</source>
-                        <target>${target.version}</target>
+                        <source>${targetVersion}</source>
+                        <target>${targetVersion}</target>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -141,11 +143,11 @@
             </plugins>
         </pluginManagement>
         <extensions>
-        	<extension>
-        		<groupId>org.apache.maven.wagon</groupId>
-        		<artifactId>wagon-webdav</artifactId>
-        		<version>1.0-beta-2</version>
-        	</extension>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
         </extensions>
     </build>
     <dependencyManagement>
@@ -153,7 +155,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
+                <version>${springVersion}</version>
             </dependency>
             <dependency>
                 <groupId>commons-collections</groupId>
@@ -175,6 +177,41 @@
                 <artifactId>commons-io</artifactId>
                 <version>1.4</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.openjpa</groupId>
+                <artifactId>openjpa</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>sqljdbc</artifactId>
+                <version>1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.openejb</groupId>
+                <artifactId>openejb-core</artifactId>
+                <version>3.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.activemq</groupId>
+                <artifactId>activemq-core</artifactId>
+                <version>4.1.2</version>
+            </dependency>
+            <dependency>
+                <groupId>backport-util-concurrent</groupId>
+                <artifactId>backport-util-concurrent</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.components</groupId>
+                <artifactId>geronimo-connector</artifactId>
+                <version>2.1.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -185,7 +222,4 @@
             <url>dav:http://localhost:8088/${project.artifactId}</url>
         </site>
     </distributionManagement>
-    <modules>
-        <module>../lhj-jaxws</module>
-    </modules>
 </project>
