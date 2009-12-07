@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean name="TransactionManager" class="org.apache.geronimo.transaction.manager.GeronimoTransactionManager" />
+    <bean name="SecurityService" class="org.apache.openejb.core.security.SecurityServiceImpl" />
+    <bean name="classPathApplication" class="org.apache.openejb.spring.ClassPathApplication" />
+    <bean name="UserInfoManager" class="lhj.learn.spring.ejb.UserInfoManager">
+        <property name="userInfos">
+            <list>
+                <bean class="lhj.learn.jpa.persistence.UserInfoEntity">
+                    <property name="id" value="00001" />
+                    <property name="userId" value="00001" />
+                    <property name="name" value="name1" />
+                    <property name="sex" value="1" />
+                    <property name="birthday">
+                        <bean id="sDate" class="org.apache.commons.lang.time.DateUtils"
+                            factory-method="parseDate">
+                            <constructor-arg value="12-07-2009 14:30" />
+                            <constructor-arg>
+                                <list>
+                                    <value>MM-dd-yyyy HH:mm</value>
+                                </list>
+                            </constructor-arg>
+                        </bean>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>
