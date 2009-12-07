@@ -1,11 +1,5 @@
 package lhj.web.learn.springweb.test.repository.impl;
 
-import java.util.List;
-
-import lhj.web.learn.springweb.domain.Product;
-import lhj.web.learn.springweb.repository.ProductDAO;
-
-import org.junit.Test;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
 public class JdbcProductDAOTest extends AbstractTransactionalDataSourceSpringContextTests {
