@@ -22,10 +22,17 @@ import javax.persistence.Table;
     @NamedQuery(name = "UserInfoEntity.list", query = "select u from UserInfoEntity u")
 })
 public class UserInfoEntity implements Serializable {
+    @Id
+    @Column(nullable = false, unique = true, updatable = false, insertable = false, name = "ID")
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
+    @Column(name = "USER_ID", nullable = false, length = 256)
     private String userId;
+    @Column(name = "USER_NAME", nullable = false, length = 256)
     private String name;
+    @Column(name = "SEX", nullable = false, length = 1)
     private String sex;
+    @Column(name = "BIRTHDAY", nullable = false)
     private Date birthday;
     private static final long serialVersionUID = 1L;
 
@@ -33,9 +40,6 @@ public class UserInfoEntity implements Serializable {
         super();
     }
 
-    @Id
-    @Column(nullable = false, unique = true, updatable = false, insertable = false, name = "ID")
-    @GeneratedValue(strategy = IDENTITY)
     public long getId() {
         return id;
     }
@@ -44,7 +48,6 @@ public class UserInfoEntity implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "USER_ID", nullable = false, length = 256)
     public String getUserId() {
         return userId;
     }
@@ -53,7 +56,6 @@ public class UserInfoEntity implements Serializable {
         this.userId = userId;
     }
 
-    @Column(name = "USER_NAME", nullable = false, length = 256)
     public String getName() {
         return name;
     }
@@ -62,7 +64,6 @@ public class UserInfoEntity implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "SEX", nullable = false, length = 1)
     public String getSex() {
         return sex;
     }
@@ -71,7 +72,6 @@ public class UserInfoEntity implements Serializable {
         this.sex = sex;
     }
 
-    @Column(name = "BIRTHDAY", nullable = false)
     public Date getBirthday() {
         return birthday;
     }
