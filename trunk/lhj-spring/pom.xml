@@ -1,34 +1,29 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <artifactId>lhj-parent</artifactId>
-        <groupId>lhj.learn</groupId>
-        <version>1.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>lhj-spring</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>lhj.learn</groupId>
-            <artifactId>lhj-openjpa</artifactId>
-            <version>${learnVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>lhj.learn</groupId>
-            <artifactId>lhj-openejb</artifactId>
-            <version>${learnVersion}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>openejb-spring</artifactId>
-        </dependency>
-        <dependency>
-        	<groupId>org.springframework</groupId>
-        	<artifactId>spring</artifactId>
-        	<type>jar</type>
-        	<scope>compile</scope>
-        </dependency>
-    </dependencies>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>lhj-parent</artifactId>
+    <groupId>lhj.learn</groupId>
+    <version>1.0</version>
+    <relativePath>../lhj-parent</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>lhj-spring</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>lhj.learn</groupId>
+      <artifactId>lhj-openjpa</artifactId>
+      <version>${learnVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>lhj.learn</groupId>
+      <artifactId>lhj-openejb</artifactId>
+      <version>${learnVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openejb</groupId>
+      <artifactId>openejb-spring</artifactId>
+    </dependency>
+  </dependencies>
 </project>
