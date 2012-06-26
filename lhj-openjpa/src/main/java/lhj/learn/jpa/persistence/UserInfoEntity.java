@@ -23,7 +23,7 @@ import javax.persistence.Table;
 })
 public class UserInfoEntity implements Serializable {
     @Id
-    @Column(nullable = false, unique = true, updatable = false, insertable = false, name = "ID")
+    @Column(updatable = false, insertable = false, name = "ID")
     @GeneratedValue(strategy = IDENTITY)
     private long id;
     @Column(name = "USER_ID", nullable = false, length = 256)

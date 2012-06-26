@@ -1,71 +1,73 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>lhj-openejb</artifactId>
-    <parent>
-        <artifactId>lhj-parent</artifactId>
-        <groupId>lhj.learn</groupId>
-        <version>1.0</version>
-    </parent>
-    <build>
-        <plugins>
-            <!-- this configures the surefire plugin to run your tests with the javaagent enabled -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <forkMode>pertest</forkMode>
-                    <argLine>-javaagent:${project.build.directory}/openejb-javaagent-${javaagentVersion}.jar</argLine>
-                    <workingDirectory>${basedir}/target</workingDirectory>
-                </configuration>
-            </plugin>
-
-            <!-- this tells maven to copy the openejb-javaagent jar into your target/ directory -->
-            <!-- where surefire can see it -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.openejb</groupId>
-                                    <artifactId>openejb-javaagent</artifactId>
-                                    <version>${javaagentVersion}</version>
-                                    <outputDirectory>${project.build.directory}</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
-    <dependencies>
-        <dependency>
-            <groupId>lhj.learn</groupId>
-            <artifactId>lhj-openjpa</artifactId>
-            <version>${learnVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.openejb</groupId>
-            <artifactId>openejb-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>sqljdbc</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>lhj-openejb</artifactId>
+  <parent>
+    <artifactId>lhj-parent</artifactId>
+    <groupId>lhj.learn</groupId>
+    <version>1.0</version>
+    <relativePath>../lhj-parent</relativePath>
+  </parent>
+  <build>
+    <plugins>
+      <!-- this configures the surefire plugin to run your tests with the 
+        javaagent enabled -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <forkMode>pertest</forkMode>
+          <argLine>-javaagent:${project.build.directory}/openejb-javaagent-${javaagentVersion}.jar</argLine>
+          <workingDirectory>${basedir}/target</workingDirectory>
+        </configuration>
+      </plugin>
+      <!-- this tells maven to copy the openejb-javaagent jar into your target/ 
+        directory -->
+      <!-- where surefire can see it -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.apache.openejb</groupId>
+                  <artifactId>openejb-javaagent</artifactId>
+                  <version>${javaagentVersion}</version>
+                  <outputDirectory>${project.build.directory}</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>lhj.learn</groupId>
+      <artifactId>lhj-openjpa</artifactId>
+      <version>${learnVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.openejb</groupId>
+      <artifactId>openejb-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.derby</groupId>
+      <artifactId>derby</artifactId>
+    </dependency>
+  </dependencies>
 </project>
