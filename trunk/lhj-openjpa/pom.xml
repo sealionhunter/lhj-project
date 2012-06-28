@@ -6,6 +6,7 @@
     <artifactId>lhj-parent</artifactId>
     <groupId>lhj.learn</groupId>
     <version>1.0</version>
+    <relativePath>../lhj-parent</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>lhj-openjpa</artifactId>
