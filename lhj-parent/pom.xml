@@ -38,11 +38,10 @@
   <properties>
     <!-- source Encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <learnVersion>1.0</learnVersion>
-    <jdkVersion>1.6</jdkVersion>
-    <javaagentVersion>3.1.2</javaagentVersion>
+    <java.version>1.6</java.version>
+    <javaagent.version>3.1.2</javaagent.version>
     <!-- dependency versions -->
-    <spring.version>2.5.6</spring.version>
+    <spring.version>3.1.1.RELEASE</spring.version>
     <powermock.version>1.4.12</powermock.version>
     <!-- java docs -->
     <jdkJavadocURL>http://java.sun.com/javase/6/docs/api/</jdkJavadocURL>
@@ -77,8 +76,8 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <configuration>
-            <source>${jdkVersion}</source>
-            <target>${jdkVersion}</target>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
             <encoding>${project.build.sourceEncoding}</encoding>
             <showDeprecation>true</showDeprecation>
             <showWarnings>true</showWarnings>
@@ -178,7 +177,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
-                  <targetJdk>${jdkVersion}</targetJdk>
+                  <targetJdk>${java.version}</targetJdk>
                   <rulesets>
                     <ruleset>/rulesets/basic.xml</ruleset>
                     <ruleset>/rulesets/braces.xml</ruleset>
@@ -535,6 +534,12 @@
         <groupId>org.apache.openejb</groupId>
         <artifactId>openejb-spring</artifactId>
         <version>3.1.2</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.apache.activemq</groupId>

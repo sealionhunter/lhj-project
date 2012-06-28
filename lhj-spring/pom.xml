@@ -14,16 +14,28 @@
     <dependency>
       <groupId>lhj.learn</groupId>
       <artifactId>lhj-openjpa</artifactId>
-      <version>${learnVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>lhj.learn</groupId>
       <artifactId>lhj-openejb</artifactId>
-      <version>${learnVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.openejb</groupId>
       <artifactId>openejb-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
     </dependency>
   </dependencies>
 </project>

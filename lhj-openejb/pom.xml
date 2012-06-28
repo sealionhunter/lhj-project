@@ -19,7 +19,7 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <forkMode>pertest</forkMode>
-          <argLine>-javaagent:${project.build.directory}/openejb-javaagent-${javaagentVersion}.jar</argLine>
+          <argLine>-javaagent:${project.build.directory}/openejb-javaagent-${javaagent.version}.jar</argLine>
           <workingDirectory>${basedir}/target</workingDirectory>
         </configuration>
       </plugin>
@@ -41,7 +41,7 @@
                 <artifactItem>
                   <groupId>org.apache.openejb</groupId>
                   <artifactId>openejb-javaagent</artifactId>
-                  <version>${javaagentVersion}</version>
+                  <version>${javaagent.version}</version>
                   <outputDirectory>${project.build.directory}</outputDirectory>
                 </artifactItem>
               </artifactItems>
@@ -55,7 +55,7 @@
     <dependency>
       <groupId>lhj.learn</groupId>
       <artifactId>lhj-openjpa</artifactId>
-      <version>${learnVersion}</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
