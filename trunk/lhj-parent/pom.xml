@@ -50,14 +50,10 @@
     <tomcat.home>E:/apps/apache-tomcat-6.0.18</tomcat.home>
     <geronimoHome>E:/Apps/geronimo-tomcat6-javaee5-2.1.4</geronimoHome>
     <!-- apps configurations -->
-    <jdbc.driverClassName>oracle.jdbc.OracleDriver</jdbc.driverClassName>
-    <jdbc.url>jdbc:oracle:thin:@${serverip}:1521:lhjdb</jdbc.url>
-    <jdbc.username>lhjdb</jdbc.username>
-    <jdbc.password>lhjdb</jdbc.password>
-    <jdbc.driverClassName>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc.driverClassName>
-    <jdbc.url>jdbc:sqlserver://localhost:1433;databaseName=lhj-db;selectMethod=cursor</jdbc.url>
+    <jdbc.driverClassName>org.apache.derby.jdbc.EmbeddedDriver</jdbc.driverClassName>
+    <jdbc.url>jdbc:derby:target/db/lhj-db;create=true</jdbc.url>
     <jdbc.username>lhj</jdbc.username>
-    <jdbc.password>lhj-db</jdbc.password>
+    <jdbc.password>lhjdb</jdbc.password>
   </properties>
   <build>
     <resources>
@@ -604,11 +600,6 @@
         <version>1.2</version>
       </dependency>
       <!-- third part -->
-      <dependency>
-        <groupId>com.microsoft.sqlserver</groupId>
-        <artifactId>sqljdbc4</artifactId>
-        <version>3.0.1301.101</version>
-      </dependency>
       <dependency>
         <groupId>hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
