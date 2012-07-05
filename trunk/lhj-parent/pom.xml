@@ -44,8 +44,8 @@
     <spring.version>3.1.1.RELEASE</spring.version>
     <powermock.version>1.4.12</powermock.version>
     <!-- java docs -->
-    <jdkJavadocURL>http://java.sun.com/javase/6/docs/api/</jdkJavadocURL>
-    <javaEEJavadocURL>http://java.sun.com/javaee/6/docs/api/</javaEEJavadocURL>
+    <javadoc.javaapi.url>http://download.oracle.com/javase/6/docs/api/</javadoc.javaapi.url>
+    <javadoc.javaeeapi.url>http://java.sun.com/javaee/6/docs/api/</javadoc.javaeeapi.url>
     <!-- env properties -->
     <tomcat.home>E:/apps/apache-tomcat-6.0.18</tomcat.home>
     <geronimoHome>E:/Apps/geronimo-tomcat6-javaee5-2.1.4</geronimoHome>
@@ -56,16 +56,6 @@
     <jdbc.password>lhjdb</jdbc.password>
   </properties>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-      <resource>
-        <directory>src/test/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -310,11 +300,6 @@
       <!-- spring framework -->
       <dependency>
         <groupId>org.springframework</groupId>
-        <artifactId>spring</artifactId>
-        <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
         <artifactId>spring-aop</artifactId>
         <version>${spring.version}</version>
       </dependency>
@@ -342,16 +327,6 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-context-support</artifactId>
         <version>${spring.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-dao</artifactId>
-        <version>2.0.8</version>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-hibernate3</artifactId>
-        <version>2.0.8</version>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -540,7 +515,7 @@
       <dependency>
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-core</artifactId>
-        <version>4.1.2</version>
+        <version>5.5.1</version>
       </dependency>
       <dependency>
         <groupId>backport-util-concurrent</groupId>
@@ -599,11 +574,11 @@
         <artifactId>jstl</artifactId>
         <version>1.2</version>
       </dependency>
-      <!-- third part -->
+      <!-- db -->
       <dependency>
         <groupId>hsqldb</groupId>
         <artifactId>hsqldb</artifactId>
-        <version>1.8.0.7</version>
+        <version>1.8.0.10</version>
       </dependency>
       <dependency>
         <groupId>org.apache.derby</groupId>
@@ -620,7 +595,7 @@
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>4.8.1</version>
+        <version>4.10</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -648,21 +623,9 @@
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-api-mockito</artifactId>
-        <version>${powermock.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>
-        <version>6.4</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>1.9.0</version>
+        <version>6.5.2</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
