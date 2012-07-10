@@ -20,6 +20,12 @@ import javax.tools.ToolProvider;
  */
 public class HtmlConverter {
 
+    private final static String CSS_CMT = "cmt";
+    private final static String CSS_STR = "str";
+    private final static String CSS_KWD = "kwd";
+//    private final static String CSS_PLN = "pln";
+    private final static String CSS_PUN = "pun";
+
     /**
      * @param args
      */
@@ -36,7 +42,7 @@ public class HtmlConverter {
         for (JavaFileObject jf : jfs) {
             CharSequence cs = jf.getCharContent(false);
             StringBuilder out = new StringBuilder();
-            convert(cs.toString().replaceAll("<","&lt;").replaceAll(">", "&gt;"), out);
+            convert(cs.toString().replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;"), out);
             System.out.println(out.toString());
         }
     }
@@ -45,51 +51,51 @@ public class HtmlConverter {
         int startPos = 0;
         int currentPos = 0;
         /* this is a block comment */
-        
+
         int length = chars.length();
         // this is a line comment
-        
+
         while (currentPos < length) {
             startPos = currentPos;
             char ch = chars.charAt(currentPos);
             if (ch == '/') {
                 ch = chars.charAt(++currentPos);
                 if (ch == '*') {
-                    out.append("<span class='review-cmt'>");
+                    out.append("<span class='" + CSS_CMT + "'>");
                     currentPos = getDocCommentEndPos(chars, currentPos + 1);
-                    out.append(chars.subSequence(startPos, 1+currentPos));
+                    out.append(chars.subSequence(startPos, 1 + currentPos));
                     out.append("</span>");
                 } else if (ch == '/') {
-                    out.append("<span class='review-cmt'>");
+                    out.append("<span class='" + CSS_CMT + "'>");
                     currentPos = getLineCmtEnd(chars, currentPos + 1);
-                    out.append(chars.subSequence(startPos, 1+currentPos));
+                    out.append(chars.subSequence(startPos, 1 + currentPos));
                     out.append("</span>");
                 } else if (ch == '=') {
-                    out.append("<span class='review-cal'>");
-                    out.append(chars.subSequence(startPos, 1+currentPos));
+                    out.append("<span class='" + CSS_PUN + "'>");
+                    out.append(chars.subSequence(startPos, 1 + currentPos));
                     out.append("</span>");
                 } else {
-                    out.append("<span class='review-cal'>");
-                    out.append(chars.subSequence(startPos, 1+currentPos));
+                    out.append("<span class='" + CSS_PUN + "'>");
+                    out.append(chars.subSequence(startPos, 1 + currentPos));
                     out.append("</span>");
                 }
             } else if (ch == '"') {
-                out.append("<span class='review-str'>");
-                if (chars.charAt(currentPos-1) == '\'') {
+                out.append("<span class='" + CSS_STR + "'>");
+                if (chars.charAt(currentPos - 1) == '\'') {
                     currentPos++;
                 } else {
                     currentPos = getStringEnd(chars, currentPos + 1);
                 }
-                out.append(chars.subSequence(startPos, 1+currentPos));
+                out.append(chars.subSequence(startPos, 1 + currentPos));
                 out.append("</span>");
             } else if (Character.isWhitespace(ch)) {
                 currentPos = getWhitespace(chars, currentPos);
-                out.append(chars.subSequence(startPos, currentPos+1));
-            } else if (Character.isJavaIdentifierPart(ch)){
+                out.append(chars.subSequence(startPos, currentPos + 1));
+            } else if (Character.isJavaIdentifierPart(ch)) {
                 currentPos = getWord(chars, currentPos + 1);
-                String word = chars.subSequence(startPos, currentPos+1).toString();
+                String word = chars.subSequence(startPos, currentPos + 1).toString();
                 if (isKeyWord(word)) {
-                    out.append("<span class='review-key'>");
+                    out.append("<span class='" + CSS_KWD + "'>");
                     out.append(word);
                     out.append("</span>");
                 } else {
@@ -104,21 +110,24 @@ public class HtmlConverter {
 
     private final static Set<String> keyWord;
     static {
-        String[] keys = {};
+        String[] keys = { "break", "continue", "do", "else", "for", "if", "return", "while", "auto", "case", "char",
+            "const", "default", "double", "enum", "extern", "float", "goto", "int", "long", "register", "short",
+            "signed", "sizeof", "static", "struct", "switch", "typedef", "union", "unsigned", "void", "volatile",
+            "catch", "class", "delete", "false", "import", "new", "operator", "private", "protected", "public", "this",
+            "throw", "true", "try", "typeof", "abstract", "boolean", "byte", "extends", "final", "finally",
+            "implements", "import", "instanceof", "null", "native", "package", "strictfp", "super", "synchronized",
+            "throws", "transient" };
         keyWord = Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(keys)));
     }
 
     private boolean isKeyWord(String word) {
-        if (keyWord.contains(word)) {
-            return true;
-        }
-        return false;
+        return keyWord.contains(word);
     }
 
     private int getWord(CharSequence chars, int startPos) {
         int currentPos = startPos;
         int length = chars.length();
-        while (currentPos < length ) {
+        while (currentPos < length) {
             if (!Character.isJavaIdentifierPart(chars.charAt(currentPos))) {
                 currentPos--;
                 break;
