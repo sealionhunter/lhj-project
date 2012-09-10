@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.multipart.maxSize" value="1000000" />
+	<include file="struts-default.xml" />
+	<package name="/" extends="json-default">
+		<default-action-ref name="default" />
+		<global-results>
+			<result name="error">WEB-INF/view//error.jsp</result>
+		</global-results>
+
+		<action name="default" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/index.jsp</result>
+		</action>
+
+		<action name="main" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/main.jsp</result>
+		</action>
+
+		<action name="top" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/top.jsp</result>
+		</action>
+
+		<action name="center" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/center.jsp</result>
+		</action>
+
+		<action name="bottom" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/bottom.jsp</result>
+		</action>
+
+		<action name="left" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">WEB-INF/view/left.jsp</result>
+		</action>
+
+		<action name="loginForm" class="loginAction" method="execute">
+			<interceptor-ref name="defaultStack" />
+			<result name="success">WEB-INF/view/login.jsp</result>
+			<result name="main">WEB-INF/view/main.jsp</result>
+		</action>
+
+		<action name="login" class="loginAction" method="login">
+			<result name="input">
+				WEB-INF/view/login.jsp
+			</result>
+			<result name="success">WEB-INF/view/main.jsp</result>
+		</action>
+
+		<action name="logout" class="loginAction" method="logout">
+			<result name="success" type="redirectAction">
+				<param name="actionName">loginForm</param>
+			</result>
+		</action>
+
+		<action name="userList" class="userAction" method="list">
+			<result name="success">WEB-INF/view/userList.jsp</result>
+		</action>
+
+		<action name="userEdit" class="userAction" method="edit">
+			<result name="success">WEB-INF/view/userEdit.jsp</result>
+		</action>
+
+		<action name="userDelete" class="userAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">userList</param>
+			</result>
+		</action>
+
+		<action name="userEditOk" class="userAction" method="editOk">
+			<result name="input">WEB-INF/view/userEdit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">userList</param>
+			</result>
+		</action>
+
+
+		<action name="userHotelSelect" class="userHotelSelectAction"
+			method="list">
+			<result name="success">WEB-INF/view/userHotelSelect.jsp</result>
+		</action>
+
+		<action name="userHotelSearchOK" class="userHotelSelectAction"
+			method="selectOk">
+			<result name="success" type="redirectAction">
+				<param name="actionName">userList</param>
+			</result>
+		</action>
+
+		<action name="hotelList" class="hotelAction" method="list">
+			<result name="success">WEB-INF/view/hotelList.jsp</result>
+		</action>
+
+		<action name="hotelDelete" class="hotelAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">hotelList</param>
+			</result>
+		</action>
+
+		<action name="hotelEdit" class="hotelAction" method="edit">
+			<result name="success">WEB-INF/view/hotelEdit.jsp</result>
+		</action>
+
+		<action name="hotelProperty" class="hotelAction" method="property">
+			<result name="success">WEB-INF/view/hotelProperty.jsp</result>
+			<result name="logout" type="redirectAction">
+				<param name="actionName">logout</param>
+			</result>
+		</action>
+
+		<action name="hotelEditOk" class="hotelAction" method="editOk">
+			<result name="input">WEB-INF/view/hotelEdit.jsp</result>
+			<result name="property">WEB-INF/view/hotelProperty.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">hotelList</param>
+			</result>
+		</action>
+
+		<action name="tableList" class="dinningTableAction" method="list">
+			<result name="success">WEB-INF/view/dinningTableList.jsp</result>
+		</action>
+
+		<action name="tableEdit" class="dinningTableAction" method="edit">
+			<result name="success">WEB-INF/view/dinningTableEdit.jsp</result>
+		</action>
+
+		<action name="tableEditOk" class="dinningTableAction" method="editOk">
+			<result name="input">WEB-INF/view/dinningTableEdit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">tableList</param>
+			</result>
+		</action>
+
+		<action name="tableDelete" class="dinningTableAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">tableList</param>
+			</result>
+		</action>
+
+		<action name="foodList" class="foodAction" method="list">
+			<result name="success">WEB-INF/view/foodList.jsp</result>
+		</action>
+
+		<action name="foodListFirst" class="foodAction" method="first">
+			<result name="success">WEB-INF/view/foodList.jsp</result>
+		</action>
+
+		<action name="foodListLast" class="foodAction" method="last">
+			<result name="success">WEB-INF/view/foodList.jsp</result>
+		</action>
+
+		<action name="foodListBack" class="foodAction" method="back">
+			<result name="success">WEB-INF/view/foodList.jsp</result>
+		</action>
+
+		<action name="foodListNext" class="foodAction" method="next">
+			<result name="success">WEB-INF/view/foodList.jsp</result>
+		</action>
+
+		<action name="foodEdit" class="foodAction" method="edit">
+			<result name="success">WEB-INF/view/foodEdit.jsp</result>
+		</action>
+
+		<action name="foodEditOk" class="foodAction" method="editOk">
+			<result name="input">WEB-INF/view/foodEdit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">foodList</param>
+			</result>
+		</action>
+
+		<action name="foodDelete" class="foodAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">foodList</param>
+			</result>
+		</action>
+
+		<action name="orderList" class="orderAction" method="list">
+			<result name="success">WEB-INF/view/orderList.jsp</result>
+		</action>
+
+		<action name="orderEdit" class="orderAction" method="edit">
+			<result name="success">WEB-INF/view/orderEdit.jsp</result>
+		</action>
+
+		<action name="orderEditOk" class="orderAction" method="editOk">
+			<result name="input">WEB-INF/view/orderEdit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">orderList</param>
+			</result>
+		</action>
+
+		<action name="orderSelectFood" class="orderAction" method="foodSelect">
+			<result name="input">WEB-INF/view/orderEdit.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">orderFoodSelect</param>
+				<param name="oid">${uuid}</param>
+			</result>
+		</action>
+
+		<action name="orderFoodSelect" class="orderFoodSelectAction"
+			method="list">
+			<result name="input">WEB-INF/view/orderFoodSelect.jsp</result>
+			<result name="success">WEB-INF/view/orderFoodSelect.jsp</result>
+		</action>
+		<!-- <action name="orderFoodSelectAdd" class="orderFoodSelectAction" method="editOk"> 
+			<result name="input">WEB-INF/view/orderFoodSelect.jsp</result> <result name="success">WEB-INF/view/orderFoodSelect.jsp</result> 
+			</action> <action name="orderFoodSelectDelete" class="orderFoodSelectAction" 
+			method="editOk"> <result name="input">WEB-INF/view/orderFoodSelect.jsp</result> 
+			<result name="success">WEB-INF/view/orderFoodSelect.jsp</result> </action> -->
+		<action name="orderFoodSelectOK" class="orderFoodSelectAction"
+			method="selectOK">
+			<result name="input">WEB-INF/view/orderFoodSelect.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">orderEdit</param>
+				<param name="actionType">foodSelectBack</param>
+				<param name="uuid">${uuid}</param>
+			</result>
+		</action>
+
+		<action name="orderDelete" class="orderAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">orderList</param>
+			</result>
+		</action>
+
+		<action name="cartAdd" class="cartAction" method="add">
+		</action>
+	</package>
+</struts>

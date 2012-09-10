@@ -1,0 +1,33 @@
+.titleText {
+	font-size: 12px;
+	color: #1F4A65;
+	font-weight: bold;
+}
+
+.tabTitle {
+	 height : 26px;
+	 background : url(/myorder/images/tab_14.gif);
+	 vertical-align : middle;
+	 text-align:center;
+}
+
+.tabBody {
+	height : 20px;
+	background-color: #fff;
+	text-align:center;
+}
+
+.newLabel {
+	padding : 5px;
+	width : 40px;
+	height : 30px;
+	text-align : right;
+	white-space: nowrap;
+}
+
+.newValue {
+	padding : 5px;
+	height : 30px;
+	width : 20px;
+	text-align : left;
+}

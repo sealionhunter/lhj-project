@@ -1,0 +1,30 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-size: 12px;
+}
+
+.text {
+	color: #43860c;
+	font-size: 12px;
+}
+
+a:link {
+	font-size:12px; 
+	text-decoration:none; 
+	color:#43860c;
+}
+
+a:visited {
+	font-size:12px; 
+	text-decoration:none; 
+	color:#43860c;
+}
+
+a:hover {
+	font-size:12px; 
+	text-decoration:none; 
+	color:#FF0000;
+}
