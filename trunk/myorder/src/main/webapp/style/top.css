@@ -1,0 +1,67 @@
+.topBack {
+	line-height : 9px; 
+	background-image : url(/myorder/images/main_04.gif);
+}
+
+.topLeft {
+	height : 9px;
+	width : 97px;
+	background-image : url(/myorder/images/main_01.gif);
+}
+
+.centerBack {
+	height : 47px;
+	background-image : url(/myorder/images/main_09.gif);
+}
+
+.centerLeft {
+	height : 47px;
+	width : 38px;
+	background-image : url(/myorder/images/main_06.gif);
+}
+
+.welcome {
+	height : 29px;
+	background-image : url(/myorder/images/main_07.gif);
+}
+
+.name {
+	height : 18px;
+	background-image : url(/myorder/images/main_14.gif);
+}
+
+.platform {
+	width : 155px;
+	background-image : url(/myorder/images/main_08.gif);
+}
+
+.operation {
+	height : 23px;
+}
+
+.timeBack {
+	width : 200px;
+	background-image : url(/myorder/images/main_11.gif);
+}
+
+.time {
+	width : 11%;
+	height : 23px;
+}
+
+.timeValue {
+	width : 89%;
+	vertical-align : bottom;
+}
+
+.bottomBack {
+	height: 5px;
+	line-height:5px; 
+	background-image:url(/myorder/images/main_18.gif);
+}
+
+.bottomLeft {
+	width : 177px;
+	background-image:url(/myorder/images/main_16.gif);
+	line-height:5px;
+}
