@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.opensymphony.xwork2.Action;
 import com.ustcsoft.gs.myerp.webui.common.AbstractAction;
 import com.ustcsoft.gs.myerp.webui.common.MyErpConstant;
-import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
 
 @Service(value = "loginAction")
 public class LoginAction extends AbstractAction<LoginInfo> {
@@ -19,7 +18,7 @@ public class LoginAction extends AbstractAction<LoginInfo> {
 
 	public String execute() throws Exception {
 		setErrormsg(null);
-		if (MyHotelUtils.getLoginInfo() != null) {
+		if (getLoginInfo() != null) {
 			return "main";
 		}
 		return Action.SUCCESS;

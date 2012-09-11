@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.opensymphony.xwork2.Action;
 import com.ustcsoft.gs.myerp.webui.common.AbstractAction;
 import com.ustcsoft.gs.myerp.webui.common.MyErpConstant;
-import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
 import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 
 @Service(value = "userAction")
@@ -36,7 +35,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 			data = userService.get(getUuid());
 		} else {
 			if ("profile".equals(actionType)) {
-				LoginInfo l = MyHotelUtils.getLoginInfo();
+				LoginInfo l = getLoginInfo();
 				data = userService.get(l.getUid());
 			}
 		}

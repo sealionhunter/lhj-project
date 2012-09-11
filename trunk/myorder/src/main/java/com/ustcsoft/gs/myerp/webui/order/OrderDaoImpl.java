@@ -129,6 +129,7 @@ public class OrderDaoImpl implements OrderDao {
 		return order;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<OrderDetail> getDetail(String oid) throws Exception {
 		DetachedCriteria criteria = DetachedCriteria
 				.forClass(OrderDetail.class);

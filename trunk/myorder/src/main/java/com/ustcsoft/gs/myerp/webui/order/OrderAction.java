@@ -57,6 +57,7 @@ public class OrderAction extends AbstractAction<Orders> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public String edit() throws Exception {
 		setErrormsg(null);
 
@@ -207,6 +208,7 @@ public class OrderAction extends AbstractAction<Orders> {
 		return Action.SUCCESS;
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<OrderDetail> getSDetails(String oid) {
 		Map<String, Object> s = ActionContext.getContext().getSession();
 		List<OrderDetail> sDetails = (List<OrderDetail>) s

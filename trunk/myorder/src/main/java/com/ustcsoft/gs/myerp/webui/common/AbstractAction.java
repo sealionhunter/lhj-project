@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.opensymphony.xwork2.Action;
+import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 
 public class AbstractAction<T> {
 	protected String actionType;
@@ -177,5 +178,9 @@ public class AbstractAction<T> {
 	 */
 	public void setDatas(List<T> datas) {
 		this.datas = datas;
+	}
+	
+	protected LoginInfo getLoginInfo() {
+		return MyHotelUtils.getLoginInfo();
 	}
 }

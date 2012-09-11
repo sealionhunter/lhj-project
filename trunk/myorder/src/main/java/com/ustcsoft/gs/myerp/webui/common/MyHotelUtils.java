@@ -8,7 +8,7 @@ import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 
 public class MyHotelUtils {
 
-	public static LoginInfo getLoginInfo() {
+	static LoginInfo getLoginInfo() {
 		return (LoginInfo) ServletActionContext.getRequest().getSession()
 				.getAttribute(MyErpConstant.SESSION_LOGIN_INFO);
 	}

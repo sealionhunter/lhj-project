@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import com.opensymphony.xwork2.Action;
 import com.ustcsoft.gs.myerp.webui.common.AbstractAction;
 import com.ustcsoft.gs.myerp.webui.common.MyErpConstant;
-import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
-import com.ustcsoft.gs.myerp.webui.food.Food;
 import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 
 @Service(value = "hotelAction")
@@ -42,7 +40,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 		setErrormsg(null);
 		data = null;
 		setActionType(MyErpConstant.ACTION_NEW);
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		if (!StringUtils.isEmpty(l.getHid())) {
 			data = hotelService.get(l.getHid());
 		}
@@ -62,7 +60,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 		data = null;
 
 		setActionType(MyErpConstant.ACTION_NEW);
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		if (!l.isAdmin()) {
 			uuid = l.getHid();
 		}
@@ -71,7 +69,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 		}
 		if (data == null) {
 			setActionType(MyErpConstant.ACTION_NEW);
-			// LoginInfo l = MyHotelUtils.getLoginInfo();
+			// LoginInfo l = getLoginInfo();
 			data = new Hotel();
 		} else {
 			setActionType(MyErpConstant.ACTION_EDIT);
@@ -102,7 +100,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 			return Action.INPUT;
 		}
 
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		if (!l.isAdmin()) {
 			return "property";
 		}
