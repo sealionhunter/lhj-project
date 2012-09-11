@@ -16,7 +16,6 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.ustcsoft.gs.myerp.webui.common.AbstractAction;
 import com.ustcsoft.gs.myerp.webui.common.MyErpConstant;
-import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
 import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 import com.ustcsoft.gs.myerp.webui.order.OrderDetail;
 import com.ustcsoft.gs.myerp.webui.order.OrderService;
@@ -35,12 +34,12 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 	private FoodService foodService;
 
 	protected List<Food> doSearch() throws Exception {
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		return foodService.list(l.getHid(), this.condition, paging);
 	}
 
 	protected int doCount() throws Exception {
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		return foodService.count(l.getHid(), this.condition);
 	}
 
@@ -70,6 +69,7 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 		s.put(MyErpConstant.SESSION_ORDER_DETAIL_INFO + oid, dbDetails);
 	}
 
+	@SuppressWarnings("unchecked")
 	private List<OrderDetail> getSDetails() {
 		Map<String, Object> s = ActionContext.getContext().getSession();
 		List<OrderDetail> sDetails = (List<OrderDetail>) s

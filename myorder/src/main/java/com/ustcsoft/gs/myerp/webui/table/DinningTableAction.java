@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.opensymphony.xwork2.Action;
 import com.ustcsoft.gs.myerp.webui.common.AbstractAction;
 import com.ustcsoft.gs.myerp.webui.common.MyErpConstant;
-import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
 import com.ustcsoft.gs.myerp.webui.login.LoginInfo;
 
 @Service(value = "dinningTableAction")
@@ -28,12 +27,12 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 	private DinningTableService dinningTableService;
 
 	protected List<DinningTable> doSearch() throws Exception {
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		return dinningTableService.list(l.getHid(), this.condition, paging);
 	}
 
 	protected int doCount() throws Exception {
-		LoginInfo l = MyHotelUtils.getLoginInfo();
+		LoginInfo l = getLoginInfo();
 		return dinningTableService.count(l.getHid(), this.condition);
 	}
 
@@ -65,7 +64,7 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 		}
 		if (data == null) {
 			setActionType(MyErpConstant.ACTION_NEW);
-			LoginInfo l = MyHotelUtils.getLoginInfo();
+			LoginInfo l = getLoginInfo();
 			data = new DinningTable();
 			data.setHid(l.getHid());
 		} else {
