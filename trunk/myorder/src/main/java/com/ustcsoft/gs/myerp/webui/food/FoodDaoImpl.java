@@ -27,9 +27,6 @@ public class FoodDaoImpl implements FoodDao {
 			throws Exception {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Food.class);
 		makeCondition(condition, hid, criteria);
-
-		hibernateTemplate.findByCriteria(criteria, paging.getPcurrent(),
-				paging.getPercount());
 		List<Food> result = (List<Food>) hibernateTemplate.findByCriteria(
 				criteria, (paging.getPcurrent() - 1) * paging.getPercount(),
 				paging.getPercount());

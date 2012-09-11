@@ -151,6 +151,11 @@ $(document).ready(function() {
 											<td class="newValue"><input type="checkbox"
 												name="data.admin" id="data.admin" value="true" /></td>
 										</tr>
+										<tr>
+											<td class="newLabel">创建餐厅:</td>
+											<td class="newValue"><input type="checkbox"
+												name="createHotel" id="createHotel" value="true" /></td>
+										</tr>
 									</c:if>
 									<tr>
 										<td>&nbsp;</td>

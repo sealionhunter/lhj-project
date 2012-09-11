@@ -19,6 +19,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 
 	@Autowired
 	private UserService userService;
+	private boolean createHotel;
 
 	protected List<UserInfo> doSearch() throws Exception {
 		return userService.list(this.condition, paging);
@@ -49,7 +50,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 		setErrormsg(null);
 		try {
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
-				userService.add(data);
+				userService.add(data, createHotel);
 			} else {
 				userService.update(data);
 			}
@@ -130,6 +131,14 @@ public class UserAction extends AbstractAction<UserInfo> {
 	 */
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public boolean isCreateHotel() {
+		return createHotel;
+	}
+
+	public void setCreateHotel(boolean createHotel) {
+		this.createHotel = createHotel;
 	}
 
 }

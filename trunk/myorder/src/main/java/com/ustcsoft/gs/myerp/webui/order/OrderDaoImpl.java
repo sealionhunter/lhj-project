@@ -31,12 +31,9 @@ public class OrderDaoImpl implements OrderDao {
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Orders.class);
 		makeCondition(condition, hid, criteria);
-
-		hibernateTemplate.findByCriteria(criteria, paging.getPcurrent(),
-				paging.getPercount());
 		List<Orders> result = (List<Orders>) hibernateTemplate.findByCriteria(
-				criteria, (paging.getPcurrent() - 1) * paging.getPercount(),
-				paging.getPercount());
+				criteria, paging == null ? 0 : (paging.getPcurrent() - 1)
+						* paging.getPercount(), paging == null ? 0 : 10);
 		// hibernateTemplate.find(sql);
 
 		if (result == null || result.size() == 0) {
@@ -77,8 +74,7 @@ public class OrderDaoImpl implements OrderDao {
 						condition.getAddress(), MatchMode.ANYWHERE));
 			}
 			if (!StringUtils.isEmpty(condition.getState())) {
-				criteria.add(Restrictions.like("state", condition.getState(),
-						MatchMode.ANYWHERE));
+				criteria.add(Restrictions.eq("state", condition.getState()));
 			}
 			if (!StringUtils.isEmpty(condition.getTelNum())) {
 				criteria.add(Restrictions.like("telNum", condition.getTelNum(),

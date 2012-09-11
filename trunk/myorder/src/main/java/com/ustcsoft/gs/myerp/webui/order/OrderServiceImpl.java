@@ -46,6 +46,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		order.setOprice(oprice);
 		if (oid == null || oid.startsWith("tmp")) {
+			order.setState("1");
 			oid = orderDao.add(order);
 			for (OrderDetail detail : details) {
 				detail.setOid(oid);
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
 		orderDao.setDetail(oid, details);
 		DinningTable table = dinningTableDao.get(order.getTid());
 		if (table != null) {
-			table.setState("2");
+			table.setState("1");
 			dinningTableDao.update(table);
 		}
 	}
@@ -74,6 +75,21 @@ public class OrderServiceImpl implements OrderService {
 			throws Exception {
 		orderDao.update(order);
 		orderDao.setDetail(order.getUuid(), details);
+	}
+
+	public Orders findByTable(String tid) throws Exception {
+		SearchCondition condition = new SearchCondition();
+		condition.setState("1");
+		List<Orders> os = orderDao.list(tid, condition, null);
+		return os == null || os.size() == 0 ? null : os.get(0);
+	}
+
+	@Transactional
+	public void pay(String uuid, BigDecimal rprice) throws Exception {
+		Orders o = orderDao.get(uuid);
+		o.setState("2");
+		o.setRprice(rprice);
+		orderDao.update(o);
 	}
 
 	@Override

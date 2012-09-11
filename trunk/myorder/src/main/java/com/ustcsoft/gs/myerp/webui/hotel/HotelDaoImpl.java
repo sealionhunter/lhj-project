@@ -27,8 +27,6 @@ public class HotelDaoImpl implements HotelDao {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Hotel.class);
 		makeCondition(condition, criteria);
 
-		hibernateTemplate.findByCriteria(criteria, paging.getPcurrent(),
-				paging.getPercount());
 		List<Hotel> result = (List<Hotel>) hibernateTemplate.findByCriteria(
 				criteria, (paging.getPcurrent() - 1) * paging.getPercount(),
 				paging.getPercount());

@@ -31,7 +31,19 @@ $(document).ready(function() {
     $('[name=btnRowOrder]').click(function() {
         var id = $(this).parent().parent().attr("id");
         $("#tableOrderForm #tid").val(id);
+        $("#tableOrderForm #actionType").val("new");
         $("#tableOrderForm").submit();
+    });
+    $('[name=btnRowOrderEdit]').click(function() {
+        var id = $(this).parent().parent().attr("id");
+        $("#tableOrderForm #tid").val(id);
+        $("#tableOrderForm #actionType").val("edit");
+        $("#tableOrderForm").submit();
+    });
+    $('[name=btnRowOrderPay]').click(function() {
+        var id = $(this).parent().parent().attr("id");
+        $("#tableOrderPayForm #tid").val(id);
+        $("#tableOrderPayForm").submit();
     });
     $("[name=btnRowDelete]").click(function() {
     	if (!confirm("删除后不可恢复，确定删除吗！")) {
@@ -106,7 +118,37 @@ $(document).ready(function() {
             return;
         }
         $("#tableOrderForm #tid").val($("input[name=ids]:checked").parent().parent().attr("id"));
+        $("#tableOrderForm #actionType").val("new");
         $("#tableOrderForm").submit();
+    });
+    $('[name=btnOrderEdit]').click(function() {
+        var n = $("input[name=ids]:checked").length;
+
+        if (n < 1) {
+            alert("请选择餐台");
+            return;
+        }
+        if (n > 1) {
+            alert("一次只能对一张餐台预定");
+            return;
+        }
+        $("#tableOrderForm #tid").val($("input[name=ids]:checked").parent().parent().attr("id"));
+        $("#tableOrderForm #actionType").val("edit");
+        $("#tableOrderForm").submit();
+    });
+    $('[name=btnOrderPay]').click(function() {
+        var n = $("input[name=ids]:checked").length;
+
+        if (n < 1) {
+            alert("请选择餐台");
+            return;
+        }
+        if (n > 1) {
+            alert("一次只能对一张餐台预定");
+            return;
+        }
+        $("#tableOrderPayForm #tid").val($("input[name=ids]:checked").parent().parent().attr("id"));
+        $("#tableOrderPayForm").submit();
     });
     $("[name=btnDelete]").click(function() {
         var uuids = new Array();
@@ -186,9 +228,8 @@ $(document).ready(function() {
 										<td>状态:</td>
 										<td><select name="condition.state" id="condition.state">
 												<option value=""></option>
-												<option value="0">使用中</option>
-												<option value="1"}>空闲中</option>
-												<option value="2"}>预订中</option>
+												<option value="0">空闲</option>
+												<option value="1">占用</option>
 										</select></td>
 									</tr>
 									<tr>
@@ -335,15 +376,18 @@ $(document).ready(function() {
 												test="${table.category == '6' }">其他</c:if></td>
 										<td class="tabBody" style="text-align: right;">${table.maxService
 											}</td>
-										<td class="tabBody"><c:if test="${table.state == '0' }">使用中</c:if>
-											<c:if test="${table.state == '1' }">空闲中</c:if> <c:if
-												test="${table.state == '2' }">预订中</c:if></td>
+										<td class="tabBody"><c:if test="${table.state == '0' }">空闲</c:if>
+											<c:if test="${table.state == '1' }">占用</c:if> </td>
 										<td class="tabBody">${table.description }</td>
 										<td class="tabBody"><img src="images/037.gif" width="9"
 											height="9" name="btnRowEdit" />&nbsp; <img
 											src="images/010.gif" width="9" height="9" name="btnRowDelete" />&nbsp;
-											<img src="images/002.gif" width="9" height="9"
-											name="btnRowOrder" /></td>
+											<c:if test="${not table.hasOrders }">
+											<img src="images/arrow_082.gif" width="9" height="9"
+											name="btnRowOrder" /></c:if><c:if test="${table.hasOrders }">
+                                            <img src="images/002.gif" width="9" height="9"
+                                            name="btnRowOrderEdit" /><img src="images/002.gif" width="9" height="9"
+                                            name="btnRowOrderPay" /></c:if></td>
 									</tr>
 								</c:forEach>
 							</table></td>
@@ -419,9 +463,14 @@ $(document).ready(function() {
 			value="delete" name="actionType" id="actionType" />
 	</form>
 	<form id="tableOrderForm" name="tableOrderForm"
-		action="orderList.action" method="post">
+		action="orderEdit.action" method="post">
 		<input type="hidden" name="tid" id="tid" /><input type="hidden"
 			value="delete" name="actionType" id="actionType" />
 	</form>
+    <form id="tableOrderPayForm" name="tablePayForm"
+        action="orderPay.action" method="post">
+        <input type="hidden" name="tid" id="tid" /><input type="hidden"
+            value="delete" name="actionType" id="actionType" />
+    </form>
 </body>
 </html>
