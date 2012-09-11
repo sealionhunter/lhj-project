@@ -98,11 +98,11 @@
 	</table>
 	<map name="Map" id="Map">
 		<area shape="rect" coords="3,1,49,22" href="#" />
-		<area shape="rect" coords="52,2,95,21" href="#" />
-		<area shape="rect" coords="102,2,144,21" href="#" />
-		<area shape="rect" coords="150,1,197,22" href="#" />
+		<area shape="rect" coords="52,2,95,21" href="#"  onclick="window.parent.mainFrame.rightFrame.history.back()"/>
+		<area shape="rect" coords="102,2,144,21" href="#"  onclick="window.parent.mainFrame.rightFrame.history.forward()"/>
+		<area shape="rect" coords="150,1,197,22" href="#" onclick="window.parent.mainFrame.rightFrame.history.back()"/>
 		<area shape="rect" coords="210,2,304,20" href="#"
-			onclick="window.parent.rightFrame.location=userEdit.action?uid=&actionType=edit" />
+			onclick="window.parent.mainFrame.rightFrame.location='userEdit.action?uid=&actionType=profile'" />
 		<area shape="rect" coords="314,-1,361,21" href="#"
 			onclick="return logout();" />
 	</map>

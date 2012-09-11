@@ -19,12 +19,24 @@ $(document).ready(function() {
 			alert("请输入用户名！");
 			return false;
 		}
+		var password = $("#data\\.password").val();
+		if (password != undefined) {
+		if (password == '' || password.length == 0) {
+			alert("请输入密码！");
+			return false;
+		}}
 		var hname = $("#data\\.uname").val();
 		if (hname == '' || hname.length == 0) {
 			alert("请输入姓名！");
 			return false;
 		}
+		var birthday = $("#data\\.birthday").val();
+		if (!jQuery.isEmptyObject(birthday) && !isDate(birthday)) {
+			alert("出生年月日输入不正确！请重新输入");
+			return false;
+		}
 		var validTo = $("#data\\.validTo").val();
+		if (validTo != undefined) {
 		if (validTo == '' || validTo.length == 0) {
 			alert("请输入有效期限！");
 			return false;
@@ -32,12 +44,7 @@ $(document).ready(function() {
 		if (validTo.length >= 0 && !isDate(validTo)) {
 			alert("有效期限输入不正确！请重新输入");
 			return false;
-		}
-		var birthday = $("#data\\.birthday").val();
-		if (birthday.length >= 0 && !isDate(birthday)) {
-			alert("出生年月日输入不正确！请重新输入");
-			return false;
-		}
+		}}
 		return true;
 	});
     $("#imgOK").click(function() {
@@ -69,7 +76,9 @@ $(document).ready(function() {
 							<td width="15" height="30"><img src="images/tab_03.gif"
 								width="15" height="30" /></td>
 							<td background="images/tab_05.gif"><img src="images/311.gif"
-								width="16" height="16" /><span class="titleText"><c:if test="${actionType=='new' }">新建用户</c:if><c:if test="${actionType != 'new'}">用户信息修改</c:if></span></td>
+								width="16" height="16" /><span class="titleText"><c:if
+										test="${actionType=='new' }">新建用户</c:if> <c:if
+										test="${actionType != 'new'}">用户信息修改</c:if></span></td>
 							<td width="15"><img src="images/tab_07.gif" width="15"
 								height="30" /></td>
 						</tr>
@@ -90,8 +99,7 @@ $(document).ready(function() {
 										<td class="newValue"><c:if test="${actionType == 'new' }">
 												<input type="text" name="data.uid" value="${data.uid }"
 													id="data.uid" maxlength="128" />
-											</c:if>
-											<c:if test="${actionType=='edit' }">
+											</c:if> <c:if test="${not (actionType=='new') }">
 												<input type="hidden" name="data.uid" value="${data.uid }"
 													id="data.uid">${data.uid }</c:if></td>
 									</tr>
@@ -129,18 +137,21 @@ $(document).ready(function() {
 											value="${data.telNum }" name="data.telNum" maxlength="128"
 											id="data.telNum"></td>
 									</tr>
-									<tr>
-										<td class="newLabel">有效期限至 :</td>
-										<td class="newValue"><input type="text"
-											value="<fmt:formatDate
+
+									<c:if test="${not (actionType == 'profile') }">
+										<tr>
+											<td class="newLabel">有效期限至 :</td>
+											<td class="newValue"><input type="text"
+												value="<fmt:formatDate
 													value="${data.validTo}" type="date" pattern="yyyy/MM/dd" />"
-											name="data.validTo" id="data.validTo" />(yyyy/MM/dd)</td>
-									</tr>
-									<tr>
-										<td class="newLabel">管理员 :</td>
-										<td class="newValue"><input type="checkbox"
-											name="data.admin" id="data.admin" value="true" /></td>
-									</tr>
+												name="data.validTo" id="data.validTo" />(yyyy/MM/dd)</td>
+										</tr>
+										<tr>
+											<td class="newLabel">管理员 :</td>
+											<td class="newValue"><input type="checkbox"
+												name="data.admin" id="data.admin" value="true" /></td>
+										</tr>
+									</c:if>
 									<tr>
 										<td>&nbsp;</td>
 										<td><img src="images/OK.gif" id="imgOK" />&nbsp;&nbsp;&nbsp;

@@ -47,8 +47,11 @@ public class HotelAction extends AbstractAction<Hotel> {
 			data = hotelService.get(l.getHid());
 		}
 		if (data == null) {
-			setErrormsg("酒店信息未指定！您不能使用不系统。请与管理员联系");
+			setErrormsg("酒店信息未指定！您不能使用不系统。请与管理员联系。");
 			return "logout";
+		}
+		if (!l.isAdmin() && StringUtils.isEmpty(data.getName())) {
+			return Action.INPUT;
 		}
 		return Action.SUCCESS;
 	}
@@ -91,6 +94,11 @@ public class HotelAction extends AbstractAction<Hotel> {
 		} catch (Exception ex) {
 			setErrormsg(ex.getMessage());
 			return Action.INPUT;
+		}
+
+		LoginInfo l = MyHotelUtils.getLoginInfo();
+		if (!l.isAdmin()) {
+			return "property";
 		}
 		return Action.SUCCESS;
 	}

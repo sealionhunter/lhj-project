@@ -33,18 +33,18 @@ function valid() {
 </head>
 <body onload="init();">
 	<form id="loginForm" name="loginForm" action="login.action"
-		onsubmit="return valid();" method="post">
+		onsubmit="return valid();" method="post" target="indexFrame">
 		<div id="login">
 			<h1>请登录：</h1>
 			<table>
 				<tr>
-					<td align="right">用户名:</td>
-					<td><input type="text" name="userId" value="${userId }"
+					<td class="newLabel" nowrap>用户名:</td>
+					<td class="newValue"><input type="text" name="userId" value="${userId }"
 						id="userId" /><font color="red">*</font></td>
 				</tr>
 				<tr>
-					<td align="right">密码 :</td>
-					<td><input type="password" name="password"
+					<td class="newLabel" nowrap>密码 :</td>
+					<td class="newValue"><input type="password" name="password"
 						value="${password }" id="password" /><font color="red">*</font></td>
 				</tr>
 				<tr>
