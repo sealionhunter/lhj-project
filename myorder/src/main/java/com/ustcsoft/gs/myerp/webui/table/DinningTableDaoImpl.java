@@ -25,15 +25,10 @@ public class DinningTableDaoImpl implements DinningTableDao {
 	@SuppressWarnings("unchecked")
 	public List<DinningTable> list(String hid, SearchCondition condition,
 			Paging paging) throws Exception {
-		List<Object> conditions = new ArrayList<Object>();
-		conditions.add(hid);
 
 		DetachedCriteria criteria = DetachedCriteria
 				.forClass(DinningTable.class);
 		makeCondition(condition, hid, criteria);
-
-		hibernateTemplate.findByCriteria(criteria, paging.getPcurrent(),
-				paging.getPercount());
 		List<DinningTable> result = (List<DinningTable>) hibernateTemplate
 				.findByCriteria(criteria,
 						(paging.getPcurrent() - 1) * paging.getPercount(),
@@ -53,8 +48,9 @@ public class DinningTableDaoImpl implements DinningTableDao {
 		// Projections.countDistinct("tid"));
 		List<Object[]> counts = hibernateTemplate
 				.findByNamedParam(
-						"select tid, count(*) as tcount from Orders where tid IN (:tids) group by tid",
-						"tids", tids);
+						"select tid, count(*) as tcount from Orders where state = :state and tid IN (:tids) group by tid",
+						new String[] { "state", "tids" }, new Object[] { "1",
+								tids });
 		if (counts != null && counts.size() > 0) {
 			for (DinningTable table : result) {
 				for (Object[] count : counts) {

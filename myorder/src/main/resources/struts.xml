@@ -194,7 +194,7 @@
 		<action name="orderEditOk" class="orderAction" method="editOk">
 			<result name="input">WEB-INF/view/orderEdit.jsp</result>
 			<result name="success" type="redirectAction">
-				<param name="actionName">orderList</param>
+				<param name="actionName">tableList</param>
 			</result>
 		</action>
 
@@ -216,14 +216,12 @@
 			</action> <action name="orderFoodSelectDelete" class="orderFoodSelectAction" 
 			method="editOk"> <result name="input">WEB-INF/view/orderFoodSelect.jsp</result> 
 			<result name="success">WEB-INF/view/orderFoodSelect.jsp</result> </action> -->
-		<action name="orderFoodSelectOK" class="orderFoodSelectAction"
-			method="selectOK">
-			<result name="input">WEB-INF/view/orderFoodSelect.jsp</result>
-			<result name="success" type="redirectAction">
-				<param name="actionName">orderEdit</param>
-				<param name="actionType">foodSelectBack</param>
-				<param name="uuid">${uuid}</param>
-			</result>
+		<action name="orderFoodSelectOK" class="orderAction" method="foodSelectOk">
+			<result name="success"> WEB-INF/view/orderEdit.jsp</result>
+		</action>
+		<action name="orderFoodSelectRemove" class="orderAction"
+			method="foodSelectRemove">
+			<result name="success"> WEB-INF/view/orderEdit.jsp</result>
 		</action>
 
 		<action name="orderDelete" class="orderAction" method="delete">
@@ -231,6 +229,17 @@
 				<param name="actionName">orderList</param>
 			</result>
 		</action>
+		
+        <action name="orderPay" class="orderPayAction" method="edit">
+            <result name="success">WEB-INF/view/orderPay.jsp</result>
+        </action>
+
+        <action name="orderPayOk" class="orderPayAction" method="editOk">
+            <result name="input">WEB-INF/view/orderPay.jsp</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">tableList</param>
+            </result>
+        </action>
 
 		<action name="cartAdd" class="cartAction" method="add">
 		</action>

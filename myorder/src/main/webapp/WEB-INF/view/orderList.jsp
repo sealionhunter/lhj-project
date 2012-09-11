@@ -337,7 +337,11 @@ $(document).ready(function() {
 													<td class="tabBody"><input type="checkbox" name="ids" /></td>
 													<td class="tabBody"><span>${table.name }</span></td>
 													<td class="tabBody"><span>${order.cname }</span></td>
-													<td class="tabBody"><span>${order.category }</span></td>
+													<td class="tabBody"><span><c:if test="${order.category == '1'}">前台订餐</c:if> <c:if
+                                                        test="${order.category == '2'}">外卖</c:if> <c:if
+                                                        test="${order.category == '3'}">电话预订</c:if> <c:if
+                                                        test="${order.category == '4'}">网络预订</c:if> <c:if
+                                                        test="${order.category == '5'}">其他</c:if></span></td>
 													<td class="tabBody"><span>${order.ccount }</span></td>
 													<td class="tabBody"><span>${order.telNum }</span></td>
 													<td class="tabBody"><span>${order.address }</span></td>

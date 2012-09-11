@@ -30,8 +30,8 @@ public class UserInfo {
 	private String telNum;
 	@Column(name = "address", length = 512)
 	private String address;
-	@Column(name = "isAdmin")
-	private boolean isAdmin;
+	@Column(name = "isAdmin", nullable = false)
+	private boolean isAdmin = false;
 	@Column(name = "validTo")
 	private Date validTo;
 	@Transient
@@ -161,7 +161,8 @@ public class UserInfo {
 	}
 
 	/**
-	 * @param hname the hname to set
+	 * @param hname
+	 *            the hname to set
 	 */
 	public void setHname(String hname) {
 		this.hname = hname;

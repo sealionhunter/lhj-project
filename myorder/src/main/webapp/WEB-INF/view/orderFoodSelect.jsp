@@ -23,17 +23,10 @@ $(document).ready(function() {
             }
         });
     });
-    $("#cbxSelectAllD").click(function() {
-        var checked = $(this).attr("checked");
-        $.each($("input[name=dids]"), function() {
-            if (checked) {
-            $(this).attr('checked',checked);
-            } else {
-                $(this).removeAttr('checked');  
-            }
-        });
-    });
 
+    $("#imgOK").click(function() {
+        $("#orderFoodSearchForm").submit();
+    });
     $('#imgFirst').click(function(){
         $("#orderFoodSearchForm #actionType").val('first');
         $("#orderFoodSearchForm").submit();
@@ -70,14 +63,7 @@ $(document).ready(function() {
         $("#orderFoodSearchForm #actionType").val('toPage');
         $("#orderFoodSearchForm").submit();
     }) ;
-    $("[name=btnRowDelete]").click(function() {
-        var fids = new Array();
-        var id = $(this).parent().parent().attr("id");
-        fids.push(id);
-        $("#orderFoodSearchForm #uuids").val(fids);
-        $("#orderFoodSearchForm #actionType").val('remove');
-        $("#orderFoodSearchForm").submit();
-    });
+    
     $("[name=btnNew]").click(function() {
         var fids = new Array();
         var n = 0;
@@ -89,36 +75,13 @@ $(document).ready(function() {
             alert("请选择要追加的菜品");
             return;
         }
-        $("#orderFoodSearchForm #fids").val(fids);
-        $("#orderFoodSearchForm #actionType").val('add');
-        $("#orderFoodSearchForm").submit();
-    });
-    $("[name=btnDelete]").click(function() {
-        var fids = new Array();
-        var n = 0;
-        $.each($("input[name=dids]:checked"), function() {
-        	fids.push($(this).parent().parent().attr("id"));
-            n++;
-        });
-        if (n < 1) {
-            alert("请选择要删除的菜品");
-            return;
-        }
-        $("#orderFoodSearchForm #uuids").val(fids);
-        $("#orderFoodSearchForm #actionType").val('remove');
-        $("#orderFoodSearchForm").submit();
-    });
-    $("#imgOK").click(function() {
-        $("#orderFoodSearchForm").submit();
-    });
-
-    $("#imgSearchOK").click(function() {
-        $("#orderFoodSearchForm").attr("action", "orderFoodSelectOK.action");
-        $("#orderFoodSearchForm").submit();
+        $("#orderEditForm #fids").val(fids);
+        $("#orderEditForm").submit();
     });
 
     $("#imgCancel").click(function() {
-        document.location.href = "orderList.action";
+        $("#orderEditForm #fids").val('');
+        $("#orderEditForm").submit();
     });
     
     <c:if test="${errormsg != null}">
@@ -213,7 +176,7 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<td colspan="4" style="padding-left: 55px; padding-top: 10px;">
-											<img src="images/search.gif" id="imgOK" />
+											<img src="images/search.gif" id="imgOK" />&nbsp;&nbsp;&nbsp;<img src="images/cancel.gif" id="imgCancel" />
 										</td>
 									</tr>
 								</table>
@@ -375,114 +338,11 @@ $(document).ready(function() {
 						</tr>
 					</table></td>
 			</tr>
-			<tr>
-				<td height="30"><table width="100%" border="0" cellspacing="0"
-						cellpadding="0">
-						<tr>
-							<td width="15" height="30"><img src="images/tab_03.gif"
-								width="15" height="30" /></td>
-							<td width="1101" background="images/tab_05.gif"><img
-								src="images/311.gif" width="16" height="16" /><span
-								class="titleText">菜品选择一览 -
-									${sessionScope.SESSION_LOGIN_INFO.hname}</span></td>
-							<td width="281" background="images/tab_05.gif"><table
-									border="0" align="right" cellpadding="0" cellspacing="0">
-									<tr>
-										</td>
-										<td width="52"><table width="88%" border="0"
-												cellpadding="0" cellspacing="0">
-												<tr>
-													<td><div align="center">
-															<img src="images/083.gif" width="14" height="14"
-																name="btnDelete" />
-														</div></td>
-													<td><div align="center" name="btnDelete">删除</div></td>
-												</tr>
-											</table></td>
-									</tr>
-								</table></td>
-							<td width="15"><img src="images/tab_07.gif" width="15"
-								height="30" /></td>
-						</tr>
-					</table></td>
-			</tr>
-			<tr>
-				<td><table width="100%" border="0" cellspacing="0"
-						cellpadding="0">
-						<tr>
-							<td width="9" background="images/tab_12.gif">&nbsp;</td>
-							<td bgcolor="#f3ffe3"><table width="99%" border="0"
-									align="center" cellpadding="0" cellspacing="1"
-									bgcolor="#c0de98" onmouseover="changeto()"
-									onmouseout="changeback()">
-									<tr>
-										<th class="tabTitle"><input type="checkbox"
-											id="cbxSelectAllD" /></th>
-										<th class="tabTitle">菜名</th>
-										<th class="tabTitle">分类</th>
-										<th class="tabTitle">菜系</th>
-										<th class="tabTitle">单价</th>
-										<th class="tabTitle">数量</th>
-										<th class="tabTitle"></th>
-									</tr>
-									<c:forEach items="${details }" var="detail" varStatus="status">
-
-										<tr id="${detail.uuid }"
-											class="${status.index / 2 == 0 ? 'odd' : 'even' }">
-											<td class="tabBody"><input type="checkbox" name="dids"
-												value="${detail.uuid }" id="${detail.uuid }" /></td>
-											<td class="tabBody"><span>${detail.food.name }</span></td>
-											<td class="tabBody"><span><c:if
-														test="${detail.food.subCategory == '0'}">主菜</c:if> <c:if
-														test="${detail.food.subCategory == '1'}">甜点</c:if> <c:if
-														test="${detail.food.subCategory == '2'}">凉菜</c:if> <c:if
-														test="${detail.food.subCategory == '3'}">酒水</c:if> <c:if
-														test="${detail.food.subCategory == '4'}">饮料</c:if> <c:if
-														test="${detail.food.subCategory == '5'}">其他</c:if></span></td>
-											<td class="tabBody"><span>${detail.food.category
-													} <c:if test="${detail.food.category == '1'}">鲁菜</c:if> <c:if
-														test="${detail.food.category == '2'}">川菜</c:if> <c:if
-														test="${detail.food.category == '3'}">粤菜</c:if> <c:if
-														test="${detail.food.category == '4'}">苏菜</c:if> <c:if
-														test="${detail.food.category == '5'}">闽菜</c:if> <c:if
-														test="${detail.food.category == '6'}">浙菜</c:if> <c:if
-														test="${detail.food.category == '7'}">湘菜</c:if> <c:if
-														test="${detail.food.category == '8'}">徽菜</c:if> <c:if
-														test="${detail.food.category == '9'}">其他</c:if>
-											</span></td>
-											<td class="tabBody"><span>${detail.food.price }</span></td>
-											<td class="tabBody"><input type="text"
-												name="count${detail.uuid }" id="count${detail.uuid }"
-												value="${detail.unit }" /><span>${detail.food.unit }</span></td>
-											<td class="tabBody"><img src="images/010.gif" width="9"
-												height="9" name="btnRowDelete" /></td>
-										</tr>
-									</c:forEach>
-								</table></td>
-							<td width="11" background="images/tab_16.gif">&nbsp;</td>
-						</tr>
-					</table></td>
-			</tr>
-			<tr>
-				<td>
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="9" background="images/tab_12.gif">&nbsp;</td>
-							<td bgcolor="#f3ffe3">
-								<table>
-									<tr>
-										<td colspan="4" style="padding-left: 55px; padding-top: 10px;">
-											<img src="images/OK.gif" id="imgSearchOK" />&nbsp;&nbsp;&nbsp;<img src="images/cancel.gif" id="imgCancel" />
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td width="11" background="images/tab_16.gif">&nbsp;</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
 		</table>
+	</form>
+	<form id="orderEditForm" name="orderEditForm"
+		action="orderFoodSelectOK.action" method="post">
+		<input type="hidden" id="fids" name="fids">
 	</form>
 </body>
 </html>

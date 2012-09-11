@@ -3,6 +3,7 @@
  */
 package com.ustcsoft.gs.myerp.webui.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.ustcsoft.gs.myerp.webui.common.Paging;
@@ -32,5 +33,9 @@ public interface OrderService {
 	//
 	// public void setDetail(String oid, List<OrderDetail> sDetails)
 	// throws Exception;
+
+	public Orders findByTable(String tid) throws Exception;
+
+	public void pay(String uuid, BigDecimal bigDecimal) throws Exception;
 
 }

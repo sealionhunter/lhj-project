@@ -47,7 +47,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 			data = hotelService.get(l.getHid());
 		}
 		if (data == null) {
-			setErrormsg("酒店信息未指定！您不能使用不系统。请与管理员联系。");
+			setErrormsg("餐厅信息未指定！您不能使用本系统。请与管理员联系。");
 			return "logout";
 		}
 		if (!l.isAdmin() && StringUtils.isEmpty(data.getName())) {
@@ -60,6 +60,12 @@ public class HotelAction extends AbstractAction<Hotel> {
 		imgFileFileName = null;
 		setErrormsg(null);
 		data = null;
+
+		setActionType(MyErpConstant.ACTION_NEW);
+		LoginInfo l = MyHotelUtils.getLoginInfo();
+		if (!l.isAdmin()) {
+			uuid = l.getHid();
+		}
 		if (uuid != null && !"".equals(uuid)) {
 			data = hotelService.get(getUuid());
 		}
