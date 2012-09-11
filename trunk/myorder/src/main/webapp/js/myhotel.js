@@ -26,5 +26,11 @@ function  changeback(){
 }
 
 function isDate(date) {
-	return true;
+	var validDate = "((19|20)?[0-9]{2})[- /.](0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])";
+	return date != undefined && date.match(validDate);
+}
+function checkTime(time) {
+	var validTime ="([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]";
+	//var reg = "/^(10|11|12|0?[1-9]):[0-5][0-9]$/";
+	return time != undefined && time.match(validTime);
 }

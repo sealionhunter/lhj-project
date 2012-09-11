@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="style/style.css" />
 <link rel="stylesheet" type="text/css" href="style/list.css" />
 <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/myhotel.js"></script>
 <title>订餐系统管理--餐厅信息</title>
 <script type="text/javascript">
 
@@ -23,6 +24,32 @@ $(document).ready(function() {
 			alert("请输入餐厅地址！");
 			return false;
 		}
+        var maxService = $("#data\\.maxService").val();
+        if (maxService == '' || maxService.length == 0) {
+            alert("请输入容纳人数 ！");
+            return false;
+        }
+        if (!jQuery.isNumeric(maxService)) {
+            alert("容纳人数输入不正确！请输入数字...");
+            return false;
+        }
+        var serviceFrom = $("#data\\.serviceFrom").val();
+        if (!checkTime(serviceFrom)) {
+            alert("营业开始时间输入不正确！请按指定格式输入");
+            return false;
+        }
+        var serviceTo = $("#data\\.serviceTo").val();
+        if (!checkTime(serviceTo)) {
+            alert("营业结束时间输入不正确！请按指定格式输入");
+            return false;
+        }
+		var category = "";
+		$.each($(":input[name*=cbx]"), function() {
+			if ($(this).attr('checked') == 'checked') {
+				category =category + $(this).val() + ",";
+			}
+		});
+    	$("#data\\.foodCategoris").val(category);
 		return true;
 	});
     $("#imgOK").click(function() {
@@ -42,6 +69,14 @@ $(document).ready(function() {
     <c:if test="${errormsg != null}">
     alert("${errormsg}");
     </c:if>
+    var category = $("#data\\.foodCategoris").val();
+    if (category != undefined && category.length >= 1) {
+    	var ids = category.split(",");
+    	var i = 0;
+    	for (; i < ids.length; i++) {
+    		$("#cbx"+ids[i]).attr("checked", "checked");
+    	}
+    }
 });
 </script>
 </head>
@@ -51,8 +86,7 @@ $(document).ready(function() {
 		action="hotelEditOk.action" method="post"
 		enctype="multipart/form-data">
 		<input type="hidden" name="data.uuid" id="data.uuid"
-			value="${data.uuid }" /> <input type="hidden"
-			value="${actionType }" />
+			value="${data.uuid }" /> <input type="hidden" value="${actionType }" />
 		<table width="100%" border="0" align="center" cellpadding="0"
 			cellspacing="0">
 			<tr>
@@ -90,16 +124,45 @@ $(document).ready(function() {
 											id="data.address" maxlength="128" /></td>
 									</tr>
 									<tr>
+										<td class="newLabel">容纳人数</td>
+										<td class="newValue"><input type="text"
+											name="data.maxService" value="${data.maxService }"
+											id="data.maxService" maxlength="128" /></td>
+									</tr>
+									<tr>
+										<td class="newLabel">营业时间段</td>
+										<td class="newValue" nowrap><input type="text"
+											name="data.serviceFrom" value="${data.serviceFrom }"
+											id="data.serviceFrom" maxlength="128" />~<input type="text"
+											name="data.serviceTo" value="${data.serviceTo }"
+											id="data.serviceTo" maxlength="128" />hh:mm</td>
+									</tr>
+									<tr>
+										<td class="newLabel">主要菜系</td>
+										<td class="newValue"><input type="hidden"
+											name="data.foodCategoris" value="${data.foodCategoris }"
+											id="data.foodCategoris" /> <input type="checkbox" id="cbx1"
+											name="cbx1" value="1">鲁菜&nbsp; <input type="checkbox"
+											id="cbx2" name="cbx2" value="2">川菜&nbsp; <input
+											type="checkbox" id="cbx3" name="cbx3" value="3">粤菜&nbsp;
+											<input type="checkbox" id="cbx4" name="cbx4" value="4">苏菜&nbsp;
+											<input type="checkbox" id="cbx5" name="cbx5" value="5">闽菜&nbsp;
+											<input type="checkbox" id="cbx6" name="cbx6" value="6">浙菜&nbsp;
+											<input type="checkbox" id="cbx7" name="cbx7" value="7">湘菜&nbsp;
+											<input type="checkbox" id="cbx8" name="cbx8" value="8">徽菜&nbsp;
+											<input type="checkbox" id="cbx9" name="cbx9" value="9">其他&nbsp;
+										</td>
+									</tr>
+									<tr>
 										<td class="newLabel">联系电话</td>
 										<td class="newValue"><input type="text"
-											name="data.telNum" value="${data.telNum }"
-											id="data.telNum" maxlength="16" /></td>
+											name="data.telNum" value="${data.telNum }" id="data.telNum"
+											maxlength="16" /></td>
 									</tr>
 									<tr>
 										<td class="newLabel">说明</td>
 										<td class="newValue"><textarea rows="4" cols="20"
-												name="data.description" maxlength="128"
-												id="data.description">${data.description }</textarea></td>
+												name="data.description" id="data.description">${data.description }</textarea></td>
 									</tr>
 									<tr>
 										<td class="newLabel">上传图片 :</td>

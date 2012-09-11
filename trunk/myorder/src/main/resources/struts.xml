@@ -7,9 +7,20 @@
 	<constant name="struts.multipart.maxSize" value="1000000" />
 	<include file="struts-default.xml" />
 	<package name="/" extends="json-default">
+		<interceptors>
+			<interceptor name="login"
+				class="com.ustcsoft.gs.myerp.webui.common.MyLoginInterceptor" />
+			<interceptor-stack name="myorder">
+				<interceptor-ref name="login" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myorder" />
 		<default-action-ref name="default" />
 		<global-results>
 			<result name="error">WEB-INF/view//error.jsp</result>
+
+			<result name="loginForm">WEB-INF/view/login.jsp</result>
 		</global-results>
 
 		<action name="default" class="com.opensymphony.xwork2.ActionSupport">
@@ -36,13 +47,8 @@
 			<result name="success">WEB-INF/view/left.jsp</result>
 		</action>
 
-		<action name="loginForm" class="loginAction" method="execute">
-			<interceptor-ref name="defaultStack" />
-			<result name="success">WEB-INF/view/login.jsp</result>
-			<result name="main">WEB-INF/view/main.jsp</result>
-		</action>
-
 		<action name="login" class="loginAction" method="login">
+			<interceptor-ref name="defaultStack" />
 			<result name="input">
 				WEB-INF/view/login.jsp
 			</result>
@@ -51,7 +57,7 @@
 
 		<action name="logout" class="loginAction" method="logout">
 			<result name="success" type="redirectAction">
-				<param name="actionName">loginForm</param>
+				<param name="actionName">main</param>
 			</result>
 		</action>
 
@@ -104,6 +110,7 @@
 		</action>
 
 		<action name="hotelProperty" class="hotelAction" method="property">
+			<result name="input">WEB-INF/view/hotelEdit.jsp</result>
 			<result name="success">WEB-INF/view/hotelProperty.jsp</result>
 			<result name="logout" type="redirectAction">
 				<param name="actionName">logout</param>

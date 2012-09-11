@@ -16,25 +16,23 @@ public class Hotel {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@Column(name = "uuid")
 	private String uuid;
-	@Column(name = "name", length = 256, nullable = false)
+	@Column(name = "name", length = 256)
 	private String name;
-	@Column(name = "maxService", nullable = false)
+	@Column(name = "maxService")
 	private int maxService = 0;
-
-//	@Column(name = "serviceFrom", nullable = false)
+	@Column(name = "serviceFrom", length = 256)
 	private String serviceFrom;
-//	@Column(name = "serviceTo", nullable = false)
+	@Column(name = "serviceTo", length = 256)
 	private String serviceTo;
-//	@Column(name = "foodCategory", nullable = false)
-	private String foodCategory;
-	
-	@Column(name = "address", length = 256, nullable = false)
+	@Column(name = "foodCategoris", length = 256)
+	private String foodCategoris;
+	@Column(name = "address", length = 256)
 	private String address;
-	@Column(name = "telNum", length = 64, nullable = false)
+	@Column(name = "telNum", length = 64)
 	private String telNum;
-	@Column(name = "description", length = 1024)
+	@Column(name = "description")
 	private String description;
-	@Column(name = "imgUrl", length = 512)
+	@Column(name = "imgUrl")
 	private String imgUrl;
 
 	/**
@@ -158,4 +156,63 @@ public class Hotel {
 		this.telNum = telNum;
 	}
 
+	/**
+	 * @return the maxService
+	 */
+	public int getMaxService() {
+		return maxService;
+	}
+
+	/**
+	 * @param maxService
+	 *            the maxService to set
+	 */
+	public void setMaxService(int maxService) {
+		this.maxService = maxService;
+	}
+
+	/**
+	 * @return the serviceFrom
+	 */
+	public String getServiceFrom() {
+		return serviceFrom;
+	}
+
+	/**
+	 * @param serviceFrom
+	 *            the serviceFrom to set
+	 */
+	public void setServiceFrom(String serviceFrom) {
+		this.serviceFrom = serviceFrom;
+	}
+
+	/**
+	 * @return the serviceTo
+	 */
+	public String getServiceTo() {
+		return serviceTo;
+	}
+
+	/**
+	 * @param serviceTo
+	 *            the serviceTo to set
+	 */
+	public void setServiceTo(String serviceTo) {
+		this.serviceTo = serviceTo;
+	}
+
+	/**
+	 * @return the foodCategoris
+	 */
+	public String getFoodCategoris() {
+		return foodCategoris;
+	}
+
+	/**
+	 * @param foodCategoris
+	 *            the foodCategoris to set
+	 */
+	public void setFoodCategoris(String foodCategoris) {
+		this.foodCategoris = foodCategoris;
+	}
 }

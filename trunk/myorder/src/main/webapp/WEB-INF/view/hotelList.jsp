@@ -270,6 +270,9 @@ $(document).ready(function() {
 										id="cbxSelectAll" /></td>
 									<td class="tabTitle">餐厅名称</td>
 									<td class="tabTitle">餐厅地址</td>
+									<td class="tabTitle">容纳人数</td>
+									<td class="tabTitle">营业时间段</td>
+									<td class="tabTitle">主要菜系</td>
 									<td class="tabTitle">电话</td>
 									<td class="tabTitle">说明</td>
 									<td class="tabTitle">&nbsp;</td>
@@ -282,6 +285,25 @@ $(document).ready(function() {
 										<td class="tabBody"><img src="${hotel.imgUrl }" height=60
 											width=80 /><span>${hotel.name }</span></td>
 										<td class="tabBody"><span> ${hotel.address }</span></td>
+										<td class="tabBody" align="right"><span>
+												${hotel.maxService }</span></td>
+										<td class="tabBody" nowrap="nowrap"><span>
+												${hotel.serviceFrom }~${hotel.serviceTo }</span></td>
+										<td class="tabBody"><c:forEach var="category"
+												varStatus="status"
+												items="${fn:split(hotel.foodCategoris, ',')}">
+												<c:if test="${status.index > 0 }">,</c:if>
+												<c:if test="${category == '1'}">鲁菜</c:if>
+												<c:if test="${category == '2'}">川菜</c:if>
+												<c:if test="${category == '3'}">粤菜</c:if>
+												<c:if test="${category == '4'}">苏菜</c:if>
+												<c:if test="${category == '5'}">闽菜</c:if>
+												<c:if test="${category == '6'}">浙菜</c:if>
+												<c:if test="${category == '7'}">湘菜</c:if>
+												<c:if test="${category == '8'}">徽菜</c:if>
+												<c:if test="${category == '9'}">其他</c:if>
+
+											</c:forEach></td>
 										<td class="tabBody"><span> ${hotel.telNum }</span></td>
 										<td class="tabBody"><span>${hotel.description }</span></td>
 										<td class="tabBody"><img src="images/037.gif" width="9"

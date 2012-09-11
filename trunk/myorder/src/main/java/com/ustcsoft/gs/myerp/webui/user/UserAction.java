@@ -34,15 +34,13 @@ public class UserAction extends AbstractAction<UserInfo> {
 		if (uuid != null && !"".equals(uuid)) {
 			data = userService.get(getUuid());
 		} else {
-			if ("edit".equals(actionType)) {
+			if ("profile".equals(actionType)) {
 				LoginInfo l = MyHotelUtils.getLoginInfo();
 				data = userService.get(l.getUid());
 			}
 		}
 		if (data == null) {
 			data = new UserInfo();
-		} else {
-			setActionType(MyErpConstant.ACTION_EDIT);
 		}
 		return Action.SUCCESS;
 	}
@@ -52,7 +50,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 		try {
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
 				userService.add(data);
-			} else if (MyErpConstant.ACTION_EDIT.equals(actionType)) {
+			} else {
 				userService.update(data);
 			}
 		} catch (Exception ex) {
