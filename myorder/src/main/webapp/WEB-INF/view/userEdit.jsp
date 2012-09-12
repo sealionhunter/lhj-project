@@ -45,6 +45,7 @@ $(document).ready(function() {
 			alert("有效期限输入不正确！请重新输入");
 			return false;
 		}}
+		<c:if test="${not (actionType == 'profile') }">
 		var createHotel = $("#cbxCreateHotel").attr('checked') == 'checked' ? 'true' : 'false';
 		if (createHotel) {
 			var hname = $("#hname").val();
@@ -55,6 +56,7 @@ $(document).ready(function() {
 			$("#createHotel").val(createHotel);	
 			
 		}
+		</c:if>
 		return true;
 	});
     $("#imgOK").click(function() {
@@ -75,13 +77,15 @@ $(document).ready(function() {
     <c:if test="${errormsg != null}">
     alert("${errormsg}");
     </c:if>
-    
+
+	<c:if test="${not (actionType == 'profile') }">
     <c:if test="${data.admin}">
     $("#data\\.admin").attr('checked', 'checked');
     </c:if>
     <c:if test="${createHotel}">
     $("#cbxCreateHotel").attr('checked', 'checked');
     </c:if>
+	</c:if>
 });
 </script>
 </head>
@@ -126,7 +130,8 @@ $(document).ready(function() {
 												<input type="hidden" name="data.uid" value="${data.uid }"
 													id="data.uid">${data.uid }</c:if></td>
 									</tr>
-									<c:if test="${actionType == 'new' }">
+									<c:if
+										test="${(actionType == 'new') or (actionType == 'profile') }">
 										<tr>
 											<td class="newLabel">密码</td>
 											<td class="newValue"><input type="password"
