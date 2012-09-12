@@ -12,7 +12,7 @@ public interface UserService {
 
 	public UserInfo get(String uuid) throws Exception;
 
-	public void add(UserInfo data, boolean createHotel) throws Exception;
+	public String add(UserInfo data, boolean createHotel, String hname) throws Exception;
 
 	public void update(UserInfo data) throws Exception;
 

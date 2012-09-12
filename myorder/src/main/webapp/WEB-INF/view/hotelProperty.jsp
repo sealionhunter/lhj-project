@@ -53,9 +53,22 @@ $(document).ready(function() {
 									}</span>
 							</div>
 						</td>
+						<td width="11" background="images/tab_16.gif">&nbsp;</td>
 					</tr>
 				</table>
 			</td>
+		</tr>
+		<tr>
+			<td height="29"><table width="100%" border="0" cellspacing="0"
+					cellpadding="0">
+					<tr>
+						<td width="15" height="29"><img src="images/tab_20.gif"
+							width="15" height="29" /></td>
+						<td background="images/tab_21.gif">&nbsp;</td>
+						<td width="16"><img src="images/tab_22.gif" width="14"
+							height="29" /></td>
+					</tr>
+				</table></td>
 		</tr>
 	</table>
 </body>

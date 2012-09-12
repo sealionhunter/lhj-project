@@ -102,16 +102,16 @@ $(document).ready(function() {
 										<td class="newLabel">餐台编号:</td>
 										<td class="newValue"><input type="text" name="data.name"
 											value="${data.name }" id="data.name" maxlength="128"
-											size="40" /><font color="red">*</font></td>
+											size="40" /></td>
 									</tr>
 									<tr>
-										<td class="newLabel">位置 :</td>
+										<td class="newLabel">位置</td>
 										<td class="newValue"><input type="text" name="data.area"
 											value="${data.area }" id="data.area" maxlength="128"
-											size="40" /><font color="red">*</font></td>
+											size="40" /></td>
 									</tr>
 									<tr>
-										<td class="newLabel">分类 :</td>
+										<td class="newLabel">分类</td>
 										<td class="newValue"><select name="data.category"
 											id="data.category">
 												<option value="1">大厅</option>
@@ -120,22 +120,22 @@ $(document).ready(function() {
 												<option value="4">豪华包厢</option>
 												<option value="5">情侣包厢</option>
 												<option value="6">其他</option>
-										</select><font color="red">*</font></td>
+										</select></td>
 									</tr>
 									<tr>
-										<td class="newLabel">座位数 :</td>
+										<td class="newLabel">座位数</td>
 										<td class="newValue"><input type="text"
 											name="data.maxService" value="${data.maxService }"
-											id="data.maxService" maxlength="16" /><font color="red">*</font></td>
+											id="data.maxService" maxlength="16" /></td>
 									</tr>
 									<tr>
-										<td class="newLabel">说明 :</td>
+										<td class="newLabel">说明</td>
 										<td class="newValue"><textarea rows="4" cols="40"
 												name="data.description" maxlength="128"
 												id="data.description">${data.description }</textarea></td>
 									</tr>
 									<tr>
-										<td class="newLabel">上传图片 :</td>
+										<td class="newLabel">上传图片</td>
 										<td class="newValue"><input type="file" name="imgFile" /></td>
 									</tr>
 									<tr>

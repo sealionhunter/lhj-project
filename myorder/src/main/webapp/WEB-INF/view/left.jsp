@@ -86,14 +86,13 @@
 												width="40" height="40" border="0" id="Image1"
 												onmouseover="MM_swapImage('Image1','','images/main_26_1.gif',1)"
 												onmouseout="MM_swapImgRestore()"
-												onclick="window.parent.rightFrame.location='<c:if test="${SESSION_LOGIN_INFO.admin }">hotelList.action</c:if><c:if test="${not SESSION_LOGIN_INFO.admin }">hotelEdit.action?uuid=${not SESSION_LOGIN_INFO.hid }
-											</c:if>'" /></a>
+												onclick="window.parent.rightFrame.location='<c:if test="${SESSION_LOGIN_INFO.admin }">hotelList.action</c:if><c:if test="${not SESSION_LOGIN_INFO.admin }">hotelEdit.action?uuid=${SESSION_LOGIN_INFO.hid }</c:if>'" /></a>
 										</div>
 									</td>
 									<td>
 										<div align="left" class="text">
 											<a href="#"
-												onclick="window.parent.rightFrame.location='<c:if test="${SESSION_LOGIN_INFO.admin }">hotelList.action</c:if><c:if test="${not SESSION_LOGIN_INFO.admin }">hotelEdit.action?uuid=${not SESSION_LOGIN_INFO.hid }</c:if>'">餐厅<br />管理
+												onclick="window.parent.rightFrame.location='<c:if test="${SESSION_LOGIN_INFO.admin }">hotelList.action</c:if><c:if test="${not SESSION_LOGIN_INFO.admin }">hotelEdit.action?uuid=${SESSION_LOGIN_INFO.hid }</c:if>'">餐厅<br />管理
 											</a>
 										</div>
 									</td>

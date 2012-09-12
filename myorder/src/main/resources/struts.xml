@@ -80,6 +80,13 @@
 			<result name="success" type="redirectAction">
 				<param name="actionName">userList</param>
 			</result>
+			<result name="userHotelSelect" type="redirectAction">
+				<param name="actionName">userHotelSelect</param>
+				<param name="uid">${uuid}</param>
+			</result>
+			<result name="hotelProperty" type="redirectAction">
+				<param name="actionName">hotelProperty</param>
+			</result>
 		</action>
 
 

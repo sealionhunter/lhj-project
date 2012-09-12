@@ -133,9 +133,9 @@ $(document).ready(function() {
 										<td class="newLabel">营业时间段</td>
 										<td class="newValue" nowrap><input type="text"
 											name="data.serviceFrom" value="${data.serviceFrom }"
-											id="data.serviceFrom" maxlength="128" />~<input type="text"
+											id="data.serviceFrom" size="10" />&nbsp;&nbsp;~&nbsp;&nbsp;<input type="text"
 											name="data.serviceTo" value="${data.serviceTo }"
-											id="data.serviceTo" maxlength="128" />hh:mm</td>
+											id="data.serviceTo" size="10" />&nbsp;&nbsp;hh:mm</td>
 									</tr>
 									<tr>
 										<td class="newLabel">主要菜系</td>

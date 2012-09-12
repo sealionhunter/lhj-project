@@ -16,7 +16,7 @@ public interface UserDao {
 
 	public UserInfo get(String uuid) throws Exception;
 
-	public void add(UserInfo data) throws Exception;
+	public String add(UserInfo data) throws Exception;
 
 	public void update(UserInfo data) throws Exception;
 
