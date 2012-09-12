@@ -25,8 +25,8 @@ $(document).ready(function() {
 			alert("请输入密码！");
 			return false;
 		}}
-		var hname = $("#data\\.uname").val();
-		if (hname == '' || hname.length == 0) {
+		var uname = $("#data\\.uname").val();
+		if (uname == '' || uname.length == 0) {
 			alert("请输入姓名！");
 			return false;
 		}
@@ -45,6 +45,16 @@ $(document).ready(function() {
 			alert("有效期限输入不正确！请重新输入");
 			return false;
 		}}
+		var createHotel = $("#cbxCreateHotel").attr('checked') == 'checked' ? 'true' : 'false';
+		if (createHotel) {
+			var hname = $("#hname").val();
+			if (hname == '' || hname.length == 0) {
+				alert("请输入餐厅名称！");
+				return false;
+			}
+			$("#createHotel").val(createHotel);	
+			
+		}
 		return true;
 	});
     $("#imgOK").click(function() {
@@ -54,10 +64,23 @@ $(document).ready(function() {
         document.userEditForm.reset();
     });
     $("#imgCancel").click(function() {
+    	<c:if test="${SESSION_LOGIN_INFO.admin }">
     	document.location.href = "userList.action";
+    	</c:if>
+    	<c:if test="${not SESSION_LOGIN_INFO.admin }">
+    	document.location.href = "hotelProperty.action";
+    	</c:if>
     });
+    
     <c:if test="${errormsg != null}">
     alert("${errormsg}");
+    </c:if>
+    
+    <c:if test="${data.admin}">
+    $("#data\\.admin").attr('checked', 'checked');
+    </c:if>
+    <c:if test="${createHotel}">
+    $("#cbxCreateHotel").attr('checked', 'checked');
     </c:if>
 });
 </script>
@@ -129,7 +152,7 @@ $(document).ready(function() {
 											name="data.birthday"
 											value="<fmt:formatDate
 													value="${data.birthday}" type="date" pattern="yyyy/MM/dd" />"
-											id="data.birthday" maxlength="16" />(yyyy/MM/dd)</td>
+											id="data.birthday" maxlength="16" />&nbsp;&nbsp;(yyyy/MM/dd)</td>
 									</tr>
 									<tr>
 										<td class="newLabel">联系电话</td>
@@ -140,21 +163,27 @@ $(document).ready(function() {
 
 									<c:if test="${not (actionType == 'profile') }">
 										<tr>
-											<td class="newLabel">有效期限至 :</td>
+											<td class="newLabel">有效期限至</td>
 											<td class="newValue"><input type="text"
 												value="<fmt:formatDate
 													value="${data.validTo}" type="date" pattern="yyyy/MM/dd" />"
-												name="data.validTo" id="data.validTo" />(yyyy/MM/dd)</td>
+												name="data.validTo" id="data.validTo" />&nbsp;&nbsp;(yyyy/MM/dd)</td>
 										</tr>
 										<tr>
-											<td class="newLabel">管理员 :</td>
+											<td class="newLabel">管理员</td>
 											<td class="newValue"><input type="checkbox"
 												name="data.admin" id="data.admin" value="true" /></td>
 										</tr>
 										<tr>
-											<td class="newLabel">创建餐厅:</td>
+											<td class="newLabel">创建餐厅</td>
 											<td class="newValue"><input type="checkbox"
-												name="createHotel" id="createHotel" value="true" /></td>
+												name="cbxCreateHotel" id="cbxCreateHotel" value="true" /> <input
+												type="hidden" name="createHotel" id="createHotel" /></td>
+										</tr>
+										<tr>
+											<td class="newLabel">餐厅名称</td>
+											<td class="newValue"><input type="text" name="hname"
+												id="hname" value="${hname}" /></td>
 										</tr>
 									</c:if>
 									<tr>

@@ -90,6 +90,11 @@ public class OrderServiceImpl implements OrderService {
 		o.setState("2");
 		o.setRprice(rprice);
 		orderDao.update(o);
+		DinningTable table = dinningTableDao.get(o.getTid());
+		if (table != null) {
+			table.setState("0");
+			dinningTableDao.update(table);
+		}
 	}
 
 	@Override

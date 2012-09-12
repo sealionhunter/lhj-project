@@ -12,7 +12,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ustcsoft.gs.myerp.webui.common.Paging;
 import com.ustcsoft.gs.myerp.webui.hotel.Hotel;
@@ -42,20 +41,17 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
-	public void add(UserInfo user) throws Exception {
-		hibernateTemplate.save(user);
+	public String add(UserInfo user) throws Exception {
+		return (String) hibernateTemplate.save(user);
 	}
 
 	@Override
-	@Transactional
 	public void delete(String userId) throws Exception {
 		hibernateTemplate
 				.delete(hibernateTemplate.load(UserInfo.class, userId));
 	}
 
 	@Override
-	@Transactional
 	public void update(UserInfo user) throws Exception {
 		hibernateTemplate.update(user);
 	}

@@ -204,10 +204,10 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<td>有效期限</td>
-										<td><input type="text" name="condition.validToFrom"
+										<td colspan="2"><input type="text" name="condition.validToFrom"
 											value="<fmt:formatDate
 													value="${condition.validToFrom}" type="date" pattern="yyyy/MM/dd" />" id="condition.validToFrom"
-											maxlength="16" />~<input type="text" name="condition.validToTo"
+											maxlength="16" />&nbsp;&nbsp;~&nbsp;&nbsp;<input type="text" name="condition.validToTo"
 											value="<fmt:formatDate
 													value="${condition.validToTo}" type="date" pattern="yyyy/MM/dd" />" id="condition.validToTo"
 											maxlength="16" /></td>

@@ -59,51 +59,59 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tr>
-    <td height="30">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="15" height="30"><img src="images/tab_03.gif" width="15" height="30" /></td>
-          <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /><span class="titleText">新建餐厅</span></td>
-          <td width="15"><img src="images/tab_07.gif" width="15" height="30" /></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="9" background="images/tab_12.gif">&nbsp;</td>
-          <td bgcolor="#f3ffe3">
-	<form id="foodEditForm" name="foodEditForm" action="foodEditOk.action"
-		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="data.uuid" id="data.uuid"
-			value="${data.uuid }" /> <input type="hidden" name="data.hid"
-			id="data.hid" value="${data.hid }" /> <input type="hidden"
-			id="actionType" name="actionType" value="${actionType }" />
+	<table width="100%" border="0" align="center" cellpadding="0"
+		cellspacing="0">
+		<tr>
+			<td height="30">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="15" height="30"><img src="images/tab_03.gif"
+							width="15" height="30" /></td>
+						<td background="images/tab_05.gif"><img src="images/311.gif"
+							width="16" height="16" /><span class="titleText">新建餐厅</span></td>
+						<td width="15"><img src="images/tab_07.gif" width="15"
+							height="30" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="9" background="images/tab_12.gif">&nbsp;</td>
+						<td bgcolor="#f3ffe3">
+							<form id="foodEditForm" name="foodEditForm"
+								action="foodEditOk.action" method="post"
+								enctype="multipart/form-data">
+								<input type="hidden" name="data.uuid" id="data.uuid"
+									value="${data.uuid }" /> <input type="hidden" name="data.hid"
+									id="data.hid" value="${data.hid }" /> <input type="hidden"
+									id="actionType" name="actionType" value="${actionType }" />
 
-            <table width="99%" border="0" align="center" cellpadding="0" cellspacing="1">
-				<tr>
-					<td class="newLabel">菜名:</td>
-					<td class="newValue"><input type="text" name="data.name" value="${data.name }"
-						id="data.name" maxlength="128" /><font color="red">*</font></td>
-				</tr>
-				<tr>
-					<td class="newLabel">分类 :</td>
-					<td class="newValue"><select name="data.subCategory" id="data.subCategory">
+								<table width="99%" border="0" align="center" cellpadding="0"
+									cellspacing="1">
+									<tr>
+										<td class="newLabel">菜名:</td>
+										<td class="newValue"><input type="text" name="data.name"
+											value="${data.name }" id="data.name" maxlength="128" /></td>
+									</tr>
+									<tr>
+										<td class="newLabel">分类</td>
+										<td class="newValue"><select name="data.subCategory"
+											id="data.subCategory">
 												<option value="0">主菜</option>
 												<option value="1">甜点</option>
 												<option value="2">凉菜</option>
 												<option value="3">酒水</option>
 												<option value="4">饮料</option>
 												<option value="5">其他</option>
-					</select><font color="red">*</font></td>
-				</tr>
-				<tr>
-					<td class="newLabel">菜系 :</td>
-					<td class="newValue"><select name="data.category" id="data.category">
+										</select></td>
+									</tr>
+									<tr>
+										<td class="newLabel">菜系</td>
+										<td class="newValue"><select name="data.category"
+											id="data.category">
 												<option value="1">鲁菜</option>
 												<option value="2">川菜</option>
 												<option value="3">粤菜</option>
@@ -113,62 +121,61 @@ $(document).ready(function() {
 												<option value="7">湘菜</option>
 												<option value="8">徽菜</option>
 												<option value="9">其他</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td class="newLabel">计量单位 :</td>
-					<td class="newValue"><input type="text" name="data.unit"
-						value="${data.unit }" id="data.unit" maxlength="16" /><font
-						color="red">*</font></td>
-				</tr>
-				<tr>
-					<td class="newLabel">单价 :</td>
-					<td class="newValue"><input type="text" name="data.price"
-						value="${data.price }" id="data.price" maxlength="16" /><font
-						color="red">*</font></td>
-				</tr>
-				<tr>
-					<td class="newLabel">说明 :</td>
-					<td class="newValue"><textarea rows="4" cols="20" name="data.description"
-							maxlength="128" id="data.description">${data.description }</textarea></td>
-				</tr>
-				<c:if test="${data.imgUrl != null }">
-					<tr>
-						<td colspan="2"  class="newValue"><img src="${data.imgUrl }"
-							height=240 width=320 /></td>
+										</select></td>
+									</tr>
+									<tr>
+										<td class="newLabel">计量单位</td>
+										<td class="newValue"><input type="text" name="data.unit"
+											value="${data.unit }" id="data.unit" maxlength="16" /></td>
+									</tr>
+									<tr>
+										<td class="newLabel">单价</td>
+										<td class="newValue"><input type="text" name="data.price"
+											value="${data.price }" id="data.price" maxlength="16" /></td>
+									</tr>
+									<tr>
+										<td class="newLabel">说明</td>
+										<td class="newValue"><textarea rows="4" cols="20"
+												name="data.description" maxlength="128"
+												id="data.description">${data.description }</textarea></td>
+									</tr>
+									<c:if test="${data.imgUrl != null }">
+										<tr>
+											<td colspan="2" class="newValue"><img
+												src="${data.imgUrl }" height=240 width=320 /></td>
+										</tr>
+									</c:if>
+									<tr>
+										<td class="newLabel">上传图片</td>
+										<td class="newValue"><input type="file" name="imgFile" /></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td><img src="images/OK.gif" id="imgOK" />&nbsp;&nbsp;&nbsp;
+											<img src="images/cancel.gif" id="imgCancel" />&nbsp;&nbsp;&nbsp;
+											<img src="images/clear.gif" id="imgReset" /></td>
+									</tr>
+								</table>
+							</form>
+						</td>
+						<td width="9" background="images/tab_16.gif">&nbsp;</td>
 					</tr>
-				</c:if>
-				<tr>
-					<td class="newLabel">上传图片 :</td>
-					<td class="newValue"><input type="file" name="imgFile" /></td>
-				</tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>
-                        <img src="images/OK.gif" id="imgOK" />&nbsp;&nbsp;&nbsp;
-                        <img src="images/cancel.gif"  id="imgCancel" />&nbsp;&nbsp;&nbsp;
-                        <img src="images/clear.gif" id="imgReset" />
-                    </td>
-                </tr>
-            </table>
-	</form>
-          </td>
-          <td width="9" background="images/tab_16.gif">&nbsp;</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td height="29">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="15" height="29"><img src="images/tab_20.gif" width="15" height="29" /></td>
-          <td background="images/tab_21.gif">&nbsp;</td>
-          <td width="14"><img src="images/tab_22.gif" width="14" height="29" /></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td height="29">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="15" height="29"><img src="images/tab_20.gif"
+							width="15" height="29" /></td>
+						<td background="images/tab_21.gif">&nbsp;</td>
+						<td width="14"><img src="images/tab_22.gif" width="14"
+							height="29" /></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>

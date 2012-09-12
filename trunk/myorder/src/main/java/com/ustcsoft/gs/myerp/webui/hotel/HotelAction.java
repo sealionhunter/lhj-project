@@ -39,7 +39,6 @@ public class HotelAction extends AbstractAction<Hotel> {
 	public String property() throws Exception {
 		setErrormsg(null);
 		data = null;
-		setActionType(MyErpConstant.ACTION_NEW);
 		LoginInfo l = getLoginInfo();
 		if (!StringUtils.isEmpty(l.getHid())) {
 			data = hotelService.get(l.getHid());
@@ -49,6 +48,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 			return "logout";
 		}
 		if (!l.isAdmin() && StringUtils.isEmpty(data.getName())) {
+			setActionType(MyErpConstant.ACTION_EDIT);
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;

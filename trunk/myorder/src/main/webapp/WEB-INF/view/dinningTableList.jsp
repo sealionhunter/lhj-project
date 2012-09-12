@@ -205,21 +205,22 @@ $(document).ready(function() {
 		</tr>
 		<tr>
 			<td>
-				<form id="tableSearchForm" name="tableSearchForm"
-					action="tableList.action" method="post">
-					<input type="hidden" id="paging.rcount" name="paging.rcount"
-						value="${paging.rcount }" /> <input type="hidden"
-						id="paging.pcount" name="paging.pcount" value="${paging.pcount }" />
-					<input type="hidden" id="paging.pcurrent" name="paging.pcurrent"
-						value="${paging.pcurrent }" /> <input type="hidden"
-						id="paging.percount" name="paging.percount"
-						value="${paging.percount }" /> <input type="hidden"
-						id="paging.toPage" name="paging.toPage" /><input type="hidden"
-						value="list" name="actionType" id="actionType" />
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="9" background="images/tab_12.gif">&nbsp;</td>
-							<td bgcolor="#f3ffe3">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="9" background="images/tab_12.gif">&nbsp;</td>
+						<td bgcolor="#f3ffe3">
+							<form id="tableSearchForm" name="tableSearchForm"
+								action="tableList.action" method="post">
+								<input type="hidden" id="paging.rcount" name="paging.rcount"
+									value="${paging.rcount }" /> <input type="hidden"
+									id="paging.pcount" name="paging.pcount"
+									value="${paging.pcount }" /> <input type="hidden"
+									id="paging.pcurrent" name="paging.pcurrent"
+									value="${paging.pcurrent }" /> <input type="hidden"
+									id="paging.percount" name="paging.percount"
+									value="${paging.percount }" /> <input type="hidden"
+									id="paging.toPage" name="paging.toPage" /><input type="hidden"
+									value="list" name="actionType" id="actionType" />
 								<table>
 									<tr>
 										<td>餐台名称:</td>
@@ -258,13 +259,11 @@ $(document).ready(function() {
 											src="images/search.gif" id="imgOK" /></td>
 									</tr>
 								</table>
-							</td>
-							<td width="11" background="images/tab_16.gif">&nbsp;</td>
-						</tr>
-					</table>
-
-				</form>
-			</td>
+							</form>
+						</td>
+						<td width="11" background="images/tab_16.gif">&nbsp;</td>
+					</tr>
+				</table>
 		</tr>
 		<tr>
 			<td height="29"><table width="100%" border="0" cellspacing="0"
@@ -313,8 +312,8 @@ $(document).ready(function() {
 											</tr>
 										</table>
 									</td>
-									<td width="52"><table width="88%"
-											border="0" cellpadding="0" cellspacing="0">
+									<td width="52"><table width="88%" border="0"
+											cellpadding="0" cellspacing="0">
 											<tr>
 												<td><div align="center">
 														<img src="images/083.gif" width="14" height="14"
@@ -323,8 +322,8 @@ $(document).ready(function() {
 												<td><div align="center" name="btnDelete">删除</div></td>
 											</tr>
 										</table></td>
-									<td width="52"><table width="88%"
-											border="0" cellpadding="0" cellspacing="0">
+									<td width="52"><table width="88%" border="0"
+											cellpadding="0" cellspacing="0">
 											<tr>
 												<td><div align="center">
 														<img src="images/083.gif" width="14" height="14"
@@ -353,8 +352,8 @@ $(document).ready(function() {
 										id="cbxSelectAll" /></td>
 									<td width="18%" class="tabTitle">餐台名称</td>
 									<td width="23%" class="tabTitle">位置</td>
-									<td width="5%" class="tabTitle">分类</v>
-									<td width="3%" class="tabTitle">座位数</td>
+									<td width="7%" class="tabTitle">分类</v>
+									<td width="5%" class="tabTitle">座位数</td>
 									<td width="10%" class="tabTitle">状态</td>
 									<td width="27%" class="tabTitle">说明</td>
 									<td width="7%" class="tabTitle">&nbsp;</td>
@@ -377,17 +376,20 @@ $(document).ready(function() {
 										<td class="tabBody" style="text-align: right;">${table.maxService
 											}</td>
 										<td class="tabBody"><c:if test="${table.state == '0' }">空闲</c:if>
-											<c:if test="${table.state == '1' }">占用</c:if> </td>
+											<c:if test="${table.state == '1' }">占用</c:if></td>
 										<td class="tabBody">${table.description }</td>
 										<td class="tabBody"><img src="images/037.gif" width="9"
 											height="9" name="btnRowEdit" />&nbsp; <img
 											src="images/010.gif" width="9" height="9" name="btnRowDelete" />&nbsp;
 											<c:if test="${not table.hasOrders }">
-											<img src="images/arrow_082.gif" width="9" height="9"
-											name="btnRowOrder" /></c:if><c:if test="${table.hasOrders }">
-                                            <img src="images/002.gif" width="9" height="9"
-                                            name="btnRowOrderEdit" /><img src="images/002.gif" width="9" height="9"
-                                            name="btnRowOrderPay" /></c:if></td>
+												<img src="images/arrow_082.gif" width="9" height="9"
+													name="btnRowOrder" />
+											</c:if> <c:if test="${table.hasOrders }">
+												<img src="images/002.gif" width="9" height="9"
+													name="btnRowOrderEdit" />
+												<img src="images/002.gif" width="9" height="9"
+													name="btnRowOrderPay" />
+											</c:if></td>
 									</tr>
 								</c:forEach>
 							</table></td>
@@ -467,10 +469,10 @@ $(document).ready(function() {
 		<input type="hidden" name="tid" id="tid" /><input type="hidden"
 			value="delete" name="actionType" id="actionType" />
 	</form>
-    <form id="tableOrderPayForm" name="tablePayForm"
-        action="orderPay.action" method="post">
-        <input type="hidden" name="tid" id="tid" /><input type="hidden"
-            value="delete" name="actionType" id="actionType" />
-    </form>
+	<form id="tableOrderPayForm" name="tablePayForm"
+		action="orderPay.action" method="post">
+		<input type="hidden" name="tid" id="tid" /><input type="hidden"
+			value="delete" name="actionType" id="actionType" />
+	</form>
 </body>
 </html>

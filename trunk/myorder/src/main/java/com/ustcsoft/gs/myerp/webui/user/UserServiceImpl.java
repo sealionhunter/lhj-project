@@ -45,13 +45,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void add(UserInfo data, boolean createHotel) throws Exception {
+	public String add(UserInfo data, boolean createHotel,String hname) throws Exception {
+		if (userDao.get(data.getUid()) != null) {
+			throw new Exception("指定的用户已存在！");
+		}
 		if (createHotel) {
 			Hotel h = new Hotel();
+			h.setName(hname);
 			String hid = hotelDao.add(h);
 			data.setHid(hid);
 		}
-		userDao.add(data);
+		return userDao.add(data);
 	}
 
 	@Override

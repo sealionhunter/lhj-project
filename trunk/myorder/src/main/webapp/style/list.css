@@ -19,7 +19,7 @@
 
 .newLabel {
 	padding : 5px;
-	width : 40px;
+	width : 70px;
 	height : 30px;
 	text-align : right;
 	white-space: nowrap;
@@ -28,7 +28,6 @@
 .newValue {
 	padding : 5px;
 	height : 30px;
-	width : 20px;
 	text-align : left;
 	white-space: nowrap;
 }

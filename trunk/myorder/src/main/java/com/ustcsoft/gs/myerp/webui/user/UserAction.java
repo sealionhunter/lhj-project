@@ -19,6 +19,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 	@Autowired
 	private UserService userService;
 	private boolean createHotel;
+	private String hname;
 
 	protected List<UserInfo> doSearch() throws Exception {
 		return userService.list(this.condition, paging);
@@ -49,13 +50,23 @@ public class UserAction extends AbstractAction<UserInfo> {
 		setErrormsg(null);
 		try {
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
-				userService.add(data, createHotel);
+				if (createHotel && StringUtils.isEmpty(hname)) {
+					setErrormsg("请指定餐厅名称！");
+					return Action.INPUT;
+				}
+				uuid = userService.add(data, createHotel, hname);
+				if (!createHotel) {
+					return "userHotelSelect";
+				}
 			} else {
 				userService.update(data);
 			}
 		} catch (Exception ex) {
 			setErrormsg(ex.getMessage());
 			return Action.INPUT;
+		}
+		if (!getLoginInfo().isAdmin()) {
+			return "hotelProperty";
 		}
 		return Action.SUCCESS;
 	}
@@ -138,6 +149,20 @@ public class UserAction extends AbstractAction<UserInfo> {
 
 	public void setCreateHotel(boolean createHotel) {
 		this.createHotel = createHotel;
+	}
+
+	/**
+	 * @return the hname
+	 */
+	public String getHname() {
+		return hname;
+	}
+
+	/**
+	 * @param hname the hname to set
+	 */
+	public void setHname(String hname) {
+		this.hname = hname;
 	}
 
 }
