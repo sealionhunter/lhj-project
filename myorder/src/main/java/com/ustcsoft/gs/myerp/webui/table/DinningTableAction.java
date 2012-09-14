@@ -84,6 +84,7 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 				File destFile = new File(path, imgUrl);
 				FileUtils.copyFile(imgFile, destFile);
 				data.setImgUrl(imgUrl);
+				imgFileFileName = null;
 			}
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
 				data.setState("0");

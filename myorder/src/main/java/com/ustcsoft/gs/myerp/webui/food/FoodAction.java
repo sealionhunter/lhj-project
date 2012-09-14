@@ -66,6 +66,7 @@ public class FoodAction extends AbstractAction<Food> {
 				File destFile = new File(path, imgUrl);
 				FileUtils.copyFile(imgFile, destFile);
 				data.setImgUrl(imgUrl);
+				imgFileFileName = null;
 			}
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
 				foodService.add(data);
