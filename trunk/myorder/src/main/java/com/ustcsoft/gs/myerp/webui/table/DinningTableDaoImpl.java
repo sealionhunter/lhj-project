@@ -137,8 +137,8 @@ public class DinningTableDaoImpl implements DinningTableDao {
 	@Override
 	public void add(DinningTable table) throws Exception {
 		List<DinningTable> exists = hibernateTemplate.find("from "
-				+ DinningTable.class.getName() + " where name = ? ",
-				table.getName());
+				+ DinningTable.class.getName() + " where name = ? and hid = ?",
+				table.getName(), table.getHid());
 		if (exists != null && exists.size() > 0) {
 			throw new Exception("同名的餐桌已经存在。请重新输入！");
 		}

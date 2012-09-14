@@ -89,6 +89,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 				File destFile = new File(path, imgUrl);
 				FileUtils.copyFile(imgFile, destFile);
 				data.setImgUrl(imgUrl);
+				imgFileFileName = null;
 			}
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
 				hotelService.add(data);
