@@ -64,7 +64,7 @@
 </script>
 </head>
 <body
-	onload="MM_preloadImages('images/main_26_1.gif','images/main_29_1.gif','images/main_31_1.gif')">
+	onload="MM_preloadImages('images/main_26_1.gif','images/main_28_1.gif','images/main_29_1.gif','images/main_31_1.gif')">
 	<table width="177" height="100%" border="0" cellpadding="0"
 		cellspacing="0">
 		<tr>
@@ -80,10 +80,10 @@
 							<table width="98%" border="0" align="center" cellpadding="0"
 								cellspacing="0">
 								<tr>
-									<td height="70" width="70">
+									<td height="90" width="90">
 										<div align="right">
 											<a href="#"><img src="images/main_26.gif" name="Image1"
-												width="40" height="40" border="0" id="Image1"
+												width="60" height="60" border="0" id="Image1"
 												onmouseover="MM_swapImage('Image1','','images/main_26_1.gif',1)"
 												onmouseout="MM_swapImgRestore()"
 												onclick="window.parent.rightFrame.location='<c:if test="${SESSION_LOGIN_INFO.admin }">hotelList.action</c:if><c:if test="${not SESSION_LOGIN_INFO.admin }">hotelEdit.action?uuid=${SESSION_LOGIN_INFO.hid }</c:if>'" /></a>
@@ -99,11 +99,11 @@
 								</tr>
 								<c:if test="${SESSION_LOGIN_INFO.admin }">
 									<tr>
-										<td height="70">
+										<td height="90">
 											<div align="right">
 												<a href="#"><img src="images/main_28.gif" name="Image2"
-													width="40" height="40" border="0" id="Image2"
-													onmouseover="MM_swapImage('Image2','','images/main_29_1.gif',1)"
+													width="60" height="60" border="0" id="Image2"
+													onmouseover="MM_swapImage('Image2','','images/main_28_1.gif',1)"
 													onmouseout="MM_swapImgRestore()"
 													onclick="window.parent.rightFrame.location='userList.action'" /></a>
 											</div>
@@ -118,11 +118,11 @@
 									</tr>
 								</c:if>
 								<tr>
-									<td height="70">
+									<td height="90">
 										<div align="right">
-											<a href="#"><img src="images/main_28.gif" name="Image2"
-												width="40" height="40" border="0" id="Image2"
-												onmouseover="MM_swapImage('Image2','','images/main_29_1.gif',1)"
+											<a href="#"><img src="images/main_29.gif" name="Image3"
+												width="60" height="60" border="0" id="Image3"
+												onmouseover="MM_swapImage('Image3','','images/main_29_1.gif',1)"
 												onmouseout="MM_swapImgRestore()"
 												onclick="window.parent.rightFrame.location='tableList.action'" /></a>
 										</div>
@@ -136,11 +136,11 @@
 									</td>
 								</tr>
 								<tr>
-									<td height="70s">
+									<td height="90">
 										<div align="right">
-											<a href="#"><img src="images/main_31.gif" name="Image3"
-												width="40" height="40" border="0" id="Image3"
-												onmouseover="MM_swapImage('Image3','','images/main_31_1.gif',1)"
+											<a href="#"><img src="images/main_31.gif" name="Image4"
+												width="60" height="60" border="0" id="Image4"
+												onmouseover="MM_swapImage('Image4','','images/main_31_1.gif',1)"
 												onmouseout="MM_swapImgRestore()"
 												onclick="window.parent.rightFrame.location='foodList.action'" /></a>
 										</div>
