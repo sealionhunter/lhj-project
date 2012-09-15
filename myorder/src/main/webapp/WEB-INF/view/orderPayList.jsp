@@ -241,7 +241,7 @@ $(document).ready(function() {
 									<td width="281" background="images/tab_05.gif"><table
 											border="0" align="right" cellpadding="0" cellspacing="0">
 											<tr>
-												<td width="60">
+												<td width="60" style="cursor:pointer">
 													<table width="90%" border="0" cellpadding="0"
 														cellspacing="0">
 														<tr>
@@ -253,7 +253,7 @@ $(document).ready(function() {
 														</tr>
 													</table>
 												</td>
-												<td width="60">
+												<td width="60" style="cursor:pointer">
 													<table width="90%" border="0" cellpadding="0"
 														cellspacing="0">
 														<tr>
@@ -265,7 +265,7 @@ $(document).ready(function() {
 														</tr>
 													</table>
 												</td>
-												<td width="52"><table width="88%" border="0"
+												<td width="52" style="cursor:pointer"><table width="88%" border="0"
 														cellpadding="0" cellspacing="0">
 														<tr>
 															<td><div align="center">
@@ -316,9 +316,9 @@ $(document).ready(function() {
 													<td class="tabBody"><span>${order.address }</span></td>
 													<td class="tabBody"><span>${order.description }</span></td>
 													<td class="tabBody"><img src="images/037.gif"
-														width="9" height="9" name="btnRowEdit" />&nbsp; <img
-														src="images/010.gif" width="9" height="9"
-														name="btnRowDelete" />&nbsp;</td>
+														width="24" height="24" name="btnRowEdit" style="cursor:pointer" />&nbsp; <img
+														src="images/010.gif" width="24" height="24"
+														name="btnRowDelete" style="cursor:pointer" />&nbsp;</td>
 												</tr>
 											</c:forEach>
 										</table></td>

@@ -211,7 +211,7 @@ $(document).ready(function() {
 							<td width="281" background="images/tab_05.gif"><table
 									border="0" align="right" cellpadding="0" cellspacing="0">
 									<tr>
-										<td width="60">
+										<td width="60" style="cursor:pointer">
 											<table width="90%" border="0" cellpadding="0" cellspacing="0">
 												<tr>
 													<td><div align="center">
