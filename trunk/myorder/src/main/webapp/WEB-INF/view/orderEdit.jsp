@@ -178,7 +178,7 @@ $(document).ready(function() {
                                     border="0" align="right" cellpadding="0" cellspacing="0">
                                     <tr>
                                         </td>
-                                        <td width="52"><table width="88%" border="0"
+                                        <td width="52" style="cursor:pointer"><table width="88%" border="0"
                                                 cellpadding="0" cellspacing="0">
                                                 <tr>
                                                     <td><div align="center">
