@@ -142,8 +142,8 @@ $(document).ready(function() {
 									</tr>
 									<tr>
 										<td>&nbsp;</td>
-										<td><input type="button" id="btnSelectFood"
-											name="btnSelectFood" value="选择菜品" /></td>
+										<td>
+											<img src="images/selectFood.gif" id="btnSelectFood" /></td>
 									</tr>
 								</table>
 							</td>
