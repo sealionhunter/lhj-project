@@ -187,7 +187,7 @@ $(document).ready(function() {
 										<table width="90%" border="0" cellpadding="0" cellspacing="0">
 											<tr>
 												<td><div align="center">
-														<img src="images/114.gif" width="14" height="14"
+														<img src="images/039.gif" width="14" height="14"
 															name="btnEdit" />
 													</div></td>
 												<td><div align="center" name="btnEdit">选择</div></td>

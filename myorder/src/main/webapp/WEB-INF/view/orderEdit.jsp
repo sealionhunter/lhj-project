@@ -243,8 +243,8 @@ $(document).ready(function() {
                                             <td class="tabBody"><input type="text"
                                                 name="count${detail.uuid }" id="count${detail.uuid }"
                                                 value="${detail.unit }" /><span>${detail.food.unit }</span></td>
-                                            <td class="tabBody"><img src="images/010.gif" width="9"
-                                                height="9" name="btnRowDelete" /></td>
+                                            <td class="tabBody"><img src="images/010.gif" width="24"
+                                                height="24" name="btnRowDelete" /></td>
                                         </tr>
                                     </c:forEach>
                                 </table></td>

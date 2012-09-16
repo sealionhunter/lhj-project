@@ -326,7 +326,7 @@ $(document).ready(function() {
 											cellpadding="0" cellspacing="0">
 											<tr>
 												<td><div align="center">
-														<img src="images/083.gif" width="14" height="14"
+														<img src="images/040.gif" width="14" height="14"
 															name="btnOrder" />
 													</div></td>
 												<td><div align="center" name="btnOrder">订餐</div></td>
@@ -380,15 +380,15 @@ $(document).ready(function() {
 										<td class="tabBody">${table.description }</td>
 										<td class="tabBody"><img src="images/037.gif" width="24"
 											height="24" name="btnRowEdit"  style="cursor:pointer" />&nbsp; <img
-											src="images/010.gif" width="24" height="24" name="btnRowDelete"  style="cursor:pointer" />&nbsp;
+											src="images/010.gif" width="24" height="24" name="btnRowDelete" style="cursor:pointer" />&nbsp;
 											<c:if test="${not table.hasOrders }">
-												<img src="images/arrow_082.gif" width="9" height="9"
-													name="btnRowOrder" />
+												<img src="images/040.gif" width="24" height="24"
+													name="btnRowOrder" style="cursor:pointer" />
 											</c:if> <c:if test="${table.hasOrders }">
-												<img src="images/002.gif" width="9" height="9"
-													name="btnRowOrderEdit" />
-												<img src="images/002.gif" width="9" height="9"
-													name="btnRowOrderPay" />
+												<img src="images/order.gif" width="24" height="24"
+													name="btnRowOrderEdit" style="cursor:pointer" />
+												<img src="images/buy.gif" width="40" height="40"
+													name="btnRowOrderPay" style="cursor:pointer" />
 											</c:if></td>
 									</tr>
 								</c:forEach>
