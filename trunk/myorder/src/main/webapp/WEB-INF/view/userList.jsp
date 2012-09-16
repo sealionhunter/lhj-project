@@ -285,7 +285,7 @@ $(document).ready(function() {
 											cellpadding="0" cellspacing="0">
 											<tr>
 												<td><div align="center">
-														<img src="images/083.gif" width="14" height="14"
+														<img src="images/038.gif" width="14" height="14"
 															name="btnHotelSelect" />
 													</div></td>
 												<td><div align="center" name="btnHotelSelect">指定餐厅</div></td>
@@ -341,7 +341,7 @@ $(document).ready(function() {
 										<td class="tabBody"><img src="images/037.gif" width="24"
 											height="24" name="btnRowEdit" style="cursor:pointer" />&nbsp; <img
 											src="images/010.gif" width="24" height="24" name="btnRowDelete" style="cursor:pointer" />&nbsp;<img
-											src="images/010.gif" width="24" height="24" name="btnRowHotelSelect" style="cursor:pointer" />&nbsp;</td>
+											src="images/038.gif" width="24" height="24" name="btnRowHotelSelect" style="cursor:pointer" />&nbsp;</td>
 									</tr>
 								</c:forEach>
 							</table></td>
