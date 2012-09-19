@@ -19,12 +19,16 @@ $(document).ready(function() {
 			alert("请输入用户名！");
 			return false;
 		}
-		var password = $("#data\\.password").val();
-		if (password != undefined) {
-		if (password == '' || password.length == 0) {
+
+		<c:if
+			test="${(actionType == 'new') }">
+		var plainPass = $("#data\\.plainPass").val();
+		if (plainPass != undefined) {
+		if (plainPass == '' || plainPass.length == 0) {
 			alert("请输入密码！");
 			return false;
 		}}
+		</c:if>
 		var uname = $("#data\\.uname").val();
 		if (uname == '' || uname.length == 0) {
 			alert("请输入姓名！");
@@ -35,17 +39,17 @@ $(document).ready(function() {
 			alert("出生年月日输入不正确！请重新输入");
 			return false;
 		}
-		var validTo = $("#data\\.validTo").val();
-		if (validTo != undefined) {
-		if (validTo == '' || validTo.length == 0) {
+		var validToDate = $("#data\\.validToDate").val();
+		if (validToDate != undefined) {
+		if (validToDate == '' || validToDate.length == 0) {
 			alert("请输入有效期限！");
 			return false;
 		}
-		if (validTo.length >= 0 && !isDate(validTo)) {
+		if (validToDate.length >= 0 && !isDate(validToDate)) {
 			alert("有效期限输入不正确！请重新输入");
 			return false;
 		}}
-		<c:if test="${not (actionType == 'profile') }">
+		<c:if test="${actionType == 'new' }">
 		var createHotel = $("#cbxCreateHotel").attr('checked') == 'checked' ? 'true' : 'false';
 		if (createHotel) {
 			var hname = $("#hname").val();
@@ -130,14 +134,11 @@ $(document).ready(function() {
 												<input type="hidden" name="data.uid" value="${data.uid }"
 													id="data.uid">${data.uid }</c:if></td>
 									</tr>
-									<c:if
-										test="${(actionType == 'new') or (actionType == 'profile') }">
-										<tr>
-											<td class="newLabel">密码</td>
-											<td class="newValue"><input type="password"
-												name="data.password" id="data.password" maxlength="128" /></td>
-										</tr>
-									</c:if>
+									<tr>
+										<td class="newLabel">密码</td>
+										<td class="newValue"><input type="password"
+											name="data.plainPass" id="data.plainPass" maxlength="128" /></td>
+									</tr>
 									<tr>
 										<td class="newLabel">姓名</td>
 										<td class="newValue"><input type="text" name="data.uname"
@@ -171,25 +172,27 @@ $(document).ready(function() {
 											<td class="newLabel">有效期限至</td>
 											<td class="newValue"><input type="text"
 												value="<fmt:formatDate
-													value="${data.validTo}" type="date" pattern="yyyy/MM/dd" />"
-												name="data.validTo" id="data.validTo" />&nbsp;&nbsp;(yyyy/MM/dd)</td>
+													value="${data.validToDate}" type="date" pattern="yyyy/MM/dd" />"
+												name="data.validToDate" id="data.validToDate" />&nbsp;&nbsp;(yyyy/MM/dd)</td>
 										</tr>
 										<tr>
 											<td class="newLabel">管理员</td>
 											<td class="newValue"><input type="checkbox"
 												name="data.admin" id="data.admin" value="true" /></td>
 										</tr>
-										<tr>
-											<td class="newLabel">创建餐厅</td>
-											<td class="newValue"><input type="checkbox"
-												name="cbxCreateHotel" id="cbxCreateHotel" value="true" /> <input
-												type="hidden" name="createHotel" id="createHotel" /></td>
-										</tr>
-										<tr>
-											<td class="newLabel">餐厅名称</td>
-											<td class="newValue"><input type="text" name="hname"
-												id="hname" value="${hname}" /></td>
-										</tr>
+										<c:if test="${actionType == 'new' }">
+											<tr>
+												<td class="newLabel">创建餐厅</td>
+												<td class="newValue"><input type="checkbox"
+													name="cbxCreateHotel" id="cbxCreateHotel" value="true" />
+													<input type="hidden" name="createHotel" id="createHotel" /></td>
+											</tr>
+											<tr>
+												<td class="newLabel">餐厅名称</td>
+												<td class="newValue"><input type="text" name="hname"
+													id="hname" value="${hname}" /></td>
+											</tr>
+										</c:if>
 									</c:if>
 									<tr>
 										<td>&nbsp;</td>

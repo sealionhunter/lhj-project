@@ -32,10 +32,14 @@ public class UserInfo {
 	private String address;
 	@Column(name = "isAdmin", nullable = false)
 	private boolean isAdmin = false;
-	@Column(name = "validTo")
-	private Date validTo;
+	@Column(name = "validTo", nullable = false)
+	private String validTo;
 	@Transient
 	private String hname;
+	@Transient
+	private String plainPass;
+	@Transient
+	private Date validToDate;
 
 	public String getUid() {
 		return uid;
@@ -141,7 +145,7 @@ public class UserInfo {
 	/**
 	 * @return the validTo
 	 */
-	public Date getValidTo() {
+	public String getValidTo() {
 		return validTo;
 	}
 
@@ -149,8 +153,23 @@ public class UserInfo {
 	 * @param validTo
 	 *            the validTo to set
 	 */
-	public void setValidTo(Date validTo) {
+	public void setValidTo(String validTo) {
 		this.validTo = validTo;
+	}
+
+	/**
+	 * @return the validTo
+	 */
+	public Date getValidToDate() {
+		return validToDate;
+	}
+
+	/**
+	 * @param validTo
+	 *            the validTo to set
+	 */
+	public void setValidToDate(Date validToDate) {
+		this.validToDate = validToDate;
 	}
 
 	/**
@@ -166,5 +185,20 @@ public class UserInfo {
 	 */
 	public void setHname(String hname) {
 		this.hname = hname;
+	}
+
+	/**
+	 * @return the plainPass
+	 */
+	public String getPlainPass() {
+		return plainPass;
+	}
+
+	/**
+	 * @param plainPass
+	 *            the plainPass to set
+	 */
+	public void setPlainPass(String plainPass) {
+		this.plainPass = plainPass;
 	}
 }
