@@ -1,9 +1,12 @@
 package com.ustcsoft.gs.myerp.webui.login;
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ustcsoft.gs.myerp.webui.common.MyHotelUtils;
 import com.ustcsoft.gs.myerp.webui.hotel.Hotel;
 import com.ustcsoft.gs.myerp.webui.hotel.HotelDao;
 import com.ustcsoft.gs.myerp.webui.user.UserDao;
@@ -25,8 +28,16 @@ public class LoginServiceImpl implements LoginService {
 			throw new Exception("请输入密码!");
 		}
 		UserInfo u = userDao.get(uid);
-		if (u == null || !password.equals(u.getPassword())) {
+		if (u == null
+				|| !MyHotelUtils.encrypt(password).equals(u.getPassword())) {
 			throw new Exception("用户名或密码错误");
+		}
+
+		Date now = new Date();
+		if (!u.isAdmin()
+				&& (u.getValidTo() == null || now.getTime() > Long
+						.parseLong(MyHotelUtils.decode(u.getValidTo())))) {
+			throw new Exception("您的有效期限已过，请与管理员联系！");
 		}
 		LoginInfo l = new LoginInfo(u.getUid(), u.getUname());
 		l.setAdmin(u.isAdmin());

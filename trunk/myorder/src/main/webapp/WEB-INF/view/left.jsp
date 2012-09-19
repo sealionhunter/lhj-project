@@ -117,6 +117,7 @@
 										</td>
 									</tr>
 								</c:if>
+								<c:if test="${not SESSION_LOGIN_INFO.admin }">
 								<tr>
 									<td height="90">
 										<div align="right">
@@ -153,6 +154,7 @@
 										</div>
 									</td>
 								</tr>
+								</c:if>
 							</table>
 						</td>
 					</tr>

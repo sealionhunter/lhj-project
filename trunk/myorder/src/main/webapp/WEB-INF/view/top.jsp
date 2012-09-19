@@ -17,6 +17,17 @@
 		return false;
 
 	}
+	function main() {
+		<c:if test="${SESSION_LOGIN_INFO.admin }">
+		window.parent.mainFrame.rightFrame.location='hotelList.action';
+		</c:if>
+		
+		<c:if test="${not SESSION_LOGIN_INFO.admin }">
+		window.parent.mainFrame.rightFrame.location='hotelProperty.action';
+		</c:if>
+		return false;
+
+	}
 </script>
 </head>
 <body>
@@ -74,7 +85,7 @@
 									<td class="time">&nbsp;</td>
 
 									<%
-										SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 EEE",
+										SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm EEE",
 												Locale.CHINESE);
 									%>
 									<td class="timeValue text">日期：<%=sdf.format(new Date())%></td>
@@ -97,12 +108,12 @@
 		</tr>
 	</table>
 	<map name="Map" id="Map">
-		<area shape="rect" coords="3,1,49,22" href="#" />
+		<area shape="rect" coords="3,1,49,22" href="#" onclick="return toMain()"/>
 		<area shape="rect" coords="52,2,95,21" href="#"  onclick="window.parent.mainFrame.rightFrame.history.back()"/>
 		<area shape="rect" coords="102,2,144,21" href="#"  onclick="window.parent.mainFrame.rightFrame.history.forward()"/>
 		<area shape="rect" coords="150,1,197,22" href="#" onclick="window.parent.mainFrame.rightFrame.history.back()"/>
 		<area shape="rect" coords="210,2,304,20" href="#"
-			onclick="window.parent.mainFrame.rightFrame.location='userEdit.action?uid=&actionType=profile'" />
+			onclick="window.parent.mainFrame.rightFrame.location='userEdit.action?uid=${SESSION_LOGIN_INFO.uid }&actionType=profile'" />
 		<area shape="rect" coords="314,-1,361,21" href="#"
 			onclick="return logout();" />
 	</map>

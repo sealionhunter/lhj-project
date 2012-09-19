@@ -40,8 +40,9 @@
 }
 
 .timeBack {
-	width : 200px;
+	width : 210px;
 	background-image : url(/myorder/images/main_11.gif);
+	background-repeat: no-repeat;
 }
 
 .time {

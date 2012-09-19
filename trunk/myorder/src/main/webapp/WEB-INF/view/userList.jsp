@@ -333,7 +333,7 @@ $(document).ready(function() {
 													value="${user.birthday}" type="date" pattern="yyyy/MM/dd" /></span></td>
 										<td class="tabBody"><span>${user.telNum }</span></td>
 										<td class="tabBody"><span><fmt:formatDate
-													value="${user.validTo}" type="date" pattern="yyyy/MM/dd" /></span></td>
+													value="${user.validToDate}" type="date" pattern="yyyy/MM/dd" /></span></td>
 										<td class="tabBody"><span>${user.hname }</span></td>
 										<td class="tabBody"><span><c:if
 													test="${user.admin}">是 </c:if>
