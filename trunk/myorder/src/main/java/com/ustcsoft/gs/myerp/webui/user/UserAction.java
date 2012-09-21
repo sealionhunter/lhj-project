@@ -29,18 +29,22 @@ public class UserAction extends AbstractAction<UserInfo> {
 		return userService.count(this.condition);
 	}
 
-	public String edit() throws Exception {
+	public String edit() {
 		setErrormsg(null);
 		data = null;
 		hname = null;
 		createHotel = false;
-		if (uuid != null && !"".equals(uuid)) {
-			data = userService.get(getUuid());
-		} else {
-			if ("profile".equals(actionType)) {
-				LoginInfo l = getLoginInfo();
-				data = userService.get(l.getUid());
+		try {
+			if (uuid != null && !"".equals(uuid)) {
+				data = userService.get(getUuid());
+			} else {
+				if ("profile".equals(actionType)) {
+					LoginInfo l = getLoginInfo();
+					data = userService.get(l.getUid());
+				}
 			}
+		} catch (Exception e) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		if (data == null) {
 			data = new UserInfo();
@@ -48,7 +52,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
 			if (MyErpConstant.ACTION_NEW.equals(actionType)) {
@@ -64,7 +68,7 @@ public class UserAction extends AbstractAction<UserInfo> {
 				userService.update(data);
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		if (!getLoginInfo().isAdmin()) {
@@ -73,14 +77,14 @@ public class UserAction extends AbstractAction<UserInfo> {
 		return Action.SUCCESS;
 	}
 
-	public String delete() throws Exception {
+	public String delete() {
 		setErrormsg(null);
 		try {
 			if (!StringUtils.isEmpty(uuids)) {
 				userService.delete(uuids.split(","));
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}
@@ -161,7 +165,8 @@ public class UserAction extends AbstractAction<UserInfo> {
 	}
 
 	/**
-	 * @param hname the hname to set
+	 * @param hname
+	 *            the hname to set
 	 */
 	public void setHname(String hname) {
 		this.hname = hname;

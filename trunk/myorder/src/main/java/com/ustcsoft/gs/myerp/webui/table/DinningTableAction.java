@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 
 	private SearchCondition condition;
 
+	private String hid;
+
 	private File imgFile;
 	private String imgFileFileName;
 	private String imgFileContentType;
@@ -27,31 +30,24 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 	private DinningTableService dinningTableService;
 
 	protected List<DinningTable> doSearch() throws Exception {
-		LoginInfo l = getLoginInfo();
-		return dinningTableService.list(l.getHid(), this.condition, paging);
+		return dinningTableService.list(hid, this.condition, paging);
 	}
 
 	protected int doCount() throws Exception {
-		LoginInfo l = getLoginInfo();
-		return dinningTableService.count(l.getHid(), this.condition);
+		return dinningTableService.count(hid, this.condition);
 	}
 
-	// public String list() throws Exception {
-	// setErrormsg(null);
-	// try {
-	// Map<String, Object> session = ActionContext.getContext()
-	// .getSession();
-	// LoginInfo loginInfo = (LoginInfo) session
-	// .get(MyErpConstant.SESSION_LOGIN_INFO);
-	// setTables(dinningTableService.list(loginInfo.getHid(), condition));
-	// } catch (Exception ex) {
-	// setErrormsg(ex.getMessage());
-	// return Action.ERROR;
-	// }
-	// return Action.SUCCESS;
-	// }
+	protected void preList() throws Exception {
+		LoginInfo l = getLoginInfo();
+		if (StringUtils.isEmpty(hid)) {
+			hid = l.getHid();
+		}
+		if (!l.isAdmin() && StringUtils.isEmpty(hid)) {
+			throw new Exception("未指定餐厅,不能查看餐台信息!");
+		}
+	}
 
-	public String edit() throws Exception {
+	public String edit() {
 		imgFileFileName = null;
 		setErrormsg(null);
 		try {
@@ -60,7 +56,7 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 				data = dinningTableService.get(getUuid());
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		if (data == null) {
 			setActionType(MyErpConstant.ACTION_NEW);
@@ -73,7 +69,7 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
 			if (imgFileFileName != null && !imgFileFileName.equals("")) {
@@ -93,20 +89,20 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 				dinningTableService.update(data);
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;
 	}
 
-	public String delete() throws Exception {
+	public String delete() {
 		if (uuids == null || uuids.length() == 0) {
 			setErrormsg("请选择餐桌！");
 		} else {
 			try {
 				dinningTableService.delete(uuids.split(","));
 			} catch (Exception ex) {
-				setErrormsg(ex.getMessage());
+				setErrormsg("发生了未知错误,请联系系统管理员");
 			}
 		}
 		return Action.SUCCESS;
@@ -200,5 +196,13 @@ public class DinningTableAction extends AbstractAction<DinningTable> {
 	 */
 	public void setData(DinningTable data) {
 		this.data = data;
+	}
+
+	public String getHid() {
+		return hid;
+	}
+
+	public void setHid(String hid) {
+		this.hid = hid;
 	}
 }

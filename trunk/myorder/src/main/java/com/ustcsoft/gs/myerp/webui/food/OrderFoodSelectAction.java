@@ -81,7 +81,7 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 		return sDetails;
 	}
 
-	public void add() throws Exception {
+	public void add()  throws Exception {
 		if (StringUtils.isEmpty(fids)) {
 			throw new Exception("请选择菜品");
 		}
@@ -114,7 +114,7 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 		// return Action.SUCCESS;
 	}
 
-	public String remove() throws Exception {
+	public String remove() {
 		if (StringUtils.isEmpty(uuids)) {
 			setErrormsg("请选择菜品");
 			return Action.INPUT;
@@ -133,7 +133,7 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 		return Action.SUCCESS;
 	}
 
-	public String selectOK() throws Exception {
+	public String selectOK() {
 		if (StringUtils.isEmpty(fids)) {
 			setErrormsg("请选择菜品");
 			return Action.INPUT;
@@ -147,7 +147,7 @@ public class OrderFoodSelectAction extends AbstractAction<Food> {
 		return Action.SUCCESS;
 	}
 
-	public String foodSelect() throws Exception {
+	public String foodSelect() {
 
 		return Action.SUCCESS;
 	}

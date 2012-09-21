@@ -46,7 +46,7 @@ public class UserHotelSelectAction extends AbstractAction<Hotel> {
 		}
 	}
 
-	public String selectOk() throws Exception {
+	public String selectOk() {
 		setErrormsg(null);
 		try {
 			if (StringUtils.isEmpty(uuid)) {
@@ -56,7 +56,7 @@ public class UserHotelSelectAction extends AbstractAction<Hotel> {
 			user.setHid(uuid);
 			userService.update(user);
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}

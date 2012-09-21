@@ -16,7 +16,7 @@ public class LoginAction extends AbstractAction<LoginInfo> {
 	@Autowired
 	private LoginService loginService;
 
-	public String execute() throws Exception {
+	public String execute() {
 		setErrormsg(null);
 		if (getLoginInfo() != null) {
 			return "main";
@@ -24,26 +24,26 @@ public class LoginAction extends AbstractAction<LoginInfo> {
 		return Action.SUCCESS;
 	}
 
-	public String login() throws Exception {
+	public String login() {
 		setErrormsg(null);
 		try {
 			LoginInfo l = loginService.login(getUserId(), getPassword());
 			ServletActionContext.getRequest().getSession()
 					.setAttribute(MyErpConstant.SESSION_LOGIN_INFO, l);
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;
 	}
 
-	public String logout() throws Exception {
+	public String logout() {
 		setErrormsg(null);
 		try {
 			ServletActionContext.getRequest().getSession()
 					.removeAttribute(MyErpConstant.SESSION_LOGIN_INFO);
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;

@@ -36,8 +36,18 @@ public class DinningTable {
 	@Column(name = "imgUrl", length = 512)
 	private String imgUrl;
 
-	@Transient 
+	@Transient
 	private boolean hasOrders;
+	@Transient
+	private String hname;
+
+	public String getHname() {
+		return hname;
+	}
+
+	public void setHname(String hname) {
+		this.hname = hname;
+	}
 
 	public boolean isHasOrders() {
 		return hasOrders;
