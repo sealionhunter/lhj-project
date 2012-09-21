@@ -36,12 +36,16 @@ public class HotelAction extends AbstractAction<Hotel> {
 		return hotelService.count(this.condition);
 	}
 
-	public String property() throws Exception {
+	public String property() {
 		setErrormsg(null);
 		data = null;
 		LoginInfo l = getLoginInfo();
 		if (!StringUtils.isEmpty(l.getHid())) {
-			data = hotelService.get(l.getHid());
+			try {
+				data = hotelService.get(l.getHid());
+			} catch (Exception e) {
+				setErrormsg("发生了未知错误,请联系系统管理员");
+			}
 		}
 		if (data == null) {
 			setErrormsg("餐厅信息未指定！您不能使用本系统。请与管理员联系。");
@@ -54,7 +58,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 		return Action.SUCCESS;
 	}
 
-	public String edit() throws Exception {
+	public String edit() {
 		imgFileFileName = null;
 		setErrormsg(null);
 		data = null;
@@ -65,7 +69,12 @@ public class HotelAction extends AbstractAction<Hotel> {
 			uuid = l.getHid();
 		}
 		if (uuid != null && !"".equals(uuid)) {
-			data = hotelService.get(getUuid());
+			try {
+				data = hotelService.get(getUuid());
+
+			} catch (Exception e) {
+				setErrormsg("发生了未知错误,请联系系统管理员");
+			}
 		}
 		if (data == null) {
 			setActionType(MyErpConstant.ACTION_NEW);
@@ -77,7 +86,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
 			if (!MyErpConstant.ACTION_DELETE.equals(actionType)
@@ -97,7 +106,7 @@ public class HotelAction extends AbstractAction<Hotel> {
 				hotelService.update(data);
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 
@@ -108,14 +117,14 @@ public class HotelAction extends AbstractAction<Hotel> {
 		return Action.SUCCESS;
 	}
 
-	public String delete() throws Exception {
+	public String delete() {
 		setErrormsg(null);
 		try {
 			if (!StringUtils.isEmpty(uuids)) {
 				hotelService.delete(uuids.split(","));
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}

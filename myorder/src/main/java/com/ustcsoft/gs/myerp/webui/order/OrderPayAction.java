@@ -23,14 +23,18 @@ public class OrderPayAction extends AbstractAction<Orders> {
 	@Autowired
 	private DinningTableService dinningTableService;
 
-	public String edit() throws Exception {
+	public String edit() {
 		setErrormsg(null);
 		if (StringUtils.isEmpty(tid)) {
 			setErrormsg("请选择餐台");
 		}
-		table = dinningTableService.get(tid);
-		if (table == null) {
-			setErrormsg("选择的餐台不存在或已被删除");
+		try {
+			table = dinningTableService.get(tid);
+			if (table == null) {
+				setErrormsg("选择的餐台不存在或已被删除");
+			}
+		} catch (Exception e) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		try {
 			data = orderService.findByTable(tid);
@@ -44,12 +48,12 @@ public class OrderPayAction extends AbstractAction<Orders> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
-				orderService.pay(uuid, data.getRprice());	
+			orderService.pay(uuid, data.getRprice());
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;

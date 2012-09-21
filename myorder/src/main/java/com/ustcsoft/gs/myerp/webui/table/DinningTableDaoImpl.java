@@ -33,19 +33,17 @@ public class DinningTableDaoImpl implements DinningTableDao {
 				.findByCriteria(criteria,
 						(paging.getPcurrent() - 1) * paging.getPercount(),
 						paging.getPercount());
-		// hibernateTemplate.find(sql);
 
 		if (result == null || result.size() == 0) {
 			return new ArrayList<DinningTable>(0);
 		}
 		List<String> tids = new ArrayList<String>();
+		List<String> hids = new ArrayList<String>();
 		for (DinningTable table : result) {
 			tids.add(table.getUuid());
+			hids.add(table.getHid());
 		}
 
-		// DetachedCriteria criteria2 = DetachedCriteria.forClass(Orders.class);
-		// criteria2.add(Restrictions.in("tid", tids)).setProjection(
-		// Projections.countDistinct("tid"));
 		List<Object[]> counts = hibernateTemplate
 				.findByNamedParam(
 						"select tid, count(*) as tcount from Orders where state = :state and tid IN (:tids) group by tid",
@@ -60,18 +58,21 @@ public class DinningTableDaoImpl implements DinningTableDao {
 				}
 			}
 		}
-		return result;
 
-		// List<Object> conditions = new ArrayList<Object>();
-		// conditions.add(hid);
-		// StringBuffer sql = makeCondition(condition, conditions);
-		// List<DinningTable> result = (List<DinningTable>) hibernateTemplate
-		// .find(sql.toString(), conditions.toArray());
-		//
-		// if (result == null || result.size() == 0) {
-		// return new ArrayList<DinningTable>(0);
-		// }
-		// return result;
+		List<Object[]> hs = hibernateTemplate
+				.findByNamedParam(
+						"select uuid, name as tcount from Hotel where uuid IN (:uuids)",
+						new String[] { "uuids" }, new Object[] { hids });
+		if (hs != null && hs.size() > 0) {
+			for (DinningTable table : result) {
+				for (Object[] count : hs) {
+					if (count[0].equals(table.getHid())) {
+						table.setHname(String.valueOf(count[1]));
+					}
+				}
+			}
+		}
+		return result;
 	}
 
 	public int count(String hid, SearchCondition condition) throws Exception {
@@ -99,7 +100,9 @@ public class DinningTableDaoImpl implements DinningTableDao {
 	private void makeCondition(SearchCondition condition, String hid,
 			DetachedCriteria criteria) {
 
-		criteria.add(Restrictions.eq("hid", hid));
+		if (!StringUtils.isEmpty(hid)) {
+			criteria.add(Restrictions.eq("hid", hid));
+		}
 		if (condition != null) {
 			if (!StringUtils.isEmpty(condition.getName())) {
 				criteria.add(Restrictions.like("name", condition.getName(),

@@ -117,7 +117,6 @@
 										</td>
 									</tr>
 								</c:if>
-								<c:if test="${not SESSION_LOGIN_INFO.admin }">
 								<tr>
 									<td height="90">
 										<div align="right">
@@ -131,11 +130,12 @@
 									<td>
 										<div align="left" class="text">
 											<a href="#"
-												onclick="window.parent.rightFrame.location='tableList.action'">餐台<br />管理
+												onclick="window.parent.rightFrame.location='tableList.action?hid=&actionType=list'">餐台<br />管理
 											</a>
 										</div>
 									</td>
 								</tr>
+								<c:if test="${not SESSION_LOGIN_INFO.admin }">
 								<tr>
 									<td height="90">
 										<div align="right">

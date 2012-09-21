@@ -16,12 +16,12 @@ public class AbstractAction<T> {
 	protected String uuids;
 	protected String uuid;
 
-	public String list() throws Exception {
+	public String list() {
 		setErrormsg(null);
 		try {
 			preList();
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return "preList";
 		}
 		try {
@@ -42,7 +42,7 @@ public class AbstractAction<T> {
 			datas = doSearch();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}
@@ -55,31 +55,51 @@ public class AbstractAction<T> {
 		return 0;
 	}
 
-	public String next() throws Exception {
-		getPaging().next();
-		paging.setRcount(doCount());
-		datas = doSearch();
+	public String next() {
+		try {
+			getPaging().next();
+			paging.setRcount(doCount());
+			datas = doSearch();
+
+		} catch (Exception ex) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		return Action.SUCCESS;
 	}
 
-	public String back() throws Exception {
-		getPaging().back();
-		paging.setRcount(doCount());
-		datas = doSearch();
+	public String back() {
+		try {
+			getPaging().back();
+			paging.setRcount(doCount());
+			datas = doSearch();
+
+		} catch (Exception ex) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		return Action.SUCCESS;
 	}
 
-	public String first() throws Exception {
-		getPaging().clear();
-		paging.setRcount(doCount());
-		datas = doSearch();
+	public String first() {
+		try {
+			getPaging().clear();
+			paging.setRcount(doCount());
+			datas = doSearch();
+
+		} catch (Exception ex) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		return Action.SUCCESS;
 	}
 
-	public String last() throws Exception {
-		getPaging().last();
-		paging.setRcount(doCount());
-		datas = doSearch();
+	public String last() {
+		try {
+			getPaging().last();
+			paging.setRcount(doCount());
+			datas = doSearch();
+
+		} catch (Exception ex) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		return Action.SUCCESS;
 	}
 
@@ -179,7 +199,7 @@ public class AbstractAction<T> {
 	public void setDatas(List<T> datas) {
 		this.datas = datas;
 	}
-	
+
 	protected LoginInfo getLoginInfo() {
 		return MyHotelUtils.getLoginInfo();
 	}

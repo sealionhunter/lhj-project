@@ -290,48 +290,50 @@ $(document).ready(function() {
 						<td width="281" background="images/tab_05.gif"><table
 								border="0" align="right" cellpadding="0" cellspacing="0">
 								<tr>
-									<td width="60" style="cursor:pointer">
-										<table width="90%" border="0" cellpadding="0" cellspacing="0">
-											<tr>
-												<td><div align="center">
-														<img src="images/001.gif" width="14" height="14"
-															name="btnNew" />
-													</div></td>
-												<td><div align="center" name="btnNew">新增</div></td>
-											</tr>
-										</table>
-									</td>
-									<td width="60" style="cursor:pointer">
-										<table width="90%" border="0" cellpadding="0" cellspacing="0">
-											<tr>
-												<td><div align="center">
-														<img src="images/114.gif" width="14" height="14"
-															name="btnEdit" />
-													</div></td>
-												<td><div align="center" name="btnEdit">修改</div></td>
-											</tr>
-										</table>
-									</td>
-									<td width="52" style="cursor:pointer"><table width="88%" border="0"
-											cellpadding="0" cellspacing="0">
-											<tr>
-												<td><div align="center">
-														<img src="images/083.gif" width="14" height="14"
-															name="btnDelete" />
-													</div></td>
-												<td><div align="center" name="btnDelete">删除</div></td>
-											</tr>
-										</table></td>
-									<td width="52" style="cursor:pointer"><table width="88%" border="0"
-											cellpadding="0" cellspacing="0">
-											<tr>
-												<td><div align="center">
-														<img src="images/040.gif" width="14" height="14"
-															name="btnOrder" />
-													</div></td>
-												<td><div align="center" name="btnOrder">订餐</div></td>
-											</tr>
-										</table></td>
+									<c:if test="${not SESSION_LOGIN_INFO.admin }">
+										<td width="60" style="cursor: pointer">
+											<table width="90%" border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td><div align="center">
+															<img src="images/001.gif" width="14" height="14"
+																name="btnNew" />
+														</div></td>
+													<td><div align="center" name="btnNew">新增</div></td>
+												</tr>
+											</table>
+										</td>
+										<td width="60" style="cursor: pointer">
+											<table width="90%" border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td><div align="center">
+															<img src="images/114.gif" width="14" height="14"
+																name="btnEdit" />
+														</div></td>
+													<td><div align="center" name="btnEdit">修改</div></td>
+												</tr>
+											</table>
+										</td>
+										<td width="52" style="cursor: pointer"><table width="88%"
+												border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td><div align="center">
+															<img src="images/083.gif" width="14" height="14"
+																name="btnDelete" />
+														</div></td>
+													<td><div align="center" name="btnDelete">删除</div></td>
+												</tr>
+											</table></td>
+										<td width="52" style="cursor: pointer"><table width="88%"
+												border="0" cellpadding="0" cellspacing="0">
+												<tr>
+													<td><div align="center">
+															<img src="images/040.gif" width="14" height="14"
+																name="btnOrder" />
+														</div></td>
+													<td><div align="center" name="btnOrder">订餐</div></td>
+												</tr>
+											</table></td>
+									</c:if>
 								</tr>
 							</table></td>
 						<td width="15"><img src="images/tab_07.gif" width="15"
@@ -348,21 +350,29 @@ $(document).ready(function() {
 								align="center" cellpadding="0" cellspacing="1" bgcolor="#c0de98"
 								onmouseover="changeto()" onmouseout="changeback()">
 								<tr>
-									<td width="3%" class="tabTitle"><input type="checkbox"
-										id="cbxSelectAll" /></td>
-									<td width="18%" class="tabTitle">餐台名称</td>
-									<td width="23%" class="tabTitle">位置</td>
-									<td width="7%" class="tabTitle">分类</v>
+									<c:if test="${not SESSION_LOGIN_INFO.admin }">
+										<td width="3%" class="tabTitle"><input type="checkbox"
+											id="cbxSelectAll" /></td>
+									</c:if>
+									<td width="18%" class="tabTitle">餐厅名称</td>
+									<td width="12%" class="tabTitle">餐台名称</td>
+									<td width="11%" class="tabTitle">位置</td>
+									<td width="7%" class="tabTitle">分类</td>
 									<td width="5%" class="tabTitle">座位数</td>
 									<td width="10%" class="tabTitle">状态</td>
 									<td width="27%" class="tabTitle">说明</td>
-									<td width="7%" class="tabTitle">&nbsp;</td>
+									<c:if test="${not SESSION_LOGIN_INFO.admin }">
+										<td width="7%" class="tabTitle">&nbsp;</td>
+									</c:if>
 								</tr>
 								<c:forEach items="${datas }" var="table" varStatus="status">
 
 									<tr id="${table.uuid }" class="tabBody">
-										<td class="tabBody"><input type="checkbox" name="ids"
-											value="${table.uuid }" id="${table.uuid }" /></td>
+										<c:if test="${not SESSION_LOGIN_INFO.admin }">
+											<td class="tabBody"><input type="checkbox" name="ids"
+												value="${table.uuid }" id="${table.uuid }" /></td>
+										</c:if>
+										<td class="tabBody">${table.hname }</td>
 										<td class="tabBody"><img src="${table.imgUrl }" height=60
 											width=80 />${table.name }</td>
 										<td class="tabBody">${table.area }</td>
@@ -378,18 +388,21 @@ $(document).ready(function() {
 										<td class="tabBody"><c:if test="${table.state == '0' }">空闲</c:if>
 											<c:if test="${table.state == '1' }">占用</c:if></td>
 										<td class="tabBody">${table.description }</td>
-										<td class="tabBody"><img src="images/037.gif" width="24"
-											height="24" name="btnRowEdit"  style="cursor:pointer" />&nbsp; <img
-											src="images/010.gif" width="24" height="24" name="btnRowDelete" style="cursor:pointer" />&nbsp;
-											<c:if test="${not table.hasOrders }">
-												<img src="images/040.gif" width="24" height="24"
-													name="btnRowOrder" style="cursor:pointer" />
-											</c:if> <c:if test="${table.hasOrders }">
-												<img src="images/order.gif" width="24" height="24"
-													name="btnRowOrderEdit" style="cursor:pointer" />
-												<img src="images/buy.gif" width="40" height="40"
-													name="btnRowOrderPay" style="cursor:pointer" />
-											</c:if></td>
+										<c:if test="${not SESSION_LOGIN_INFO.admin }">
+											<td class="tabBody"><img src="images/037.gif" width="24"
+												height="24" name="btnRowEdit" style="cursor: pointer" />&nbsp;
+												<img src="images/010.gif" width="24" height="24"
+												name="btnRowDelete" style="cursor: pointer" />&nbsp; <c:if
+													test="${not table.hasOrders }">
+													<img src="images/040.gif" width="24" height="24"
+														name="btnRowOrder" style="cursor: pointer" />
+												</c:if> <c:if test="${table.hasOrders }">
+													<img src="images/order.gif" width="24" height="24"
+														name="btnRowOrderEdit" style="cursor: pointer" />
+													<img src="images/buy.gif" width="40" height="40"
+														name="btnRowOrderPay" style="cursor: pointer" />
+												</c:if></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</table></td>

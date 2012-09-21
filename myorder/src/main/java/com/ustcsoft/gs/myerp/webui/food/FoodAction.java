@@ -37,12 +37,16 @@ public class FoodAction extends AbstractAction<Food> {
 		return foodService.count(l.getHid(), this.condition);
 	}
 
-	public String edit() throws Exception {
+	public String edit() {
 		imgFileFileName = null;
 		setErrormsg(null);
 		data = null;
 		if (uuid != null && !"".equals(uuid)) {
-			data = foodService.get(getUuid());
+			try {
+				data = foodService.get(getUuid());
+			} catch (Exception e) {
+				setErrormsg("发生了未知错误,请联系系统管理员");
+			}
 		}
 		if (data == null) {
 			setActionType(MyErpConstant.ACTION_NEW);
@@ -55,7 +59,7 @@ public class FoodAction extends AbstractAction<Food> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
 			if (imgFileFileName != null && !imgFileFileName.equals("")) {
@@ -74,20 +78,20 @@ public class FoodAction extends AbstractAction<Food> {
 				foodService.update(data);
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;
 	}
 
-	public String delete() throws Exception {
+	public String delete() {
 		setErrormsg(null);
 		try {
 			if (!StringUtils.isEmpty(uuids)) {
 				foodService.delete(uuids.split(","));
 			}
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}

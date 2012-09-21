@@ -58,7 +58,7 @@ public class OrderAction extends AbstractAction<Orders> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String edit() throws Exception {
+	public String edit() {
 		setErrormsg(null);
 
 		if ("foodSelectBack".equals(actionType)) {
@@ -76,7 +76,11 @@ public class OrderAction extends AbstractAction<Orders> {
 		if (StringUtils.isEmpty(tid)) {
 			setErrormsg("请选择餐台");
 		}
-		table = dinningTableService.get(tid);
+		try {
+			table = dinningTableService.get(tid);
+		} catch (Exception e) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		if (table == null) {
 			setErrormsg("选择的餐台不存在或已被删除");
 		}
@@ -86,10 +90,18 @@ public class OrderAction extends AbstractAction<Orders> {
 		// session.get(MyErpConstant.SESSION_LOGIN_INFO);
 		// foods = foodService.list(l.getHid(), null, getPaging());
 
-		data = orderService.findByTable(tid);
+		try {
+			data = orderService.findByTable(tid);
+		} catch (Exception e) {
+			setErrormsg("发生了未知错误,请联系系统管理员");
+		}
 		if (data != null) {
 			uuid = data.getUuid();
-			details = orderService.getDetail(uuid);
+			try {
+				details = orderService.getDetail(uuid);
+			} catch (Exception e) {
+				setErrormsg("发生了未知错误,请联系系统管理员");
+			}
 		} else {
 			uuid = "tmp".concat(UUID.randomUUID().toString());
 			setActionType(MyErpConstant.ACTION_NEW);
@@ -118,14 +130,14 @@ public class OrderAction extends AbstractAction<Orders> {
 		}
 	}
 
-	public String foodSelect() throws Exception {
+	public String foodSelect() {
 		ActionContext.getContext().getSession()
 				.put(MyErpConstant.SESSION_ORDER_INFO, data);
 		setFCounts();
 		return Action.SUCCESS;
 	}
 
-	public String foodSelectOk() throws Exception {
+	public String foodSelectOk() {
 		// if (StringUtils.isEmpty(fids)) {
 		// setError
 		// }
@@ -135,36 +147,41 @@ public class OrderAction extends AbstractAction<Orders> {
 		tid = data.getTid();
 		List<OrderDetail> sDetails = getSDetails(uuid);
 		if (!StringUtils.isEmpty(fids)) {
-			List<Food> selectFoods = foodService.gets(fids.split(","));
-			for (Food f : selectFoods) {
-				OrderDetail detail = null;
-				for (OrderDetail sDetail : sDetails) {
-					if (sDetail.getFoodId().equals(f.getUuid())) {
-						detail = sDetail;
-						break;
+			List<Food> selectFoods;
+			try {
+				selectFoods = foodService.gets(fids.split(","));
+				for (Food f : selectFoods) {
+					OrderDetail detail = null;
+					for (OrderDetail sDetail : sDetails) {
+						if (sDetail.getFoodId().equals(f.getUuid())) {
+							detail = sDetail;
+							break;
+						}
+					}
+					if (detail == null) {
+						detail = new OrderDetail();
+						detail.setUuid(UUID.randomUUID().toString());
+						detail.setOid(uuid);
+						detail.setFoodId(f.getUuid());
+						// detail.setFoodName(f.getName());
+						// detail.setUnitName(f.getUnit());
+						detail.setUnit(1);
+						// detail.setDescription("");
+						detail.setFood(f);
+						sDetails.add(detail);
+					} else {
+						detail.setUnit(detail.getUnit() + 1);
 					}
 				}
-				if (detail == null) {
-					detail = new OrderDetail();
-					detail.setUuid(UUID.randomUUID().toString());
-					detail.setOid(uuid);
-					detail.setFoodId(f.getUuid());
-					// detail.setFoodName(f.getName());
-					// detail.setUnitName(f.getUnit());
-					detail.setUnit(1);
-					// detail.setDescription("");
-					detail.setFood(f);
-					sDetails.add(detail);
-				} else {
-					detail.setUnit(detail.getUnit() + 1);
-				}
+			} catch (Exception e) {
+				setErrormsg("发生了未知错误,请联系系统管理员");
 			}
 		}
 		details = sDetails;
 		return Action.SUCCESS;
 	}
 
-	public String foodSelectRemove() throws Exception {
+	public String foodSelectRemove() {
 		if (StringUtils.isEmpty(uuids)) {
 			setErrormsg("请选择菜品");
 			return Action.INPUT;
@@ -183,7 +200,7 @@ public class OrderAction extends AbstractAction<Orders> {
 		return Action.SUCCESS;
 	}
 
-	public String editOk() throws Exception {
+	public String editOk() {
 		setErrormsg(null);
 		try {
 			setFCounts();
@@ -202,7 +219,7 @@ public class OrderAction extends AbstractAction<Orders> {
 			// // orderService.add(data);
 			// }
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 			return Action.INPUT;
 		}
 		return Action.SUCCESS;
@@ -229,12 +246,12 @@ public class OrderAction extends AbstractAction<Orders> {
 		}
 	}
 
-	public String delete() throws Exception {
+	public String delete() {
 		setErrormsg(null);
 		try {
 			orderService.delete(getUuids().split(","));
 		} catch (Exception ex) {
-			setErrormsg(ex.getMessage());
+			setErrormsg("发生了未知错误,请联系系统管理员");
 		}
 		return Action.SUCCESS;
 	}

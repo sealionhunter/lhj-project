@@ -1,13 +1,21 @@
 package com.ustcsoft.gs.myerp.webui.table;
 
-
 public class SearchCondition {
+	private String hname;
 	private String name;
 	private String state;
 	private String category;
 	private String area;
 	private String maxService;
 	private String description;
+
+	public String getHname() {
+		return hname;
+	}
+
+	public void setHname(String hname) {
+		this.hname = hname;
+	}
 
 	/**
 	 * @return the name

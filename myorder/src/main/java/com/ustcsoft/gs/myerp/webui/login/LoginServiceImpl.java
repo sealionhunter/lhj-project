@@ -49,6 +49,8 @@ public class LoginServiceImpl implements LoginService {
 				l.setHid(h.getUuid());
 				l.setHname(h.getName());
 			}
+		} else if (!u.isAdmin()) {
+			throw new Exception("您还未指定餐厅, 请联系系统管理员给您指定餐厅.");
 		}
 		return l;
 	}
