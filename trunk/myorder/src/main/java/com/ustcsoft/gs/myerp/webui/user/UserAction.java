@@ -32,6 +32,8 @@ public class UserAction extends AbstractAction<UserInfo> {
 	public String edit() throws Exception {
 		setErrormsg(null);
 		data = null;
+		hname = null;
+		createHotel = false;
 		if (uuid != null && !"".equals(uuid)) {
 			data = userService.get(getUuid());
 		} else {
