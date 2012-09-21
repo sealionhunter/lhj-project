@@ -51,7 +51,7 @@ $(document).ready(function() {
 		}}
 		<c:if test="${actionType == 'new' }">
 		var createHotel = $("#cbxCreateHotel").attr('checked') == 'checked' ? 'true' : 'false';
-		if (createHotel) {
+		if (createHotel == 'true') {
 			var hname = $("#hname").val();
 			if (hname == '' || hname.length == 0) {
 				alert("请输入餐厅名称！");
