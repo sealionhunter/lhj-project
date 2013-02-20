@@ -21,7 +21,7 @@ public class ModifyPasswordValidator implements Validator {
         ModifyPasswordCommand v = (ModifyPasswordCommand) target;
 
         if (v.getIdCardNo() == null || v.getIdCardNo().length() == 0) {
-            errors.rejectValue("idCardNo", "idCardNo", "身份证号必须填写!");
+            errors.rejectValue("idCardNoError", "idCardNoError", "身份证号必须填写!");
         } else {
             if (!isValidate18Idcard(v.getIdCardNo())) {
                 errors.rejectValue("idCardNoError", "idCardNoError",
