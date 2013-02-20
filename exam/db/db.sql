@@ -1,3 +1,4 @@
+drop database IF EXISTS exam;
 create database exam default character set UTF8;
 use exam;
 
@@ -5,7 +6,7 @@ CREATE TABLE `apply` (
   `userid` int(11) NOT NULL,
   `officeid` int(11) NOT NULL,
   `state` int(11) NOT NULL,
-  `reason` varchar(512) NOT NULL,
+  `reason` varchar(512) DEFAULT NULL,
   `createDate` datetime DEFAULT NULL,
   `udpateDate` datetime DEFAULT NULL,
   PRIMARY KEY (`userid`,`officeid`)
