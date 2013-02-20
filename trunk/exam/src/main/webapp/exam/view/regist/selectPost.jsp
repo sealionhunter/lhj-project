@@ -264,7 +264,9 @@ function changeDeart() {
 <script text="text/javascript">
 <!--
  changeDeart();
-document.getElementById("applyPostId").value='${RegistCommand.applyPostId}';
+ if ('${RegistCommand.applyPostId}' != '') {
+	 document.getElementById("applyPostId").value='${RegistCommand.applyPostId}'; 
+ }
 //-->
 </script>
 </html>
