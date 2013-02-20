@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-lazy="false">
+ <class name="model.Apply" table="apply">
+  <composite-id mapped="false" name="id" unsaved-value="undefined">
+   <key-property column="userid" name="userid"/>
+   <key-property column="officeid" name="officeid"/>
+  </composite-id>
+  <property generated="never" lazy="false" name="state"/>
+  <property generated="never" lazy="false" name="reason"/>
+  <property generated="never" lazy="false" name="createDate"/>
+  <property generated="never" lazy="false" name="udpateDate"/>
+ </class>
+</hibernate-mapping>

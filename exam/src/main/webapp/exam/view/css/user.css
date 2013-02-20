@@ -1,0 +1,57 @@
+@charset "utf-8";
+@import url("common.css");
+.top5px{margin-top:5px;}
+.loginPub{width:950px;margin:0 auto;text-align:left;padding:10px 0;}
+.sideGG{width:228px;float:left;display:inline;text-align:center;}
+.sideGG a{display:block;}
+.sideGG img{margin:auto;}
+.loginPannel{width:484px;float:left;display:inherit;margin:0 5px;background:#f5fafe url(../images/login/loginBG.jpg) repeat-x;}
+.shuoming{padding:10px 20px;}
+.shuoming p{margin:3px auto 0 auto;}
+.border{border:1px solid #66a3d7}
+
+.midBox{width:950px;background:#fff url(../images/search/search_Top.jpg) center 10px no-repeat;margin:0px auto;}
+.midTitle{width:300px;margin:0 auto;padding-top:10px;font-size:14px;font-weight:600;color:#a60;text-align:center;line-height:22px;height:22px;}
+.cnt{width:910px;background:url(../images/search/search_Bottom.jpg) bottom no-repeat;margin:0;padding:6px 20px 20px;}
+.cnt h3{font-size:14px; color:#005690; text-align:center;}
+
+.whiteBox{ width:908px; background:#FFFFFF; border:1px solid #a9ccde;}
+.whiteBox .ad900{width:900px;margin:5px auto 0 auto;text-align:center;}
+.yourAdd{text-align:left; height:30px; line-height:30px;}
+.whiteBox h2{font-size:14px; color:#005690;}
+/* page */
+.tablebody1 { padding:1px 7px; height:18px; line-height:18px; border:1px solid #E1E1E1; background:#FFFFFF;}
+.tablebody2 { padding:1px 7px; height:18px; line-height:18px; border:1px solid #a9ccde;background:#DCF2FF url(../images/zxdy/zxdyHeaderbg.gif) repeat-x top;}
+.PageInput {height:14px; font-size:12px;}
+/* page */
+.borderTD{border:1px solid #66a3d7;line-height:22px;background-color:#f7fafd;text-align:left;color:#1b72b3 !important;}
+.borderTD p{line-height:22px;color:#1b72b3 !important;}
+
+.imgGG{text-align:center;}
+.imgGG a{margin-top:4px;}
+.imgGG img{width:220px;height:40px;}
+.txtGG{padding-top:10px;text-align:left !important;}
+.txtGG a{padding-left:10px;}
+
+.noticeBar{width:452px;height:54px;margin:15px auto 0 auto;background:url(../images/login/loginNoitce.jpg) no-repeat;padding-top:3px;}
+.loginNotice{ width:448px;height:12px;line-height:12px;padding:5px 0;background:url(../images/login/ico1.gif) 10px 4px no-repeat;margin:0 auto;}
+.loginNotice p *{ vertical-align:middle;}
+.loginNotice p{margin-left:35px;border-left:1px solid #666;padding:0 10px;line-height:12px;display:inline;}
+
+.loginInput{border:1px solid #AFC4D0; background-color:#FFFFFF;height:16px;line-hegiht:16px;width:120px;font-size:12px;}
+.loginInput2{border:1px solid #AFC4D0; background-color:#FFFFFF;height:16px;line-hegiht:16px;width:58px;font-size:12px;}
+
+.buttonYZ1{width:48px;height:48px;line-height:48px;padding:0px 10px;font-weight:600;font-size:12px;color:#fff;background:url(../images/login/login.jpg) center no-repeat; border:0; cursor:hand;}
+.buttonYZ2{width:48px;height:21px;line-height:21px;padding:0px 10px;font-weight:600;font-size:12px;color:#fff;background:url(../images/login/reset.jpg) center no-repeat; border:0; cursor:hand;}
+
+.errormessage{
+    color:red;
+}
+.adlist{list-style:none;padding:0;margin:5px 0 0 0;}
+.adlist li{padding-left:5px;height:22px;line-height:22px;}
+.piclist a{display:block;margin-top:5px;}
+
+.loginTable td *{ vertical-align:middle;}
+
+.enterBtn{width:134px;height:48px; color:#fff;line-height:48px;font-weight:600;font-size:16px;font-family:"微软雅黑","宋体";border:0;background:url(../images/loginpub/tjBtn.jpg) no-repeat;text-align:center; cursor:pointer;}
+.bbsInput_short{width:150px;}

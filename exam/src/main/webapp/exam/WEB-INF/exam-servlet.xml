@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/jdbc 
+	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/exam" />
+		<property name="username" value="root" />
+		<property name="password" value="overseas" />
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>model/Apply.hbm.xml</value>
+				<value>model/City.hbm.xml</value>
+				<value>model/Depart.hbm.xml</value>
+				<value>model/Office.hbm.xml</value>
+				<value>model/User.hbm.xml</value>
+				<value>model/Master.hbm.xml</value>
+				<value>model/Exam.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.current_session_context_class=thread
+			</value>
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 定义事务管理器（声明式的事务） -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- use declarative transaction management -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="simpleUrlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/regist.action">registController</prop>
+				<prop key="/applyinfo.action">applyInfoController</prop>
+				<prop key="/modifyPassword.action">modifyPasswordController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userDao" class="dao.UserDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="departDao" class="dao.DepartDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="cityDao" class="dao.CityDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="officeDao" class="dao.OfficeDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="applyDao" class="dao.ApplyDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="masterDao" class="dao.MasterDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="examDao" class="dao.ExamDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="registService" class="service.RegistServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="departDao" ref="departDao" />
+		<property name="cityDao" ref="cityDao" />
+		<property name="officeDao" ref="officeDao" />
+		<property name="applyDao" ref="applyDao" />
+		<property name="masterDao" ref="masterDao" />
+		<property name="examDao" ref="examDao" />
+	</bean>
+	<bean id="registController" class="controller.RegistWizardController">
+		<property name="successView" value="success" />
+		<property name="cancelView" value="init" />
+		<property name="commandName" value="RegistCommand" />
+		<property name="commandClass" value="command.RegistCommand" />
+		<property name="registService" ref="registService" />
+		<!---配置操作类 -->
+		<property name="pages">
+			<list>
+				<value>regist/inputUserInfo</value>
+				<value>regist/doReg</value>
+				<value>regist/regprotocol</value>
+				<value>regist/doRegQualify</value>
+				<value>regist/selectPost</value>
+				<value>regist/uploadPhoto</value>
+				<value>regist/confirmInfo</value>
+			</list>
+		</property>
+		<property name="validator">
+			<bean class="validator.RegistValidator"></bean>
+		</property>
+	</bean>
+	<bean id="applyInfoController" class="controller.ApplyInfoController">
+		<property name="successView" value="success" />
+		<property name="formView" value="signUpSearch" />
+		<property name="commandName" value="RegistCommand" />
+		<property name="commandClass" value="command.RegistCommand" />
+		<property name="registService" ref="registService" />
+	</bean>
+	<bean id="modifyPasswordValidator" class="validator.ModifyPasswordValidator" />
+	<bean id="modifyPasswordController" class="controller.ModifyPasswordController">
+		<property name="successView" value="success" />
+		<property name="formView" value="modifyPassword" />
+		<property name="commandName" value="ModifyPasswordCommand" />
+		<property name="commandClass" value="command.ModifyPasswordCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="modifyPasswordValidator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize">
+			<value>2000000</value>
+		</property>
+	</bean>
+	<bean id="exceptionResolver" class="handler.ExamHandlerExceptionResolver"/>  
+</beans>
