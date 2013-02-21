@@ -20,7 +20,53 @@ public class Apply implements Serializable {
 
     private Date udpateDate;
 
+    private String idCardNo;
+
+    private String applyUserName;
+    
+    private String applyOfficeName;
+    
+    private String applyOfficeCode;
+
+    private String applyOfficeDescrip;
+    
+    private String applyOfficeMajor;
+    
+    private String applyOfficeDegree;
+
+    private String applyDepartName;
+
+    private String aplyUserPolitical;
+
+    /**
+     * @return the aplyUserPolitical
+     */
+    public String getAplyUserPolitical() {
+        return aplyUserPolitical;
+    }
+
+    /**
+     * @param aplyUserPolitical the aplyUserPolitical to set
+     */
+    public void setAplyUserPolitical(String aplyUserPolitical) {
+        this.aplyUserPolitical = aplyUserPolitical;
+    }
+
     public Apply() {
+    }
+    
+    /**
+     * @return the applyDepartName
+     */
+    public String getApplyDepartName() {
+        return applyDepartName;
+    }
+
+    /**
+     * @param applyDepartName the applyDepartName to set
+     */
+    public void setApplyDepartName(String applyDepartName) {
+        this.applyDepartName = applyDepartName;
     }
 
     public ApplyPK getId() {
@@ -68,6 +114,104 @@ public class Apply implements Serializable {
 
     public void setUdpateDate(Date udpateDate) {
         this.udpateDate = udpateDate;
+    }
+
+    /**
+     * @return the idCardNo
+     */
+    public String getIdCardNo() {
+        return idCardNo;
+    }
+
+    /**
+     * @param idCardNo the idCardNo to set
+     */
+    public void setIdCardNo(String idCardNo) {
+        this.idCardNo = idCardNo;
+    }
+
+    /**
+     * @return the applyUserName
+     */
+    public String getApplyUserName() {
+        return applyUserName;
+    }
+
+    /**
+     * @param applyUserName the applyUserName to set
+     */
+    public void setApplyUserName(String applyUserName) {
+        this.applyUserName = applyUserName;
+    }
+
+    /**
+     * @return the applyOfficeName
+     */
+    public String getApplyOfficeName() {
+        return applyOfficeName;
+    }
+
+    /**
+     * @param applyOfficeName the applyOfficeName to set
+     */
+    public void setApplyOfficeName(String applyOfficeName) {
+        this.applyOfficeName = applyOfficeName;
+    }
+
+    /**
+     * @return the applyOfficeCode
+     */
+    public String getApplyOfficeCode() {
+        return applyOfficeCode;
+    }
+
+    /**
+     * @param applyOfficeCode the applyOfficeCode to set
+     */
+    public void setApplyOfficeCode(String applyOfficeCode) {
+        this.applyOfficeCode = applyOfficeCode;
+    }
+
+    /**
+     * @return the applyOfficeMajor
+     */
+    public String getApplyOfficeMajor() {
+        return applyOfficeMajor;
+    }
+
+    /**
+     * @param applyOfficeMajor the applyOfficeMajor to set
+     */
+    public void setApplyOfficeMajor(String applyOfficeMajor) {
+        this.applyOfficeMajor = applyOfficeMajor;
+    }
+
+    /**
+     * @return the applyOfficeDegree
+     */
+    public String getApplyOfficeDegree() {
+        return applyOfficeDegree;
+    }
+
+    /**
+     * @param applyOfficeDegree the applyOfficeDegree to set
+     */
+    public void setApplyOfficeDegree(String applyOfficeDegree) {
+        this.applyOfficeDegree = applyOfficeDegree;
+    }
+
+    /**
+     * @return the applyOfficeDescrip
+     */
+    public String getApplyOfficeDescrip() {
+        return applyOfficeDescrip;
+    }
+
+    /**
+     * @param applyOfficeDescrip the applyOfficeDescrip to set
+     */
+    public void setApplyOfficeDescrip(String applyOfficeDescrip) {
+        this.applyOfficeDescrip = applyOfficeDescrip;
     }
 
 }

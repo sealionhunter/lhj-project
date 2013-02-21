@@ -2,6 +2,7 @@ package command;
 
 import java.util.List;
 
+import model.Apply;
 import model.City;
 import model.Depart;
 import model.Exam;
@@ -89,6 +90,7 @@ public class RegistCommand {
 	private List<Office> offices;
 	private List<City> cities;
 	private List<Exam> exams;
+	private List<Apply> applyUsers;
 	private byte[] photo;
 
 	public Integer getUserId() {
@@ -762,4 +764,18 @@ public class RegistCommand {
 	public void setEditFlg(String editFlg) {
 		this.editFlg = editFlg;
 	}
+
+    /**
+     * @return the users
+     */
+    public List<Apply> getApplyUsers() {
+        return applyUsers;
+    }
+
+    /**
+     * @param users the users to set
+     */
+    public void setApplyUsers(List<Apply> applyUsers) {
+        this.applyUsers = applyUsers;
+    }
 }

@@ -28,6 +28,7 @@ public interface RegistService {
     public List<City> listCity() throws Exception;
     
     public List<Exam> listExam() throws Exception;
+    public List<Apply> listApplyUser() throws Exception;
     public Apply getApply(Integer userId, Integer officeId) throws Exception;
     public Office getOffice(Integer officeId) throws Exception;
 

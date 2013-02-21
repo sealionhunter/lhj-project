@@ -4,6 +4,9 @@ import java.util.List;
 
 import model.Apply;
 import model.ApplyPK;
+import model.Depart;
+import model.Office;
+import model.User;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -25,7 +28,34 @@ public class ApplyDaoImpl implements ApplyDao {
 	public List<Apply> find(Integer userId) throws Exception {
         return getHibernateTemplate().find("from Apply as apply where apply.id.userid = ?", userId);
 	}
-	
+
+    @Override
+    public List<Apply> list() throws Exception {
+        List<Apply> applys = getHibernateTemplate().loadAll(Apply.class);
+        for (Apply apply : applys) {
+            if (apply.getId() != null) {
+                User user = (User) getHibernateTemplate().load(
+                        User.class, apply.getId().getUserid());
+                if (user != null) {
+                    apply.setApplyUserName(user.getName());
+                    apply.setIdCardNo(user.getIdCardNo());
+                }
+                Office office = (Office) getHibernateTemplate().load(
+                        Office.class, apply.getId().getOfficeid());
+                if (office != null) {
+                    apply.setApplyOfficeName(office.getName());
+                    apply.setApplyOfficeCode(office.getCode());
+                    apply.setApplyOfficeDescrip(office.getDescription());
+                    Depart depart = (Depart) getHibernateTemplate().load(
+                            Depart.class, office.getDepartId());
+                    apply.setApplyDepartName(depart.getName());
+                }
+                
+            }
+
+        }
+        return applys;
+    }
 	public void delete(Apply apply) {
 		getHibernateTemplate().delete(apply);
 	}

@@ -61,6 +61,10 @@
                     <td style="height:10px;text-align:left;">
                         <a href="view/admissionPrint.html">打印准考证</a>
                     </td>
+				<tr bgcolor="#ffffff">
+                    <td style="height:10px;text-align:left;">
+                        <a href="/exam/signuppeopleinfo.action">审核</a>
+                    </td>
                 </tr>
             </table>
         </td>
