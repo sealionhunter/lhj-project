@@ -59,7 +59,7 @@ public class RegistServiceImpl implements RegistService {
         user.setWorkyears(Integer.valueOf(object.getWorkYears()));
         user.setMajor(object.getUserMajor());
         user.setComputerSkill(object.getComputerSkill());
-        user.setLanguageSkill(object.getComputerSkill());
+        user.setLanguageSkill(object.getLanguageSkill());
         user.setTelephone(object.getTelephone());
 		user.setHeight(Integer.parseInt(object.getHeight()));
 		user.setTrainingExp(object.getTrainingExp());
