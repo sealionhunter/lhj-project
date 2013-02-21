@@ -42,29 +42,26 @@ public class RegistServiceImpl implements RegistService {
 	public void add(RegistCommand object) throws Exception {
 		User user = new User();
 		user.setName(object.getName());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setBirthdayYear(object.getBirthdayYear());
+        user.setPassword(object.getPassword());
 		user.setIdCardNo(object.getIdCardNo());
-		user.setPassword(object.getPassword());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setBirthdayYear(object.getBirthdayYear());
-		user.setComputerSkill(object.getComputerSkill());
-		user.setLanguageSkill(object.getComputerSkill());
-		user.setDegree(object.getDegree());
-		user.setGraduateMonth(Integer.parseInt(object.getGraduateMonth()));
+		user.setSex(Integer.parseInt(object.getSexCode()));
+		user.setNationCode(Integer.parseInt(object.getNationCode()));
+        user.setHomeTown(object.getHomeTown());
+        user.setBirthdayMonth(object.getBirthdayMonth());
+        user.setBirthdayYear(object.getBirthdayYear());
+        user.setPoliticalCode(Integer.parseInt(object.getPoliticalCode()));
+        user.setIdentity(object.getIdentity());
+		user.setMarried(Integer.parseInt(object.getIsMarried()));
+        user.setDegree(object.getDegree());
+        user.setGraduateSchool(object.getUserSchool());
 		user.setGraduateYear(Integer.parseInt(object.getGraduateYear()));
-		user.setGraduateSchool(object.getUserSchool());
+        user.setGraduateMonth(Integer.parseInt(object.getGraduateMonth()));
+        user.setWorkyears(Integer.valueOf(object.getWorkYears()));
+        user.setMajor(object.getUserMajor());
+        user.setComputerSkill(object.getComputerSkill());
+        user.setLanguageSkill(object.getComputerSkill());
+        user.setTelephone(object.getTelephone());
 		user.setHeight(Integer.parseInt(object.getHeight()));
-		user.setHomeTown(object.getHomeTown());
-		user.setIdCardNo(object.getIdCardNo());
-		user.setIdentity(object.getIdentity());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setBirthdayMonth(object.getBirthdayMonth());
-		user.setMajor(object.getUserMajor());
-		user.setWorkyears(Integer.valueOf(object.getWorkYears()));
-		user.setTelephone(object.getTelephone());
 		user.setTrainingExp(object.getTrainingExp());
 		user.setWorkExp(object.getWorkExp());
 		user.setSocialRel(object.getSocialRel());
@@ -112,6 +109,11 @@ public class RegistServiceImpl implements RegistService {
 	@Override
 	public List<Exam> listExam() throws Exception {
 		return examDao.list();
+	}
+
+	@Override
+	public List<Apply> listApplyUser() throws Exception {
+	    return applyDao.list();
 	}
 
 	@Override
