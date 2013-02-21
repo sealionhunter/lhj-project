@@ -74,6 +74,9 @@
                <c:when test="${RegistCommand.identity == '1'}">
                    <td align="left">应届毕业生</td>
                </c:when>
+               <c:when test="${RegistCommand.identity == '2'}">
+                   <td align="left">无业人员</td>
+               </c:when>
                <c:otherwise>
                    <td align="left">在职人员</td>
                </c:otherwise>
