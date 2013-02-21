@@ -53,7 +53,7 @@ INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
                      VALUES('专业技术岗位','401','社会管理等相关专业','大学本科',4,26,'社区管理工作经验',4,'1',2013);
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
-                     VALUES('管理岗位','501','专业不限','大学本科',1,26,'具有招商引资经验，有较强的社交沟通能力',5,'1',2013);
+                     VALUES('管理岗位','501','专业不限','大学本科',2,26,'具有招商引资经验，有较强的社交沟通能力',5,'1',2013);
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
                      VALUES('管理岗位','502','专业不限','大学本科',1,26,'应届毕业生，有较强的社交沟通能力 ',5,'1',2013);
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
@@ -61,6 +61,6 @@ INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
                      VALUES('专业技术岗位','504','英语','大学本科',1,26,'全日制本科及以上、具有相应学位，英语专业具有专业八级证书',5,'1',2013);
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
-                     VALUES('管理岗位','601','专业不限','大学本科',1,26,'',6,'1',2013);
+                     VALUES('管理岗位','601','专业不限','大学本科',3,26,'',6,'1',2013);
 
 INSERT INTO `exam`(`name`,`applyBeginDate`,`applyDeadDate`, `examDate`,`examTime`, `examPosition`)VALUES('阜阳合肥现代产业园区管委会招聘工作人员考试','2013/02/21 9:00:00','2013/03/04 16:00:00','2013/03/16','8：30-11:30','待定');

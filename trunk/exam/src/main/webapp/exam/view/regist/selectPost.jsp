@@ -105,19 +105,15 @@ function changeDeart() {
 	        <td valign="top" align="center" height="300" style="padding-top:15px;">
 	            <table width="80%"  border="0" cellpadding="4" cellspacing="1" bgcolor="#E1E1E1">
 	                    <%--
-	                    <tr bgcolor="#f7f7f7"> 
-	                        <th rowspan="2" align="center">招聘部门</th>
-	                        <th rowspan="2" align="center">岗位类别</th>
-	                        <th rowspan="2" align="center">岗位编号</th>
-	                        <th rowspan="2" align="center">招聘职位数</th>
-	                        <th colspan="4" align="center">职位资格条件</th>
-	                    </tr>
-	                    <tr bgcolor="#f7f7f7"> 
-	                        <th>专业</th>
-	                        <th>学历</th>
-	                        <th>年龄</th>
-	                        <th>其他</th>
-	                    </tr>
+
+	              <tr bgcolor="#f7f7f7"> 
+                        <th align="center">招聘部门</th>
+                        <th align="center">岗位类别</th>
+                        <th align="center">岗位编号</th>
+                        <th align="center">招聘职位数</th>
+						<th align="center">专业要求</th>
+						<th align="center">岗位要求</th>
+                    </tr>
 	            <c:forEach items="${RegistCommand.offices }" var="office">
 	                    <tr bgcolor="#ffffff">
 	                        <td>${office.departName}</td>
@@ -125,8 +121,6 @@ function changeDeart() {
 	                        <td>${office.code}</td>
 	                        <td>${office.recruits }</td>
 	                        <td>${office.major }</td>
-	                        <td>${office.degree }</td>
-	                        <td>${office.limitAge }</td>
 	                        <td>${office.description }</td>
 	                    </tr>
 	            
@@ -218,14 +212,14 @@ function changeDeart() {
                         <td rowspan="4">经贸（招商）局</td>
                         <td>管理岗位</td>
                         <td>501</td>
-                        <td>1</td>
+                        <td>2</td>
                         <td>专业不限</td>
                         <td>具有招商引资经验，有较强的社交沟通能力</td>
                     </tr>
 					<tr bgcolor="#ffffff"> 
                         <td>管理岗位 </td>
                         <td>502</td>
-                        <td>2</td>
+                        <td>1</td>
                         <td>专业不限</td>
                         <td>应届毕业生，有较强的社交沟通能力 </td>
                     </tr>
@@ -249,7 +243,7 @@ function changeDeart() {
                         <td>601</td>
                         <td>3</td>
                         <td>专业不限</td>
-                        <td>&nbsp;</td>
+                        <td>应届毕业生</td>
                     </tr>
 	            </table>
 	        </td>
