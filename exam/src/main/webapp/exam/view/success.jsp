@@ -19,7 +19,7 @@
         <td align="center" bgcolor="#FFFFFF" style="padding:20px;">
 		  <font color="#FF0000">
 			恭喜你，设置成功。<br />
-		  请于报名截止时间之后，查看审核状态。			</font>
+		  请于规定时间内查看审核状态。</font>
 		</td>
       </tr>
     </table>
