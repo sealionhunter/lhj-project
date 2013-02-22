@@ -15,6 +15,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import service.RegistService;
 
@@ -34,6 +35,8 @@ public class SignUpPeopleInfoController extends SimpleFormController {
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
+        SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
+        cmd.setVerifyUserId(null);
         Map model = super.referenceData(request, command, errors);
         if (model == null) {
             model = new HashMap();
@@ -48,15 +51,21 @@ public class SignUpPeopleInfoController extends SimpleFormController {
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
-        Integer deptId = cmd.getDeptId();
-        Integer officeId = cmd.getPostId();
+        if (cmd.getVerifyUserId() == null) {
+            Integer deptId = cmd.getDeptId();
+            Integer officeId = cmd.getPostId();
 
-        Map model = errors.getModel();
-        initModel(model, deptId, officeId);
-        return new ModelAndView(getFormView(), model);
+            Map model = errors.getModel();
+            initModel(model, deptId, officeId);
+            return new ModelAndView(getFormView(), model);
+        } else {
+            String url = "verify.action?userId=" + cmd.getVerifyUserId();
+            return new ModelAndView(new RedirectView(url));
+        }
     }
 
-    private void initModel(Map model, Integer deptId, Integer officeId) throws Exception {
+    private void initModel(Map model, Integer deptId, Integer officeId)
+            throws Exception {
         List<Apply> applyList = registService.listApplyUser(deptId, officeId);
         model.put("applyUsers", applyList);
 
@@ -67,7 +76,7 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         dept.setName("");
         deptList.add(0, dept);
         model.put("departs", deptList);
-        
+
         List<Office> officeList = registService.listOffice();
         Office office = new Office();
         office.setId(-1);

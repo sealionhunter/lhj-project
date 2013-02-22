@@ -41,6 +41,11 @@ function changeDeart() {
 	}
 }
 
+function doVerify(obj) {
+	document.getElementById('verifyUserId').value = obj;
+	personForm.submit();
+}
+
 //-->
 </script>
 </head>
@@ -55,6 +60,7 @@ function changeDeart() {
 			<form:form name="personForm" method="post"
 				action="/exam/signuppeopleinfo.action"
 				commandName="SignUpPersonSearchCommand">
+				<form:hidden path="verifyUserId" id="verifyUserId" />
 				<table width="100%" border="0" cellpadding="0" cellspacing="1"
 					bgcolor="#E1E1E1">
 					<tr>
@@ -68,21 +74,24 @@ function changeDeart() {
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#ffffff">
-									<td style="height: 10px; text-align: right; width: 10%;">
+									<td style="text-align: right; width:10%;">
 										部门：</td>
-									<td style="height: 10px; text-align: left;"><form:select
+									<td style="text-align: left; width:15%">
+										<form:select
 											path="deptId" items="${departs}" id="deptId" itemLabel="name"
 											itemValue="id"
 											onchange="changeDeart();">
 										</form:select>
 									</td>
-									<td>
+									<td style="text-align: right; width:10%;">
 										岗位类别：
 									</td>
-									<td>
+									<td style="text-align: left; width:20%"">
 										<form:select path="postId" id="postId" />
 									</td>
-									<td><input type="submit" value="筛选" style="width:50px;" /></td>
+									<td style="text-align: left;">
+										<input type="submit" value="筛选" style="width:50px;" />
+									</td>
 								</tr>
 							</table>
 						</td>
@@ -100,7 +109,7 @@ function changeDeart() {
 									<th style="width: 14%;">报考部门</th>
 									<th style="width: 12%;">岗位类别</th>
 									<th style="width: 8%;">岗位编号</th>
-									<th style="width: 8%;">审核状态</th>
+									<th style="width: 10%;">审核状态</th>
 									<th>&nbsp;</th>
 								</tr>
 								<c:forEach items="${applyUsers}" var="applyUser">
@@ -126,17 +135,17 @@ function changeDeart() {
 											<c:when test="${applyUser.state == 2 }">
 												<td>审核通过</td>
 												<td><input type="button" value="详细"
-													style="width: 50px;" /></td>
+													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
 											</c:when>
 											<c:when test="${applyUser.state == 1 }">
 												<td>审核不通过</td>
 												<td><input type="button" value="详细"
-													style="width: 50px;" /></td>
+													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
 											</c:when>
 											<c:otherwise>
 												<td>未审核</td>
 												<td><input type="button" value="审核"
-													style="width: 50px;" /></td>
+													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
 											</c:otherwise>
 										</c:choose>
 									</tr>

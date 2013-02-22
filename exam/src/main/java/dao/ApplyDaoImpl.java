@@ -66,14 +66,13 @@ public class ApplyDaoImpl implements ApplyDao {
             apply.setApplyUserName(user.getName());
             apply.setIdCardNo(user.getIdCardNo());
             apply.setApplyUserHomeTown(user.getHomeTown());
-            apply.setAplyUserPolitical(String.valueOf(user
-                    .getPoliticalCode()));
+            apply.setAplyUserPolitical(String.valueOf(user.getPoliticalCode()));
 
             apply.setApplyOfficeName(office.getName());
             apply.setApplyOfficeCode(office.getCode());
             apply.setApplyOfficeDescrip(office.getDescription());
             apply.setApplyDepartName(dept.getName());
-            
+
             applyList.add(apply);
         }
         return applyList;
@@ -100,16 +99,15 @@ public class ApplyDaoImpl implements ApplyDao {
             apply.setApplyUserName(user.getName());
             apply.setIdCardNo(user.getIdCardNo());
             apply.setApplyUserHomeTown(user.getHomeTown());
-            apply.setAplyUserPolitical(String.valueOf(user
-                    .getPoliticalCode()));
-            
+            apply.setAplyUserPolitical(String.valueOf(user.getPoliticalCode()));
+
             apply.setApplyOfficeName(office.getName());
             apply.setApplyOfficeCode(office.getCode());
             apply.setApplyOfficeDescrip(office.getDescription());
             apply.setApplyDepartName(dept.getName());
             apply.setApplyExamId(exam.getId());
             apply.setApplyExamPosition(exam.getExamPosition());
-            
+
             applyList.add(apply);
         }
         return applyList;
@@ -117,6 +115,11 @@ public class ApplyDaoImpl implements ApplyDao {
 
     public void delete(Apply apply) {
         getHibernateTemplate().delete(apply);
+    }
+
+    @Override
+    public void update(Apply apply) throws Exception {
+        getHibernateTemplate().update(apply);
     }
 
     /**

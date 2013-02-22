@@ -49,8 +49,15 @@
 	<!-- use declarative transaction management -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	<bean id="adminInterceptor" class="interceptor.AdminInterceptor"/>
+
 	<bean id="simpleUrlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="adminInterceptor" />
+			</list>
+		</property>
 		<property name="mappings">
 			<props>
 				<prop key="/regist.action">registController</prop>
@@ -58,6 +65,7 @@
 				<prop key="/signuppeopleinfo.action">signUpPeopleInfoController</prop>
 				<prop key="/modifyPassword.action">modifyPasswordController</prop>
 				<prop key="/statusSearch.action">statusSearchController</prop>
+				<prop key="/verify.action">verifyController</prop>
 			</props>
 		</property>
 	</bean>
@@ -153,6 +161,18 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="verifyValidator" class="validator.VerifyValidator" />
+	<bean id="verifyController" class="controller.VerifyController">
+		<property name="formView" value="verify" />
+		<property name="commandName" value="VerifyCommand" />
+		<property name="commandClass" value="command.VerifyCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="verifyValidator" />
+			</list>
+		</property>
+	</bean>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -169,5 +189,5 @@
 			<value>2000000</value>
 		</property>
 	</bean>
-	<bean id="exceptionResolver" class="handler.ExamHandlerExceptionResolver"/>  
+	<bean id="exceptionResolver" class="handler.ExamHandlerExceptionResolver" />
 </beans>

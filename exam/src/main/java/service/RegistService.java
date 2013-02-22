@@ -2,8 +2,6 @@ package service;
 
 import java.util.List;
 
-import org.springframework.validation.BindException;
-
 import model.Apply;
 import model.City;
 import model.Depart;
@@ -12,9 +10,12 @@ import model.Master;
 import model.Office;
 import model.User;
 
+import org.springframework.validation.BindException;
+
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.StatusSearchCommand;
+import command.VerifyCommand;
 
 public interface RegistService {
 
@@ -49,4 +50,8 @@ public interface RegistService {
 
     public void searchStatus(StatusSearchCommand cmd, BindException errors)
             throws Exception;
+    
+    public void initVerify(VerifyCommand cmd) throws Exception;
+
+    public void verify(Apply apply) throws Exception;
 }

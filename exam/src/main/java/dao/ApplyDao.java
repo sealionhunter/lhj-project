@@ -18,4 +18,6 @@ public interface ApplyDao {
     public List<Apply> list(Integer deptId, Integer officeId) throws Exception;
 
     public List<Apply> findApplyInfo(Integer userId) throws Exception;
+
+    public void update(Apply apply) throws Exception;
 }
