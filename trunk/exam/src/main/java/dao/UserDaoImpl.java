@@ -17,12 +17,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findIdCardNo(String idCardNo) throws Exception {
-        return getHibernateTemplate().find("from User as user where user.idCardNo = ?", idCardNo);
+        return getHibernateTemplate().find(
+                "from User as user where user.idCardNo = ?", idCardNo);
     }
+
     @Override
     public List<User> findUserName(String userName) throws Exception {
-    	return getHibernateTemplate().find("from User as user where user.name = ?", userName);
+        return getHibernateTemplate().find(
+                "from User as user where user.name = ?", userName);
     }
+
     @Override
     public User get(int id) throws Exception {
         return (User) getHibernateTemplate().load(User.class, id);

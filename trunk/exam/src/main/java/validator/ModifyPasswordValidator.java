@@ -29,15 +29,14 @@ public class ModifyPasswordValidator implements Validator {
             }
         }
         if (v.getOldPassword() == null || v.getOldPassword().length() == 0) {
-            errors.rejectValue("oldPassword", "oldPassword",
-                    "旧密码必须填写!");
+            errors.rejectValue("oldPassword", "oldPassword", "旧密码必须填写!");
         }
         if (v.getPassword() == null || v.getPassword().length() == 0) {
             errors.rejectValue("password", "password", "新密码必须填写!");
         } else {
             if (!v.getPassword().equals(v.getRePassword())) {
-                errors.rejectValue("rePasswordError",
-                        "rePasswordError", "新密码与重复新密码必须一致!");
+                errors.rejectValue("rePasswordError", "rePasswordError",
+                        "新密码与重复新密码必须一致!");
             }
         }
     }

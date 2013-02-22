@@ -53,8 +53,9 @@
 									<td align="right">密码：</td>
 									<td align="left"><form:password path="password"
 											id="password" maxlength="16" size="18"
-											cssClass="bbsInput_short" /><font color="#ff0000">*&nbsp;&nbsp;<c:if test="${RegistCommand.editFlg != '1' }">请务必牢记&nbsp;&nbsp;</c:if><form:errors
-												path="password" /></font></td>
+											cssClass="bbsInput_short" /><font color="#ff0000">*&nbsp;&nbsp;<c:if
+												test="${RegistCommand.editFlg != '1' }">请务必牢记&nbsp;&nbsp;</c:if>
+											<form:errors path="password" /></font></td>
 								</tr>
 								<c:if test="${RegistCommand.editFlg != '1' }">
 									<tr bgcolor="#ffffff">
@@ -68,22 +69,24 @@
 								<tr bgcolor="#ffffff">
 									<td height="22" colspan="4">
 										<div align="center">
-										<c:choose>
-											<c:when test="${RegistCommand.editFlg != '1' }"><input type="submit" value="下一步" style="width: 50px;"
-												name="_target1" /></c:when>
-												<c:otherwise><input type="submit" value="下一步" style="width: 50px;"
-												name="_target3" />
+											<c:choose>
+												<c:when test="${RegistCommand.editFlg != '1' }">
+													<input type="submit" value="下一步" style="width: 50px;"
+														name="_target1" />
+												</c:when>
+												<c:otherwise>
+													<input type="submit" value="下一步" style="width: 50px;"
+														name="_target3" />
 												</c:otherwise>
-										</c:choose>&nbsp;&nbsp; <input type="reset"
-												value="清  除" style="width: 50px;" /> &nbsp;&nbsp; <input
-												type="submit" value="返  回" name="_cancel"
-												style="width: 50px;" />
+											</c:choose>
+											&nbsp;&nbsp; <input type="reset" value="清  除"
+												style="width: 50px;" /> &nbsp;&nbsp; <input type="submit"
+												value="返  回" name="_cancel" style="width: 50px;" />
 										</div>
 									</td>
 								</tr>
 							</form:form>
-						</table> <br />
-					<br /></td>
+						</table> <br /> <br /></td>
 				</tr>
 			</table>
 		</div>
