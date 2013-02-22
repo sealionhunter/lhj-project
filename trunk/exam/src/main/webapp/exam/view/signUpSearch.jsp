@@ -27,21 +27,6 @@
 							style="padding-left: 10px;"><b><span
 								style="color: #666666">职位报考情况一览</span></b></td>
 					</tr>
-					<%--
-	<tr bgcolor="#FFFFFF"> 
-        <td valign="top" align="center" height="45" style="padding-top:10px;">
-            <table width="95%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#E1E1E1">
-                <tr bgcolor="#ffffff">
-                    <td style="height:10px;text-align:right;width:10%;">
-                        请选择部门：</td>
-					<td style="height:10px;text-align:left;">
-                        <form:select path="applyDeptId"  items="${RegistCommand.departs }" itemLabel="name" itemValue="id">
-                        </form:select>
-					</td>
-                </tr>
-            </table>
-        </td>
-    </tr> --%>
 					<tr bgcolor="#FFFFFF">
 						<td valign="top" align="center" height="448"
 							style="padding-top: 5px;">

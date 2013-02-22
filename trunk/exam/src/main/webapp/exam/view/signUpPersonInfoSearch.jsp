@@ -8,9 +8,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
 	media="all" />
+<script type="text/javascript">
+<!--
+var office = new Array();
+<c:forEach items="${offices}" var="office" varStatus="status">
+	office[${status.index }] = new Object();
+    office[${status.index }].id = '${office.id}';
+    <c:choose>
+        <c:when test='${office.name == ""}'>
+            office[${status.index }].name = '';
+        </c:when>
+        <c:otherwise>
+            office[${status.index }].name = '${office.name}' + '(' +  '${office.code}' + ')';
+        </c:otherwise>
+    </c:choose>
+    office[${status.index }].departId = '${office.departId}';
+</c:forEach>
+
+function changeDeart() {
+	var departId = document.getElementById("deptId").value;
+	var officeEl = document.getElementById("postId");
+	officeEl.options.length=0;
+	var i = 0;
+	for (; i < office.length; i++) {
+		if (departId == -1) {
+			officeEl.options.add(new Option(office[i].name, office[i].id));
+			continue;
+		}
+		if (office[i].departId == departId) {
+			officeEl.options.add(new Option(office[i].name, office[i].id));
+		}
+	}
+}
+
+//-->
+</script>
 </head>
 <body>
-
 	<div class="whiteBG">
 		<div class="header_logo"></div>
 	</div>
@@ -18,8 +52,9 @@
 	<div class="midBox">
 		<div class="midTitle">报名人员信息一览</div>
 		<div class="cnt">
-			<form:form name="registForm" method="post"
-				action="/exam/applyinfo.action" commandName="RegistCommand">
+			<form:form name="personForm" method="post"
+				action="/exam/signuppeopleinfo.action"
+				commandName="SignUpPersonSearchCommand">
 				<table width="100%" border="0" cellpadding="0" cellspacing="1"
 					bgcolor="#E1E1E1">
 					<tr>
@@ -27,51 +62,81 @@
 							style="padding-left: 10px;"><b><span
 								style="color: #666666">报名人员信息一览</span></b></td>
 					</tr>
-					<%--
-	<tr bgcolor="#FFFFFF"> 
-        <td valign="top" align="center" height="45" style="padding-top:10px;">
-            <table width="95%"  border="0" cellpadding="4" cellspacing="0" bgcolor="#E1E1E1">
-                <tr bgcolor="#ffffff">
-                    <td style="height:10px;text-align:right;width:10%;">
-                        请选择部门：</td>
-					<td style="height:10px;text-align:left;">
-                        <form:select path="applyDeptId"  items="${RegistCommand.departs }" itemLabel="name" itemValue="id">
-                        </form:select>
-					</td>
-                </tr>
-            </table>
-        </td>
-    </tr> --%>
+					<tr bgcolor="#FFFFFF">
+						<td valign="top" align="center" height="25"
+							style="padding-top: 5px;">
+							<table width="95%" border="0" cellpadding="4" cellspacing="0"
+								bgcolor="#E1E1E1">
+								<tr bgcolor="#ffffff">
+									<td style="height: 10px; text-align: right; width: 10%;">
+										部门：</td>
+									<td style="height: 10px; text-align: left;"><form:select
+											path="deptId" items="${departs}" id="deptId" itemLabel="name"
+											itemValue="id"
+											onchange="changeDeart();">
+										</form:select>
+									</td>
+									<td>
+										岗位类别：
+									</td>
+									<td>
+										<form:select path="postId" id="postId" />
+									</td>
+									<td><input type="submit" value="筛选" style="width:50px;" /></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
 					<tr bgcolor="#FFFFFF">
 						<td valign="top" align="center" height="448"
 							style="padding-top: 5px;">
 							<table width="95%" border="0" cellpadding="8" cellspacing="1"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#f7f7f7">
-									<th style="width: 10%;">姓名</th>
-									<th style="width: 8%;">身份证号</th>
-									<th style="width: 8%;">籍贯</th>
+									<th style="width: 8%;">姓名</th>
+									<th style="width: 10%;">身份证号</th>
+									<th style="width: 12%;">籍贯</th>
 									<th style="width: 8%;">政治面貌</th>
-									<th style="width: 20%;">部门</th>
-									<th style="width: 8%;">报考岗位类别</th>
-									<th style="width: 8%;">报考岗位编号</th>
-									<th style="width: 8%;">报名岗位要求</th>
-									<th style="width: 12%;">审核状态</th>
-									<th></th>
+									<th style="width: 14%;">报考部门</th>
+									<th style="width: 12%;">岗位类别</th>
+									<th style="width: 8%;">岗位编号</th>
+									<th style="width: 8%;">审核状态</th>
+									<th>&nbsp;</th>
 								</tr>
-								<c:forEach items="${RegistCommand.applyUsers }" var="applyUser">
+								<c:forEach items="${applyUsers}" var="applyUser">
 									<tr bgcolor="#ffffff">
 										<td>${applyUser.applyUserName}</td>
 										<td>${applyUser.idCardNo}</td>
+										<td>${applyUser.applyUserHomeTown}</td>
+										<c:choose>
+											<c:when test="${applyUser.aplyUserPolitical == '1'}">
+												<td>共产党员</td>
+											</c:when>
+											<c:when test="${applyUser.aplyUserPolitical == '2'}">
+												<td>共青团员</td>
+											</c:when>
+											<c:otherwise>
+												<td>群众</td>
+											</c:otherwise>
+										</c:choose>
 										<td>${applyUser.applyDepartName}</td>
 										<td>${applyUser.applyOfficeName}</td>
 										<td>${applyUser.applyOfficeCode}</td>
 										<c:choose>
-											<c:when test="${applyUser.state != '2' }">
-												<td>已审核</td>
+											<c:when test="${applyUser.state == 2 }">
+												<td>审核通过</td>
+												<td><input type="button" value="详细"
+													style="width: 50px;" /></td>
+											</c:when>
+											<c:when test="${applyUser.state == 1 }">
+												<td>审核不通过</td>
+												<td><input type="button" value="详细"
+													style="width: 50px;" /></td>
 											</c:when>
 											<c:otherwise>
 												<td>未审核</td>
+												<td><input type="button" value="审核"
+													style="width: 50px;" /></td>
 											</c:otherwise>
 										</c:choose>
 									</tr>
@@ -82,8 +147,14 @@
 				</table>
 			</form:form>
 		</div>
-
 	</div>
-
 </body>
+<script type="text/javascript">
+<!--
+ changeDeart();
+ if ('${PostId}' != '') {
+	 document.getElementById("postId").value='${postId}';
+ }
+//-->
+</script>
 </html>

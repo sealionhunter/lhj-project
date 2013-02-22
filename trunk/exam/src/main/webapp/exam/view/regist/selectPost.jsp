@@ -253,8 +253,8 @@ function changeDeart() {
 				</table>
 			</form:form>
 		</div>
-
 	</div>
+</body>
 <script type="text/javascript">
 <!--
  changeDeart();
@@ -263,5 +263,4 @@ function changeDeart() {
  }
 //-->
 </script>
-</body>
 </html>

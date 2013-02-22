@@ -28,7 +28,6 @@ public class ApplyInfoController extends SimpleFormController {
 
         RegistCommand cmd = (RegistCommand) command;
         cmd.setOffices(registService.listOffice());
-        cmd.setDeparts(registService.listDepart());
         return super.referenceData(request, command, errors);
     }
 
