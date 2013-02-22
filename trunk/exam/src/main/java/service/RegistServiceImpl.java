@@ -17,6 +17,7 @@ import org.springframework.validation.BindException;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.StatusSearchCommand;
+import command.VerifyCommand;
 
 import dao.ApplyDao;
 import dao.CityDao;
@@ -281,4 +282,25 @@ public class RegistServiceImpl implements RegistService {
         cmd.setApply(a);
     }
 
+    @Override
+    public void initVerify(VerifyCommand cmd) throws Exception {
+        User user = userDao.get(cmd.getUserId());
+        if (user == null) {
+            throw new Exception("选择的考生不存在！");
+        }
+        cmd.setUser(user);
+        List<Apply> applyList = applyDao.findApplyInfo(user.getId());
+        if (applyList == null || applyList.isEmpty()) {
+            throw new Exception("找不到该考生的报名信息");
+        }
+        Apply a = applyList.get(0);
+        cmd.setApply(a);
+        cmd.setVerifyReason(a.getReason());
+        cmd.setVerifyState(String.valueOf(a.getState()));
+    }
+
+    @Override
+    public void verify(Apply apply) throws Exception {
+        applyDao.update(apply);
+    }
 }
