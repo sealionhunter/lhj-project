@@ -39,7 +39,7 @@
                 </tr>
                 <tr bgcolor="#ffffff">
                     <td style="height:10px;text-align:left;">
-                        <a href="view/statusSearch.html">查询/打印资审结果</a>
+                        <a href="/exam/statusSearch.action">查询/打印资审结果</a>
                     </td>
                 </tr>
 				<tr bgcolor="#ffffff">

@@ -57,6 +57,7 @@
 				<prop key="/applyinfo.action">applyInfoController</prop>
 				<prop key="/signuppeopleinfo.action">signUpPeopleInfoController</prop>
 				<prop key="/modifyPassword.action">modifyPasswordController</prop>
+				<prop key="/statusSearch.action">statusSearchController</prop>
 			</props>
 		</property>
 	</bean>
@@ -137,6 +138,18 @@
 		<property name="validators">
 			<list>
 				<ref bean="modifyPasswordValidator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="statusSearchValidator" class="validator.StatusSearchValidator" />
+	<bean id="statusSearchController" class="controller.StatusSearchController">
+		<property name="formView" value="statusSearch" />
+		<property name="commandName" value="StatusSearchCommand" />
+		<property name="commandClass" value="command.StatusSearchCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="statusSearchValidator" />
 			</list>
 		</property>
 	</bean>

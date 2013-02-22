@@ -5,6 +5,7 @@ import java.util.List;
 import model.Apply;
 import model.ApplyPK;
 import model.Depart;
+import model.Exam;
 import model.Office;
 import model.User;
 
@@ -25,6 +26,7 @@ public class ApplyDaoImpl implements ApplyDao {
     	return (Apply) getHibernateTemplate().load(Apply.class, id);
     	
     }
+
 	public List<Apply> find(Integer userId) throws Exception {
         return getHibernateTemplate().find("from Apply as apply where apply.id.userid = ?", userId);
 	}
@@ -56,6 +58,40 @@ public class ApplyDaoImpl implements ApplyDao {
         }
         return applys;
     }
+
+    public List<Apply> findApplyInfo(Integer userId) throws Exception {
+        List<Apply> applys = getHibernateTemplate().find(
+                "from Apply as apply where apply.id.userid = ?", userId);
+        for (Apply apply : applys) {
+            if (apply.getId() != null) {
+                User user = (User) getHibernateTemplate().load(
+                        User.class, apply.getId().getUserid());
+                if (user != null) {
+                    apply.setApplyUserName(user.getName());
+                    apply.setIdCardNo(user.getIdCardNo());
+                }
+                Office office = (Office) getHibernateTemplate().load(
+                        Office.class, apply.getId().getOfficeid());
+                if (office != null) {
+                    apply.setApplyOfficeName(office.getName());
+                    apply.setApplyOfficeCode(office.getCode());
+                    apply.setApplyOfficeDescrip(office.getDescription());
+                    Depart depart = (Depart) getHibernateTemplate().load(
+                            Depart.class, office.getDepartId());
+                    apply.setApplyDepartName(depart.getName());
+                }
+                Exam exam = (Exam) getHibernateTemplate().load(
+                        Exam.class, office.getExamId());
+                if (exam != null) {
+                    apply.setApplyExamId(exam.getId());
+                    apply.setApplyExamPosition(exam.getExamPosition());
+                }
+            }
+
+        }
+        return applys;
+    }
+
 	public void delete(Apply apply) {
 		getHibernateTemplate().delete(apply);
 	}

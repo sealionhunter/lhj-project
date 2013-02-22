@@ -14,6 +14,7 @@ import model.User;
 
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.StatusSearchCommand;
 
 public interface RegistService {
 
@@ -40,4 +41,6 @@ public interface RegistService {
 	public void modifyPassword(ModifyPasswordCommand cmd, BindException errors) throws Exception ;
 
 //    public void update(User user) throws Exception;
+	
+	public void searchStatus(StatusSearchCommand cmd, BindException errors) throws Exception;
 }
