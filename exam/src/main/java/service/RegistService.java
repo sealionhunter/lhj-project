@@ -30,7 +30,7 @@ public interface RegistService {
 
     public List<Exam> listExam() throws Exception;
 
-    public List<Apply> listApplyUser() throws Exception;
+    public List<Apply> listApplyUser(Integer deptId, Integer officeId) throws Exception;
 
     public Apply getApply(Integer userId, Integer officeId) throws Exception;
 

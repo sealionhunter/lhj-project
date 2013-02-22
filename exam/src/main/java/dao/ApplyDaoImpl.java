@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Apply;
@@ -33,65 +34,85 @@ public class ApplyDaoImpl implements ApplyDao {
                 "from Apply as apply where apply.id.userid = ?", userId);
     }
 
-    @Override
-    public List<Apply> list() throws Exception {
-        List<Apply> applys = getHibernateTemplate().loadAll(Apply.class);
-        for (Apply apply : applys) {
-            if (apply.getId() != null) {
-                User user = (User) getHibernateTemplate().load(User.class,
-                        apply.getId().getUserid());
-                if (user != null) {
-                    apply.setApplyUserName(user.getName());
-                    apply.setIdCardNo(user.getIdCardNo());
-                }
-                Office office = (Office) getHibernateTemplate().load(
-                        Office.class, apply.getId().getOfficeid());
-                if (office != null) {
-                    apply.setApplyOfficeName(office.getName());
-                    apply.setApplyOfficeCode(office.getCode());
-                    apply.setApplyOfficeDescrip(office.getDescription());
-                    Depart depart = (Depart) getHibernateTemplate().load(
-                            Depart.class, office.getDepartId());
-                    apply.setApplyDepartName(depart.getName());
-                }
-
-            }
-
+    public List<Apply> list(Integer deptId, Integer officeId) throws Exception {
+        String hql = "from Apply A, User U, Office O, Depart D "
+                + "where A.id.userid=U.id and A.id.officeid=O.id and O.departId=D.id ";
+        List<Integer> paramList = new ArrayList<Integer>();
+        if (deptId >= 0) {
+            hql += "and D.id=? ";
+            paramList.add(deptId);
         }
-        return applys;
+        if (officeId >= 0) {
+            hql += "and O.id=? ";
+            paramList.add(officeId);
+        }
+        List<?> list = null;
+        if (!paramList.isEmpty()) {
+            list = getHibernateTemplate().find(hql, paramList.toArray());
+        } else {
+            list = getHibernateTemplate().find(hql);
+        }
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        List<Apply> applyList = new ArrayList<Apply>();
+        for (Object o : list) {
+            Object[] objects = (Object[]) o;
+            Apply apply = (Apply) objects[0];
+            User user = (User) objects[1];
+            Office office = (Office) objects[2];
+            Depart dept = (Depart) objects[3];
+
+            apply.setApplyUserName(user.getName());
+            apply.setIdCardNo(user.getIdCardNo());
+            apply.setApplyUserHomeTown(user.getHomeTown());
+            apply.setAplyUserPolitical(String.valueOf(user
+                    .getPoliticalCode()));
+
+            apply.setApplyOfficeName(office.getName());
+            apply.setApplyOfficeCode(office.getCode());
+            apply.setApplyOfficeDescrip(office.getDescription());
+            apply.setApplyDepartName(dept.getName());
+            
+            applyList.add(apply);
+        }
+        return applyList;
     }
 
     public List<Apply> findApplyInfo(Integer userId) throws Exception {
-        List<Apply> applys = getHibernateTemplate().find(
-                "from Apply as apply where apply.id.userid = ?", userId);
-        for (Apply apply : applys) {
-            if (apply.getId() != null) {
-                User user = (User) getHibernateTemplate().load(User.class,
-                        apply.getId().getUserid());
-                if (user != null) {
-                    apply.setApplyUserName(user.getName());
-                    apply.setIdCardNo(user.getIdCardNo());
-                }
-                Office office = (Office) getHibernateTemplate().load(
-                        Office.class, apply.getId().getOfficeid());
-                if (office != null) {
-                    apply.setApplyOfficeName(office.getName());
-                    apply.setApplyOfficeCode(office.getCode());
-                    apply.setApplyOfficeDescrip(office.getDescription());
-                    Depart depart = (Depart) getHibernateTemplate().load(
-                            Depart.class, office.getDepartId());
-                    apply.setApplyDepartName(depart.getName());
-                }
-                Exam exam = (Exam) getHibernateTemplate().load(Exam.class,
-                        office.getExamId());
-                if (exam != null) {
-                    apply.setApplyExamId(exam.getId());
-                    apply.setApplyExamPosition(exam.getExamPosition());
-                }
-            }
+        String hql = "from Apply A, User U, Office O, Depart D, Exam E "
+                + "where A.id.userid=U.id and A.id.officeid=O.id and O.departId=D.id and E.id=O.examId "
+                + "and U.id=?";
+        List<?> list = getHibernateTemplate().find(hql, userId);
 
+        if (list == null || list.isEmpty()) {
+            return null;
         }
-        return applys;
+        List<Apply> applyList = new ArrayList<Apply>();
+        for (Object o : list) {
+            Object[] objects = (Object[]) o;
+            Apply apply = (Apply) objects[0];
+            User user = (User) objects[1];
+            Office office = (Office) objects[2];
+            Depart dept = (Depart) objects[3];
+            Exam exam = (Exam) objects[4];
+
+            apply.setApplyUserName(user.getName());
+            apply.setIdCardNo(user.getIdCardNo());
+            apply.setApplyUserHomeTown(user.getHomeTown());
+            apply.setAplyUserPolitical(String.valueOf(user
+                    .getPoliticalCode()));
+            
+            apply.setApplyOfficeName(office.getName());
+            apply.setApplyOfficeCode(office.getCode());
+            apply.setApplyOfficeDescrip(office.getDescription());
+            apply.setApplyDepartName(dept.getName());
+            apply.setApplyExamId(exam.getId());
+            apply.setApplyExamPosition(exam.getExamPosition());
+            
+            applyList.add(apply);
+        }
+        return applyList;
     }
 
     public void delete(Apply apply) {

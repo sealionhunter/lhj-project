@@ -23,6 +23,8 @@ public class Apply implements Serializable {
     private String idCardNo;
 
     private String applyUserName;
+    
+    private String applyUserHomeTown;
 
     private String applyOfficeName;
 
@@ -257,4 +259,17 @@ public class Apply implements Serializable {
         this.applyExamPosition = applyExamPosition;
     }
 
+    /**
+     * @return the applyUserHomeTown
+     */
+    public String getApplyUserHomeTown() {
+        return applyUserHomeTown;
+    }
+
+    /**
+     * @param applyUserHomeTown the applyUserHomeTown to set
+     */
+    public void setApplyUserHomeTown(String applyUserHomeTown) {
+        this.applyUserHomeTown = applyUserHomeTown;
+    }
 }

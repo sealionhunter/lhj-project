@@ -9,13 +9,13 @@ public interface ApplyDao {
 
     public ApplyPK add(Apply user) throws Exception;
 
-	public Apply get(Integer userId, Integer officeId) throws Exception;
+    public Apply get(Integer userId, Integer officeId) throws Exception;
 
-	public List<Apply> find(Integer userId) throws Exception;
+    public List<Apply> find(Integer userId) throws Exception;
 
-	public void delete(Apply apply);
-	
-    public List<Apply> list() throws Exception;
+    public void delete(Apply apply);
+
+    public List<Apply> list(Integer deptId, Integer officeId) throws Exception;
 
     public List<Apply> findApplyInfo(Integer userId) throws Exception;
 }

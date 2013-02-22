@@ -36,8 +36,6 @@ public class RegistServiceImpl implements RegistService {
     private MasterDao masterDao;
     private ExamDao examDao;
 
-    // private UserDao userDao;
-
     @Override
     @Transactional
     public void add(RegistCommand object) throws Exception {
@@ -113,8 +111,9 @@ public class RegistServiceImpl implements RegistService {
     }
 
     @Override
-    public List<Apply> listApplyUser() throws Exception {
-        return applyDao.list();
+    public List<Apply> listApplyUser(Integer deptId, Integer officeId)
+            throws Exception {
+        return applyDao.list(deptId, officeId);
     }
 
     @Override
