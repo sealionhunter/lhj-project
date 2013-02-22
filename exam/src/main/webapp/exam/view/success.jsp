@@ -5,8 +5,8 @@
 <head>
 <link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
 	media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>网上报名-合肥猎头网</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>网上报名-合肥猎头网</title>
 </head>
 <body>
 	<div class="whiteBG">

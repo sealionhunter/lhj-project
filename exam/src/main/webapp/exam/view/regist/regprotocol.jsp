@@ -4,7 +4,8 @@
 <%@ include file="/view/include.jsp"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css" media="all" />
+<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
+	media="all" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>网上报名-合肥猎头网</title>
 </head>
@@ -28,8 +29,8 @@
 				<tr>
 					<td align="center" bgcolor="#FFFFFF" style="padding-top: 30px;">
 						<span style="color: #666666; font-size: 14px; font-weight: 600">3.阅读报名须知并签订诚信承诺书</span><br />
-						<textarea name="textarea" cols="100" rows="22"
-							readonly style="padding-top: 15px; font-size: 12px">
+						<textarea name="textarea" cols="100" rows="22" readonly
+							style="padding-top: 15px; font-size: 12px">
                                                        网上报名协议
 
 １、考生必须完全同意所有条款，方可进行网上报名。
@@ -46,17 +47,17 @@
 
 ７、考生本人理解并同意，在报名成功后，由于本网站系统出现问题影响考生参加考试，考生提出赔偿的，本网站可能提供的补偿仅限于在规定时限内帮助安排重新报名，不承担任何其他责任。
 
-                </textarea> <br /> <br />
-                <a href="#" onclick="javascript:window.open('view/promise.html')">诚信承诺书</a><br />               
-                <span style="color: #CC3300">点击同意，表示您已阅读并同意遵守本网站用户服务协议。<br />
+                </textarea> <br /> <br /> <a href="#"
+						onclick="javascript:window.open('view/promise.html')">诚信承诺书</a><br />
+						<span style="color: #CC3300">点击同意，表示您已阅读并同意遵守本网站用户服务协议。<br />
 							<br />
-					</span>
-					<form:form name="registForm" method="post" action="/exam/regist.action" commandName="RegistCommand">
-						<input type="submit" value="同意" name="_target3" />
+					</span> <form:form name="registForm" method="post"
+							action="/exam/regist.action" commandName="RegistCommand">
+							<input type="submit" value="同意" name="_target3" />
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="submit" name="_cancel" value="不同意" />
-					</form:form>
-					<br /><br /> <br />
+						</form:form> <br />
+					<br /> <br />
 					</td>
 				</tr>
 			</table>

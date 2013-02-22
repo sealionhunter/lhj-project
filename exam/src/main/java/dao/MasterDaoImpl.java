@@ -13,7 +13,8 @@ public class MasterDaoImpl implements MasterDao {
     @Override
     public List<Master> list(int category) throws Exception {
         // TODO Auto-generated method stub
-        return getHibernateTemplate().find("from Master as master where master.id.category = ?", category );
+        return getHibernateTemplate().find(
+                "from Master as master where master.id.category = ?", category);
     }
 
     /**
@@ -24,7 +25,8 @@ public class MasterDaoImpl implements MasterDao {
     }
 
     /**
-     * @param hibernateTemplate the hibernateTemplate to set
+     * @param hibernateTemplate
+     *            the hibernateTemplate to set
      */
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;

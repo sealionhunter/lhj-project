@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>网上报名-合肥猎头网</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
-		media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
+	media="all" />
 </head>
 <body>
 	<div class="whiteBG">
@@ -29,11 +29,10 @@
 
 					<tr bgcolor="#FFFFFF">
 						<td valign="top" align="center" height="300"><span
-							align="center"
 							style="color: #666666; font-size: 14px; font-weight: 600"><br />
-								7.确认填写信息 </span><br /> <br />
-						<span align="center"
-							style="color: #222222; font-size: 16px; font-weight: 600">${RegistCommand.registExamName}&nbsp;资格审查表</span>
+								7.确认填写信息 </span><br />
+						<br />
+						<span style="color: #222222; font-size: 16px; font-weight: 600">${RegistCommand.registExamName}&nbsp;资格审查表</span>
 							<br />报考序号:${RegistCommand.registExamCode}
 							<table width="80%" border="0" cellpadding="4" cellspacing="1"
 								bgcolor="#E1E1E1">

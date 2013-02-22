@@ -263,26 +263,23 @@
 									<td align="right"><font color="#ff0000">*</font>身高：</td>
 									<td align="left"><form:input path="height" maxlength="4"
 											size="14" cssClass="bbsInput_short" />cm <font
-                                        color="#ff0000">&nbsp;&nbsp;<form:errors
-                                                path="height" /></font></td>
-								</tr>
+										color="#ff0000">&nbsp;&nbsp;<form:errors path="height" /></font></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">学习/培训经历：</td>
-									<td align="left"><form:textarea path="trainingExp" cols="50" rows="4"/></textarea>
-									</td>
+									<td align="left"><form:textarea path="trainingExp"
+											cols="50" rows="4" /></td>
 								</tr>
 								<tr bgcolor="#f7f7f7">
 									<td align="right">工作经历：</td>
-									<td align="left">
-                                          <form:textarea path="workExp" cols="50" rows="4"/>
-									</td>
+									<td align="left"><form:textarea path="workExp" cols="50"
+											rows="4" /></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
 									<td align="left">
 										<p>
-										  <form:textarea path="socialRel" cols="50" rows="4"/>
+											<form:textarea path="socialRel" cols="50" rows="4" />
 										</p>
 										<p>
 											<font color="#FF0000">格式:称谓 姓名 年龄 工作单位及任职</font><br /> 例：<br />
@@ -295,16 +292,19 @@
 								<tr bgcolor="#f7f7f7">
 									<td height="22" colspan="4">
 										<div align="center">
-											<input type="submit" value="确定" name="_target4">
-												&nbsp;&nbsp; <input type="reset" value="清除">
-													&nbsp;&nbsp; 
-										<c:choose>
-											<c:when test="${RegistCommand.editFlg != '1' }"><input type="submit" value="返回" style="width: 50px;"
-												name="_target2" /></c:when>
-												<c:otherwise><input type="submit" value="返回" style="width: 50px;"
-												name="_target0" />
+											<input type="submit" value="确定" name="_target4" />
+											&nbsp;&nbsp; 
+											<input type="reset" value="清除" /> &nbsp;&nbsp;
+											<c:choose>
+												<c:when test="${RegistCommand.editFlg != '1' }">
+													<input type="submit" value="返回" style="width: 50px;"
+														name="_target2" />
+												</c:when>
+												<c:otherwise>
+													<input type="submit" value="返回" style="width: 50px;"
+														name="_target0" />
 												</c:otherwise>
-										</c:choose>
+											</c:choose>
 										</div>
 									</td>
 								</tr>

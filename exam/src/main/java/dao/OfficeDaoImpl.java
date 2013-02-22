@@ -28,24 +28,26 @@ public class OfficeDaoImpl implements OfficeDao {
                 if (depart != null) {
                     office.setDepartName(depart.getName());
                 }
-                City city = (City) getHibernateTemplate().load(
-                		City.class, depart.getCityId());
+                City city = (City) getHibernateTemplate().load(City.class,
+                        depart.getCityId());
                 if (city != null) {
-                	office.setCityName(city.getName());
+                    office.setCityName(city.getName());
                 }
-                List<Apply> applys = getHibernateTemplate().find("from Apply as apply where apply.id.officeid = ?", office.getId());
+                List<Apply> applys = getHibernateTemplate().find(
+                        "from Apply as apply where apply.id.officeid = ?",
+                        office.getId());
                 int applyCount = applys.size();
                 if (applys != null && applyCount != 0) {
                     office.setApplyCount(applyCount);
                     int validateCount = 0;
-                    for (Apply apply: applys) {
-                    	if (apply.getState() != 0) {
-                    		validateCount ++;
-                    	}
-                    	office.setValidataCount(validateCount);
+                    for (Apply apply : applys) {
+                        if (apply.getState() != 0) {
+                            validateCount++;
+                        }
+                        office.setValidataCount(validateCount);
                     }
                     int recruits = office.getRecruits();
-                    office.setScale(applyCount/recruits);
+                    office.setScale(applyCount / recruits);
                 }
             }
 

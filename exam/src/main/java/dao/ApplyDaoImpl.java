@@ -19,25 +19,27 @@ public class ApplyDaoImpl implements ApplyDao {
     public ApplyPK add(Apply user) throws Exception {
         return (ApplyPK) getHibernateTemplate().save(user);
     }
+
     public Apply get(Integer userId, Integer officeId) {
-    	ApplyPK id = new ApplyPK();
-    	id.setUserid(userId);
-    	id.setOfficeid(officeId);
-    	return (Apply) getHibernateTemplate().load(Apply.class, id);
-    	
+        ApplyPK id = new ApplyPK();
+        id.setUserid(userId);
+        id.setOfficeid(officeId);
+        return (Apply) getHibernateTemplate().load(Apply.class, id);
+
     }
 
-	public List<Apply> find(Integer userId) throws Exception {
-        return getHibernateTemplate().find("from Apply as apply where apply.id.userid = ?", userId);
-	}
+    public List<Apply> find(Integer userId) throws Exception {
+        return getHibernateTemplate().find(
+                "from Apply as apply where apply.id.userid = ?", userId);
+    }
 
     @Override
     public List<Apply> list() throws Exception {
         List<Apply> applys = getHibernateTemplate().loadAll(Apply.class);
         for (Apply apply : applys) {
             if (apply.getId() != null) {
-                User user = (User) getHibernateTemplate().load(
-                        User.class, apply.getId().getUserid());
+                User user = (User) getHibernateTemplate().load(User.class,
+                        apply.getId().getUserid());
                 if (user != null) {
                     apply.setApplyUserName(user.getName());
                     apply.setIdCardNo(user.getIdCardNo());
@@ -52,7 +54,7 @@ public class ApplyDaoImpl implements ApplyDao {
                             Depart.class, office.getDepartId());
                     apply.setApplyDepartName(depart.getName());
                 }
-                
+
             }
 
         }
@@ -64,8 +66,8 @@ public class ApplyDaoImpl implements ApplyDao {
                 "from Apply as apply where apply.id.userid = ?", userId);
         for (Apply apply : applys) {
             if (apply.getId() != null) {
-                User user = (User) getHibernateTemplate().load(
-                        User.class, apply.getId().getUserid());
+                User user = (User) getHibernateTemplate().load(User.class,
+                        apply.getId().getUserid());
                 if (user != null) {
                     apply.setApplyUserName(user.getName());
                     apply.setIdCardNo(user.getIdCardNo());
@@ -80,8 +82,8 @@ public class ApplyDaoImpl implements ApplyDao {
                             Depart.class, office.getDepartId());
                     apply.setApplyDepartName(depart.getName());
                 }
-                Exam exam = (Exam) getHibernateTemplate().load(
-                        Exam.class, office.getExamId());
+                Exam exam = (Exam) getHibernateTemplate().load(Exam.class,
+                        office.getExamId());
                 if (exam != null) {
                     apply.setApplyExamId(exam.getId());
                     apply.setApplyExamPosition(exam.getExamPosition());
@@ -92,9 +94,9 @@ public class ApplyDaoImpl implements ApplyDao {
         return applys;
     }
 
-	public void delete(Apply apply) {
-		getHibernateTemplate().delete(apply);
-	}
+    public void delete(Apply apply) {
+        getHibernateTemplate().delete(apply);
+    }
 
     /**
      * @return the hibernateTemplate

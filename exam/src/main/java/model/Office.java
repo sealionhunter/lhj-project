@@ -1,149 +1,147 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
-
 
 /**
  * The persistent class for the office database table.
  * 
  */
 public class Office implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
-	private Date applyYear;
+    private Date applyYear;
 
-	private String code;
+    private String code;
 
-	private String degree;
+    private String degree;
 
-	private String description;
+    private String description;
 
-	private Integer examId;
+    private Integer examId;
 
-	private String examName;
+    private String examName;
 
-	private int limitAge;
+    private int limitAge;
 
-	private String major;
+    private String major;
 
-	private String name;
+    private String name;
 
-	private int recruits;
+    private int recruits;
 
-	private Integer departId;
-	
+    private Integer departId;
+
     private String departName;
 
     private String cityName;
-    
+
     private int applyCount;
-    
+
     private int validataCount;
-    
+
     private int scale;
 
-	public Office() {
-	}
+    public Office() {
+    }
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getExamName() {
-		return this.examName;
-	}
+    public String getExamName() {
+        return this.examName;
+    }
 
-	public void setExamName(String examName) {
-		this.examName = examName;
-	}
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
 
-	public Date getApplyYear() {
-		return this.applyYear;
-	}
+    public Date getApplyYear() {
+        return this.applyYear;
+    }
 
-	public void setApplyYear(Date applyYear) {
-		this.applyYear = applyYear;
-	}
+    public void setApplyYear(Date applyYear) {
+        this.applyYear = applyYear;
+    }
 
-	public String getCode() {
-		return this.code;
-	}
+    public String getCode() {
+        return this.code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getDegree() {
-		return this.degree;
-	}
+    public String getDegree() {
+        return this.degree;
+    }
 
-	public void setDegree(String degree) {
-		this.degree = degree;
-	}
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public String getDescription() {
+        return this.description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getExamId() {
-		return this.examId;
-	}
+    public Integer getExamId() {
+        return this.examId;
+    }
 
-	public void setExamId(Integer examPosition) {
-		this.examId = examPosition;
-	}
+    public void setExamId(Integer examPosition) {
+        this.examId = examPosition;
+    }
 
-	public int getLimitAge() {
-		return this.limitAge;
-	}
+    public int getLimitAge() {
+        return this.limitAge;
+    }
 
-	public void setLimitAge(int limitAge) {
-		this.limitAge = limitAge;
-	}
+    public void setLimitAge(int limitAge) {
+        this.limitAge = limitAge;
+    }
 
-	public String getMajor() {
-		return this.major;
-	}
+    public String getMajor() {
+        return this.major;
+    }
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public int getRecruits() {
-		return this.recruits;
-	}
+    public int getRecruits() {
+        return this.recruits;
+    }
 
-	public void setRecruits(int recruits) {
-		this.recruits = recruits;
-	}
+    public void setRecruits(int recruits) {
+        this.recruits = recruits;
+    }
 
-	public Integer getDepartId() {
-		return this.departId;
-	}
+    public Integer getDepartId() {
+        return this.departId;
+    }
 
-	public void setDepartId(Integer depart) {
-		this.departId = depart;
-	}
+    public void setDepartId(Integer depart) {
+        this.departId = depart;
+    }
 
     /**
      * @return the departName
@@ -153,66 +151,71 @@ public class Office implements Serializable {
     }
 
     /**
-     * @param departName the departName to set
+     * @param departName
+     *            the departName to set
      */
     public void setDepartName(String departName) {
         this.departName = departName;
     }
 
-	/**
-	 * @return the cityName
-	 */
-	public String getCityName() {
-		return cityName;
-	}
+    /**
+     * @return the cityName
+     */
+    public String getCityName() {
+        return cityName;
+    }
 
-	/**
-	 * @param cityName the cityName to set
-	 */
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
+    /**
+     * @param cityName
+     *            the cityName to set
+     */
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
-	/**
-	 * @return the applyCount
-	 */
-	public int getApplyCount() {
-		return applyCount;
-	}
+    /**
+     * @return the applyCount
+     */
+    public int getApplyCount() {
+        return applyCount;
+    }
 
-	/**
-	 * @param applyCount the applyCount to set
-	 */
-	public void setApplyCount(int applyCount) {
-		this.applyCount = applyCount;
-	}
+    /**
+     * @param applyCount
+     *            the applyCount to set
+     */
+    public void setApplyCount(int applyCount) {
+        this.applyCount = applyCount;
+    }
 
-	/**
-	 * @return the validataCount
-	 */
-	public int getValidataCount() {
-		return validataCount;
-	}
+    /**
+     * @return the validataCount
+     */
+    public int getValidataCount() {
+        return validataCount;
+    }
 
-	/**
-	 * @param validataCount the validataCount to set
-	 */
-	public void setValidataCount(int validataCount) {
-		this.validataCount = validataCount;
-	}
+    /**
+     * @param validataCount
+     *            the validataCount to set
+     */
+    public void setValidataCount(int validataCount) {
+        this.validataCount = validataCount;
+    }
 
-	/**
-	 * @return the scale
-	 */
-	public int getScale() {
-		return scale;
-	}
+    /**
+     * @return the scale
+     */
+    public int getScale() {
+        return scale;
+    }
 
-	/**
-	 * @param scale the scale to set
-	 */
-	public void setScale(int scale) {
-		this.scale = scale;
-	}
+    /**
+     * @param scale
+     *            the scale to set
+     */
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
 
 }

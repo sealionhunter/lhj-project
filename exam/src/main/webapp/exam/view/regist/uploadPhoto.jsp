@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>网上报名-合肥猎头网</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
-		media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
+	media="all" />
 </head>
 <body>
 	<div class="whiteBG">
@@ -26,26 +26,22 @@
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td valign="top" align="center" height="140"><span
-						align="center"
 						style="color: #666666; font-size: 14px; font-weight: 600"><br />
 							6.上传照片 </span><br /> <br />
 						<table width="80%" border="0" cellpadding="4" cellspacing="1"
 							bgcolor="#E1E1E1">
-							<form name="registeForm" method="post" action="/user/newUser.do"
-								onsubmit="return CheckForm();">
-								<tr bgcolor="#ffffff">
-									<td width="21%" align="right">特别提示：</td>
-									<td align="left" width="79%">1.照片必须为jpg格式，宽度1-2厘米，高度2-3厘米，分辨率约为300-500像素，大小为100kb以下；</td>
-								</tr>
-								<tr bgcolor="#ffffff">
-									<td align="right">&nbsp;</td>
-									<td align="left" width="79%">2.请保证照片长宽比例同二寸证件照长宽之比，打印效果清晰；</td>
-								</tr>
-								<tr bgcolor="#ffffff">
-									<td align="right">&nbsp;</td>
-									<td align="left">3.考生点击浏览按钮找到所需照片并选中，再点击下一步按钮即可。</td>
-								</tr>
-							</form>
+							<tr bgcolor="#ffffff">
+								<td width="21%" align="right">特别提示：</td>
+								<td align="left" width="79%">1.照片必须为jpg格式，宽度1-2厘米，高度2-3厘米，分辨率约为300-500像素，大小为100kb以下；</td>
+							</tr>
+							<tr bgcolor="#ffffff">
+								<td align="right">&nbsp;</td>
+								<td align="left" width="79%">2.请保证照片长宽比例同二寸证件照长宽之比，打印效果清晰；</td>
+							</tr>
+							<tr bgcolor="#ffffff">
+								<td align="right">&nbsp;</td>
+								<td align="left">3.考生点击浏览按钮找到所需照片并选中，再点击下一步按钮即可。</td>
+							</tr>
 						</table></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
@@ -78,19 +74,19 @@
 								<tr bgcolor="#ffffff">
 									<td colspan="4" align="center"><input size="50"
 										type="file" name="uploadPhoto" id="uploadPhoto" /> <font
-										color="#ff0000">&nbsp;&nbsp;<form:errors/></font></td>
-												
+										color="#ff0000">&nbsp;&nbsp;<form:errors /></font></td>
+
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td height="22" colspan="4">
 										<div align="center">
-											<input type="submit" value="上一步" style="width: 50px;"
-												name="_target4"> &nbsp;&nbsp; <input type="submit"
-												value="下一步" style="width: 50px;" name="_target6">
+											<input type="submit" value="上一步" style="width: 50px;" name="_target4" />
+											&nbsp;&nbsp; 
+											<input type="submit" value="下一步" style="width: 50px;" name="_target6" />
 										</div>
+									</td>
+								</tr>
 							</form:form>
-							</td>
-							</tr>
 						</table>
 					</td>
 				</tr>
