@@ -16,6 +16,7 @@ import org.springframework.validation.BindException;
 
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.StatusSearchCommand;
 
 import dao.ApplyDao;
 import dao.CityDao;
@@ -27,234 +28,258 @@ import dao.UserDao;
 
 public class RegistServiceImpl implements RegistService {
 
-	private UserDao userDao;
-	private DepartDao departDao;
-	private OfficeDao officeDao;
-	private CityDao cityDao;
-	private ApplyDao applyDao;
-	private MasterDao masterDao;
-	private ExamDao examDao;
+    private UserDao userDao;
+    private DepartDao departDao;
+    private OfficeDao officeDao;
+    private CityDao cityDao;
+    private ApplyDao applyDao;
+    private MasterDao masterDao;
+    private ExamDao examDao;
 
-	// private UserDao userDao;
+    // private UserDao userDao;
 
-	@Override
-	@Transactional
-	public void add(RegistCommand object) throws Exception {
-		User user = new User();
-		user.setName(object.getName());
+    @Override
+    @Transactional
+    public void add(RegistCommand object) throws Exception {
+        User user = new User();
+        user.setName(object.getName());
         user.setPassword(object.getPassword());
-		user.setIdCardNo(object.getIdCardNo());
-		user.setSex(Integer.parseInt(object.getSexCode()));
-		user.setNationCode(Integer.parseInt(object.getNationCode()));
+        user.setIdCardNo(object.getIdCardNo());
+        user.setSex(Integer.parseInt(object.getSexCode()));
+        user.setNationCode(Integer.parseInt(object.getNationCode()));
         user.setHomeTown(object.getHomeTown());
         user.setBirthdayMonth(object.getBirthdayMonth());
         user.setBirthdayYear(object.getBirthdayYear());
         user.setPoliticalCode(Integer.parseInt(object.getPoliticalCode()));
         user.setIdentity(object.getIdentity());
-		user.setMarried(Integer.parseInt(object.getIsMarried()));
+        user.setMarried(Integer.parseInt(object.getIsMarried()));
         user.setDegree(object.getDegree());
         user.setGraduateSchool(object.getUserSchool());
-		user.setGraduateYear(Integer.parseInt(object.getGraduateYear()));
+        user.setGraduateYear(Integer.parseInt(object.getGraduateYear()));
         user.setGraduateMonth(Integer.parseInt(object.getGraduateMonth()));
         user.setWorkyears(Integer.valueOf(object.getWorkYears()));
         user.setMajor(object.getUserMajor());
         user.setComputerSkill(object.getComputerSkill());
         user.setLanguageSkill(object.getLanguageSkill());
         user.setTelephone(object.getTelephone());
-		user.setHeight(Integer.parseInt(object.getHeight()));
-		user.setTrainingExp(object.getTrainingExp());
-		user.setWorkExp(object.getWorkExp());
-		user.setSocialRel(object.getSocialRel());
-		user.setPhoto(object.getPhoto());
-		Integer userId = object.getUserId() ;
-		if (object.getUserId() == null) {
-			userId = getUserDao().add(user);
-			object.setUserId(userId);
-		} else {
-			user.setId(object.getUserId());
-			getUserDao().update(user);
-			List<Apply> applies = getApplyDao().find(userId);
-			for (Apply apply : applies) {
-				getApplyDao().delete(apply);
-			}
-		}
-		Apply apply = new Apply();
-		ApplyPK applyPk = new ApplyPK();
-		applyPk.setUserid(userId);
-		applyPk.setOfficeid(Integer.valueOf(object.getApplyPostId()));
-		apply.setId(applyPk);
-		getApplyDao().add(apply);
-	}
+        user.setHeight(Integer.parseInt(object.getHeight()));
+        user.setTrainingExp(object.getTrainingExp());
+        user.setWorkExp(object.getWorkExp());
+        user.setSocialRel(object.getSocialRel());
+        user.setPhoto(object.getPhoto());
+        Integer userId = object.getUserId();
+        if (object.getUserId() == null) {
+            userId = getUserDao().add(user);
+            object.setUserId(userId);
+        } else {
+            user.setId(object.getUserId());
+            getUserDao().update(user);
+            List<Apply> applies = getApplyDao().find(userId);
+            for (Apply apply : applies) {
+                getApplyDao().delete(apply);
+            }
+        }
+        Apply apply = new Apply();
+        ApplyPK applyPk = new ApplyPK();
+        applyPk.setUserid(userId);
+        applyPk.setOfficeid(Integer.valueOf(object.getApplyPostId()));
+        apply.setId(applyPk);
+        getApplyDao().add(apply);
+    }
 
-	@Override
-	public List<Master> getMasters(int category) throws Exception {
-		return masterDao.list(category);
-	}
+    @Override
+    public List<Master> getMasters(int category) throws Exception {
+        return masterDao.list(category);
+    }
 
-	@Override
-	public List<Depart> listDepart() throws Exception {
-		return departDao.list();
-	}
+    @Override
+    public List<Depart> listDepart() throws Exception {
+        return departDao.list();
+    }
 
-	@Override
-	public List<Office> listOffice() throws Exception {
-		return officeDao.list();
-	}
+    @Override
+    public List<Office> listOffice() throws Exception {
+        return officeDao.list();
+    }
 
-	@Override
-	public List<City> listCity() throws Exception {
-		return cityDao.list();
-	}
+    @Override
+    public List<City> listCity() throws Exception {
+        return cityDao.list();
+    }
 
-	@Override
-	public List<Exam> listExam() throws Exception {
-		return examDao.list();
-	}
+    @Override
+    public List<Exam> listExam() throws Exception {
+        return examDao.list();
+    }
 
-	@Override
-	public List<Apply> listApplyUser() throws Exception {
-	    return applyDao.list();
-	}
+    @Override
+    public List<Apply> listApplyUser() throws Exception {
+        return applyDao.list();
+    }
 
-	@Override
-	public List<User> findUser(String userName) throws Exception {
-		return userDao.findUserName(userName);
-	}
-	
-	@Override
-	public List<User> findIdCardNo(String idCardNo) throws Exception {
-		return userDao.findIdCardNo(idCardNo);
-	}
+    @Override
+    public List<User> findUser(String userName) throws Exception {
+        return userDao.findUserName(userName);
+    }
 
-	@Override
-	public Apply getApply(Integer userId, Integer officeId) throws Exception {
-		return applyDao.get(userId, officeId);
-	}
-	@Override
-	public List<Apply> getApply(Integer userId) throws Exception {
-		return applyDao.find(userId);
-	}
+    @Override
+    public List<User> findIdCardNo(String idCardNo) throws Exception {
+        return userDao.findIdCardNo(idCardNo);
+    }
 
-	@Override
-	public Office getOffice(Integer officeId) throws Exception {
-		return officeDao.get(officeId);
-	}
+    @Override
+    public Apply getApply(Integer userId, Integer officeId) throws Exception {
+        return applyDao.get(userId, officeId);
+    }
 
-	/**
-	 * @return the userDao
-	 */
-	public UserDao getUserDao() {
-		return userDao;
-	}
+    @Override
+    public List<Apply> getApply(Integer userId) throws Exception {
+        return applyDao.find(userId);
+    }
 
-	/**
-	 * @param userDao
-	 *            the userDao to set
-	 */
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    @Override
+    public Office getOffice(Integer officeId) throws Exception {
+        return officeDao.get(officeId);
+    }
 
-	/**
-	 * @return the departDao
-	 */
-	public DepartDao getDepartDao() {
-		return departDao;
-	}
+    /**
+     * @return the userDao
+     */
+    public UserDao getUserDao() {
+        return userDao;
+    }
 
-	/**
-	 * @param departDao
-	 *            the departDao to set
-	 */
-	public void setDepartDao(DepartDao departDao) {
-		this.departDao = departDao;
-	}
+    /**
+     * @param userDao
+     *            the userDao to set
+     */
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-	/**
-	 * @return the officeDao
-	 */
-	public OfficeDao getOfficeDao() {
-		return officeDao;
-	}
+    /**
+     * @return the departDao
+     */
+    public DepartDao getDepartDao() {
+        return departDao;
+    }
 
-	/**
-	 * @param officeDao
-	 *            the officeDao to set
-	 */
-	public void setOfficeDao(OfficeDao officeDao) {
-		this.officeDao = officeDao;
-	}
+    /**
+     * @param departDao
+     *            the departDao to set
+     */
+    public void setDepartDao(DepartDao departDao) {
+        this.departDao = departDao;
+    }
 
-	/**
-	 * @return the cityDao
-	 */
-	public CityDao getCityDao() {
-		return cityDao;
-	}
+    /**
+     * @return the officeDao
+     */
+    public OfficeDao getOfficeDao() {
+        return officeDao;
+    }
 
-	/**
-	 * @param cityDao
-	 *            the cityDao to set
-	 */
-	public void setCityDao(CityDao cityDao) {
-		this.cityDao = cityDao;
-	}
+    /**
+     * @param officeDao
+     *            the officeDao to set
+     */
+    public void setOfficeDao(OfficeDao officeDao) {
+        this.officeDao = officeDao;
+    }
 
-	/**
-	 * @return the applyDao
-	 */
-	public ApplyDao getApplyDao() {
-		return applyDao;
-	}
+    /**
+     * @return the cityDao
+     */
+    public CityDao getCityDao() {
+        return cityDao;
+    }
 
-	/**
-	 * @param applyDao
-	 *            the applyDao to set
-	 */
-	public void setApplyDao(ApplyDao applyDao) {
-		this.applyDao = applyDao;
-	}
+    /**
+     * @param cityDao
+     *            the cityDao to set
+     */
+    public void setCityDao(CityDao cityDao) {
+        this.cityDao = cityDao;
+    }
 
-	/**
-	 * @return the masterDao
-	 */
-	public MasterDao getMasterDao() {
-		return masterDao;
-	}
+    /**
+     * @return the applyDao
+     */
+    public ApplyDao getApplyDao() {
+        return applyDao;
+    }
 
-	/**
-	 * @param masterDao
-	 *            the masterDao to set
-	 */
-	public void setMasterDao(MasterDao masterDao) {
-		this.masterDao = masterDao;
-	}
+    /**
+     * @param applyDao
+     *            the applyDao to set
+     */
+    public void setApplyDao(ApplyDao applyDao) {
+        this.applyDao = applyDao;
+    }
 
-	public ExamDao getExamDao() {
-		return examDao;
-	}
+    /**
+     * @return the masterDao
+     */
+    public MasterDao getMasterDao() {
+        return masterDao;
+    }
 
-	public void setExamDao(ExamDao examDao) {
-		this.examDao = examDao;
-	}
+    /**
+     * @param masterDao
+     *            the masterDao to set
+     */
+    public void setMasterDao(MasterDao masterDao) {
+        this.masterDao = masterDao;
+    }
 
-	@Override
-	public void modifyPassword(ModifyPasswordCommand cmd, BindException errors) throws Exception {
-		List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
-		if (user == null || user.isEmpty()) {
-			errors.rejectValue("idCardNoError", "required.idCardNoError",
-					"身份证号不正确!");
-			return;
-		}
-		User u = user.get(0); 
-		if (!cmd.getOldPassword().equals(u.getPassword())) {
-			errors.rejectValue("oldPassword", "required.oldPassword",
-					"旧密码不正确!");
-			return;
-		}
-		u.setPassword(cmd.getPassword());
-		userDao.update(u);
-		
-	}
+    public ExamDao getExamDao() {
+        return examDao;
+    }
+
+    public void setExamDao(ExamDao examDao) {
+        this.examDao = examDao;
+    }
+
+    @Override
+    public void modifyPassword(ModifyPasswordCommand cmd, BindException errors)
+            throws Exception {
+        List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
+        if (user == null || user.isEmpty()) {
+            errors.rejectValue("idCardNoError", "required.idCardNoError",
+                    "身份证号不正确!");
+            return;
+        }
+        User u = user.get(0);
+        if (!cmd.getOldPassword().equals(u.getPassword())) {
+            errors.rejectValue("oldPassword", "required.oldPassword", "旧密码不正确!");
+            return;
+        }
+        u.setPassword(cmd.getPassword());
+        userDao.update(u);
+
+    }
+
+    @Override
+    public void searchStatus(StatusSearchCommand cmd, BindException errors)
+            throws Exception {
+        List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
+        if (user == null || user.isEmpty()) {
+            errors.rejectValue("idCardNo", "required.idCardNo", "身份证号不正确!");
+            return;
+        }
+        User u = user.get(0);
+        if (!cmd.getPassword().equals(u.getPassword())) {
+            errors.rejectValue("password", "required.password", "密码不正确!");
+            return;
+        }
+        cmd.setUser(u);
+        List<Apply> applyList = applyDao.findApplyInfo(u.getId());
+        if (applyList == null || applyList.isEmpty()) {
+            errors.rejectValue("idCardNo", "required.apply", "找不到该考生的报名信息");
+            return;
+        }
+        Apply a = applyList.get(0);
+        cmd.setApply(a);
+    }
 
 }

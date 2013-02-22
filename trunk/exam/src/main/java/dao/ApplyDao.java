@@ -16,4 +16,6 @@ public interface ApplyDao {
 	public void delete(Apply apply);
 	
     public List<Apply> list() throws Exception;
+
+    public List<Apply> findApplyInfo(Integer userId) throws Exception;
 }

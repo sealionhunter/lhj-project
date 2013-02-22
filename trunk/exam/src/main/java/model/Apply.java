@@ -23,20 +23,24 @@ public class Apply implements Serializable {
     private String idCardNo;
 
     private String applyUserName;
-    
+
     private String applyOfficeName;
-    
+
     private String applyOfficeCode;
 
     private String applyOfficeDescrip;
-    
+
     private String applyOfficeMajor;
-    
+
     private String applyOfficeDegree;
 
     private String applyDepartName;
 
     private String aplyUserPolitical;
+
+    private Integer applyExamId;
+
+    private String applyExamPosition;
 
     /**
      * @return the aplyUserPolitical
@@ -46,7 +50,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param aplyUserPolitical the aplyUserPolitical to set
+     * @param aplyUserPolitical
+     *            the aplyUserPolitical to set
      */
     public void setAplyUserPolitical(String aplyUserPolitical) {
         this.aplyUserPolitical = aplyUserPolitical;
@@ -54,7 +59,7 @@ public class Apply implements Serializable {
 
     public Apply() {
     }
-    
+
     /**
      * @return the applyDepartName
      */
@@ -63,7 +68,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyDepartName the applyDepartName to set
+     * @param applyDepartName
+     *            the applyDepartName to set
      */
     public void setApplyDepartName(String applyDepartName) {
         this.applyDepartName = applyDepartName;
@@ -124,7 +130,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param idCardNo the idCardNo to set
+     * @param idCardNo
+     *            the idCardNo to set
      */
     public void setIdCardNo(String idCardNo) {
         this.idCardNo = idCardNo;
@@ -138,7 +145,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyUserName the applyUserName to set
+     * @param applyUserName
+     *            the applyUserName to set
      */
     public void setApplyUserName(String applyUserName) {
         this.applyUserName = applyUserName;
@@ -152,7 +160,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyOfficeName the applyOfficeName to set
+     * @param applyOfficeName
+     *            the applyOfficeName to set
      */
     public void setApplyOfficeName(String applyOfficeName) {
         this.applyOfficeName = applyOfficeName;
@@ -166,7 +175,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyOfficeCode the applyOfficeCode to set
+     * @param applyOfficeCode
+     *            the applyOfficeCode to set
      */
     public void setApplyOfficeCode(String applyOfficeCode) {
         this.applyOfficeCode = applyOfficeCode;
@@ -180,7 +190,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyOfficeMajor the applyOfficeMajor to set
+     * @param applyOfficeMajor
+     *            the applyOfficeMajor to set
      */
     public void setApplyOfficeMajor(String applyOfficeMajor) {
         this.applyOfficeMajor = applyOfficeMajor;
@@ -194,7 +205,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyOfficeDegree the applyOfficeDegree to set
+     * @param applyOfficeDegree
+     *            the applyOfficeDegree to set
      */
     public void setApplyOfficeDegree(String applyOfficeDegree) {
         this.applyOfficeDegree = applyOfficeDegree;
@@ -208,10 +220,41 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyOfficeDescrip the applyOfficeDescrip to set
+     * @param applyOfficeDescrip
+     *            the applyOfficeDescrip to set
      */
     public void setApplyOfficeDescrip(String applyOfficeDescrip) {
         this.applyOfficeDescrip = applyOfficeDescrip;
+    }
+
+    /**
+     * @return the applyExamId
+     */
+    public Integer getApplyExamId() {
+        return applyExamId;
+    }
+
+    /**
+     * @param applyExamId
+     *            the applyExamId to set
+     */
+    public void setApplyExamId(Integer applyExamId) {
+        this.applyExamId = applyExamId;
+    }
+
+    /**
+     * @return the applyExamPosition
+     */
+    public String getApplyExamPosition() {
+        return applyExamPosition;
+    }
+
+    /**
+     * @param applyExamPosition
+     *            the applyExamPosition to set
+     */
+    public void setApplyExamPosition(String applyExamPosition) {
+        this.applyExamPosition = applyExamPosition;
     }
 
 }
