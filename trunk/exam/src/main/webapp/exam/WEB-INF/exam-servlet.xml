@@ -27,6 +27,7 @@
 				<value>model/User.hbm.xml</value>
 				<value>model/Master.hbm.xml</value>
 				<value>model/Exam.hbm.xml</value>
+				<value>model/Admin.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

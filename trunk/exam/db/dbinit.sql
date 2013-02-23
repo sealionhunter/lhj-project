@@ -63,4 +63,7 @@ INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
                      VALUES('管理岗位','601','专业不限','大学本科',3,26,'',6,'1',2013);
 
-INSERT INTO `exam`(`name`,`applyBeginDate`,`applyDeadDate`, `examDate`,`examTime`, `examPosition`)VALUES('阜阳合肥现代产业园区管委会招聘工作人员考试','2013/02/21 9:00:00','2013/03/04 16:00:00','2013/03/16','8：30-11:30','待定');
+INSERT INTO `exam`.`exam`(`name`,`applyBeginDate`,`applyDeadDate`, `examDate`,`examTime`, `examPosition`)VALUES('阜阳合肥现代产业园区管委会招聘工作人员考试','2013/02/21 9:00:00','2013/03/04 16:00:00','2013/03/16','8：30-11:30','待定');
+
+
+INSERT INTO `exam`.`admin`(`administratorId`, `password`) VALUES ('administrator', 'examadmin');
