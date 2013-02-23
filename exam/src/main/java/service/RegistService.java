@@ -14,6 +14,7 @@ import org.springframework.validation.BindException;
 
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
 
@@ -54,4 +55,6 @@ public interface RegistService {
     public void initVerify(VerifyCommand cmd) throws Exception;
 
     public void verify(Apply apply) throws Exception;
+
+    public List<Apply> searchApplyUsers(SignupDetailSearchCommand cmd) throws Exception;
 }

@@ -16,6 +16,7 @@ import org.springframework.validation.BindException;
 
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
 
@@ -67,6 +68,7 @@ public class RegistServiceImpl implements RegistService {
         user.setSocialRel(object.getSocialRel());
         user.setPhoto(object.getPhoto());
         Integer userId = object.getUserId();
+        String reason = "";
         if (object.getUserId() == null) {
             userId = getUserDao().add(user);
             object.setUserId(userId);
@@ -75,6 +77,7 @@ public class RegistServiceImpl implements RegistService {
             getUserDao().update(user);
             List<Apply> applies = getApplyDao().find(userId);
             for (Apply apply : applies) {
+                reason = apply.getReason();
                 getApplyDao().delete(apply);
             }
         }
@@ -83,6 +86,8 @@ public class RegistServiceImpl implements RegistService {
         applyPk.setUserid(userId);
         applyPk.setOfficeid(Integer.valueOf(object.getApplyPostId()));
         apply.setId(applyPk);
+        apply.setState(0);
+        apply.setReason(reason);
         getApplyDao().add(apply);
     }
 
@@ -302,5 +307,10 @@ public class RegistServiceImpl implements RegistService {
     @Override
     public void verify(Apply apply) throws Exception {
         applyDao.update(apply);
+    }
+
+    public List<Apply> searchApplyUsers(SignupDetailSearchCommand cmd)
+            throws Exception {
+        return applyDao.findApplyInfo(cmd);
     }
 }

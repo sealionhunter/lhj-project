@@ -67,6 +67,7 @@
 				<prop key="/modifyPassword.action">modifyPasswordController</prop>
 				<prop key="/statusSearch.action">statusSearchController</prop>
 				<prop key="/verify.action">verifyController</prop>
+				<prop key="/signupdetailsearch.action">signupDetailSearchController</prop>
 			</props>
 		</property>
 	</bean>
@@ -174,6 +175,14 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="signupDetailSearchController" class="controller.SignupDetailSearchController">
+		<property name="formView" value="signUpDetailSearch" />
+		<property name="commandName" value="SignupDetailSearchCommand" />
+		<property name="commandClass" value="command.SignupDetailSearchCommand" />
+		<property name="registService" ref="registService" />
+	</bean>
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
