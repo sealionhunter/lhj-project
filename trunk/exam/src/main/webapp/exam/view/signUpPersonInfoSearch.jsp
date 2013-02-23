@@ -94,7 +94,8 @@ function doLogout() {
 									<td style="text-align: left; width: 20%""><form:select
 											path="postId" id="postId" /></td>
 									<td style="text-align: left;"><input type="submit"
-										value="筛选" style="width: 50px;" /></td>
+										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
+										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/adminInit.action'"/></td>
 								</tr>
 							</table>
 						</form:form></td>

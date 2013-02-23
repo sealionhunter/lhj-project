@@ -48,7 +48,9 @@
 								<tr bgcolor="#ffffff">
 									<td>&nbsp;</td>
 									<td style="text-align: left;"><input type="submit"
-										value="登 录" style="width: 50px;" /></td>
+										value="登 录" style="width: 50px;" />
+										&nbsp;&nbsp;<input
+										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/'"/></td>
 								</tr>
 							</table>
 						</form:form></td>
