@@ -93,15 +93,10 @@ function doLogout() {
 											path="homeTown" maxlength="32" size="15"
 											cssClass="bbsInput_short" /></td>
 
-									<td align="right"><font color="#ff0000">*</font>政治面貌：</td>
-									<td align="left"><form:select path="politicalCode"
-											items="${politicalCodes }" itemLabel="name"
-											itemValue="id.code">
-										</form:select></td>
-								</tr>
-								<tr bgcolor="#ffffff">
-									<td style="text-align: right;" colspan="4"><input
-										type="submit" value="筛选" style="width: 50px;" /></td>
+									<td align="right"></td>
+									<td style="text-align: left;"><input
+										type="submit" value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
+										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/adminInit.action'"/></td>
 								</tr>
 							</table>
 						</form:form></td>
@@ -111,6 +106,9 @@ function doLogout() {
 						style="padding-top: 5px;">
 						<table width="95%" border="0" cellpadding="8" cellspacing="1"
 							bgcolor="#E1E1E1">
+								<tr bgcolor="#f7f7f7">
+									<th colspan="8" style="text-align: right; width: 10%;">总人数：<span id="totalCount">${totalCount}</span>人</th>
+								</tr>
 							<tr bgcolor="#f7f7f7">
 								<th style="width: 8%;">姓名</th>
 								<th style="width: 10%;">身份证号</th>
@@ -157,6 +155,9 @@ function doLogout() {
 									</c:choose>
 								</tr>
 							</c:forEach>
+								<tr bgcolor="#f7f7f7">
+									<th colspan="8" style="text-align: right; width: 10%;">总人数：${totalCount}人</th>
+								</tr>
 						</table>
 					</td>
 				</tr>
@@ -170,6 +171,7 @@ function doLogout() {
  if ('${SignupDetailSearchCommand.postId}' != '') {
 	 document.getElementById("postId").value='${SignupDetailSearchCommand.postId}';
  }
+ document.getElementById("totalCount").innerText='${totalCount}';
 //-->
 </script>
 </html>

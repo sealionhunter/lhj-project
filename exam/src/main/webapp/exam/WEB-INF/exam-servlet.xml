@@ -8,12 +8,26 @@
 	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/exam" />
 		<property name="username" value="root" />
 		<property name="password" value="overseas" />
+
+		<property name="maxActive" value="30" />
+
+		<property name="maxIdle" value="20" />
+
+		<property name="initialSize" value="10" />
+
+		<property name="maxWait" value="1000" />
+		<property name="defaultAutoCommit" value="true" />
+
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="60" />
+
+		<property name="logAbandoned" value="true" />
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -68,6 +82,7 @@
 				<prop key="/statusSearch.action">statusSearchController</prop>
 				<prop key="/verify.action">verifyController</prop>
 				<prop key="/adminLogin.action">adminLoginController</prop>
+				<prop key="/adminInit.action">adminInitController</prop>
 				<prop key="/modifyAdmin.action">adminModifyController</prop>
 				<prop key="/adminLogout.action">adminLogoutController</prop>
 				<prop key="/signupdetailsearch.action">signupDetailSearchController</prop>
@@ -217,6 +232,12 @@
 	<bean id="adminLogoutController" class="controller.AdminLogoutController">
 		<property name="successView" value="adminLogin" />
 		<property name="commandName" value="AdminLoginCommand" />
+		<property name="commandClass" value="command.AdminLoginCommand" />
+	</bean>
+	<bean id="adminInitController" class="org.springframework.web.servlet.mvc.SimpleFormController">
+		<property name="formView" value="adminIndex" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="AdminInitCommand" />
 		<property name="commandClass" value="command.AdminLoginCommand" />
 	</bean>
 	<bean id="viewResolver"

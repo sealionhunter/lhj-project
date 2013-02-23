@@ -60,7 +60,7 @@
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
-									href="/exam/adminLogin.action">管理员入口</a></td>
+									href="/exam/adminInit.action">管理员入口</a></td>
 							</tr>
 						</table>
 					</td>
