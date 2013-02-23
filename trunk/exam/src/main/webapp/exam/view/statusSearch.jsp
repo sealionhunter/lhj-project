@@ -58,7 +58,7 @@
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td style="height: 10px; text-align: right;">审核状态：</td>
-									<td style="height: 10px; text-align: left;color:#ff0000">
+									<td style="height: 10px; text-align: left; color: #ff0000">
 										<c:choose>
 											<c:when test="${StatusSearchCommand.apply.state == '0'}">
 												未审核
@@ -82,12 +82,12 @@
 						<tr>
 							<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
 								style="padding-left: 10px;"><b><span
-									style="color: #666666">详细信息</span></b><br /> <span style="color:#ff0000;">※请仔细核对信息，如发现有误，通过信息修改修正信息</span>
-							</td>
+									style="color: #666666">详细信息</span></b><br /> <span
+								style="color: #ff0000;">※请仔细核对信息，如发现有误，通过信息修改修正信息</span></td>
 						</tr>
 						<tr bgcolor="#FFFFFF">
 							<td valign="top" align="center" height="200"
-								style="padding-top: 20px;">
+								style="padding-top: 20px;padding-bottom:10px;">
 								<table width="80%" border="0" cellpadding="4" cellspacing="1"
 									bgcolor="#E1E1E1">
 									<tr bgcolor="#ffffff">
@@ -187,7 +187,7 @@
 									<tr bgcolor="#ffffff">
 										<td align="right">身高：</td>
 										<td align="left">${StatusSearchCommand.user.height}cm</td>
-										<td align="right">联系电话</td>
+										<td align="right">联系电话：</td>
 										<td align="left" colspan="2">${StatusSearchCommand.user.telephone}</td>
 									</tr>
 									<tr bgcolor="#ffffff">
@@ -213,6 +213,34 @@
 									<tr bgcolor="#ffffff">
 										<td align="right">社会关系：</td>
 										<td align="left" colspan="4">${StatusSearchCommand.user.socialRel}</td>
+									</tr>
+									<tr bgcolor="#ffffff">
+										<td style="height: 10px; text-align: right;">审核状态：</td>
+										<td style="height: 10px; text-align: left; color: #ff0000" colspan="4"><b>
+											<c:choose>
+											<c:when test="${StatusSearchCommand.apply.state == '0'}">
+												未审核
+											</c:when>
+											<c:when test="${StatusSearchCommand.apply.state == '1'}">
+												审核未通过
+											</c:when>
+											<c:when test="${StatusSearchCommand.apply.state == '2'}">
+												审核通过
+											</c:when>
+											<c:otherwise>
+												&nbsp;
+											</c:otherwise>
+											</c:choose>
+										</b></td>
+									</tr>
+									<tr bgcolor="#ffffff">
+										<td style="height: 10px; text-align: right;">原因：</td>
+										<td style="height: 10px; text-align: left;" colspan="4">${StatusSearchCommand.apply.reason}</td>
+									</tr>
+									<tr bgcolor="#ffffff">
+										<td style="height: 10px; text-align: center; padding-left:100px;" colspan="5">
+											<input type="button" value="打印" style="width:50px;" disabled="disabled" />
+										</td>
 									</tr>
 								</table>
 							</td>
