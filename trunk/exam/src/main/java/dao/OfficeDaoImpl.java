@@ -41,7 +41,7 @@ public class OfficeDaoImpl implements OfficeDao {
                     office.setApplyCount(applyCount);
                     int validateCount = 0;
                     for (Apply apply : applys) {
-                        if (apply.getState() != 0) {
+                        if (apply.getState() == 2) {
                             validateCount++;
                         }
                         office.setValidataCount(validateCount);
