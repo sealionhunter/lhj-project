@@ -12,6 +12,8 @@ import model.User;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import command.SignupDetailSearchCommand;
+
 public class ApplyDaoImpl implements ApplyDao {
 
     private HibernateTemplate hibernateTemplate;
@@ -83,6 +85,64 @@ public class ApplyDaoImpl implements ApplyDao {
                 + "where A.id.userid=U.id and A.id.officeid=O.id and O.departId=D.id and E.id=O.examId "
                 + "and U.id=?";
         List<?> list = getHibernateTemplate().find(hql, userId);
+
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        List<Apply> applyList = new ArrayList<Apply>();
+        for (Object o : list) {
+            Object[] objects = (Object[]) o;
+            Apply apply = (Apply) objects[0];
+            User user = (User) objects[1];
+            Office office = (Office) objects[2];
+            Depart dept = (Depart) objects[3];
+            Exam exam = (Exam) objects[4];
+
+            apply.setApplyUserName(user.getName());
+            apply.setIdCardNo(user.getIdCardNo());
+            apply.setApplyUserHomeTown(user.getHomeTown());
+            apply.setAplyUserPolitical(String.valueOf(user.getPoliticalCode()));
+
+            apply.setApplyOfficeName(office.getName());
+            apply.setApplyOfficeCode(office.getCode());
+            apply.setApplyOfficeDescrip(office.getDescription());
+            apply.setApplyDepartName(dept.getName());
+            apply.setApplyExamId(exam.getId());
+            apply.setApplyExamPosition(exam.getExamPosition());
+
+            applyList.add(apply);
+        }
+        return applyList;
+    }
+
+    public List<Apply> findApplyInfo(SignupDetailSearchCommand condition)
+            throws Exception {
+        String hql = "from Apply A, User U, Office O, Depart D, Exam E "
+                + "where A.id.userid=U.id and A.id.officeid=O.id and O.departId=D.id and E.id=O.examId ";
+        List<Object> paramList = new ArrayList<Object>();
+        if (condition.getDeptId() >= 0) {
+            hql += "and D.id=? ";
+            paramList.add(condition.getDeptId());
+        }
+        if (condition.getPostId() >= 0) {
+            hql += "and O.id=? ";
+            paramList.add(condition.getPostId());
+        }
+        if (condition.getHomeTown() != null
+                && condition.getHomeTown().trim().length() > 0) {
+            hql += "and U.homeTown LIKE ? ";
+            paramList.add("%" + condition.getHomeTown() + "%");
+        }
+        if (condition.getPoliticalCode() > 0) {
+            hql += "and U.politicalCode=? ";
+            paramList.add(condition.getPoliticalCode());
+        }
+        List<?> list = null;
+        if (!paramList.isEmpty()) {
+            list = getHibernateTemplate().find(hql, paramList.toArray());
+        } else {
+            list = getHibernateTemplate().find(hql);
+        }
 
         if (list == null || list.isEmpty()) {
             return null;
