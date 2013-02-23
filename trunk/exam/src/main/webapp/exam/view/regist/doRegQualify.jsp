@@ -165,19 +165,6 @@
 								<tr bgcolor="#ffffff">
 									<td align="right"><font color="#ff0000">*</font>毕业年月：</td>
 									<td align="left"><form:select path="graduateYear">
-											<form:option value="1970" label="1970" />
-											<form:option value="1971" label="1971" />
-											<form:option value="1972" label="1972" />
-											<form:option value="1973" label="1973" />
-											<form:option value="1974" label="1974" />
-											<form:option value="1975" label="1975" />
-											<form:option value="1976" label="1976" />
-											<form:option value="1977" label="1977" />
-											<form:option value="1978" label="1978" />
-											<form:option value="1979" label="1979" />
-											<form:option value="1980" label="1980" />
-											<form:option value="1981" label="1981" />
-											<form:option value="1982" label="1982" />
 											<form:option value="1983" label="1983" />
 											<form:option value="1984" label="1984" />
 											<form:option value="1985" label="1985" />
