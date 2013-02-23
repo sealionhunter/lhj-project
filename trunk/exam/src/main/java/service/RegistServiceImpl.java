@@ -2,6 +2,7 @@ package service;
 
 import java.util.List;
 
+import model.Admin;
 import model.Apply;
 import model.ApplyPK;
 import model.City;
@@ -14,12 +15,15 @@ import model.User;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
 
+import command.AdminLoginCommand;
+import command.AdminModifyCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
 
+import dao.AdminDao;
 import dao.ApplyDao;
 import dao.CityDao;
 import dao.DepartDao;
@@ -37,6 +41,7 @@ public class RegistServiceImpl implements RegistService {
     private ApplyDao applyDao;
     private MasterDao masterDao;
     private ExamDao examDao;
+    private AdminDao adminDao;
 
     @Override
     @Transactional
@@ -245,6 +250,21 @@ public class RegistServiceImpl implements RegistService {
         this.examDao = examDao;
     }
 
+    /**
+     * @return the adminDao
+     */
+    public AdminDao getAdminDao() {
+        return adminDao;
+    }
+
+    /**
+     * @param adminDao
+     *            the adminDao to set
+     */
+    public void setAdminDao(AdminDao adminDao) {
+        this.adminDao = adminDao;
+    }
+
     @Override
     public void modifyPassword(ModifyPasswordCommand cmd, BindException errors)
             throws Exception {
@@ -307,6 +327,39 @@ public class RegistServiceImpl implements RegistService {
     @Override
     public void verify(Apply apply) throws Exception {
         applyDao.update(apply);
+    }
+
+    @Override
+    public void adminLogin(AdminLoginCommand cmd, BindException errors)
+            throws Exception {
+        String adminId = cmd.getAdminId();
+        String password = cmd.getAdminPassword();
+        Admin admin = adminDao.get(adminId);
+        if (admin == null) {
+            errors.rejectValue("adminId", "adminId.error", "管理员帐号不存在！");
+            return;
+        }
+        if (!admin.getPassword().equals(password)) {
+            errors.rejectValue("adminPassword", "password.error", "密码不正确！");
+            return;
+        }
+    }
+
+    @Override
+    public void modifyAdminPassword(AdminModifyCommand cmd, BindException errors)
+            throws Exception {
+        Admin admin = adminDao.get(cmd.getAdminId());
+        if (admin == null) {
+            errors.rejectValue("adminId", "adminId.error",
+                    "管理员帐号不存在!");
+            return;
+        }
+        if (!cmd.getOldPassword().equals(admin.getPassword())) {
+            errors.rejectValue("oldPassword", "oldPassword.error", "旧密码不正确!");
+            return;
+        }
+        admin.setPassword(cmd.getPassword());
+        adminDao.update(admin);
     }
 
     public List<Apply> searchApplyUsers(SignupDetailSearchCommand cmd)

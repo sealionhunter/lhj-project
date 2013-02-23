@@ -12,6 +12,8 @@ import model.User;
 
 import org.springframework.validation.BindException;
 
+import command.AdminLoginCommand;
+import command.AdminModifyCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.SignupDetailSearchCommand;
@@ -51,10 +53,16 @@ public interface RegistService {
 
     public void searchStatus(StatusSearchCommand cmd, BindException errors)
             throws Exception;
-    
+
     public void initVerify(VerifyCommand cmd) throws Exception;
 
     public void verify(Apply apply) throws Exception;
+
+    public void adminLogin(AdminLoginCommand cmd, BindException errors)
+            throws Exception;
+
+    public void modifyAdminPassword(AdminModifyCommand cmd, BindException errors)
+            throws Exception;
 
     public List<Apply> searchApplyUsers(SignupDetailSearchCommand cmd) throws Exception;
 }

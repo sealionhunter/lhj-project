@@ -67,6 +67,9 @@
 				<prop key="/modifyPassword.action">modifyPasswordController</prop>
 				<prop key="/statusSearch.action">statusSearchController</prop>
 				<prop key="/verify.action">verifyController</prop>
+				<prop key="/adminLogin.action">adminLoginController</prop>
+				<prop key="/modifyAdmin.action">adminModifyController</prop>
+				<prop key="/adminLogout.action">adminLogoutController</prop>
 				<prop key="/signupdetailsearch.action">signupDetailSearchController</prop>
 			</props>
 		</property>
@@ -93,6 +96,9 @@
 	<bean id="examDao" class="dao.ExamDaoImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<bean id="adminDao" class="dao.AdminDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 	<bean id="registService" class="service.RegistServiceImpl">
 		<property name="userDao" ref="userDao" />
 		<property name="departDao" ref="departDao" />
@@ -101,6 +107,7 @@
 		<property name="applyDao" ref="applyDao" />
 		<property name="masterDao" ref="masterDao" />
 		<property name="examDao" ref="examDao" />
+		<property name="adminDao" ref="adminDao" />
 	</bean>
 	<bean id="registController" class="controller.RegistWizardController">
 		<property name="successView" value="success" />
@@ -175,14 +182,43 @@
 			</list>
 		</property>
 	</bean>
-	
 	<bean id="signupDetailSearchController" class="controller.SignupDetailSearchController">
 		<property name="formView" value="signUpDetailSearch" />
 		<property name="commandName" value="SignupDetailSearchCommand" />
 		<property name="commandClass" value="command.SignupDetailSearchCommand" />
 		<property name="registService" ref="registService" />
 	</bean>
-	
+	<bean id="adminLoginValidator" class="validator.AdminLoginValidator" />
+	<bean id="adminLoginController" class="controller.AdminLoginController">
+		<property name="formView" value="adminLogin" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="AdminLoginCommand" />
+		<property name="commandClass" value="command.AdminLoginCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="adminLoginValidator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="adminModifyValidator" class="validator.AdminModifyValidator" />
+	<bean id="adminModifyController" class="controller.AdminModifyController">
+		<property name="formView" value="adminModify" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="AdminModifyCommand" />
+		<property name="commandClass" value="command.AdminModifyCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="adminModifyValidator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="adminLogoutController" class="controller.AdminLogoutController">
+		<property name="successView" value="adminLogin" />
+		<property name="commandName" value="AdminLoginCommand" />
+		<property name="commandClass" value="command.AdminLoginCommand" />
+	</bean>
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

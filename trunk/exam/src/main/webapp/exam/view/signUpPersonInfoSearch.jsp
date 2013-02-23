@@ -35,7 +35,7 @@ function changeDeart() {
 			officeEl.options.add(new Option(office[i].name, office[i].id));
 			continue;
 		}
-		if (office[i].departId == departId) {
+		if (office[i].departId == departId || office[i].id == -1) {
 			officeEl.options.add(new Option(office[i].name, office[i].id));
 		}
 	}
@@ -44,6 +44,10 @@ function changeDeart() {
 function doVerify(obj) {
 	document.getElementById('verifyUserId').value = obj;
 	personForm.submit();
+}
+
+function doLogout() {
+	adminLogoutForm.submit();
 }
 
 //-->
@@ -57,104 +61,102 @@ function doVerify(obj) {
 	<div class="midBox">
 		<div class="midTitle">报名人员信息一览</div>
 		<div class="cnt">
-			<form:form name="personForm" method="post"
-				action="/exam/signuppeopleinfo.action"
-				commandName="SignUpPersonSearchCommand">
-				<form:hidden path="verifyUserId" id="verifyUserId" />
-				<table width="100%" border="0" cellpadding="0" cellspacing="1"
-					bgcolor="#E1E1E1">
-					<tr>
-						<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
-							style="padding-left: 10px;"><b><span
-								style="color: #666666">报名人员信息一览</span></b></td>
-					</tr>
-					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="25"
-							style="padding-top: 5px;">
+
+			<table width="100%" border="0" cellpadding="0" cellspacing="1"
+				bgcolor="#E1E1E1">
+				<tr>
+					<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
+						style="padding-left: 10px;"><b><span
+							style="color: #666666">报名人员信息一览</span></b></td>
+					<td height="32" align="right" bgcolor="#FFFFFF" valign="middle"
+						style="padding-right: 10px;" width="30"><form:form
+							name="adminLogoutForm" method="post"
+							action="/exam/adminLogout.action" commandName="AdminLoginCommand">
+							<a href="#" onclick="doLogout();">注销</a>
+						</form:form></td>
+				</tr>
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="25"
+						style="padding-top: 5px;">
+							<form:form name="personForm"
+								method="post" action="/exam/signuppeopleinfo.action"
+								commandName="SignUpPersonSearchCommand">
+							<form:hidden path="verifyUserId" id="verifyUserId" />
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#ffffff">
-									<td style="text-align: right; width:10%;">
-										部门：</td>
-									<td style="text-align: left; width:15%">
-										<form:select
+									<td style="text-align: right; width: 10%;">部门：</td>
+									<td style="text-align: left; width: 15%"><form:select
 											path="deptId" items="${departs}" id="deptId" itemLabel="name"
-											itemValue="id"
-											onchange="changeDeart();">
-										</form:select>
-									</td>
-									<td style="text-align: right; width:10%;">
-										岗位类别：
-									</td>
-									<td style="text-align: left; width:20%"">
-										<form:select path="postId" id="postId" />
-									</td>
-									<td style="text-align: left;">
-										<input type="submit" value="筛选" style="width:50px;" />
-									</td>
+											itemValue="id" onchange="changeDeart();">
+										</form:select></td>
+									<td style="text-align: right; width: 10%;">岗位类别：</td>
+									<td style="text-align: left; width: 20%""><form:select
+											path="postId" id="postId" /></td>
+									<td style="text-align: left;"><input type="submit"
+										value="筛选" style="width: 50px;" /></td>
 								</tr>
 							</table>
-						</td>
-					</tr>
-					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="448"
-							style="padding-top: 5px;">
-							<table width="95%" border="0" cellpadding="8" cellspacing="1"
-								bgcolor="#E1E1E1">
-								<tr bgcolor="#f7f7f7">
-									<th style="width: 8%;">姓名</th>
-									<th style="width: 10%;">身份证号</th>
-									<th style="width: 12%;">籍贯</th>
-									<th style="width: 8%;">政治面貌</th>
-									<th style="width: 14%;">报考部门</th>
-									<th style="width: 12%;">岗位类别</th>
-									<th style="width: 8%;">岗位编号</th>
-									<th style="width: 10%;">审核状态</th>
-									<th>&nbsp;</th>
+						</form:form></td>
+				</tr>
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="448"
+						style="padding-top: 5px;">
+						<table width="95%" border="0" cellpadding="8" cellspacing="1"
+							bgcolor="#E1E1E1">
+							<tr bgcolor="#f7f7f7">
+								<th style="width: 8%;">姓名</th>
+								<th style="width: 10%;">身份证号</th>
+								<th style="width: 12%;">籍贯</th>
+								<th style="width: 8%;">政治面貌</th>
+								<th style="width: 14%;">报考部门</th>
+								<th style="width: 12%;">岗位类别</th>
+								<th style="width: 8%;">岗位编号</th>
+								<th style="width: 10%;">审核状态</th>
+								<th>&nbsp;</th>
+							</tr>
+							<c:forEach items="${applyUsers}" var="applyUser">
+								<tr bgcolor="#ffffff">
+									<td>${applyUser.applyUserName}</td>
+									<td>${applyUser.idCardNo}</td>
+									<td>${applyUser.applyUserHomeTown}</td>
+									<c:choose>
+										<c:when test="${applyUser.aplyUserPolitical == '1'}">
+											<td>共产党员</td>
+										</c:when>
+										<c:when test="${applyUser.aplyUserPolitical == '2'}">
+											<td>共青团员</td>
+										</c:when>
+										<c:otherwise>
+											<td>群众</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${applyUser.applyDepartName}</td>
+									<td>${applyUser.applyOfficeName}</td>
+									<td>${applyUser.applyOfficeCode}</td>
+									<c:choose>
+										<c:when test="${applyUser.state == 2 }">
+											<td>审核通过</td>
+											<td><input type="button" value="详细" style="width: 50px;"
+												onclick="doVerify(${applyUser.id.userid})" /></td>
+										</c:when>
+										<c:when test="${applyUser.state == 1 }">
+											<td>审核不通过</td>
+											<td><input type="button" value="详细" style="width: 50px;"
+												onclick="doVerify(${applyUser.id.userid})" /></td>
+										</c:when>
+										<c:otherwise>
+											<td>未审核</td>
+											<td><input type="button" value="审核" style="width: 50px;"
+												onclick="doVerify(${applyUser.id.userid})" /></td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
-								<c:forEach items="${applyUsers}" var="applyUser">
-									<tr bgcolor="#ffffff">
-										<td>${applyUser.applyUserName}</td>
-										<td>${applyUser.idCardNo}</td>
-										<td>${applyUser.applyUserHomeTown}</td>
-										<c:choose>
-											<c:when test="${applyUser.aplyUserPolitical == '1'}">
-												<td>共产党员</td>
-											</c:when>
-											<c:when test="${applyUser.aplyUserPolitical == '2'}">
-												<td>共青团员</td>
-											</c:when>
-											<c:otherwise>
-												<td>群众</td>
-											</c:otherwise>
-										</c:choose>
-										<td>${applyUser.applyDepartName}</td>
-										<td>${applyUser.applyOfficeName}</td>
-										<td>${applyUser.applyOfficeCode}</td>
-										<c:choose>
-											<c:when test="${applyUser.state == 2 }">
-												<td>审核通过</td>
-												<td><input type="button" value="详细"
-													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
-											</c:when>
-											<c:when test="${applyUser.state == 1 }">
-												<td>审核不通过</td>
-												<td><input type="button" value="详细"
-													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
-											</c:when>
-											<c:otherwise>
-												<td>未审核</td>
-												<td><input type="button" value="审核"
-													style="width: 50px;" onclick="doVerify(${applyUser.id.userid})" /></td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
-								</c:forEach>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</form:form>
+							</c:forEach>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>

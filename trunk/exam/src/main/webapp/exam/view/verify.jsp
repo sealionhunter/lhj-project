@@ -10,10 +10,14 @@
 	media="all" />
 <script type="text/javascript">
 <!--
-function submitVerify(obj) {
-	document.getElementById('submitFlag').value = obj;
-	document.getElementById('verifyForm').submit();
-}
+	function submitVerify(obj) {
+		document.getElementById('submitFlag').value = obj;
+		document.getElementById('verifyForm').submit();
+	}
+
+	function doLogout() {
+		adminLogoutForm.submit();
+	}
 //-->
 </script>
 </head>
@@ -21,22 +25,28 @@ function submitVerify(obj) {
 	<div class="whiteBG">
 		<div class="header_logo"></div>
 	</div>
-	<form:form id="verifyForm" name="verifyForm" method="post" action="/exam/verify.action"
-		commandName="VerifyCommand">
-		<form:hidden path="userId" />
-		<div class="midBox">
-			<div class="midTitle">报名审核</div>
-			<div class="cnt">
-				<table width="100%" border="0" cellpadding="0" cellspacing="1"
-					bgcolor="#E1E1E1">
-					<tr>
-						<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
-							style="padding-left: 10px;"><b><span
-								style="color: #666666">报名审核</span></b></td>
-					</tr>
-					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="200"
-							style="padding-top: 20px;">
+	<div class="midBox">
+		<div class="midTitle">报名审核</div>
+		<div class="cnt">
+			<table width="100%" border="0" cellpadding="0" cellspacing="1"
+				bgcolor="#E1E1E1">
+				<tr>
+					<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
+						style="padding-left: 10px;"><b><span
+							style="color: #666666">报名审核</span></b></td>
+					<td height="32" align="right" bgcolor="#FFFFFF" valign="middle"
+						style="padding-right: 10px;" width="30"><form:form
+							name="adminLogoutForm" method="post"
+							action="/exam/adminLogout.action" commandName="AdminLoginCommand">
+							<a href="#" onclick="doLogout();">注销</a>
+						</form:form></td>
+				</tr>
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="200"
+						style="padding-top: 20px;"><form:form id="verifyForm"
+							name="verifyForm" method="post" action="/exam/verify.action"
+							commandName="VerifyCommand">
+							<form:hidden path="userId" />
 							<table width="80%" border="0" cellpadding="4" cellspacing="1"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#ffffff">
@@ -171,24 +181,22 @@ function submitVerify(obj) {
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">原因：</td>
-									<td align="left" colspan="4">
-										<form:textarea path="verifyReason" cols="50" rows="4" />
-										<form:errors path="verifyReason" />
-									</td>
+									<td align="left" colspan="4"><form:textarea
+											path="verifyReason" cols="50" rows="4" /><font color="#ff0000"><form:errors
+											path="verifyReason" /></font></td>
 								</tr>
 								<tr bgcolor="#ffffff">
-									<td align="center" colspan="5">
-										<form:hidden path="submitFlag" id="submitFlag" />
-										<input type="button" value="确 定" style="width:50px;" onclick="submitVerify(true);" />&nbsp;&nbsp;&nbsp;
-										<input type="button" value="返 回" style="width:50px;" onclick="submitVerify(false);"/>
-									</td>
+									<td align="center" colspan="5"><form:hidden
+											path="submitFlag" id="submitFlag" /> <input type="button"
+										value="确 定" style="width: 50px;" onclick="submitVerify(true);" />&nbsp;&nbsp;&nbsp;
+										<input type="button" value="返 回" style="width: 50px;"
+										onclick="submitVerify(false);" /></td>
 								</tr>
 							</table>
-						</td>
-					</tr>
-				</table>
-			</div>
+						</form:form></td>
+				</tr>
+			</table>
 		</div>
-	</form:form>
+	</div>
 </body>
 </html>
