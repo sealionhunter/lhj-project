@@ -1,14 +1,14 @@
 package command;
 
 public class SignUpPersonSearchCommand {
-    private Integer deptId = -1;
-    private Integer postId = -1;
+    private String deptId = "-1";
+    private String postId = "-1";
     private String verifyUserId;
 
     /**
      * @return the deptId
      */
-    public Integer getDeptId() {
+    public String getDeptId() {
         return deptId;
     }
 
@@ -16,14 +16,14 @@ public class SignUpPersonSearchCommand {
      * @param deptId
      *            the deptId to set
      */
-    public void setDeptId(Integer deptId) {
+    public void setDeptId(String deptId) {
         this.deptId = deptId;
     }
 
     /**
      * @return the postId
      */
-    public Integer getPostId() {
+    public String getPostId() {
         return postId;
     }
 
@@ -31,7 +31,7 @@ public class SignUpPersonSearchCommand {
      * @param postId
      *            the postId to set
      */
-    public void setPostId(Integer postId) {
+    public void setPostId(String postId) {
         this.postId = postId;
     }
 

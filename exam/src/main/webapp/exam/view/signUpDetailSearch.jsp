@@ -35,10 +35,14 @@ function changeDeart() {
 			officeEl.options.add(new Option(office[i].name, office[i].id));
 			continue;
 		}
-		if (office[i].departId == departId) {
+		if (office[i].departId == departId || office[i].id == -1) { 
 			officeEl.options.add(new Option(office[i].name, office[i].id));
 		}
 	}
+}
+
+function doLogout() {
+	adminLogoutForm.submit();
 }
 
 //-->
@@ -52,19 +56,25 @@ function changeDeart() {
 	<div class="midBox">
 		<div class="midTitle">报名人员信息检索</div>
 		<div class="cnt">
-			<form:form name="personForm" method="post"
-				action="/exam/signupdetailsearch.action"
-				commandName="SignupDetailSearchCommand">
-				<table width="100%" border="0" cellpadding="0" cellspacing="1"
-					bgcolor="#E1E1E1">
-					<tr>
-						<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
-							style="padding-left: 10px;"><b><span
-								style="color: #666666">报名人员信息检索</span></b></td>
-					</tr>
-					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="25"
-							style="padding-top: 5px;">
+
+			<table width="100%" border="0" cellpadding="0" cellspacing="1"
+				bgcolor="#E1E1E1">
+				<tr>
+					<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
+						style="padding-left: 10px;"><b><span
+							style="color: #666666">报名人员信息检索</span></b></td>
+					<td height="32" align="right" bgcolor="#FFFFFF" valign="middle"
+						style="padding-right: 10px;" width="30"><form:form
+							name="adminLogoutForm" method="post"
+							action="/exam/adminLogout.action" commandName="AdminLoginCommand">
+							<a href="#" onclick="doLogout();">注销</a>
+						</form:form></td>
+				</tr>
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="25"
+						style="padding-top: 5px;"><form:form name="personForm"
+							method="post" action="/exam/signupdetailsearch.action"
+							commandName="SignupDetailSearchCommand">
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#ffffff">
@@ -94,64 +104,63 @@ function changeDeart() {
 										type="submit" value="筛选" style="width: 50px;" /></td>
 								</tr>
 							</table>
-						</td>
-					</tr>
-					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="448"
-							style="padding-top: 5px;">
-							<table width="95%" border="0" cellpadding="8" cellspacing="1"
-								bgcolor="#E1E1E1">
-								<tr bgcolor="#f7f7f7">
-									<th style="width: 8%;">姓名</th>
-									<th style="width: 10%;">身份证号</th>
-									<th >籍贯</th>
-									<th style="width: 8%;">政治面貌</th>
-									<th style="width: 14%;">报考部门</th>
-									<th style="width: 12%;">岗位类别</th>
-									<th style="width: 8%;">岗位编号</th>
-									<th style="width: 8%;">审核状态</th>
+						</form:form></td>
+				</tr>
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="448"
+						style="padding-top: 5px;">
+						<table width="95%" border="0" cellpadding="8" cellspacing="1"
+							bgcolor="#E1E1E1">
+							<tr bgcolor="#f7f7f7">
+								<th style="width: 8%;">姓名</th>
+								<th style="width: 10%;">身份证号</th>
+								<th>籍贯</th>
+								<th style="width: 8%;">政治面貌</th>
+								<th style="width: 14%;">报考部门</th>
+								<th style="width: 12%;">岗位类别</th>
+								<th style="width: 8%;">岗位编号</th>
+								<th style="width: 10%;">审核状态</th>
+							</tr>
+							<c:set var="totalCount" value="0" />
+							<c:set var="totalPassed" value="0" />
+							<c:forEach items="${applyUsers}" var="applyUser">
+								<c:set var="totalCount" value="${totalCount + 1 }" />
+								<tr bgcolor="#ffffff">
+									<td>${applyUser.applyUserName}</td>
+									<td>${applyUser.idCardNo}</td>
+									<td>${applyUser.applyUserHomeTown}</td>
+									<c:choose>
+										<c:when test="${applyUser.aplyUserPolitical == '1'}">
+											<td>共产党员</td>
+										</c:when>
+										<c:when test="${applyUser.aplyUserPolitical == '2'}">
+											<td>共青团员</td>
+										</c:when>
+										<c:otherwise>
+											<td>群众</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${applyUser.applyDepartName}</td>
+									<td>${applyUser.applyOfficeName}</td>
+									<td>${applyUser.applyOfficeCode}</td>
+									<c:choose>
+										<c:when test="${applyUser.state == 2 }">
+											<c:set var="totalPassed" value="${totalPassed + 1 }" />
+											<td>审核通过</td>
+										</c:when>
+										<c:when test="${applyUser.state == 1 }">
+											<td>审核不通过</td>
+										</c:when>
+										<c:otherwise>
+											<td>未审核</td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
-								<c:set var="totalCount" value="0" />
-								<c:set var="totalPassed" value="0" />
-								<c:forEach items="${applyUsers}" var="applyUser">
-									<c:set var="totalCount" value="${totalCount + 1 }" />
-									<tr bgcolor="#ffffff">
-										<td>${applyUser.applyUserName}</td>
-										<td>${applyUser.idCardNo}</td>
-										<td>${applyUser.applyUserHomeTown}</td>
-										<c:choose>
-											<c:when test="${applyUser.aplyUserPolitical == '1'}">
-												<td>共产党员</td>
-											</c:when>
-											<c:when test="${applyUser.aplyUserPolitical == '2'}">
-												<td>共青团员</td>
-											</c:when>
-											<c:otherwise>
-												<td>群众</td>
-											</c:otherwise>
-										</c:choose>
-										<td>${applyUser.applyDepartName}</td>
-										<td>${applyUser.applyOfficeName}</td>
-										<td>${applyUser.applyOfficeCode}</td>
-										<c:choose>
-											<c:when test="${applyUser.state == 2 }">
-												<c:set var="totalPassed" value="${totalPassed + 1 }" />
-												<td>审核通过</td>
-											</c:when>
-											<c:when test="${applyUser.state == 1 }">
-												<td>审核不通过</td>
-											</c:when>
-											<c:otherwise>
-												<td>未审核</td>
-											</c:otherwise>
-										</c:choose>
-									</tr>
-								</c:forEach>
-							</table>
-						</td>
-					</tr>
-				</table>
-			</form:form>
+							</c:forEach>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </body>

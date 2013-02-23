@@ -51,9 +51,9 @@ public class SignUpPeopleInfoController extends SimpleFormController {
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
-        if (cmd.getVerifyUserId() == null) {
-            Integer deptId = cmd.getDeptId();
-            Integer officeId = cmd.getPostId();
+        if (cmd.getVerifyUserId() == null || cmd.getVerifyUserId().isEmpty()) {
+            Integer deptId = Integer.valueOf(cmd.getDeptId());
+            Integer officeId = Integer.valueOf(cmd.getPostId());
 
             Map model = errors.getModel();
             initModel(model, deptId, officeId);
