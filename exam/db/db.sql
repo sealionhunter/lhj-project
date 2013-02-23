@@ -105,3 +105,10 @@ CREATE TABLE `user` (
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ;
 
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `administratorId` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
