@@ -68,30 +68,21 @@ function changeDeart() {
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#ffffff">
-									<td style="text-align: right; width:10%;">
-										部门：</td>
-									<td style="text-align: left; width:15%">
-										<form:select
+									<td style="text-align: right; width: 10%;">部门：</td>
+									<td style="text-align: left; width: 15%"><form:select
 											path="deptId" items="${departs}" id="deptId" itemLabel="name"
-											itemValue="id"
-											onchange="changeDeart();">
-										</form:select>
-									</td>
-									<td style="text-align: right; width:10%;">
-										岗位类别：
-									</td>
-									<td style="text-align: left; width:20%"">
-										<form:select path="postId" id="postId" />
-									</td>
+											itemValue="id" onchange="changeDeart();">
+										</form:select></td>
+									<td style="text-align: right; width: 10%;">岗位类别：</td>
+									<td style="text-align: left; width: 20%""><form:select
+											path="postId" id="postId" /></td>
 								</tr>
 								<tr bgcolor="#ffffff">
-									<td style="text-align: right; width:10%;">
-										籍贯：</td>
-									<td style="text-align: left; width:15%">
-										<form:input path="homeTown"
-											maxlength="32" size="15" cssClass="bbsInput_short" />
-									</td>
-								
+									<td style="text-align: right; width: 10%;">籍贯：</td>
+									<td style="text-align: left; width: 15%"><form:input
+											path="homeTown" maxlength="32" size="15"
+											cssClass="bbsInput_short" /></td>
+
 									<td align="right"><font color="#ff0000">*</font>政治面貌：</td>
 									<td align="left"><form:select path="politicalCode"
 											items="${politicalCodes }" itemLabel="name"
@@ -99,9 +90,8 @@ function changeDeart() {
 										</form:select></td>
 								</tr>
 								<tr bgcolor="#ffffff">
-									<td style="text-align: right;" colspan="4">
-										<input type="submit" value="筛选" style="width:50px;" />
-									</td>
+									<td style="text-align: right;" colspan="4"><input
+										type="submit" value="筛选" style="width: 50px;" /></td>
 								</tr>
 							</table>
 						</td>
@@ -114,14 +104,17 @@ function changeDeart() {
 								<tr bgcolor="#f7f7f7">
 									<th style="width: 8%;">姓名</th>
 									<th style="width: 10%;">身份证号</th>
-									<th style="width: 12%;">籍贯</th>
+									<th >籍贯</th>
 									<th style="width: 8%;">政治面貌</th>
 									<th style="width: 14%;">报考部门</th>
 									<th style="width: 12%;">岗位类别</th>
 									<th style="width: 8%;">岗位编号</th>
-									<th style="width: 10%;">审核状态</th>
+									<th style="width: 8%;">审核状态</th>
 								</tr>
+								<c:set var="totalCount" value="0" />
+								<c:set var="totalPassed" value="0" />
 								<c:forEach items="${applyUsers}" var="applyUser">
+									<c:set var="totalCount" value="${totalCount + 1 }" />
 									<tr bgcolor="#ffffff">
 										<td>${applyUser.applyUserName}</td>
 										<td>${applyUser.idCardNo}</td>
@@ -142,6 +135,7 @@ function changeDeart() {
 										<td>${applyUser.applyOfficeCode}</td>
 										<c:choose>
 											<c:when test="${applyUser.state == 2 }">
+												<c:set var="totalPassed" value="${totalPassed + 1 }" />
 												<td>审核通过</td>
 											</c:when>
 											<c:when test="${applyUser.state == 1 }">
@@ -164,8 +158,8 @@ function changeDeart() {
 <script type="text/javascript">
 <!--
  changeDeart();
- if ('${PostId}' != '') {
-	 document.getElementById("postId").value='${postId}';
+ if ('${SignupDetailSearchCommand.postId}' != '') {
+	 document.getElementById("postId").value='${SignupDetailSearchCommand.postId}';
  }
 //-->
 </script>

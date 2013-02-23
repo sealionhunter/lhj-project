@@ -53,9 +53,6 @@ public class SignupDetailSearchController extends SimpleFormController {
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         SignupDetailSearchCommand cmd = (SignupDetailSearchCommand) command;
-        Integer deptId = cmd.getDeptId();
-        Integer officeId = cmd.getPostId();
-
         Map model = errors.getModel();
         initModel(model, cmd);
         return new ModelAndView(getFormView(), model);
