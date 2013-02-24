@@ -10,8 +10,10 @@ public class StatusSearchCommand {
     private User user;
 
     private Apply apply;
-    
+
     private boolean showDetail = false;
+
+    private String submitType;
 
     /**
      * @return the idCardNo
@@ -81,9 +83,18 @@ public class StatusSearchCommand {
     }
 
     /**
-     * @param showDetail the showDetail to set
+     * @param showDetail
+     *            the showDetail to set
      */
     public void setShowDetail(boolean showDetail) {
         this.showDetail = showDetail;
+    }
+
+    public String getSubmitType() {
+        return submitType;
+    }
+
+    public void setSubmitType(String submitType) {
+        this.submitType = submitType;
     }
 }

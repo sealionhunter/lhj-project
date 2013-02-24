@@ -175,7 +175,9 @@
 	</bean>
 	<bean id="statusSearchValidator" class="validator.StatusSearchValidator" />
 	<bean id="statusSearchController" class="controller.StatusSearchController">
+		<property name="sessionForm" value="true" />
 		<property name="formView" value="statusSearch" />
+		<property name="successView" value="statusPrint" />
 		<property name="commandName" value="StatusSearchCommand" />
 		<property name="commandClass" value="command.StatusSearchCommand" />
 		<property name="registService" ref="registService" />
