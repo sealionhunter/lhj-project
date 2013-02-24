@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
 	media="all" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
 	<div class="whiteBG">
@@ -21,7 +22,7 @@
 				bgcolor="#E1E1E1">
 				<tr>
 					<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
-						style="padding-left: 10px;">管理员登录</td>
+						style="padding-left: 10px;">管理员登陆</td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td valign="top" align="center" height="448"
