@@ -53,4 +53,9 @@ public class ApplyPK implements Serializable {
 
         return hash;
     }
+
+    @Override
+    public String toString() {
+        return "ApplyPK [userid=" + userid + ", officeid=" + officeid + "]";
+    }
 }

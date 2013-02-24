@@ -20,7 +20,9 @@ public class StatusSearchValidator implements Validator {
 
     private void validateRegistInfo(Object target, Errors errors) {
         StatusSearchCommand v = (StatusSearchCommand) target;
-
+        if (!"search".equals(v.getSubmitType())) {
+            return;
+        }
         if (v.getIdCardNo() == null || v.getIdCardNo().length() == 0) {
             errors.rejectValue("idCardNo", "idCardNo", "身份证号必须填写!");
         } else {

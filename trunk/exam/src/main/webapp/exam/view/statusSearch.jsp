@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
 	media="all" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<script type="text/javascript">
+function goSubmit(type) {
+	document.getElementById('submitType').value=type;
+	statusSearchForm.submit();
+}
+</script>
 </head>
 <body>
 
@@ -17,6 +23,7 @@
 	</div>
 	<form:form name="statusSearchForm" method="post"
 		action="/exam/statusSearch.action" commandName="StatusSearchCommand">
+		<form:hidden path="submitType" id="submitType" />
 		<div class="midBox">
 			<div class="midTitle">审核状态</div>
 			<div class="cnt">
@@ -53,7 +60,7 @@
 									<td>&nbsp;</td>
 									<td height="22">
 										<div style="text-align: left;">
-											<input type="submit" value="检  索" style="width: 50px;" />
+											<input type="button" value="检  索" style="width: 50px;" onclick="goSubmit('search');" />
 										</div>
 									</td>
 								</tr>
@@ -88,7 +95,7 @@
 						</tr>
 						<tr bgcolor="#FFFFFF">
 							<td valign="top" align="center" height="200"
-								style="padding-top: 20px;padding-bottom:10px;">
+								style="padding-top: 20px; padding-bottom: 10px;">
 								<table width="80%" border="0" cellpadding="4" cellspacing="1"
 									bgcolor="#E1E1E1">
 									<tr bgcolor="#ffffff">
@@ -217,7 +224,8 @@
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td style="height: 10px; text-align: right;">审核状态：</td>
-										<td style="height: 10px; text-align: left; color: #ff0000" colspan="4"><b>
+										<td style="height: 10px; text-align: left; color: #ff0000"
+											colspan="4"><b>
 											<c:choose>
 											<c:when test="${StatusSearchCommand.apply.state == '0'}">
 												未审核
@@ -239,8 +247,8 @@
 										<td style="height: 10px; text-align: left;" colspan="4">${StatusSearchCommand.apply.reason}</td>
 									</tr>
 									<tr bgcolor="#ffffff">
-										<td style="height: 10px; text-align: center; padding-left:100px;" colspan="5">
-											<input type="button" value="打印" style="width:50px;" disabled="disabled" />
+										<td style="height: 10px; text-align: center; padding-left: 100px;" colspan="5">
+											<input type="button" value="去打印页面" style="width:100px;" onclick="goSubmit('print');" />
 										</td>
 									</tr>
 								</table>

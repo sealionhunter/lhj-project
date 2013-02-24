@@ -2,6 +2,10 @@ package controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.Apply;
+import model.User;
 
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,16 +38,29 @@ public class StatusSearchController extends SimpleFormController {
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         StatusSearchCommand cmd = (StatusSearchCommand) command;
-        cmd.setShowDetail(false);
-        if (!errors.hasErrors()) {
-            registService.searchStatus(cmd, errors);
-        }
-        if (errors.hasErrors()) {
+        String submitType = cmd.getSubmitType();
+        if ("search".equals(submitType)) {
+            cmd.setShowDetail(false);
+            if (!errors.hasErrors()) {
+                registService.searchStatus(cmd, errors);
+                HttpSession session = request.getSession();
+                session.setAttribute("UserInfo", cmd.getUser());
+                session.setAttribute("ApplyInfo", cmd.getApply());
+            }
+            if (errors.hasErrors()) {
+                return new ModelAndView(getFormView(), errors.getModel());
+            }
+            cmd.setShowDetail(true);
+            request.getSession().setAttribute("photoData" + cmd.getIdCardNo(),
+                    cmd.getUser().getPhoto());
             return new ModelAndView(getFormView(), errors.getModel());
+        } else {
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("UserInfo");
+            Apply apply = (Apply) session.getAttribute("ApplyInfo");
+            cmd.setUser(user);
+            cmd.setApply(apply);
+            return new ModelAndView(getSuccessView(), errors.getModel());
         }
-        cmd.setShowDetail(true);
-        request.getSession().setAttribute("photoData" + cmd.getIdCardNo(),
-                cmd.getUser().getPhoto());
-        return new ModelAndView(getFormView(), errors.getModel());
     }
 }
