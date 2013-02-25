@@ -19,6 +19,7 @@ import command.AdminLoginCommand;
 import command.AdminModifyCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.SignUpPersonSearchCommand;
 import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
@@ -122,9 +123,9 @@ public class RegistServiceImpl implements RegistService {
     }
 
     @Override
-    public List<Apply> listApplyUser(Integer deptId, Integer officeId)
+    public List<Apply> listApplyUser(SignUpPersonSearchCommand cmd)
             throws Exception {
-        return applyDao.list(deptId, officeId);
+        return applyDao.list(cmd);
     }
 
     @Override
