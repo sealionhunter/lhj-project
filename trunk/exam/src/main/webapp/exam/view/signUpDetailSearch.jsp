@@ -95,9 +95,11 @@ function doLogout() {
 											cssClass="bbsInput_short" /></td>
 
 									<td align="right"></td>
-									<td style="text-align: left;"><input
-										type="submit" value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
-										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/adminInit.action'"/></td>
+									<td style="text-align: left;"><input type="submit"
+										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
+										type="submit" value="导出" style="width: 50px;" name="excelExport"/>&nbsp;&nbsp;<input
+										type="button" value="返回" style="width: 50px;"
+										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
 								</tr>
 							</table>
 						</form:form></td>
@@ -107,9 +109,11 @@ function doLogout() {
 						style="padding-top: 5px;">
 						<table width="95%" border="0" cellpadding="8" cellspacing="1"
 							bgcolor="#E1E1E1">
-								<tr bgcolor="#f7f7f7">
-									<th colspan="8" style="text-align: right; width: 10%;">总人数：<span id="totalCount">${totalCount}</span>人</th>
-								</tr>
+							<tr bgcolor="#f7f7f7">
+								<th colspan="8" style="text-align: right; width: 10%;">总人数：<span
+									id="totalCount">${totalCount}</span>人
+								</th>
+							</tr>
 							<tr bgcolor="#f7f7f7">
 								<th style="width: 8%;">姓名</th>
 								<th style="width: 10%;">身份证号</th>
@@ -156,15 +160,20 @@ function doLogout() {
 									</c:choose>
 								</tr>
 							</c:forEach>
-								<tr bgcolor="#f7f7f7">
-									<th colspan="8" style="text-align: right; width: 10%;">总人数：${totalCount}人</th>
-								</tr>
+							<tr bgcolor="#f7f7f7">
+								<th colspan="8" style="text-align: right; width: 10%;">总人数：${totalCount}人</th>
+							</tr>
 						</table>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
+
+	<c:if test="${downloadFile != null && downloadFile != '' }">
+	<iframe id="downloadForm" name="downloadForm" style="display:none"
+		src="/exam/excelExport?id=${downloadFile}"></iframe>
+	</c:if>
 </body>
 <script type="text/javascript">
 <!--
