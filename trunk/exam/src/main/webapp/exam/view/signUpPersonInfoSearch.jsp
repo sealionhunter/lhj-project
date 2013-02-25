@@ -94,6 +94,17 @@ function doLogout() {
 									<td style="text-align: right; width: 10%;">岗位类别：</td>
 									<td style="text-align: left; width: 20%""><form:select
 											path="postId" id="postId" /></td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;">审核状态：</td>
+									<td style="text-align: left; width: 15%"><form:select
+											path="state" id="state">
+											<form:option value="-1">全部</form:option>
+											<form:option value="0">未审核</form:option>
+											<form:option value="1">审核不通过</form:option>
+											<form:option value="2">审核通过</form:option>
+										</form:select></td>
+									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: left;"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
 										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/adminInit.action'"/></td>

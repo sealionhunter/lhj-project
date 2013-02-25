@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import command.SignUpPersonSearchCommand;
 import command.SignupDetailSearchCommand;
 
 import model.Apply;
@@ -17,7 +18,7 @@ public interface ApplyDao {
 
     public void delete(Apply apply);
 
-    public List<Apply> list(Integer deptId, Integer officeId) throws Exception;
+    public List<Apply> list(SignUpPersonSearchCommand cmd) throws Exception;
 
     public List<Apply> findApplyInfo(Integer userId) throws Exception;
 

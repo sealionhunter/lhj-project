@@ -12,6 +12,7 @@ import model.User;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
+import command.SignUpPersonSearchCommand;
 import command.SignupDetailSearchCommand;
 
 public class ApplyDaoImpl implements ApplyDao {
@@ -36,17 +37,22 @@ public class ApplyDaoImpl implements ApplyDao {
                 "from Apply as apply where apply.id.userid = ?", userId);
     }
 
-    public List<Apply> list(Integer deptId, Integer officeId) throws Exception {
+    @Override
+    public List<Apply> list(SignUpPersonSearchCommand cmd) throws Exception {
         String hql = "from Apply A, User U, Office O, Depart D "
                 + "where A.id.userid=U.id and A.id.officeid=O.id and O.departId=D.id ";
         List<Integer> paramList = new ArrayList<Integer>();
-        if (deptId >= 0) {
+        if (cmd.getDeptId() >= 0) {
             hql += "and D.id=? ";
-            paramList.add(deptId);
+            paramList.add(cmd.getDeptId());
         }
-        if (officeId >= 0) {
+        if (cmd.getPostId() >= 0) {
             hql += "and O.id=? ";
-            paramList.add(officeId);
+            paramList.add(cmd.getPostId());
+        }
+        if (cmd.getState() >= 0) {
+            hql += "and A.state=? ";
+            paramList.add(cmd.getState());
         }
         List<?> list = null;
         if (!paramList.isEmpty()) {

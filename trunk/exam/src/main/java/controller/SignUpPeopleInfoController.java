@@ -41,7 +41,7 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         if (model == null) {
             model = new HashMap();
         }
-        initModel(model, -1, -1);
+        initModel(model, cmd);
 
         return model;
     }
@@ -52,11 +52,9 @@ public class SignUpPeopleInfoController extends SimpleFormController {
             throws Exception {
         SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
         if (cmd.getVerifyUserId() == null || cmd.getVerifyUserId().isEmpty()) {
-            Integer deptId = Integer.valueOf(cmd.getDeptId());
-            Integer officeId = Integer.valueOf(cmd.getPostId());
 
             Map model = errors.getModel();
-            initModel(model, deptId, officeId);
+            initModel(model, cmd);
             return new ModelAndView(getFormView(), model);
         } else {
             String url = "verify.action?userId=" + cmd.getVerifyUserId();
@@ -64,9 +62,9 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         }
     }
 
-    private void initModel(Map model, Integer deptId, Integer officeId)
+    private void initModel(Map model, SignUpPersonSearchCommand cmd)
             throws Exception {
-        List<Apply> applyList = registService.listApplyUser(deptId, officeId);
+        List<Apply> applyList = registService.listApplyUser(cmd);
         model.put("applyUsers", applyList);
 
         List<Depart> deptList = registService.listDepart();

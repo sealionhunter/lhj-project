@@ -16,6 +16,7 @@ import command.AdminLoginCommand;
 import command.AdminModifyCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.SignUpPersonSearchCommand;
 import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
@@ -34,7 +35,7 @@ public interface RegistService {
 
     public List<Exam> listExam() throws Exception;
 
-    public List<Apply> listApplyUser(Integer deptId, Integer officeId) throws Exception;
+    public List<Apply> listApplyUser(SignUpPersonSearchCommand cmd) throws Exception;
 
     public Apply getApply(Integer userId, Integer officeId) throws Exception;
 
