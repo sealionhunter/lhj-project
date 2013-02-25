@@ -99,7 +99,7 @@ function doLogout() {
 									<td style="text-align: right; width: 10%;">审核状态：</td>
 									<td style="text-align: left; width: 15%"><form:select
 											path="state" id="state">
-											<form:option value="-1">全部</form:option>
+											<form:option value="-1"></form:option>
 											<form:option value="0">未审核</form:option>
 											<form:option value="1">审核不通过</form:option>
 											<form:option value="2">审核通过</form:option>
