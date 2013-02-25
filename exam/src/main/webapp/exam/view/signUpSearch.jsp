@@ -43,7 +43,9 @@
 									<th style="width: 11%;">通过审核人数</th>
 									<th style="width: 8%;">报考比例</th>
 									<th style="width: 12%;">专业要求</th>
+									<%--
 									<th style="width: 15%;">岗位要求</th>
+									 --%>
 								</tr>
 								<c:forEach items="${RegistCommand.offices}" var="office">
 									<tr bgcolor="#ffffff">
@@ -56,7 +58,9 @@
 										<td>${office.validataCount }</td>
 										<td>1:${office.scale }</td>
 										<td align="left">${office.major }</td>
+										<%--
 										<td align="left">${office.description }</td>
+										 --%>
 									</tr>
 								</c:forEach>
 							</table>
