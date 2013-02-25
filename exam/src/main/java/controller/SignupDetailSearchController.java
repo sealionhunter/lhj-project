@@ -1,8 +1,10 @@
 package controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,16 +14,15 @@ import model.Depart;
 import model.Master;
 import model.MasterPK;
 import model.Office;
+import net.sf.jxls.transformer.XLSTransformer;
 
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.view.RedirectView;
 
 import service.RegistService;
 
-import command.SignUpPersonSearchCommand;
 import command.SignupDetailSearchCommand;
 
 public class SignupDetailSearchController extends SimpleFormController {
@@ -55,6 +56,19 @@ public class SignupDetailSearchController extends SimpleFormController {
         SignupDetailSearchCommand cmd = (SignupDetailSearchCommand) command;
         Map model = errors.getModel();
         initModel(model, cmd);
+        if (request.getParameter("excelExport") != null) {
+            File dest = File.createTempFile("excelExport", ".xlsx");
+            dest.deleteOnExit();
+            String src = request.getSession().getServletContext()
+                    .getRealPath("/WEB-INF/template/excelExport.xlsx");
+            XLSTransformer transformer = new XLSTransformer();
+            transformer.transformXLS(src, model, dest.getAbsolutePath());
+            String uuid = UUID.randomUUID().toString();
+            request.getSession().setAttribute(uuid, dest.getAbsolutePath());
+            model.put("downloadFile", uuid);
+        } else {
+            model.remove("downloadFile");
+        }
         return new ModelAndView(getFormView(), model);
     }
 
