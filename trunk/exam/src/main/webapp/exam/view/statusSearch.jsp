@@ -211,16 +211,16 @@ function goSubmit(type) {
 										<td align="left" colspan="2">${StatusSearchCommand.apply.applyExamPosition}</td>
 									</tr>
 									<tr bgcolor="#ffffff">
-										<td align="right">学习/培训经历：</td>
-										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.trainingExp}</pre></td>
+										<td align="right" nowrap="nowrap">学习/培训经历：</td>
+										<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${StatusSearchCommand.user.trainingExp}</pre></div></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">工作经历：</td>
-										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.workExp}</pre></td>
+										<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${StatusSearchCommand.user.workExp}</pre></div></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">社会关系：</td>
-										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.socialRel}</pre></td>
+										<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${StatusSearchCommand.user.socialRel}</pre></div></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td style="height: 10px; text-align: right;">审核状态：</td>
@@ -244,7 +244,7 @@ function goSubmit(type) {
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td style="height: 10px; text-align: right;">原因：</td>
-										<td style="height: 10px; text-align: left;" colspan="4">${StatusSearchCommand.apply.reason}</td>
+										<td style="height: 10px; text-align: left;" colspan="4"><pre>${StatusSearchCommand.apply.reason}</pre></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td style="height: 10px; text-align: center; padding-left: 100px;" colspan="5">

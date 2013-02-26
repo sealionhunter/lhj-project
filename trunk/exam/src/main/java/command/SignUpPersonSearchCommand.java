@@ -9,6 +9,9 @@ public class SignUpPersonSearchCommand {
     private Integer sex = -1;
     private String homeTown;
     private Integer politicalCode = -1;
+    private String name;
+    private String degree;
+    private Integer age = -1;
 
     /**
      * @return the deptId
@@ -102,5 +105,47 @@ public class SignUpPersonSearchCommand {
      */
     public void setPoliticalCode(Integer politicalCode) {
         this.politicalCode = politicalCode;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the degree
+     */
+    public String getDegree() {
+        return degree;
+    }
+
+    /**
+     * @param degree the degree to set
+     */
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    /**
+     * @return the age
+     */
+    public Integer getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

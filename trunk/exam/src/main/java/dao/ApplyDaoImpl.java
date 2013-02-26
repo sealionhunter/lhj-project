@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import model.Apply;
@@ -58,15 +59,57 @@ public class ApplyDaoImpl implements ApplyDao {
             hql += "and U.sex=? ";
             paramList.add(cmd.getSex());
         }
-        if (cmd.getHomeTown() != null
-                && cmd.getHomeTown().trim().length() > 0) {
-            hql += "and (U.homeTown LIKE ? ";
-            paramList.add("%" + cmd.getHomeTown() + "%");
-            hql += ")";
+        if (cmd.getHomeTown() != null && cmd.getHomeTown().trim().length() > 0) {
+            hql += "and U.homeTown LIKE ? ";
+            paramList.add(getLikeStr(cmd.getHomeTown()));
         }
         if (cmd.getPoliticalCode() > 0) {
             hql += "and U.politicalCode=? ";
             paramList.add(cmd.getPoliticalCode());
+        }
+        if (cmd.getName() != null && cmd.getName().trim().length() > 0) {
+            hql += "and U.name LIKE ? ";
+            paramList.add(getLikeStr(cmd.getName().trim()));
+        }
+        if (cmd.getDegree() != null && cmd.getDegree().trim().length() > 0) {
+            hql += "and U.degree LIKE ? ";
+            paramList.add(getLikeStr(cmd.getDegree().trim()));
+        }
+        if (cmd.getAge() >= 0) {
+            hql += "and (? - U.birthdayYear < ? AND (? - U.birthdayYear) >= ?)";
+            Integer year = Calendar.getInstance().get(Calendar.YEAR);
+            switch (cmd.getAge()) {
+            case 0:// below 18
+                paramList.add(year);
+                paramList.add(18);
+                paramList.add(year);
+                paramList.add(0);
+                break;
+            case 1: // 18~25
+                paramList.add(year);
+                paramList.add(25);
+                paramList.add(year);
+                paramList.add(18);
+                break;
+            case 2:// 25~30
+                paramList.add(year);
+                paramList.add(30);
+                paramList.add(year);
+                paramList.add(25);
+                break;
+            case 3:// 30~35
+                paramList.add(year);
+                paramList.add(35);
+                paramList.add(year);
+                paramList.add(30);
+                break;
+            case 4:// 35以上
+                paramList.add(year);
+                paramList.add(100);
+                paramList.add(year);
+                paramList.add(35);
+                break;
+            }
         }
         List<?> list = null;
         if (!paramList.isEmpty()) {
@@ -84,6 +127,10 @@ public class ApplyDaoImpl implements ApplyDao {
             User user = (User) objects[1];
             Office office = (Office) objects[2];
             Depart dept = (Depart) objects[3];
+
+            apply.setUser(user);
+            apply.setOffice(office);
+            apply.setDepart(dept);
 
             apply.setApplyUserName(user.getName());
             apply.setIdCardNo(user.getIdCardNo());
@@ -157,5 +204,12 @@ public class ApplyDaoImpl implements ApplyDao {
      */
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
+    }
+
+    private String getLikeStr(String target) {
+        if (target == null) {
+            return null;
+        }
+        return "%" + target.replaceAll("%", "%%") + "%";
     }
 }

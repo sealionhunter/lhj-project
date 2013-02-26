@@ -146,16 +146,16 @@
 									<td align="left" colspan="2">${RegistCommand.registExamLocation}</td>
 								</tr>
 								<tr bgcolor="#ffffff">
-									<td align="right">学习/培训经历：</td>
-									<td align="left" colspan="4"><pre>${RegistCommand.trainingExp}</pre></td>
+									<td align="right" nowrap="nowrap">学习/培训经历：</td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${RegistCommand.trainingExp}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">工作经历：</td>
-									<td align="left" colspan="4"><pre>${RegistCommand.workExp}</pre></td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${RegistCommand.workExp}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
-									<td align="left" colspan="4"><pre>${RegistCommand.socialRel}</pre></td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${RegistCommand.socialRel}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td height="22" colspan="5">
