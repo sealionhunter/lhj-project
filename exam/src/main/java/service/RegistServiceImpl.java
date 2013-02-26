@@ -20,7 +20,6 @@ import command.AdminModifyCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.SignUpPersonSearchCommand;
-import command.SignupDetailSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
 
@@ -351,8 +350,7 @@ public class RegistServiceImpl implements RegistService {
             throws Exception {
         Admin admin = adminDao.get(cmd.getAdminId());
         if (admin == null) {
-            errors.rejectValue("adminId", "adminId.error",
-                    "管理员帐号不存在!");
+            errors.rejectValue("adminId", "adminId.error", "管理员帐号不存在!");
             return;
         }
         if (!cmd.getOldPassword().equals(admin.getPassword())) {
@@ -363,8 +361,4 @@ public class RegistServiceImpl implements RegistService {
         adminDao.update(admin);
     }
 
-    public List<Apply> searchApplyUsers(SignupDetailSearchCommand cmd)
-            throws Exception {
-        return applyDao.findApplyInfo(cmd);
-    }
 }

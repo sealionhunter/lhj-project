@@ -2,11 +2,10 @@ package dao;
 
 import java.util.List;
 
-import command.SignUpPersonSearchCommand;
-import command.SignupDetailSearchCommand;
-
 import model.Apply;
 import model.ApplyPK;
+
+import command.SignUpPersonSearchCommand;
 
 public interface ApplyDao {
 
@@ -23,6 +22,4 @@ public interface ApplyDao {
     public List<Apply> findApplyInfo(Integer userId) throws Exception;
 
     public void update(Apply apply) throws Exception;
-    public List<Apply> findApplyInfo(SignupDetailSearchCommand condition)
-            throws Exception ;
 }

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Apply;
 import model.Depart;
@@ -32,6 +33,7 @@ public class SignUpPeopleInfoController extends SimpleFormController {
      * referenceData(javax.servlet.http.HttpServletRequest, java.lang.Object,
      * org.springframework.validation.Errors, int)
      */
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
@@ -46,11 +48,27 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         return model;
     }
 
+    /* (non-Javadoc)
+     * @see org.springframework.web.servlet.mvc.AbstractFormController#formBackingObject(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected Object formBackingObject(HttpServletRequest request)
+            throws Exception {
+        HttpSession session = request.getSession();
+        Object cmd = session.getAttribute(getFormSessionAttributeName(request));
+        if (cmd != null) {
+            return cmd;
+        }
+        return super.formBackingObject(request);
+    }
+
+    @SuppressWarnings("rawtypes")
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
+        request.getSession().setAttribute(getFormSessionAttributeName(), cmd);
         if (cmd.getVerifyUserId() == null || cmd.getVerifyUserId().isEmpty()) {
 
             Map model = errors.getModel();
@@ -62,6 +80,7 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private void initModel(Map model, SignUpPersonSearchCommand cmd)
             throws Exception {
         List<Apply> applyList = registService.listApplyUser(cmd);

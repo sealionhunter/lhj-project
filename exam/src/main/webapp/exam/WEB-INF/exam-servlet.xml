@@ -154,6 +154,7 @@
 		<property name="registService" ref="registService" />
 	</bean>
 	<bean id="signUpPeopleInfoController" class="controller.SignUpPeopleInfoController">
+		<property name="sessionForm" value="true" />
 		<property name="successView" value="success" />
 		<property name="formView" value="signUpPersonInfoSearch" />
 		<property name="commandName" value="SignUpPersonSearchCommand" />
@@ -200,9 +201,10 @@
 		</property>
 	</bean>
 	<bean id="signupDetailSearchController" class="controller.SignupDetailSearchController">
+		<property name="sessionForm" value="true" />
 		<property name="formView" value="signUpDetailSearch" />
 		<property name="commandName" value="SignupDetailSearchCommand" />
-		<property name="commandClass" value="command.SignupDetailSearchCommand" />
+		<property name="commandClass" value="command.SignUpPersonSearchCommand" />
 		<property name="registService" ref="registService" />
 	</bean>
 	<bean id="adminLoginValidator" class="validator.AdminLoginValidator" />
