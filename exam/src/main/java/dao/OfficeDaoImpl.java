@@ -18,6 +18,7 @@ public class OfficeDaoImpl implements OfficeDao {
         return (Office) getHibernateTemplate().load(Office.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Office> list() throws Exception {
         List<Office> offices = getHibernateTemplate().loadAll(Office.class);
@@ -47,7 +48,8 @@ public class OfficeDaoImpl implements OfficeDao {
                         office.setValidataCount(validateCount);
                     }
                     int recruits = office.getRecruits();
-                    office.setScale(applyCount / recruits);
+//                    office.setScale(applyCount / recruits);
+                    office.setScale(validateCount / recruits);
                 }
             }
 
