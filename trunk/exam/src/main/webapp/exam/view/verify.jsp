@@ -162,15 +162,15 @@
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">学习/培训经历：</td>
-									<td align="left" colspan="4">${VerifyCommand.user.trainingExp}</td>
+									<td align="left" colspan="4"><pre>${VerifyCommand.user.trainingExp}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">工作经历：</td>
-									<td align="left" colspan="4">${VerifyCommand.user.workExp}</td>
+									<td align="left" colspan="4"><pre>${VerifyCommand.user.workExp}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
-									<td align="left" colspan="4">${VerifyCommand.user.socialRel}</td>
+									<td align="left" colspan="4"><pre>${VerifyCommand.user.socialRel}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">审核：</td>

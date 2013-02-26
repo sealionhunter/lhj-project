@@ -212,15 +212,15 @@ function goSubmit(type) {
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">学习/培训经历：</td>
-										<td align="left" colspan="4">${StatusSearchCommand.user.trainingExp}</td>
+										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.trainingExp}</pre></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">工作经历：</td>
-										<td align="left" colspan="4">${StatusSearchCommand.user.workExp}</td>
+										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.workExp}</pre></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">社会关系：</td>
-										<td align="left" colspan="4">${StatusSearchCommand.user.socialRel}</td>
+										<td align="left" colspan="4"><pre>${StatusSearchCommand.user.socialRel}</pre></td>
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td style="height: 10px; text-align: right;">审核状态：</td>
