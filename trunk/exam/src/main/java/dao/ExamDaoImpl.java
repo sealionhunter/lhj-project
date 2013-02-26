@@ -15,9 +15,10 @@ public class ExamDaoImpl implements ExamDao {
         return (Exam) getHibernateTemplate().load(Exam.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Exam> list() throws Exception {
-        return (List<Exam>) getHibernateTemplate().loadAll(Exam.class);
+        return  getHibernateTemplate().loadAll(Exam.class);
     }
 
     /**

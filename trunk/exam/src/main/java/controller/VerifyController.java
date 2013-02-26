@@ -36,6 +36,7 @@ public class VerifyController extends SimpleFormController {
         this.registService = registService;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {

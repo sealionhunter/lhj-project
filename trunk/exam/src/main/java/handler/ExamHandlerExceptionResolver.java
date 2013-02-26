@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class ExamHandlerExceptionResolver implements HandlerExceptionResolver {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ModelAndView resolveException(HttpServletRequest request,
             HttpServletResponse response, Object handler, Exception ex) {

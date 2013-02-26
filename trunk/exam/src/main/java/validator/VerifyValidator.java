@@ -7,6 +7,7 @@ import command.VerifyCommand;
 
 public class VerifyValidator implements Validator {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean supports(Class clazz) {
         return clazz.isAssignableFrom(VerifyCommand.class);

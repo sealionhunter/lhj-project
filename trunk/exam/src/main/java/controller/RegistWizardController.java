@@ -49,31 +49,6 @@ public class RegistWizardController extends AbstractWizardFormController {
         this.successView = successView;
     }
 
-//    /*
-//     * (non-Javadoc)
-//     * 
-//     * @see
-//     * org.springframework.web.servlet.mvc.AbstractWizardFormController#showForm
-//     * (javax.servlet.http.HttpServletRequest,
-//     * javax.servlet.http.HttpServletResponse,
-//     * org.springframework.validation.BindException)
-//     */
-//    @Override
-//    protected ModelAndView showForm(HttpServletRequest request,
-//            HttpServletResponse response, BindException errors)
-//            throws Exception {
-//
-//        ModelAndView mv = super.showForm(request, response, errors);
-//        if (!isFormSubmission(request) && errors.hasGlobalErrors() && getCurrentPage(request) == getInitialPage(request)
-//                || isFormSubmission(request) && errors.hasGlobalErrors() && getCurrentPage(request) == 0) {
-//            Map m = new HashMap();
-//            m.put("errorMsg",
-//                    errors.getGlobalError().getDefaultMessage());
-//            return new ModelAndView("regist/examDateExceed", m);
-//        }
-//        return mv;
-//    }
-
     /*
      * (non-Javadoc)
      * 
@@ -81,6 +56,7 @@ public class RegistWizardController extends AbstractWizardFormController {
      * referenceData(javax.servlet.http.HttpServletRequest, java.lang.Object,
      * org.springframework.validation.Errors, int)
      */
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors, int page) throws Exception {

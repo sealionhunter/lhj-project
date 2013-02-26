@@ -15,12 +15,14 @@ public class UserDaoImpl implements UserDao {
         return (Integer) getHibernateTemplate().save(user);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> findIdCardNo(String idCardNo) throws Exception {
         return getHibernateTemplate().find(
                 "from User as user where user.idCardNo = ?", idCardNo);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<User> findUserName(String userName) throws Exception {
         return getHibernateTemplate().find(

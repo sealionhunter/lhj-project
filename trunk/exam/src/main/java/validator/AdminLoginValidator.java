@@ -7,6 +7,7 @@ import command.AdminLoginCommand;
 
 public class AdminLoginValidator implements Validator {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean supports(Class clazz) {
         return clazz.isAssignableFrom(AdminLoginCommand.class);
