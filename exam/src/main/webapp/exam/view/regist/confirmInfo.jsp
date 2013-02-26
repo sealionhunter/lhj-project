@@ -147,15 +147,15 @@
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">学习/培训经历：</td>
-									<td align="left" colspan="4">${RegistCommand.trainingExp}</td>
+									<td align="left" colspan="4"><pre>${RegistCommand.trainingExp}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">工作经历：</td>
-									<td align="left" colspan="4">${RegistCommand.workExp}</td>
+									<td align="left" colspan="4"><pre>${RegistCommand.workExp}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
-									<td align="left" colspan="4">${RegistCommand.socialRel}</td>
+									<td align="left" colspan="4"><pre>${RegistCommand.socialRel}</pre></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td height="22" colspan="5">
