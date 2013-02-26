@@ -1,3 +1,4 @@
+use exam;
 
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

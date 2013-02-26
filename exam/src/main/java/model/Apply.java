@@ -44,6 +44,12 @@ public class Apply implements Serializable {
 
     private String applyExamPosition;
 
+    private User user;
+
+    private Office office;
+
+    private Depart depart;
+
     /**
      * @return the aplyUserPolitical
      */
@@ -271,5 +277,47 @@ public class Apply implements Serializable {
      */
     public void setApplyUserHomeTown(String applyUserHomeTown) {
         this.applyUserHomeTown = applyUserHomeTown;
+    }
+
+    /**
+     * @return the user
+     */
+    public User getUser() {
+        return user;
+    }
+
+    /**
+     * @param user the user to set
+     */
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * @return the office
+     */
+    public Office getOffice() {
+        return office;
+    }
+
+    /**
+     * @param office the office to set
+     */
+    public void setOffice(Office office) {
+        this.office = office;
+    }
+
+    /**
+     * @return the depart
+     */
+    public Depart getDepart() {
+        return depart;
+    }
+
+    /**
+     * @param depart the depart to set
+     */
+    public void setDepart(Depart depart) {
+        this.depart = depart;
     }
 }

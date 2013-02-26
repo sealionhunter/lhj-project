@@ -44,7 +44,7 @@
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td colspan="2" valign="top" align="center" height="200"
-						style="padding-top: 20px;"><form:form id="verifyForm"
+						style="padding-top: 20px;padding-bottom: 5px;"><form:form id="verifyForm"
 							name="verifyForm" method="post" action="/exam/verify.action"
 							commandName="VerifyCommand">
 							<form:hidden path="userId" />
@@ -161,16 +161,16 @@
 									<td align="left" colspan="2">${VerifyCommand.apply.applyExamPosition}</td>
 								</tr>
 								<tr bgcolor="#ffffff">
-									<td align="right">学习/培训经历：</td>
-									<td align="left" colspan="4"><pre>${VerifyCommand.user.trainingExp}</pre></td>
+									<td align="right" nowrap="nowrap">学习/培训经历：</td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.trainingExp}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">工作经历：</td>
-									<td align="left" colspan="4"><pre>${VerifyCommand.user.workExp}</pre></td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.workExp}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
-									<td align="left" colspan="4"><pre>${VerifyCommand.user.socialRel}</pre></td>
+									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.socialRel}</pre></div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">审核：</td>

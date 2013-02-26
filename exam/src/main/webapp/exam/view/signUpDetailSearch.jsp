@@ -89,12 +89,53 @@ function doLogout() {
 											path="postId" id="postId" /></td>
 								</tr>
 								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;">姓名：</td>
+									<td style="text-align: left; width: 15%"><form:input
+											path="name" maxlength="32" size="15"
+											cssClass="bbsInput_short" /></td>
+									<td style="text-align: right; width: 10%;">性别：</td>
+									<td style="text-align: left; width: 20%""><form:select path="sex"
+											id="sex">
+											<form:option value="-1" label=""></form:option>
+											<form:option value="1">男</form:option>
+											<form:option value="2">女</form:option>
+										</form:select></td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;">年龄：</td>
+									<td style="text-align: left; width: 20%""><form:select path="age"
+											id="age">
+											<form:option value="-1" label=""></form:option>
+											<form:option value="0">18岁以下</form:option>
+											<form:option value="1">18~25岁</form:option>
+											<form:option value="2">25~30岁</form:option>
+											<form:option value="3">30~35岁</form:option>
+											<form:option value="4">35以上岁</form:option>
+										</form:select></td>
+									<td style="text-align: right; width: 10%;">学历：</td>
+									<td style="text-align: left; width: 15%"><form:input
+											path="degree" maxlength="32" size="15"
+											cssClass="bbsInput_short" /></td>
+								</tr>
+								<tr bgcolor="#ffffff">
 									<td style="text-align: right; width: 10%;">籍贯：</td>
 									<td style="text-align: left; width: 15%"><form:input
 											path="homeTown" maxlength="32" size="15"
 											cssClass="bbsInput_short" /></td>
 
-									<td align="right"></td>
+									<td style="text-align: right; width: 10%;">审核状态：</td>
+									<td style="text-align: left; width: 15%"><form:select
+											path="state" id="state">
+											<form:option value="-1" label=""></form:option>
+											<form:option value="0">未审核</form:option>
+											<form:option value="1">审核不通过</form:option>
+											<form:option value="2">审核通过</form:option>
+										</form:select></td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;"></td>
+									<td style="text-align: left; width: 15%"></td>
+									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: left;"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
 										type="submit" value="导出" style="width: 50px;"
@@ -106,30 +147,30 @@ function doLogout() {
 						</form:form></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
-					<td colspan="2" valign="top" align="center" height="448"
-						style="padding-top: 5px;">
-						<table width="95%" border="0" cellpadding="8" cellspacing="1"
+					<td colspan="2" valign="top" align="center"
+						style="padding-top: 5px; padding-bottom: 5px;">
+						<table width="99%" border="0" cellpadding="4" cellspacing="1"
 							bgcolor="#E1E1E1">
 							<tr bgcolor="#f7f7f7">
-								<th colspan="8" style="text-align: right; width: 10%;">总计：<span
+								<th colspan="10" style="text-align: right; width: 10%;">总计：<span
 									id="totalCount">${totalCount}</span>人&nbsp;&nbsp;未审核：<span
 									id="totalUnVerify">${totalCount - totalPassed -
-										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span
-										id="totalPassed">${totalPassed }</span>人
-								</font>&nbsp;&nbsp;<font color="red">审核未通过：<span
-										id="totalUnPassed">${totalUnPassed }</span>人
-								</font>
+										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span id="totalPassed">${totalPassed
+										}</span>人</font>&nbsp;&nbsp;<font color="red">审核不通过：<span id="totalUnPassed">${totalUnPassed
+										}</span>人</font>
 								</th>
 							</tr>
 							<tr bgcolor="#f7f7f7">
-								<th style="width: 8%;">姓名</th>
-								<th style="width: 10%;">身份证号</th>
-								<th>籍贯</th>
+								<th style="width: 7%;" nowrap="nowrap">姓名</th>
+								<th style="width: 10%;" nowrap="nowrap">身份证号</th>
+								<th style="width: 12%;">籍贯</th>
 								<th style="width: 8%;">政治面貌</th>
+								<th style="width: 5%;" nowrap="nowrap">性别</th>
+								<th style="width: 9%;" nowrap="nowrap">出生年月</th>
+								<th style="width: 8%;">学历</th>
 								<th style="width: 14%;">报考部门</th>
 								<th style="width: 12%;">岗位类别</th>
-								<th style="width: 8%;">岗位编号</th>
-								<th style="width: 10%;">审核状态</th>
+								<th style="width: 9%;" nowrap="nowrap">审核状态</th>
 							</tr>
 							<c:set var="totalCount" value="0" />
 							<c:set var="totalPassed" value="0" />
@@ -151,9 +192,18 @@ function doLogout() {
 											<td>群众</td>
 										</c:otherwise>
 									</c:choose>
+									<c:choose>
+										<c:when test="${applyUser.user.sex == '1'}">
+											<td>男</td>
+										</c:when>
+										<c:otherwise>
+											<td>女</td>
+										</c:otherwise>
+									</c:choose>
+									<td>${applyUser.user.birthdayYear}年${applyUser.user.birthdayMonth }月</td>
+									<td>${applyUser.user.degree}</td>
 									<td>${applyUser.applyDepartName}</td>
-									<td>${applyUser.applyOfficeName}</td>
-									<td>${applyUser.applyOfficeCode}</td>
+									<td>${applyUser.applyOfficeName}(${applyUser.applyOfficeCode})</td>
 									<c:choose>
 										<c:when test="${applyUser.state == 2 }">
 											<c:set var="totalPassed" value="${totalPassed + 1 }" />
@@ -161,19 +211,18 @@ function doLogout() {
 										</c:when>
 										<c:when test="${applyUser.state == 1 }">
 											<c:set var="totalUnPassed" value="${totalUnPassed + 1 }" />
-											<td>审核不通过</td>
+											<td><font color="green">审核不通过</font></td>
 										</c:when>
 										<c:otherwise>
-											<td>未审核</td>
+											<td><font color="red">未审核</font></td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
 							</c:forEach>
 							<tr bgcolor="#f7f7f7">
-								<th colspan="8" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;未审核：${totalCount
-									- totalPassed - totalUnPassed};&nbsp;&nbsp;<font color="green">审核通过：${totalPassed
-										}人</font>&nbsp;&nbsp;<font color="red">审核未通过：${totalUnPassed}人</font>
-								</th>
+								<th colspan="10" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;<font color="red">未审核：${totalCount
+									- totalPassed - totalUnPassed}</font>&nbsp;&nbsp;审核通过：${totalPassed
+									}人&nbsp;&nbsp;<font color="green">审核不通过：${totalUnPassed}人</font></th>
 							</tr>
 						</table>
 					</td>
