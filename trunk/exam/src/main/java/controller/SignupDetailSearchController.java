@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Apply;
 import model.Depart;
@@ -23,12 +24,25 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import service.RegistService;
 
-import command.SignupDetailSearchCommand;
+import command.SignUpPersonSearchCommand;
 
 public class SignupDetailSearchController extends SimpleFormController {
 
     private RegistService registService;
 
+    /* (non-Javadoc)
+     * @see org.springframework.web.servlet.mvc.AbstractFormController#formBackingObject(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected Object formBackingObject(HttpServletRequest request)
+            throws Exception {
+        HttpSession session = request.getSession();
+        Object cmd = session.getAttribute(getFormSessionAttributeName(request));
+        if (cmd != null) {
+            return cmd;
+        }
+        return super.formBackingObject(request);
+    }
     /*
      * (non-Javadoc)
      * 
@@ -36,10 +50,11 @@ public class SignupDetailSearchController extends SimpleFormController {
      * referenceData(javax.servlet.http.HttpServletRequest, java.lang.Object,
      * org.springframework.validation.Errors, int)
      */
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
-        SignupDetailSearchCommand cmd = (SignupDetailSearchCommand) command;
+        SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
         Map model = super.referenceData(request, command, errors);
         if (model == null) {
             model = new HashMap();
@@ -49,11 +64,13 @@ public class SignupDetailSearchController extends SimpleFormController {
         return model;
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
-        SignupDetailSearchCommand cmd = (SignupDetailSearchCommand) command;
+        SignUpPersonSearchCommand cmd = (SignUpPersonSearchCommand) command;
+        request.getSession().setAttribute(getFormSessionAttributeName(), cmd);
         Map model = errors.getModel();
         initModel(model, cmd);
         if (request.getParameter("excelExport") != null) {
@@ -72,9 +89,10 @@ public class SignupDetailSearchController extends SimpleFormController {
         return new ModelAndView(getFormView(), model);
     }
 
-    private void initModel(Map model, SignupDetailSearchCommand cmd)
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private void initModel(Map model, SignUpPersonSearchCommand cmd)
             throws Exception {
-        List<Apply> applyList = registService.searchApplyUsers(cmd);
+        List<Apply> applyList = registService.listApplyUser(cmd);
         model.put("applyUsers", applyList);
 
         List<Depart> deptList = registService.listDepart();

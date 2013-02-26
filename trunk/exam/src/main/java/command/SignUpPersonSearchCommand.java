@@ -4,7 +4,11 @@ public class SignUpPersonSearchCommand {
     private Integer deptId = -1;
     private Integer postId = -1;
     private String verifyUserId;
-    private Integer state = 0;
+    private Integer state = -1;
+
+    private Integer sex = -1;
+    private String homeTown;
+    private Integer politicalCode = -1;
 
     /**
      * @return the deptId
@@ -56,5 +60,47 @@ public class SignUpPersonSearchCommand {
      */
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    /**
+     * @return the sex
+     */
+    public Integer getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * @return the homeTown
+     */
+    public String getHomeTown() {
+        return homeTown;
+    }
+
+    /**
+     * @param homeTown the homeTown to set
+     */
+    public void setHomeTown(String homeTown) {
+        this.homeTown = homeTown;
+    }
+
+    /**
+     * @return the politicalCode
+     */
+    public Integer getPoliticalCode() {
+        return politicalCode;
+    }
+
+    /**
+     * @param politicalCode the politicalCode to set
+     */
+    public void setPoliticalCode(Integer politicalCode) {
+        this.politicalCode = politicalCode;
     }
 }

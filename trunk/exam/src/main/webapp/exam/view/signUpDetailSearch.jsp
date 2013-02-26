@@ -97,8 +97,9 @@ function doLogout() {
 									<td align="right"></td>
 									<td style="text-align: left;"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
-										type="submit" value="导出" style="width: 50px;" name="excelExport"/>&nbsp;&nbsp;<input
-										type="button" value="返回" style="width: 50px;"
+										type="submit" value="导出" style="width: 50px;"
+										name="excelExport" />&nbsp;&nbsp;<input type="button"
+										value="返回" style="width: 50px;"
 										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
 								</tr>
 							</table>
@@ -110,8 +111,14 @@ function doLogout() {
 						<table width="95%" border="0" cellpadding="8" cellspacing="1"
 							bgcolor="#E1E1E1">
 							<tr bgcolor="#f7f7f7">
-								<th colspan="8" style="text-align: right; width: 10%;">总人数：<span
-									id="totalCount">${totalCount}</span>人
+								<th colspan="8" style="text-align: right; width: 10%;">总计：<span
+									id="totalCount">${totalCount}</span>人&nbsp;&nbsp;未审核：<span
+									id="totalUnVerify">${totalCount - totalPassed -
+										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span
+										id="totalPassed">${totalPassed }</span>人
+								</font>&nbsp;&nbsp;<font color="red">审核未通过：<span
+										id="totalUnPassed">${totalUnPassed }</span>人
+								</font>
 								</th>
 							</tr>
 							<tr bgcolor="#f7f7f7">
@@ -126,6 +133,7 @@ function doLogout() {
 							</tr>
 							<c:set var="totalCount" value="0" />
 							<c:set var="totalPassed" value="0" />
+							<c:set var="totalUnPassed" value="0" />
 							<c:forEach items="${applyUsers}" var="applyUser">
 								<c:set var="totalCount" value="${totalCount + 1 }" />
 								<tr bgcolor="#ffffff">
@@ -152,6 +160,7 @@ function doLogout() {
 											<td>审核通过</td>
 										</c:when>
 										<c:when test="${applyUser.state == 1 }">
+											<c:set var="totalUnPassed" value="${totalUnPassed + 1 }" />
 											<td>审核不通过</td>
 										</c:when>
 										<c:otherwise>
@@ -161,7 +170,10 @@ function doLogout() {
 								</tr>
 							</c:forEach>
 							<tr bgcolor="#f7f7f7">
-								<th colspan="8" style="text-align: right; width: 10%;">总人数：${totalCount}人</th>
+								<th colspan="8" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;未审核：${totalCount
+									- totalPassed - totalUnPassed};&nbsp;&nbsp;<font color="green">审核通过：${totalPassed
+										}人</font>&nbsp;&nbsp;<font color="red">审核未通过：${totalUnPassed}人</font>
+								</th>
 							</tr>
 						</table>
 					</td>
@@ -171,8 +183,8 @@ function doLogout() {
 	</div>
 
 	<c:if test="${downloadFile != null && downloadFile != '' }">
-	<iframe id="downloadForm" name="downloadForm" style="display:none"
-		src="/exam/excelExport?id=${downloadFile}"></iframe>
+		<iframe id="downloadForm" name="downloadForm" style="display: none"
+			src="/exam/excelExport?id=${downloadFile}"></iframe>
 	</c:if>
 </body>
 <script type="text/javascript">
@@ -182,6 +194,9 @@ function doLogout() {
 	 document.getElementById("postId").value='${SignupDetailSearchCommand.postId}';
  }
  document.getElementById("totalCount").innerText='${totalCount}';
+ document.getElementById("totalPassed").innerText='${totalPassed}';
+ document.getElementById("totalUnPassed").innerText='${totalUnPassed}';
+ document.getElementById("totalUnVerify").innerText='${totalCount - totalPassed - totalUnPassed}';
 //-->
 </script>
 </html>

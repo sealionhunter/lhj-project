@@ -78,10 +78,9 @@ function doLogout() {
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td colspan="2" valign="top" align="center" height="25"
-						style="padding-top: 5px;">
-							<form:form name="personForm"
-								method="post" action="/exam/signuppeopleinfo.action"
-								commandName="SignUpPersonSearchCommand">
+						style="padding-top: 5px;"><form:form name="personForm"
+							method="post" action="/exam/signuppeopleinfo.action"
+							commandName="SignUpPersonSearchCommand">
 							<form:hidden path="verifyUserId" id="verifyUserId" />
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
@@ -99,15 +98,27 @@ function doLogout() {
 									<td style="text-align: right; width: 10%;">审核状态：</td>
 									<td style="text-align: left; width: 15%"><form:select
 											path="state" id="state">
-											<form:option value="-1"></form:option>
+											<form:option value="-1" label=""></form:option>
 											<form:option value="0">未审核</form:option>
 											<form:option value="1">审核不通过</form:option>
 											<form:option value="2">审核通过</form:option>
 										</form:select></td>
+									<td style="text-align: right; width: 10%;">性别：</td>
+									<td style="text-align: left;"><form:select path="sex"
+											id="sex">
+											<form:option value="-1" label=""></form:option>
+											<form:option value="1">男</form:option>
+											<form:option value="2">女</form:option>
+										</form:select></td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;"></td>
+									<td style="text-align: left; width: 15%"></td>
 									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: left;"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
-										type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/adminInit.action'"/></td>
+										type="button" value="返回" style="width: 50px;"
+										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
 								</tr>
 							</table>
 						</form:form></td>
@@ -117,6 +128,15 @@ function doLogout() {
 						style="padding-top: 5px;">
 						<table width="95%" border="0" cellpadding="8" cellspacing="1"
 							bgcolor="#E1E1E1">
+							<tr bgcolor="#f7f7f7">
+								<th colspan="9" style="text-align: right; width: 10%;">总计：<span
+									id="totalCount">${totalCount}</span>人&nbsp;&nbsp;未审核：<span
+									id="totalUnVerify">${totalCount - totalPassed -
+										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span id="totalPassed">${totalPassed
+										}</span>人</font>&nbsp;&nbsp;<font color="red">审核未通过：<span id="totalUnPassed">${totalUnPassed
+										}</span>人</font>
+								</th>
+							</tr>
 							<tr bgcolor="#f7f7f7">
 								<th style="width: 8%;">姓名</th>
 								<th style="width: 10%;">身份证号</th>
@@ -128,7 +148,11 @@ function doLogout() {
 								<th style="width: 10%;">审核状态</th>
 								<th>&nbsp;</th>
 							</tr>
+							<c:set var="totalCount" value="0" />
+							<c:set var="totalPassed" value="0" />
+							<c:set var="totalUnPassed" value="0" />
 							<c:forEach items="${applyUsers}" var="applyUser">
+								<c:set var="totalCount" value="${totalCount + 1 }" />
 								<tr bgcolor="#ffffff">
 									<td>${applyUser.applyUserName}</td>
 									<td>${applyUser.idCardNo}</td>
@@ -149,11 +173,13 @@ function doLogout() {
 									<td>${applyUser.applyOfficeCode}</td>
 									<c:choose>
 										<c:when test="${applyUser.state == 2 }">
+											<c:set var="totalPassed" value="${totalPassed + 1 }" />
 											<td>审核通过</td>
 											<td><input type="button" value="详细" style="width: 50px;"
 												onclick="doVerify(${applyUser.id.userid})" /></td>
 										</c:when>
 										<c:when test="${applyUser.state == 1 }">
+											<c:set var="totalUnPassed" value="${totalUnPassed + 1 }" />
 											<td>审核不通过</td>
 											<td><input type="button" value="详细" style="width: 50px;"
 												onclick="doVerify(${applyUser.id.userid})" /></td>
@@ -166,6 +192,11 @@ function doLogout() {
 									</c:choose>
 								</tr>
 							</c:forEach>
+							<tr bgcolor="#f7f7f7">
+								<th colspan="9" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;未审核：${totalCount
+									- totalPassed - totalUnPassed};&nbsp;&nbsp;<font color="green">审核通过：${totalPassed
+									}人</font>&nbsp;&nbsp;<font color="red">审核未通过：${totalUnPassed}人</font></th>
+							</tr>
 						</table>
 					</td>
 				</tr>
@@ -176,9 +207,13 @@ function doLogout() {
 <script type="text/javascript">
 <!--
  changeDeart();
- if ('${PostId}' != '') {
-	 document.getElementById("postId").value='${postId}';
+ if ('${SignUpPersonSearchCommand.postId}' != '') {
+	 document.getElementById("postId").value='${SignUpPersonSearchCommand.postId}';
  }
+ document.getElementById("totalCount").innerText='${totalCount}';
+ document.getElementById("totalPassed").innerText='${totalPassed}';
+ document.getElementById("totalUnPassed").innerText='${totalUnPassed}';
+ document.getElementById("totalUnVerify").innerText='${totalCount - totalPassed - totalUnPassed}';
 //-->
 </script>
 </html>
