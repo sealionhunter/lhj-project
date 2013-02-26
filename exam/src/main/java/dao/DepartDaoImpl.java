@@ -16,6 +16,7 @@ public class DepartDaoImpl implements DepartDao {
         return (Depart) getHibernateTemplate().load(Depart.class, id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Depart> list() throws Exception {
         List<Depart> departs = getHibernateTemplate().loadAll(Depart.class);

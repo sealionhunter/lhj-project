@@ -24,6 +24,7 @@ public class AdminDaoImpl implements AdminDao {
         this.hibernateTemplate = hibernateTemplate;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Admin get(String adminId) throws Exception {
         List<Admin> adminList = getHibernateTemplate().find(

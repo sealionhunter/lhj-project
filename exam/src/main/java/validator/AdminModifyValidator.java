@@ -7,6 +7,7 @@ import command.AdminModifyCommand;
 
 public class AdminModifyValidator implements Validator {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean supports(Class clazz) {
         return clazz.isAssignableFrom(AdminModifyCommand.class);

@@ -9,7 +9,6 @@ public class ModifyPasswordValidator implements Validator {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public boolean supports(Class clazz) {
-        // TODO Auto-generated method stub
         return clazz.isAssignableFrom(ModifyPasswordCommand.class);
     }
 

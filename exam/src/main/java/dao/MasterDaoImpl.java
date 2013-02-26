@@ -10,9 +10,9 @@ public class MasterDaoImpl implements MasterDao {
 
     private HibernateTemplate hibernateTemplate;
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Master> list(int category) throws Exception {
-        // TODO Auto-generated method stub
         return getHibernateTemplate().find(
                 "from Master as master where master.id.category = ?", category);
     }

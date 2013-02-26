@@ -22,6 +22,7 @@ public class ApplyInfoController extends SimpleFormController {
      * referenceData(javax.servlet.http.HttpServletRequest, java.lang.Object,
      * org.springframework.validation.Errors, int)
      */
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
