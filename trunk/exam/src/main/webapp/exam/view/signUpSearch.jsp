@@ -29,25 +29,31 @@
 								style="color: #666666">职位报考情况一览</span></b></td>
 					</tr>
 					<tr bgcolor="#FFFFFF">
-						<td valign="top" align="center" height="448"
-							style="padding-top: 5px;">
+						<td valign="top" align="center" 
+							style="padding-top: 5px;padding-bottom: 5px;">
 							<table width="98%" border="0" cellpadding="8" cellspacing="1"
 								bgcolor="#E1E1E1">
 								<tr bgcolor="#f7f7f7">
 									<th style="width: 8%;">地区</th>
-									<th style="width: 10%;">部门</th>
+									<th style="width: 12%;">部门</th>
 									<th style="width: 8%;">岗位编号</th>
 									<th style="width: 12%;">岗位类别</th>
 									<th style="width: 8%;">计划数</th>
 									<th style="width: 8%;">报名人数</th>
-									<th style="width: 11%;">通过审核人数</th>
-									<th style="width: 8%;">报考比例</th>
-									<th style="width: 12%;">专业要求</th>
+									<th style="width: 12%;">通过审核人数</th>
+									<th style="width: 12%;">通过审核比例</th>
+									<th >专业要求</th>
 									<%--
 									<th style="width: 15%;">岗位要求</th>
 									 --%>
 								</tr>
+							<c:set var="totalRecruits" value="0" />
+							<c:set var="totalApplyCount" value="0" />
+							<c:set var="totalValidataCount" value="0" />
 								<c:forEach items="${RegistCommand.offices}" var="office">
+								<c:set var="totalRecruits" value="${totalRecruits + office.recruits }" />
+								<c:set var="totalApplyCount" value="${totalApplyCount + office.applyCount }" />
+								<c:set var="totalValidataCount" value="${totalValidataCount + office.validataCount }" />
 									<tr bgcolor="#ffffff">
 										<td>${office.cityName}</td>
 										<td>${office.departName}</td>
@@ -63,6 +69,16 @@
 										 --%>
 									</tr>
 								</c:forEach>
+									<tr bgcolor="#f7f7f7">
+										<td colspan="4" style="text-align: right">总计:</td>
+										<td>${totalRecruits}</td>
+										<td>${totalApplyCount}</td>
+										<td>${totalValidataCount}</td>
+										<td colspan="4" ></td>
+										<%--
+										<td align="left">${office.description }</td>
+										 --%>
+									</tr>
 							</table>
 						</td>
 					</tr>
