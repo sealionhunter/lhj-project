@@ -41,7 +41,7 @@
 									<th style="width: 8%;">计划数</th>
 									<th style="width: 8%;">报名人数</th>
 									<th style="width: 12%;">通过审核人数</th>
-									<th style="width: 12%;">通过审核比例</th>
+									<th style="width: 8%;">报考比例</th>
 									<th >专业要求</th>
 									<%--
 									<th style="width: 15%;">岗位要求</th>
