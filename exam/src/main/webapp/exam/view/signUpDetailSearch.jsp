@@ -211,18 +211,18 @@ function doLogout() {
 										</c:when>
 										<c:when test="${applyUser.state == 1 }">
 											<c:set var="totalUnPassed" value="${totalUnPassed + 1 }" />
-											<td><font color="green">审核不通过</font></td>
+											<td>审核不通过</td>
 										</c:when>
 										<c:otherwise>
-											<td><font color="red">未审核</font></td>
+											<td>未审核</td>
 										</c:otherwise>
 									</c:choose>
 								</tr>
 							</c:forEach>
 							<tr bgcolor="#f7f7f7">
-								<th colspan="10" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;<font color="red">未审核：${totalCount
-									- totalPassed - totalUnPassed}</font>&nbsp;&nbsp;审核通过：${totalPassed
-									}人&nbsp;&nbsp;<font color="green">审核不通过：${totalUnPassed}人</font></th>
+								<th colspan="10" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;未审核：${totalCount
+									- totalPassed - totalUnPassed};&nbsp;&nbsp;<font color="green">审核通过：${totalPassed
+									}人</font>&nbsp;&nbsp;<font color="red">审核不通过：${totalUnPassed}人</font></th>
 							</tr>
 						</table>
 					</td>
