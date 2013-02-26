@@ -101,8 +101,7 @@ CREATE TABLE `user` (
   `socialRel` varchar(512) DEFAULT NULL,
   `photo` longblob,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idCardNo_UNIQUE` (`idCardNo`),
-  UNIQUE KEY `name_UNIQUE` (`name`)
+  UNIQUE KEY `idCardNo_UNIQUE` (`idCardNo`)
 ) ;
 
 CREATE TABLE `admin` (

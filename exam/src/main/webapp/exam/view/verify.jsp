@@ -55,7 +55,7 @@
 									<td width="40%" align="left">${VerifyCommand.user.idCardNo}</td>
 									<td width="20%" align="right">姓名：</td>
 									<td width="20%" align="left">${VerifyCommand.user.name}</td>
-									<td rowspan="5"><img
+									<td rowspan="5" align="center"><img
 										src="/exam/imageDownload?userId=${VerifyCommand.user.idCardNo}"
 										height="140px" width="102px" /></td>
 								</tr>
@@ -145,7 +145,7 @@
 								<tr bgcolor="#ffffff">
 									<td align="right">身高：</td>
 									<td align="left">${VerifyCommand.user.height}cm</td>
-									<td align="right">联系电话</td>
+									<td align="right">联系电话：</td>
 									<td align="left" colspan="2">${VerifyCommand.user.telephone}</td>
 								</tr>
 								<tr bgcolor="#ffffff">

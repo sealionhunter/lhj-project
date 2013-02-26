@@ -77,9 +77,10 @@ function doLogout() {
 						</form:form></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
-					<td colspan="2" valign="top" align="center" 
-						style="padding-top: 5px; padding-bottom: 5px;"><form:form name="personForm"
-							method="post" action="/exam/signuppeopleinfo.action"
+					<td colspan="2" valign="top" align="center"
+						style="padding-top: 5px; padding-bottom: 5px;"><form:form
+							name="personForm" method="post"
+							action="/exam/signuppeopleinfo.action"
 							commandName="SignUpPersonSearchCommand">
 							<form:hidden path="verifyUserId" id="verifyUserId" />
 							<table width="95%" border="0" cellpadding="4" cellspacing="0"
@@ -103,7 +104,7 @@ function doLogout() {
 											<form:option value="1">审核不通过</form:option>
 											<form:option value="2">审核通过</form:option>
 										</form:select></td>
-									
+
 									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: left;"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
@@ -122,23 +123,28 @@ function doLogout() {
 								<th colspan="11" style="text-align: right; width: 10%;">总计：<span
 									id="totalCount">${totalCount}</span>人&nbsp;&nbsp;未审核：<span
 									id="totalUnVerify">${totalCount - totalPassed -
-										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span id="totalPassed">${totalPassed
-										}</span>人</font>&nbsp;&nbsp;<font color="red">审核不通过：<span id="totalUnPassed">${totalUnPassed
-										}</span>人</font>
+										totalUnPassed }</span>人&nbsp;&nbsp;<font color="green">审核通过：<span
+										id="totalPassed">${totalPassed }</span>人
+								</font>&nbsp;&nbsp;<font color="red">审核不通过：<span
+										id="totalUnPassed">${totalUnPassed }</span>人
+								</font>
 								</th>
 							</tr>
 							<tr bgcolor="#f7f7f7">
 								<th style="width: 7%;" nowrap="nowrap">姓名</th>
 								<th style="width: 10%;" nowrap="nowrap">身份证号</th>
-								<th style="width: 12%;">籍贯</th>
-								<th style="width: 8%;">政治面貌</th>
-								<th style="width: 5%;" nowrap="nowrap">性别</th>
-								<th style="width: 9%;" nowrap="nowrap">出生年月</th>
+								<th style="width: 6%;" nowrap="nowrap">性别</th>
+								<th style="width: 8%;" nowrap="nowrap">出生年月</th>
+								<th>毕业院校</th>
+								<th style="width: 11%;">专业</th>
+								<th style="width: 8%;" nowrap="nowrap">毕业时间</th>
 								<th style="width: 8%;">学历</th>
-								<th style="width: 14%;">报考部门</th>
+								<th style="width: 11%;">报考部门</th>
+								<%--
 								<th style="width: 12%;">岗位类别</th>
-								<th style="width: 9%;" nowrap="nowrap">审核状态</th>
-								<th>&nbsp;</th>
+								 --%>
+								<th style="width: 8%;" nowrap="nowrap">审核状态</th>
+								<th style="width: 6%;">&nbsp;</th>
 							</tr>
 							<c:set var="totalCount" value="0" />
 							<c:set var="totalPassed" value="0" />
@@ -148,45 +154,36 @@ function doLogout() {
 								<tr bgcolor="#ffffff">
 									<td>${applyUser.applyUserName}</td>
 									<td>${applyUser.idCardNo}</td>
-									<td>${applyUser.applyUserHomeTown}</td>
-									<c:choose>
-										<c:when test="${applyUser.aplyUserPolitical == '1'}">
-											<td>共产党员</td>
-										</c:when>
-										<c:when test="${applyUser.aplyUserPolitical == '2'}">
-											<td>共青团员</td>
-										</c:when>
-										<c:otherwise>
-											<td>群众</td>
-										</c:otherwise>
-									</c:choose>
-									<c:choose>
-										<c:when test="${applyUser.user.sex == '1'}">
-											<td>男</td>
-										</c:when>
-										<c:otherwise>
-											<td>女</td>
-										</c:otherwise>
-									</c:choose>
-									<td>${applyUser.user.birthdayYear}年${applyUser.user.birthdayMonth }月</td>
+									<td style="text-align: center"><c:choose>
+											<c:when test="${applyUser.user.sex == '1'}">男</c:when>
+											<c:otherwise>女</c:otherwise>
+										</c:choose></td>
+									<td style="text-align: center">${applyUser.user.birthdayYear}/<fmt:formatNumber pattern="#00">${applyUser.user.birthdayMonth
+									}</fmt:formatNumber></td>
+									<td>${applyUser.user.graduateSchool}</td>
+									<td>${applyUser.user.major}</td>
+									<td style="text-align: center">${applyUser.user.graduateYear}/<fmt:formatNumber pattern="#00">${applyUser.user.graduateMonth
+									}</fmt:formatNumber></td>
 									<td>${applyUser.user.degree}</td>
 									<td>${applyUser.applyDepartName}</td>
+									<%--
 									<td>${applyUser.applyOfficeName}(${applyUser.applyOfficeCode})</td>
+									--%>
 									<c:choose>
 										<c:when test="${applyUser.state == 2 }">
 											<c:set var="totalPassed" value="${totalPassed + 1 }" />
-											<td>审核通过</td>
+											<td style="text-align: center">审核通过</td>
 											<td><input type="button" value="详细" style="width: 50px;"
 												onclick="doVerify(${applyUser.id.userid})" /></td>
 										</c:when>
 										<c:when test="${applyUser.state == 1 }">
 											<c:set var="totalUnPassed" value="${totalUnPassed + 1 }" />
-											<td>审核不通过</td>
+											<td style="text-align: center">审核不通过</td>
 											<td><input type="button" value="详细" style="width: 50px;"
 												onclick="doVerify(${applyUser.id.userid})" /></td>
 										</c:when>
 										<c:otherwise>
-											<td>未审核</td>
+											<td style="text-align: center">未审核</td>
 											<td><input type="button" value="审核" style="width: 50px;"
 												onclick="doVerify(${applyUser.id.userid})" /></td>
 										</c:otherwise>
@@ -196,7 +193,8 @@ function doLogout() {
 							<tr bgcolor="#f7f7f7">
 								<th colspan="11" style="text-align: right; width: 10%;">总计：${totalCount}人&nbsp;&nbsp;未审核：${totalCount
 									- totalPassed - totalUnPassed};&nbsp;&nbsp;<font color="green">审核通过：${totalPassed
-									}人</font>&nbsp;&nbsp;<font color="red">审核不通过：${totalUnPassed}人</font></th>
+										}人</font>&nbsp;&nbsp;<font color="red">审核不通过：${totalUnPassed}人</font>
+								</th>
 							</tr>
 						</table>
 					</td>

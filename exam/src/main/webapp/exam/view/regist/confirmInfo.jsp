@@ -130,7 +130,7 @@
 								<tr bgcolor="#ffffff">
 									<td align="right">身高：</td>
 									<td align="left">${RegistCommand.height}cm</td>
-									<td align="right">联系电话</td>
+									<td align="right">联系电话：</td>
 									<td align="left" colspan="2">${RegistCommand.telephone}</td>
 								</tr>
 								<tr bgcolor="#ffffff">
