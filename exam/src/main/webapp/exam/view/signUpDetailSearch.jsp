@@ -134,14 +134,13 @@ function doLogout() {
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td style="text-align: right; width: 10%;"></td>
-									<td style="text-align: left; width: 15%"></td>
-									<td style="text-align: right; width: 10%;"></td>
-									<td style="text-align: left;"><input type="submit"
+									<td style="text-align: center;"  colspan="2"><input type="submit"
 										value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input
 										type="submit" value="导出" style="width: 50px;"
 										name="excelExport" />&nbsp;&nbsp;<input type="button"
 										value="返回" style="width: 50px;"
 										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
+									<td style="text-align: right; width: 10%;"></td>
 								</tr>
 							</table>
 						</form:form></td>

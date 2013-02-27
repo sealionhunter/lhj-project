@@ -115,7 +115,7 @@ CREATE TABLE `admin` (
 CREATE TABLE `room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` char(4) NOT NULL,
-  `name` varchar(16) NOT NULL,
+  `name` varchar(32) NOT NULL,
   `position` varchar(128) NOT NULL,
   `seats` int(11) NOT NULL DEFAULT '0',
   `officeId` int(11) DEFAULT NULL,
@@ -136,5 +136,14 @@ CREATE TABLE `seat` (
   KEY `FK_seat_user_idx` (`userId`),
   CONSTRAINT `FK_seat_room` FOREIGN KEY (`roomId`) REFERENCES `room` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_seat_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+
+CREATE TABLE `admission` (
+  `userId` int(11) NOT NULL,
+  `code` char(10) NOT NULL,
+  PRIMARY KEY (`userId`),
+  KEY `FK_admission_user_idx` (`userId`),
+  CONSTRAINT `FK_admission_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
