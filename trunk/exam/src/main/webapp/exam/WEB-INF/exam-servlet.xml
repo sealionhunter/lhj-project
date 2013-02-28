@@ -42,6 +42,9 @@
 				<value>model/Master.hbm.xml</value>
 				<value>model/Exam.hbm.xml</value>
 				<value>model/Admin.hbm.xml</value>
+				<value>model/Room.hbm.xml</value>
+				<value>model/Seat.hbm.xml</value>
+				<value>model/Admission.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -64,7 +67,7 @@
 	<!-- use declarative transaction management -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="adminInterceptor" class="interceptor.AdminInterceptor"/>
+	<bean id="adminInterceptor" class="interceptor.AdminInterceptor" />
 
 	<bean id="simpleUrlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -86,6 +89,8 @@
 				<prop key="/modifyAdmin.action">adminModifyController</prop>
 				<prop key="/adminLogout.action">adminLogoutController</prop>
 				<prop key="/signupdetailsearch.action">signupDetailSearchController</prop>
+				<prop key="/roomEdit.action">roomEditController</prop>
+				<prop key="/roomList.action">roomListController</prop>
 			</props>
 		</property>
 	</bean>
@@ -114,6 +119,12 @@
 	<bean id="adminDao" class="dao.AdminDaoImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+	<bean id="roomDao" class="dao.RoomDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="admissionDao" class="dao.AdmissionDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
 	<bean id="registService" class="service.RegistServiceImpl">
 		<property name="userDao" ref="userDao" />
 		<property name="departDao" ref="departDao" />
@@ -123,6 +134,18 @@
 		<property name="masterDao" ref="masterDao" />
 		<property name="examDao" ref="examDao" />
 		<property name="adminDao" ref="adminDao" />
+	</bean>
+	<bean id="roomService" class="service.RoomServiceImpl">
+		<property name="userDao" ref="userDao" />
+		<property name="departDao" ref="departDao" />
+		<!-- <property name="cityDao" ref="cityDao" /> -->
+		<property name="officeDao" ref="officeDao" />
+		<property name="roomDao" ref="roomDao" />
+		<property name="examDao" ref="examDao" />
+		<property name="applyDao" ref="applyDao" />
+		<property name="admissionDao" ref="admissionDao" />
+		<!-- <property name="masterDao" ref="masterDao" /> <property name="examDao" 
+			ref="examDao" /> <property name="adminDao" ref="adminDao" /> -->
 	</bean>
 	<bean id="registController" class="controller.RegistWizardController">
 		<property name="successView" value="success" />
@@ -238,12 +261,36 @@
 		<property name="commandName" value="AdminLoginCommand" />
 		<property name="commandClass" value="command.AdminLoginCommand" />
 	</bean>
-	<bean id="adminInitController" class="org.springframework.web.servlet.mvc.SimpleFormController">
+	<bean id="adminInitController"
+		class="org.springframework.web.servlet.mvc.SimpleFormController">
 		<property name="formView" value="adminIndex" />
 		<property name="successView" value="adminIndex" />
 		<property name="commandName" value="AdminInitCommand" />
 		<property name="commandClass" value="command.AdminLoginCommand" />
 	</bean>
+
+	<bean id="roomEditValidator" class="validator.RoomEditValidator" />
+	<bean id="roomEditController" class="controller.RoomEditController">
+		<property name="formView" value="room/roomEdit" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="RoomEditCommand" />
+		<property name="commandClass" value="command.RoomEditCommand" />
+		<property name="roomService" ref="roomService" />
+		<property name="validators">
+			<list>
+				<ref bean="roomEditValidator" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="roomListController" class="controller.RoomListController">
+		<property name="formView" value="room/roomList" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="RoomListCommand" />
+		<property name="commandClass" value="command.RoomEditCommand" />
+		<property name="roomService" ref="roomService" />
+	</bean>
+
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">

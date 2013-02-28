@@ -18,4 +18,10 @@ public interface RoomService {
     public void editOk(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception;
 
+    public void generateAdmission(HttpServletRequest request,
+            RoomEditCommand cmd, BindException errors) throws Exception;
+
+    @SuppressWarnings("rawtypes")
+    public Map initList(RoomEditCommand cmd) throws Exception;
+
 }

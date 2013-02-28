@@ -11,17 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import model.Admission;
 import model.Apply;
+import model.Depart;
+import model.Exam;
 import model.Office;
 import model.Room;
-import model.Exam;
 import model.Seat;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 
 import command.RoomEditCommand;
 import command.SignUpPersonSearchCommand;
 
+import dao.AdmissionDao;
 import dao.ApplyDao;
 import dao.DepartDao;
 import dao.ExamDao;
@@ -36,6 +39,7 @@ public class RoomServiceImpl implements RoomService {
     private OfficeDao officeDao;
     private ApplyDao applyDao;
     private ExamDao examDao;
+    private AdmissionDao admissionDao;
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -79,10 +83,19 @@ public class RoomServiceImpl implements RoomService {
         roomDao.update(room);
     }
 
-    private void generateAdmission() throws Exception {
-        SignUpPersonSearchCommand cmd = new SignUpPersonSearchCommand();
-        cmd.setState(2);
-        List<Apply> applies = applyDao.list(cmd);
+    @Transactional
+    @Override
+    public void generateAdmission(HttpServletRequest request,
+            RoomEditCommand cmd, BindException errors) throws Exception {
+        List<Office> offices = roomDao.findOfficeInfo(cmd);
+        if (!offices.isEmpty()) {
+            errors.reject("", "");
+        }
+        SignUpPersonSearchCommand condition = new SignUpPersonSearchCommand();
+        condition.setState(2);
+        condition.setDeptId(cmd.getDepartId());
+        condition.setPostId(cmd.getOfficeId());
+        List<Apply> applies = applyDao.list(condition);
         List<Admission> admissions = new ArrayList<Admission>(applies.size());
         List<Seat> seats = new ArrayList<Seat>(applies.size());
         List<Room> rooms = roomDao.list();
@@ -97,42 +110,72 @@ public class RoomServiceImpl implements RoomService {
         nf.setMinimumIntegerDigits(2);
         nf.setMinimumFractionDigits(0);
         nf.setMaximumFractionDigits(0);
-        String format = "%s%s%02d";
+        String format = "%s%02d%02d";
         Map<String, Integer> sequeses = new HashMap<String, Integer>();
         // TODO
         Room room = null;
         for (Apply apply : applies) {
+            room = null;
             for (Room r : rooms) {
+                String key = apply.getOffice().getCode() + "room" + r.getId();
                 if (r.getOfficeId() == apply.getId().getOfficeid()
-                        && (!sequeses.containsKey(apply.getOffice().getCode()
-                                + r.getCode()) || sequeses
-                                .get(apply.getOffice().getCode()
-                                        + rooms.get(0).getCode()) < r
+                        && (!sequeses.containsKey(key) || sequeses.get(key) < r
                                 .getSeats())) {
                     room = r;
                     break;
                 }
             }
-
-            Integer seq = sequeses.get(apply.getOffice().getCode()
-                    + rooms.get(0).getCode());
+            if (room == null) {
+                continue;
+            }
+            String key = apply.getOffice().getCode() + "room" + room.getId();
+            Integer seq = sequeses.get(key);
             if (seq == null) {
                 seq = 1;
-                sequeses.put(apply.getOffice().getCode()
-                        + rooms.get(0).getCode(), seq);
-            } else if (seq >= room.getSeats()) {
+            } else {
                 seq += 1;
-                sequeses.put(apply.getOffice().getCode()
-                        + rooms.get(0).getCode(), seq);
             }
+            sequeses.put(key, seq);
             Seat seat = new Seat();
             seat.setCode(String.format("%02d", seq));
             seat.setRoomId(room.getId());
             seat.setUserId(apply.getId().getUserid());
             seats.add(seat);
             admissions.add(new Admission(apply.getUser().getId(), String
-                    .format(format, prefix, room.getCode(), seq)));
+                    .format(format, prefix, room.getId(), seq)));
         }
+
+        roomDao.addSeat(seats);
+        admissionDao.add(admissions);
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    public Map initList(RoomEditCommand cmd) throws Exception {
+
+        Map model = new HashMap();
+        List<Depart> deptList = departDao.list();
+
+        Depart dept = new Depart();
+        dept.setId(-1);
+        dept.setName("");
+        deptList.add(0, dept);
+        model.put("departs", deptList);
+
+        List<Office> officeList = officeDao.list();
+        Office office = new Office();
+        office.setId(-1);
+        office.setName("");
+        office.setCode("");
+        officeList.add(0, office);
+        model.put("offices", officeList);
+
+        List<Office> offices = roomDao.findOfficeInfo(cmd);
+        for (Office office1 : offices) {
+            office1.setRooms(roomDao.list(office1.getId()));
+        }
+        cmd.setOffices(offices);
+        return model;
     }
 
     /**
@@ -225,4 +268,18 @@ public class RoomServiceImpl implements RoomService {
         this.examDao = examDao;
     }
 
+    /**
+     * @return the admissionDao
+     */
+    public AdmissionDao getAdmissionDao() {
+        return admissionDao;
+    }
+
+    /**
+     * @param admissionDao
+     *            the admissionDao to set
+     */
+    public void setAdmissionDao(AdmissionDao admissionDao) {
+        this.admissionDao = admissionDao;
+    }
 }
