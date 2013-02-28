@@ -14,6 +14,7 @@ import org.springframework.validation.BindException;
 
 import command.AdminLoginCommand;
 import command.AdminModifyCommand;
+import command.AdmissionCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.SignUpPersonSearchCommand;
@@ -64,4 +65,5 @@ public interface RegistService {
     public void modifyAdminPassword(AdminModifyCommand cmd, BindException errors)
             throws Exception;
 
+    public void printAdmission(AdmissionCommand cmd, BindException errors) throws Exception;
 }

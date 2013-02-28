@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 
 import model.Admission;
+import model.Room;
+import model.Seat;
 
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
@@ -36,7 +38,20 @@ public class AdmissionDaoImpl implements AdmissionDao {
 
     @Override
     public Admission get(Integer userId) throws Exception {
-        return (Admission) hibernateTemplate.load(Admission.class, userId);
+        String hql = "from Admission A, Seat S, Room R where A.userId=S.userId and R.id=S.roomId and A.userId=?";
+        List<?> list = hibernateTemplate.find(hql, userId);
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        Object obj = list.get(0);
+        Object[] o = (Object[]) obj;
+        Admission admission = (Admission) o[0];
+        Seat seat = (Seat) o[1];
+        Room room = (Room) o[2];
+        seat.setRoom(room);
+        admission.setSeat(seat);
+
+        return admission;
     }
 
     @Override

@@ -1,8 +1,11 @@
 package service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import model.Admin;
+import model.Admission;
 import model.Apply;
 import model.ApplyPK;
 import model.City;
@@ -17,6 +20,7 @@ import org.springframework.validation.BindException;
 
 import command.AdminLoginCommand;
 import command.AdminModifyCommand;
+import command.AdmissionCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
 import command.SignUpPersonSearchCommand;
@@ -24,6 +28,7 @@ import command.StatusSearchCommand;
 import command.VerifyCommand;
 
 import dao.AdminDao;
+import dao.AdmissionDao;
 import dao.ApplyDao;
 import dao.CityDao;
 import dao.DepartDao;
@@ -42,6 +47,7 @@ public class RegistServiceImpl implements RegistService {
     private MasterDao masterDao;
     private ExamDao examDao;
     private AdminDao adminDao;
+    private AdmissionDao admissionDao;
 
     @Override
     @Transactional
@@ -265,6 +271,20 @@ public class RegistServiceImpl implements RegistService {
         this.adminDao = adminDao;
     }
 
+    /**
+     * @return the admissionDao
+     */
+    public AdmissionDao getAdmissionDao() {
+        return admissionDao;
+    }
+
+    /**
+     * @param admissionDao the admissionDao to set
+     */
+    public void setAdmissionDao(AdmissionDao admissionDao) {
+        this.admissionDao = admissionDao;
+    }
+
     @Override
     public void modifyPassword(ModifyPasswordCommand cmd, BindException errors)
             throws Exception {
@@ -361,4 +381,42 @@ public class RegistServiceImpl implements RegistService {
         adminDao.update(admin);
     }
 
+    @Override
+    public void printAdmission(AdmissionCommand cmd, BindException errors) throws Exception {
+        Exam exam = examDao.list().get(0);
+
+        Date date = exam.getExamDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dateStr = sdf.format(date);
+        String timeStr = exam.getExamTime();
+        String[] timeArray = timeStr.split("-");
+
+        String from = dateStr + " " + timeArray[0];
+        String to = dateStr + " " + timeArray[1];
+
+        sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
+        Date fromTime = sdf.parse(from);
+        Date toTime = sdf.parse(to);
+        Date now = new Date();
+
+        if (now.before(exam.getApplyBeginDate())) {
+            throw new Exception("报名还未开始，不能打印准考证");
+        }
+        if (now.before(exam.getApplyDeadDate())) {
+            throw new Exception("报名还未结束，不能打印准考证");
+        }
+        if (now.after(toTime)) {
+            throw new Exception("考试已经结束，不能打印准考证");
+        }
+        if (now.after(fromTime)) {
+            throw new Exception("考试已经开始，不能打印准考证");
+        }
+
+        Admission admission = admissionDao.get(cmd.getUser().getId());
+        if (admission == null) {
+            throw new Exception("管理员还未分配座位，请等待座位分配完毕，再打印准考证");
+        }
+        cmd.setExam(exam);
+        cmd.setAdmission(admission);
+    }
 }
