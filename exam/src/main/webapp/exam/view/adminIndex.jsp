@@ -10,9 +10,9 @@
 	media="all" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <script type="text/javascript">
-function doLogout() {
-	adminLogoutForm.submit();
-}
+	function doLogout() {
+		adminLogoutForm.submit();
+	}
 </script>
 </head>
 <body>
@@ -31,13 +31,11 @@ function doLogout() {
 						style="padding-left: 10px;"><b><span
 							style="color: #666666">管理员首页</span></b></td>
 					<td height="32" align="right" bgcolor="#FFFFFF" valign="middle"
-						style="padding-right: 10px;" width="30">
-						<form:form name="adminLogoutForm"
-							method="post" action="/exam/adminLogout.action"
-							commandName="AdminLoginCommand">
-						<a href="#" onclick="doLogout();">注销</a>
-						</form:form>
-					</td>
+						style="padding-right: 10px;" width="30"><form:form
+							name="adminLogoutForm" method="post"
+							action="/exam/adminLogout.action" commandName="AdminLoginCommand">
+							<a href="#" onclick="doLogout();">注销</a>
+						</form:form></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td colspan="2" valign="top" align="center" height="448"
@@ -55,6 +53,10 @@ function doLogout() {
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
 									href="/exam/signupdetailsearch.action">报名信息检索</a></td>
+							</tr>
+							<tr bgcolor="#ffffff">
+								<td style="height: 10px; text-align: left;"><a
+									href="/exam/roomList.action">考场登陆</a></td>
 							</tr>
 						</table>
 					</td>

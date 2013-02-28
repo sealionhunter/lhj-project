@@ -14,7 +14,7 @@ CREATE TABLE `room` (
 
 
 CREATE TABLE `seat` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(3) DEFAULT NULL,
   `roomId` int(11) NOT NULL,
   `userId` int(11) DEFAULT NULL,

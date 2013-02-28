@@ -26,11 +26,11 @@ INSERT INTO `master`(`category`,`code`,`name`)VALUES(6,'2','军官证');
 INSERT INTO `exam`.`city`(`name`,`description`)VALUES('阜阳市','阜阳市');
 
 INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('办公室','办公室','1');
-INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('财政局','安徽公安厅','1');
-INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('规划建设局','安徽公安厅','1');
-INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('社会事业局','安徽公安厅','1');
-INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('经贸（招商）局','安徽公安厅','1');
-INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('企业服务中心','安徽公安厅','1');
+INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('财政局','财政局','1');
+INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('规划建设局','规划建设局','1');
+INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('社会事业局','社会事业局','1');
+INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('经贸（招商）局','经贸（招商）局','1');
+INSERT INTO `exam`.`depart`(`name`,`description`,`cityId`)VALUES('企业服务中心','企业服务中心','1');
 
 INSERT INTO `exam`.`office`(`name`,`code`,`major`,`degree`,`recruits`,`limitAge`,`description`,`departId`,`examId`,`applyYear`)
                      VALUES('管理岗位','101','中文及相关专业','大学本科',1,26,'',1,'1',2013);

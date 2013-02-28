@@ -2,6 +2,9 @@ package dao;
 
 import java.util.List;
 
+import command.RoomEditCommand;
+
+import model.Office;
 import model.Room;
 import model.Seat;
 
@@ -9,6 +12,8 @@ public interface RoomDao {
     public void add(Room room) throws Exception;
 
     public List<Room> list() throws Exception;
+
+    public List<Room> list(Integer officeId) throws Exception;
 
     public Room get(Integer userId) throws Exception;
 
@@ -21,4 +26,7 @@ public interface RoomDao {
     public Seat getSeat(Integer userId) throws Exception;
 
     public void updateSeat(Seat admission) throws Exception;
+
+    public List<Office> findOfficeInfo(RoomEditCommand cmd)
+            throws Exception;
 }

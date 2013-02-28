@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The persistent class for the office database table.
@@ -43,6 +44,11 @@ public class Office implements Serializable {
     private int validataCount;
 
     private int scale;
+    
+    private Integer totalUsers;
+    private Integer totalSeats;
+    
+    private List<Room> rooms;
 
     public Office() {
     }
@@ -216,6 +222,48 @@ public class Office implements Serializable {
      */
     public void setScale(int scale) {
         this.scale = scale;
+    }
+
+    /**
+     * @return the totalUsers
+     */
+    public Integer getTotalUsers() {
+        return totalUsers;
+    }
+
+    /**
+     * @param totalUsers the totalUsers to set
+     */
+    public void setTotalUsers(Integer totalUsers) {
+        this.totalUsers = totalUsers;
+    }
+
+    /**
+     * @return the totalSeats
+     */
+    public Integer getTotalSeats() {
+        return totalSeats;
+    }
+
+    /**
+     * @param totalSeats the totalSeats to set
+     */
+    public void setTotalSeats(Integer totalSeats) {
+        this.totalSeats = totalSeats;
+    }
+
+    /**
+     * @return the rooms
+     */
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    /**
+     * @param rooms the rooms to set
+     */
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
 }

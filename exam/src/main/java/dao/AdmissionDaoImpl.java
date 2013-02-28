@@ -25,12 +25,12 @@ public class AdmissionDaoImpl implements AdmissionDao {
     }
 
     public void add(Admission admission) throws Exception {
-        hibernateTemplate.saveOrUpdate(admission);
+        hibernateTemplate.save(admission);
     }
 
     public void add(List<Admission> admissions) throws Exception {
         for (Admission admission : admissions) {
-            hibernateTemplate.saveOrUpdate(admission);
+            hibernateTemplate.save(admission);
         }
     }
 

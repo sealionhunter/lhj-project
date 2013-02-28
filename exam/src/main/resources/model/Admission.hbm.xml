@@ -4,7 +4,7 @@
 <hibernate-mapping default-lazy="false">
 	<class name="model.Admission" table="admission">
 		<id name="userId">
-			<generator class="identity" />
+			<generator class="assigned" />
 		</id>
 		<property generated="never" lazy="false" name="code" />
 	</class>
