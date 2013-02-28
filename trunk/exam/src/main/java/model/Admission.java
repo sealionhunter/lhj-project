@@ -15,11 +15,15 @@ public class Admission implements Serializable {
 
     private int userId;
     private String code;
+    private Seat seat;
 
     public Admission(int userId, String code) {
         super();
         this.userId = userId;
         this.code = code;
+    }
+
+    public Admission() {
     }
 
     /**
@@ -52,4 +56,17 @@ public class Admission implements Serializable {
         this.code = code;
     }
 
+    /**
+     * @return the seat
+     */
+    public Seat getSeat() {
+        return seat;
+    }
+
+    /**
+     * @param seat the seat to set
+     */
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
 }

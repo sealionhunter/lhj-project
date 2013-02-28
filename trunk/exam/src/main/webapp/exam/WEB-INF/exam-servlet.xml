@@ -91,6 +91,7 @@
 				<prop key="/signupdetailsearch.action">signupDetailSearchController</prop>
 				<prop key="/roomEdit.action">roomEditController</prop>
 				<prop key="/roomList.action">roomListController</prop>
+				<prop key="/admissionPrint.action">admissionPrintController</prop>
 			</props>
 		</property>
 	</bean>
@@ -134,6 +135,7 @@
 		<property name="masterDao" ref="masterDao" />
 		<property name="examDao" ref="examDao" />
 		<property name="adminDao" ref="adminDao" />
+		<property name="admissionDao" ref="admissionDao" />
 	</bean>
 	<bean id="roomService" class="service.RoomServiceImpl">
 		<property name="userDao" ref="userDao" />
@@ -289,6 +291,20 @@
 		<property name="commandName" value="RoomListCommand" />
 		<property name="commandClass" value="command.RoomEditCommand" />
 		<property name="roomService" ref="roomService" />
+	</bean>
+
+	<bean id="admissionPrintValidator" class="validator.AdmissionValidator" />
+	<bean id="admissionPrintController" class="controller.AdmissionController">
+		<property name="formView" value="admissionPrepare" />
+		<property name="successView" value="admissionPrint" />
+		<property name="commandName" value="AdmissionPrintCommand" />
+		<property name="commandClass" value="command.AdmissionCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="admissionPrintValidator" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="viewResolver"
