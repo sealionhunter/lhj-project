@@ -43,13 +43,13 @@ public class StatusSearchController extends SimpleFormController {
             cmd.setShowDetail(false);
             if (!errors.hasErrors()) {
                 registService.searchStatus(cmd, errors);
-                HttpSession session = request.getSession();
-                session.setAttribute("UserInfo", cmd.getUser());
-                session.setAttribute("ApplyInfo", cmd.getApply());
             }
             if (errors.hasErrors()) {
                 return new ModelAndView(getFormView(), errors.getModel());
             }
+            HttpSession session = request.getSession();
+            session.setAttribute("UserInfo", cmd.getUser());
+            session.setAttribute("ApplyInfo", cmd.getApply());
             cmd.setShowDetail(true);
             request.getSession().setAttribute("photoData" + cmd.getIdCardNo(),
                     cmd.getUser().getPhoto());

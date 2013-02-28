@@ -57,7 +57,7 @@
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
-									href="view/admissionPrint.html">打印准考证</a></td>
+									href="/exam/admissionPrint.action">打印准考证</a></td>
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
