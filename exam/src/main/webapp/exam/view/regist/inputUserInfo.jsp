@@ -32,8 +32,7 @@
 						<table width="80%" border="0" cellpadding="4" cellspacing="1"
 							bgcolor="#E1E1E1">
 							<form:form name="registeForm" method="post"
-								action="/exam/regist.action" commandName="RegistCommand"
-								onsubmit="return CheckForm();">
+								action="/exam/regist.action" commandName="RegistCommand">
 								<c:if test="${RegistCommand.editFlg != '1' }">
 									<tr bgcolor="#f7f7f7">
 										<td width="21%" align="right">姓名：</td>

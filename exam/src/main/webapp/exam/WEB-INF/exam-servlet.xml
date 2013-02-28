@@ -14,19 +14,13 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/exam" />
 		<property name="username" value="root" />
 		<property name="password" value="overseas" />
-
 		<property name="maxActive" value="30" />
-
 		<property name="maxIdle" value="20" />
-
 		<property name="initialSize" value="10" />
-
 		<property name="maxWait" value="1000" />
 		<property name="defaultAutoCommit" value="true" />
-
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="60" />
-
 		<property name="logAbandoned" value="true" />
 	</bean>
 	<bean id="sessionFactory"
@@ -92,6 +86,7 @@
 				<prop key="/roomEdit.action">roomEditController</prop>
 				<prop key="/roomList.action">roomListController</prop>
 				<prop key="/admissionPrint.action">admissionPrintController</prop>
+				<prop key="/userPasswordReset.action">userPasswordResetController</prop>
 			</props>
 		</property>
 	</bean>
@@ -303,6 +298,25 @@
 		<property name="validators">
 			<list>
 				<ref bean="admissionPrintValidator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userPasswordService" class="service.UserPasswordServiceImpl">
+		<property name="userDao" ref="userDao"></property>
+		<property name="applyDao" ref="applyDao"></property>
+	</bean>
+	<bean id="userPasswordResetValidator" class="validator.UserPasswordResetValidator" />
+	<bean id="userPasswordResetController" class="controller.UserPasswordResetController">
+		<property name="formView" value="userPasswordReset" />
+		<property name="successView" value="userPasswordReset" />
+		<property name="commandName" value="UserPasswordResetCommand" />
+		<property name="commandClass" value="command.UserPasswordResetCommand" />
+		<property name="initPassword" value="888888" />
+		<property name="userPasswordService" ref="userPasswordService" />
+		<property name="validators">
+			<list>
+				<ref bean="userPasswordResetValidator" />
 			</list>
 		</property>
 	</bean>

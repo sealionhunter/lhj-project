@@ -42,15 +42,15 @@ public class AdmissionController extends SimpleFormController {
         if ("search".equals(submitType)) {
             if (!errors.hasErrors()) {
                 registService.searchStatus(cmd, errors);
-                HttpSession session = request.getSession();
-                session.setAttribute("UserInfo", cmd.getUser());
-                session.setAttribute("ApplyInfo", cmd.getApply());
-                session.setAttribute("photoData" + cmd.getIdCardNo(),
-                        cmd.getUser().getPhoto());
             }
             if (errors.hasErrors()) {
                 return new ModelAndView(getFormView(), errors.getModel());
             }
+            HttpSession session = request.getSession();
+            session.setAttribute("UserInfo", cmd.getUser());
+            session.setAttribute("ApplyInfo", cmd.getApply());
+            session.setAttribute("photoData" + cmd.getIdCardNo(),
+                    cmd.getUser().getPhoto());
             return new ModelAndView(getFormView(), errors.getModel());
         } else {
             HttpSession session = request.getSession();
