@@ -114,7 +114,7 @@ function doLogout() {
 							</tr>
 							<tr bgcolor="#f7f7f7">
 								<th style="width: 6%;">编号</th>
-								<th style="width: 6%;">座位数</th>
+								<th style="width: 8%;">座位数</th>
 								<th style="width: 12%;" nowrap="nowrap">说明</th>
 								<th>位置</th>
 							</tr>

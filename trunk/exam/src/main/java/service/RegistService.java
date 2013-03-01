@@ -43,7 +43,7 @@ public interface RegistService {
 
     public List<User> findUser(String username) throws Exception;
 
-    public List<User> findIdCardNo(String idCardNo) throws Exception;
+    public User findIdCardNo(String idCardNo) throws Exception;
 
     public List<Apply> getApply(Integer userId) throws Exception;
 

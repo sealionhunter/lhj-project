@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -11,6 +12,10 @@ import model.Exam;
 import model.Office;
 import model.User;
 
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import command.SignUpPersonSearchCommand;
@@ -70,6 +75,10 @@ public class ApplyDaoImpl implements ApplyDao {
         if (cmd.getName() != null && cmd.getName().trim().length() > 0) {
             hql += "and U.name LIKE ? ";
             paramList.add(getLikeStr(cmd.getName().trim()));
+        }
+        if (cmd.getIdCardNo() != null && cmd.getIdCardNo().trim().length() > 0) {
+            hql += "and U.idCardNo = ? ";
+            paramList.add(cmd.getIdCardNo().trim());
         }
         if (cmd.getDegree() != null && cmd.getDegree().trim().length() > 0) {
             hql += "and U.degree LIKE ? ";
@@ -165,6 +174,10 @@ public class ApplyDaoImpl implements ApplyDao {
             Depart dept = (Depart) objects[3];
             Exam exam = (Exam) objects[4];
 
+            apply.setUser(user);
+            apply.setOffice(office);
+            apply.setDepart(dept);
+
             apply.setApplyUserName(user.getName());
             apply.setIdCardNo(user.getIdCardNo());
             apply.setApplyUserHomeTown(user.getHomeTown());
@@ -182,6 +195,7 @@ public class ApplyDaoImpl implements ApplyDao {
         return applyList;
     }
 
+    @Override
     public void delete(Apply apply) {
         getHibernateTemplate().delete(apply);
     }
@@ -189,6 +203,26 @@ public class ApplyDaoImpl implements ApplyDao {
     @Override
     public void update(Apply apply) throws Exception {
         getHibernateTemplate().update(apply);
+    }
+
+    @Override
+    public boolean hasUnVerified() throws Exception {
+
+        return (Boolean) hibernateTemplate.execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                String sql = "select count(*) from apply where state = ?";
+                SQLQuery query = session.createSQLQuery(sql);
+                query.setInteger(0, 0);
+                Object obj = query.uniqueResult();
+                if (obj != null && ((Number) obj).intValue() > 0) {
+                    return Boolean.TRUE;
+                }
+                return Boolean.FALSE;
+            }
+        });
     }
 
     /**

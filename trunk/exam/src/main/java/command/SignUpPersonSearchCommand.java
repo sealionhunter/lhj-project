@@ -12,6 +12,7 @@ public class SignUpPersonSearchCommand {
     private String name;
     private String degree;
     private Integer age = -1;
+    private String idCardNo;
 
     /**
      * @return the deptId
@@ -147,5 +148,13 @@ public class SignUpPersonSearchCommand {
      */
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public String getIdCardNo() {
+        return idCardNo;
+    }
+
+    public void setIdCardNo(String idCardNo) {
+        this.idCardNo = idCardNo;
     }
 }

@@ -75,8 +75,8 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public Room get(Integer userId) throws Exception {
-        return (Room) hibernateTemplate.load(Room.class, userId);
+    public Room get(Integer roomId) throws Exception {
+        return (Room) hibernateTemplate.get(Room.class, roomId);
     }
 
     @Override
@@ -107,9 +107,20 @@ public class RoomDaoImpl implements RoomDao {
         hibernateTemplate.saveOrUpdateAll(seats);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Seat getSeat(Integer id) throws Exception {
-        return (Seat) hibernateTemplate.load(Seat.class, id);
+    public Seat getSeat(Integer userId) throws Exception {
+        List<Seat> seats = (List<Seat>) hibernateTemplate.find(
+                "from model.Seat as seat where seat.userId = ? ", userId);
+        if (seats == null || seats.isEmpty()) {
+            return null;
+        }
+        Seat seat = seats.get(0);
+        if (seat != null) {
+            seat.setRoom((Room) hibernateTemplate.get(Room.class,
+                    seat.getRoomId()));
+        }
+        return seat;
     }
 
     @Override
@@ -170,4 +181,50 @@ public class RoomDaoImpl implements RoomDao {
         });
     }
 
+    public boolean checkSeats() throws Exception {
+
+        return (Boolean) hibernateTemplate.execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                String sql = "select count(1) from (" + hql;
+                sql += " and (totalSeats is null OR totalUser > totalSeats)) offices";
+                SQLQuery query = session.createSQLQuery(sql);
+                Object obj = query.uniqueResult();
+                if (obj != null && ((Number) obj).intValue() > 0) {
+                    return Boolean.FALSE;
+                }
+                return Boolean.TRUE;
+            }
+        });
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Seat> findSeat(Integer roomId) throws Exception {
+        return (List<Seat>) hibernateTemplate.find(
+                "from model.Seat as seat where seat.roomId = ? ", roomId);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean checkRoom(String code) throws Exception {
+        List<Room> rooms = (List<Room>) hibernateTemplate.find(
+                "from model.Room as room where room.code = ? ", code);
+        return rooms != null && rooms.size() > 0;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void removeSeat(Integer userId) throws Exception {
+        List<Seat> seats = (List<Seat>) hibernateTemplate.find(
+                "from model.Seat as seat where seat.userId = ? ", userId);
+        if (seats != null) {
+            for (Seat seat :seats) {
+            hibernateTemplate.delete(seat);
+            }
+        }
+        hibernateTemplate.flush();
+    }
 }

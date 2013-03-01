@@ -95,8 +95,7 @@ function changeDeart() {
 										<div align="center">
 											<input type="submit" value="确定" name="_target4" />&nbsp;&nbsp;
 											<input type="reset" value="清除" /> &nbsp;&nbsp;<input
-												type="submit" value="返回" style="width: 50px;"
-												name="_target2" />
+												type="button" value="返回" style="width: 50px;" onclick="javascript:document.location='/exam/roomList.action'" />
 										</div>
 									</td>
 								</tr>

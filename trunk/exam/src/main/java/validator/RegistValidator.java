@@ -1,7 +1,5 @@
 package validator;
 
-import java.util.List;
-
 import model.User;
 
 import org.springframework.validation.Errors;
@@ -31,7 +29,7 @@ public class RegistValidator implements Validator {
     }
 
     public void validateRegistInfo(Object target, Errors errors,
-            List<User> idCardNoLst) {
+            User idCardNoLst) {
         RegistCommand v = (RegistCommand) target;
 
         if ("1".equals(v.getEditFlg())) {
@@ -44,11 +42,11 @@ public class RegistValidator implements Validator {
                     errors.rejectValue("idCardNoError",
                             "required.idCardNoError", "身份证号输入不正确!");
                 } else {
-                    if (idCardNoLst == null || idCardNoLst.isEmpty()) {
+                    if (idCardNoLst == null) {
                         errors.rejectValue("idCardNoError",
                                 "required.idCardNoError", "身份证号不存在!");
                     } else {
-                        user = (User) idCardNoLst.get(0);
+                        user = idCardNoLst;
                     }
                 }
             }
@@ -71,7 +69,7 @@ public class RegistValidator implements Validator {
                     errors.rejectValue("idCardNoError",
                             "required.idCardNoError", "身份证号输入不正确!");
                 } else {
-                    if (idCardNoLst != null && idCardNoLst.size() != 0) {
+                    if (idCardNoLst != null) {
                         errors.rejectValue("idCardNoError",
                                 "required.idCardNoError", "身份证号已存在!");
                     }

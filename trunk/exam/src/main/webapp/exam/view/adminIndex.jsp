@@ -56,11 +56,15 @@
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
+									href="/exam/userPasswordReset.action">考生密码重置</a></td>
+							</tr>
+							<tr bgcolor="#ffffff">
+								<td style="height: 10px; text-align: left;"><a
 									href="/exam/roomList.action">考场登陆</a></td>
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
-									href="/exam/userPasswordReset.action">考生密码重置</a></td>
+									href="/exam/userSeatReset.action">考生座位重置</a></td>
 							</tr>
 						</table>
 					</td>

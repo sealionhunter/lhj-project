@@ -22,4 +22,6 @@ public interface ApplyDao {
     public List<Apply> findApplyInfo(Integer userId) throws Exception;
 
     public void update(Apply apply) throws Exception;
+
+    public boolean hasUnVerified() throws Exception;
 }

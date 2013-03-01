@@ -35,12 +35,11 @@ public class UserPasswordServiceImpl implements UserPasswordService {
     @Override
     public void searchUserApplyInfo(UserPasswordResetCommand cmd,
             BindException errors) throws Exception {
-        List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
-        if (user == null || user.isEmpty()) {
+        User u = userDao.getByIdCardNo(cmd.getIdCardNo());
+        if (u == null) {
             errors.rejectValue("idCardNo", "required.idCardNo", "身份证号不正确!");
             return;
         }
-        User u = user.get(0);
         cmd.setUser(u);
         List<Apply> applyList = applyDao.findApplyInfo(u.getId());
         if (applyList == null || applyList.isEmpty()) {
@@ -52,8 +51,9 @@ public class UserPasswordServiceImpl implements UserPasswordService {
     }
 
     @Override
-    public void resetUserPasswor(String idCardNo, String initPassword) throws Exception {
-        User u = userDao.findIdCardNo(idCardNo).get(0);
+    public void resetUserPasswor(String idCardNo, String initPassword)
+            throws Exception {
+        User u = userDao.getByIdCardNo(idCardNo);
         u.setPassword(initPassword);
         userDao.update(u);
     }

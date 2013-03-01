@@ -8,7 +8,7 @@ public interface UserDao {
 
     public Integer add(User user) throws Exception;
 
-    public List<User> findIdCardNo(String idcardno) throws Exception;
+    public User getByIdCardNo(String idcardno) throws Exception;
     public List<User> findUserName(String userName) throws Exception;
     public User get(int id) throws Exception;
 

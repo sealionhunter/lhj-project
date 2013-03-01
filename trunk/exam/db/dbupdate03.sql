@@ -1,5 +1,10 @@
 use exam;
 
+update exam set examTime = '8:30-11:30' where id = 1;
+
+DROP TABLE IF EXISTS `admission`;
+DROP TABLE IF EXISTS `seat`;
+DROP TABLE IF EXISTS `room`; 
 CREATE TABLE `room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` char(4) NOT NULL,

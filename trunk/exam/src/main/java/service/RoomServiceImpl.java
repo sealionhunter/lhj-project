@@ -1,8 +1,8 @@
 package service;
 
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import model.Exam;
 import model.Office;
 import model.Room;
 import model.Seat;
+import model.User;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
@@ -23,6 +24,7 @@ import org.springframework.validation.Errors;
 
 import command.RoomEditCommand;
 import command.SignUpPersonSearchCommand;
+import command.UserSeatResetCommand;
 
 import dao.AdmissionDao;
 import dao.ApplyDao;
@@ -73,6 +75,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void editOk(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception {
+        if (roomDao.checkRoom(cmd.getCode())) {
+            errors.rejectValue("code", "code", "指定编号的考场已存在，请重新指定");
+            return;
+        }
         Room room = new Room();
         room.setId(cmd.getId());
         room.setCode(cmd.getCode());
@@ -87,10 +93,9 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void generateAdmission(HttpServletRequest request,
             RoomEditCommand cmd, BindException errors) throws Exception {
-        List<Office> offices = roomDao.findOfficeInfo(cmd);
-        if (!offices.isEmpty()) {
-            errors.reject("", "");
-        }
+        Exam exam = examDao.list().get(0);
+
+        checkCondition(exam);
         SignUpPersonSearchCommand condition = new SignUpPersonSearchCommand();
         condition.setState(2);
         condition.setDeptId(cmd.getDepartId());
@@ -102,15 +107,8 @@ public class RoomServiceImpl implements RoomService {
 
         // yyMMddAABB
         // TODO
-        Exam exam = examDao.list().get(0);
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         String prefix = sdf.format(exam.getExamDate());
-        NumberFormat nf = NumberFormat.getInstance();
-        nf.setMaximumIntegerDigits(2);
-        nf.setMinimumIntegerDigits(2);
-        nf.setMinimumFractionDigits(0);
-        nf.setMaximumFractionDigits(0);
-        String format = "%s%02d%02d";
         Map<String, Integer> sequeses = new HashMap<String, Integer>();
         // TODO
         Room room = null;
@@ -141,12 +139,48 @@ public class RoomServiceImpl implements RoomService {
             seat.setRoomId(room.getId());
             seat.setUserId(apply.getId().getUserid());
             seats.add(seat);
-            admissions.add(new Admission(apply.getUser().getId(), String
-                    .format(format, prefix, room.getId(), seq)));
+            admissions.add(new Admission(apply.getUser().getId(), prefix
+                    + room.getCode() + seat.getCode()));
         }
 
         roomDao.addSeat(seats);
         admissionDao.add(admissions);
+    }
+
+    private void checkCondition(Exam exam) throws Exception {
+        Date date = exam.getExamDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dateStr = sdf.format(date);
+        String timeStr = exam.getExamTime();
+        String[] timeArray = timeStr.split("-");
+
+        String from = dateStr + " " + timeArray[0];
+        String to = dateStr + " " + timeArray[1];
+
+        sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
+        Date fromTime = sdf.parse(from);
+        Date toTime = sdf.parse(to);
+        Date now = new Date();
+
+        if (now.before(exam.getApplyBeginDate())) {
+            throw new Exception("报名还未开始，不能分配座位！");
+        }
+        if (now.before(exam.getApplyDeadDate())) {
+            throw new Exception("报名还未结束，不能分配座位！");
+        }
+        if (now.after(toTime)) {
+            throw new Exception("考试已经结束，不能分配座位！");
+        }
+        if (now.after(fromTime)) {
+            throw new Exception("考试已经开始，不能分配座位！");
+        }
+        // 存在未审核人员
+        if (applyDao.hasUnVerified()) {
+            throw new Exception("还有考生审核未完成，不能分配座位。请先审核完全部考生！");
+        }
+        if (!roomDao.checkSeats()) {
+            throw new Exception("考场座位数不够容纳全部考生，请先确认考场座位！");
+        }
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -176,6 +210,99 @@ public class RoomServiceImpl implements RoomService {
         }
         cmd.setOffices(offices);
         return model;
+    }
+
+    @Transactional
+    @Override
+    public void resetUserSeat(UserSeatResetCommand cmd, BindException errors)
+            throws Exception {
+        roomDao.removeSeat(cmd.getUserId());
+        admissionDao.delete(cmd.getUserId());
+        Exam exam = examDao.list().get(0);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        String prefix = sdf.format(exam.getExamDate());
+        Seat seat = new Seat();
+        seat.setCode(cmd.getSeatId());
+        seat.setUserId(cmd.getUserId());
+        seat.setRoomId(cmd.getRoomId());
+        Admission admission = new Admission(cmd.getUserId(), prefix
+                + cmd.getRoomCode() + seat.getCode());
+        roomDao.addSeat(seat);
+        admissionDao.add(admission);
+        seat = roomDao.getSeat(cmd.getUserId());
+        cmd.setSeat(seat);
+        if (seat != null) {
+            cmd.setSeatId(seat.getCode());
+            cmd.setRoomId(seat.getRoomId());
+            if (seat.getRoom() != null) {
+                cmd.setRoomCode(seat.getRoom().getCode());
+            }
+        }
+        admission = admissionDao.get(cmd.getUserId());
+        if (admission != null) {
+            cmd.setAdmission(admission.getCode());
+        }
+    }
+
+    @Override
+    public void initSeatReset(UserSeatResetCommand cmd, BindException errors)
+            throws Exception {
+        String idCardNo = cmd.getIdCardNo();
+        User user = userDao.getByIdCardNo(idCardNo);
+        if (user == null) {
+            errors.rejectValue("idCardNo", "required.idCardNo", "身份证号不正确!");
+            return;
+        }
+        List<Apply> applyList = applyDao.findApplyInfo(user.getId());
+        if (applyList == null || applyList.isEmpty()) {
+            errors.rejectValue("idCardNo", "required.apply", "找不到该考生的报名信息");
+            return;
+        }
+        Apply a = applyList.get(0);
+        cmd.setUser(user);
+        cmd.setUserId(user.getId());
+        cmd.setApply(a);
+        Seat seat = roomDao.getSeat(user.getId());
+        cmd.setSeat(seat);
+        String seatCode = "";
+        if (seat != null) {
+            cmd.setSeatId(seat.getCode());
+            seatCode = seat.getCode();
+            cmd.setRoomId(seat.getRoomId());
+            if (seat.getRoom() != null) {
+                cmd.setRoomCode(seat.getRoom().getCode());
+            }
+        }
+        Admission admission = admissionDao.get(user.getId());
+        if (admission != null) {
+            cmd.setAdmission(admission.getCode());
+        }
+        List<Room> rooms = roomDao.list(a.getOffice().getId());
+        for (Room room : rooms) {
+            List<Seat> dbSeats = roomDao.findSeat(room.getId());
+            List<Seat> avliableSeats = new ArrayList<Seat>();
+            for (int i = 1; i <= room.getSeats(); i++) {
+                boolean findDbSeat = false;
+                for (Seat dbSeat : dbSeats) {
+                    if (i == Integer.parseInt(dbSeat.getCode())
+                            && !seatCode.equals(dbSeat.getCode())) {
+                        findDbSeat = true;
+                        break;
+                    }
+                }
+                if (findDbSeat) {
+                    continue;
+                }
+
+                Seat avliable = new Seat();
+                avliable.setCode(String.format("%02d", i));
+                avliable.setRoomId(room.getId());
+                avliable.setUserId(user.getId());
+                avliableSeats.add(avliable);
+            }
+            room.setSeatsSet(avliableSeats);
+        }
+        cmd.setRooms(rooms);
     }
 
     /**
@@ -282,4 +409,5 @@ public class RoomServiceImpl implements RoomService {
     public void setAdmissionDao(AdmissionDao admissionDao) {
         this.admissionDao = admissionDao;
     }
+
 }

@@ -76,7 +76,7 @@ public class UserPasswordResetController extends SimpleFormController {
             session.removeAttribute("UserInfo");
             session.removeAttribute("ApplyInfo");
             session.removeAttribute("photoData" + cmd.getIdCardNo());
-            return new ModelAndView(new RedirectView("adminIndex.action"));
+            return new ModelAndView(new RedirectView("adminInit.action"));
         }
     }
 }

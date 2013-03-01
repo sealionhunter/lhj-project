@@ -139,8 +139,8 @@ public class RegistServiceImpl implements RegistService {
     }
 
     @Override
-    public List<User> findIdCardNo(String idCardNo) throws Exception {
-        return userDao.findIdCardNo(idCardNo);
+    public User findIdCardNo(String idCardNo) throws Exception {
+        return userDao.getByIdCardNo(idCardNo);
     }
 
     @Override
@@ -279,7 +279,8 @@ public class RegistServiceImpl implements RegistService {
     }
 
     /**
-     * @param admissionDao the admissionDao to set
+     * @param admissionDao
+     *            the admissionDao to set
      */
     public void setAdmissionDao(AdmissionDao admissionDao) {
         this.admissionDao = admissionDao;
@@ -288,13 +289,12 @@ public class RegistServiceImpl implements RegistService {
     @Override
     public void modifyPassword(ModifyPasswordCommand cmd, BindException errors)
             throws Exception {
-        List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
-        if (user == null || user.isEmpty()) {
+        User u = userDao.getByIdCardNo(cmd.getIdCardNo());
+        if (u == null) {
             errors.rejectValue("idCardNoError", "required.idCardNoError",
                     "身份证号不正确!");
             return;
         }
-        User u = user.get(0);
         if (!cmd.getOldPassword().equals(u.getPassword())) {
             errors.rejectValue("oldPassword", "required.oldPassword", "旧密码不正确!");
             return;
@@ -307,12 +307,11 @@ public class RegistServiceImpl implements RegistService {
     @Override
     public void searchStatus(StatusSearchCommand cmd, BindException errors)
             throws Exception {
-        List<User> user = userDao.findIdCardNo(cmd.getIdCardNo());
-        if (user == null || user.isEmpty()) {
+        User u = userDao.getByIdCardNo(cmd.getIdCardNo());
+        if (u == null) {
             errors.rejectValue("idCardNo", "required.idCardNo", "身份证号不正确!");
             return;
         }
-        User u = user.get(0);
         if (!cmd.getPassword().equals(u.getPassword())) {
             errors.rejectValue("password", "required.password", "密码不正确!");
             return;
@@ -382,7 +381,8 @@ public class RegistServiceImpl implements RegistService {
     }
 
     @Override
-    public void printAdmission(AdmissionCommand cmd, BindException errors) throws Exception {
+    public void printAdmission(AdmissionCommand cmd, BindException errors)
+            throws Exception {
         Exam exam = examDao.list().get(0);
 
         Date date = exam.getExamDate();
