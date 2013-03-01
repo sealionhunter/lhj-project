@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,7 @@ public class RegistWizardController extends AbstractWizardFormController {
 
     private String successView;
     private String cancelView;
+    private String dataEditBefore;
 
     public String getCancelView() {
         return cancelView;
@@ -69,12 +71,19 @@ public class RegistWizardController extends AbstractWizardFormController {
             cmd.setExams(registService.listExam());
             Date today = Calendar.getInstance().getTime();
             for (Exam exam : cmd.getExams()) {
-                if (!"1".equals(editFlg) && today.after(exam.getApplyDeadDate())) {
+                if (!"1".equals(editFlg)
+                        && today.after(exam.getApplyDeadDate())) {
                     throw new Exception("很抱歉，报名已经结束！");
-//                    errors.reject("test", "很抱歉，报名已经结束！");
+                    // errors.reject("test", "很抱歉，报名已经结束！");
                 } else if (today.before(exam.getApplyBeginDate())) {
                     throw new Exception("报名还未开始，请耐心等待！");
-//                    errors.reject("test", "报名还未开始，请耐心等待！");
+                    // errors.reject("test", "报名还未开始，请耐心等待！");
+                } else if (dataEditBefore != null) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+                    Date d = sdf.parse(dataEditBefore);
+                    if ("1".equals(editFlg) && today.after(d)) {
+                        throw new Exception("信息修改时间已结束，无法修改！");
+                    }
                 }
             }
             if (!errors.hasErrors()) {
@@ -104,9 +113,8 @@ public class RegistWizardController extends AbstractWizardFormController {
         RegistCommand cmd = (RegistCommand) command;
         if (page == 0 && !errors.hasErrors()) {
             String idCardNo = cmd.getIdCardNo();
-            List<User> users = registService.findIdCardNo(idCardNo);
-            if (users != null && !users.isEmpty()) {
-                User user = users.get(0);
+            User user = registService.findIdCardNo(idCardNo);
+            if (user != null) {
                 cmd.setUserId(user.getId());
                 cmd.setName(user.getName());
                 cmd.setPassword(user.getPassword());
@@ -133,16 +141,17 @@ public class RegistWizardController extends AbstractWizardFormController {
                 cmd.setWorkExp(user.getWorkExp());
                 cmd.setSocialRel(user.getSocialRel());
                 cmd.setPhoto(user.getPhoto());
-                
+
                 List<Apply> applies = registService.getApply(user.getId());
                 if (applies != null && !applies.isEmpty()) {
                     Integer applyPostId = applies.get(0).getId().getOfficeid();
                     int state = applies.get(0).getState();
                     if (state == 2) {
                         throw new Exception("申请已审核完毕，无法修改！");
-//                        errors.reject("error", "");
-//                        super.postProcessPage(request, command, errors, page);
-//                        return ;
+                        // errors.reject("error", "");
+                        // super.postProcessPage(request, command, errors,
+                        // page);
+                        // return ;
                     }
                     if (applyPostId != null) {
                         Office office = null;
@@ -252,7 +261,7 @@ public class RegistWizardController extends AbstractWizardFormController {
 
         switch (page) {
         case 0:
-            List<User> idCardNoLst = null;
+            User idCardNoLst = null;
             try {
                 if (vote.getIdCardNo() != null) {
                     idCardNoLst = registService
@@ -289,6 +298,14 @@ public class RegistWizardController extends AbstractWizardFormController {
      */
     public void setRegistService(RegistService registService) {
         this.registService = registService;
+    }
+
+    public String getDataEditBefore() {
+        return dataEditBefore;
+    }
+
+    public void setDataEditBefore(String dataEditBefore) {
+        this.dataEditBefore = dataEditBefore;
     }
 
 }

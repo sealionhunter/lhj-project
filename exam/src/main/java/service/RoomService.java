@@ -8,6 +8,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 
 import command.RoomEditCommand;
+import command.UserSeatResetCommand;
 
 public interface RoomService {
 
@@ -23,5 +24,9 @@ public interface RoomService {
 
     @SuppressWarnings("rawtypes")
     public Map initList(RoomEditCommand cmd) throws Exception;
+
+    public void resetUserSeat(UserSeatResetCommand cmd, BindException errors) throws Exception;
+
+    public void initSeatReset(UserSeatResetCommand cmd, BindException errors) throws Exception;
 
 }

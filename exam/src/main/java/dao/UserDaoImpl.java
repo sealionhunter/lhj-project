@@ -17,9 +17,13 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<User> findIdCardNo(String idCardNo) throws Exception {
-        return getHibernateTemplate().find(
+    public User getByIdCardNo(String idCardNo) throws Exception {
+        List<User> users = getHibernateTemplate().find(
                 "from User as user where user.idCardNo = ?", idCardNo);
+        if (users == null || users.isEmpty()) {
+            return null;
+        }
+        return users.get(0);
     }
 
     @SuppressWarnings("unchecked")

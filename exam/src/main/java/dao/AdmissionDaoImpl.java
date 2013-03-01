@@ -58,4 +58,14 @@ public class AdmissionDaoImpl implements AdmissionDao {
     public void update(Admission admission) throws Exception {
         hibernateTemplate.update(admission);
     }
+
+    @Override
+    public void delete(Integer userId) throws Exception {
+        Admission sdmission = (Admission) hibernateTemplate.get(
+                Admission.class, userId);
+        if (sdmission != null) {
+            hibernateTemplate.delete(sdmission);
+        }
+        hibernateTemplate.flush();
+    }
 }

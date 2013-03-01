@@ -8,12 +8,20 @@
 	http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/conf/exam.properties</value>
+			</list>
+		</property>
+	</bean>
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/exam" />
-		<property name="username" value="root" />
-		<property name="password" value="overseas" />
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
 		<property name="maxActive" value="30" />
 		<property name="maxIdle" value="20" />
 		<property name="initialSize" value="10" />
@@ -87,6 +95,7 @@
 				<prop key="/roomList.action">roomListController</prop>
 				<prop key="/admissionPrint.action">admissionPrintController</prop>
 				<prop key="/userPasswordReset.action">userPasswordResetController</prop>
+				<prop key="/userSeatReset.action">userSeatResetController</prop>
 			</props>
 		</property>
 	</bean>
@@ -148,6 +157,7 @@
 		<property name="successView" value="success" />
 		<property name="cancelView" value="init" />
 		<property name="commandName" value="RegistCommand" />
+		<property name="dataEditBefore" value="${dataEditBefore}" />
 		<property name="commandClass" value="command.RegistCommand" />
 		<property name="registService" ref="registService" />
 		<!---配置操作类 -->
@@ -301,7 +311,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userPasswordService" class="service.UserPasswordServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 		<property name="applyDao" ref="applyDao"></property>
@@ -312,11 +322,25 @@
 		<property name="successView" value="userPasswordReset" />
 		<property name="commandName" value="UserPasswordResetCommand" />
 		<property name="commandClass" value="command.UserPasswordResetCommand" />
-		<property name="initPassword" value="888888" />
+		<property name="initPassword" value="${userResetPassword}" />
 		<property name="userPasswordService" ref="userPasswordService" />
 		<property name="validators">
 			<list>
 				<ref bean="userPasswordResetValidator" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userSeatResetValidator" class="validator.UserSeatResetValidator" />
+	<bean id="userSeatResetController" class="controller.UserSeatResetController">
+		<property name="sessionForm" value="true" />
+		<property name="formView" value="room/userSeatReset" />
+		<property name="successView" value="room/userSeatReset" />
+		<property name="commandName" value="UserSeatResetCommand" />
+		<property name="commandClass" value="command.UserSeatResetCommand" />
+		<property name="roomService" ref="roomService" />
+		<property name="validators">
+			<list>
+				<ref bean="userSeatResetValidator" />
 			</list>
 		</property>
 	</bean>

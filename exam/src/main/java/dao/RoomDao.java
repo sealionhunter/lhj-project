@@ -25,8 +25,15 @@ public interface RoomDao {
 
     public Seat getSeat(Integer userId) throws Exception;
 
+    public List<Seat> findSeat(Integer roomId) throws Exception;
+
     public void updateSeat(Seat admission) throws Exception;
 
-    public List<Office> findOfficeInfo(RoomEditCommand cmd)
-            throws Exception;
+    public List<Office> findOfficeInfo(RoomEditCommand cmd) throws Exception;
+
+    public boolean checkSeats() throws Exception;
+
+    public boolean checkRoom(String code) throws Exception;
+
+    public void removeSeat(Integer userId) throws Exception;
 }
