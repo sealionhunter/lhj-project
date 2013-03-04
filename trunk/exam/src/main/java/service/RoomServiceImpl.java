@@ -42,6 +42,7 @@ public class RoomServiceImpl implements RoomService {
     private ApplyDao applyDao;
     private ExamDao examDao;
     private AdmissionDao admissionDao;
+    private boolean resetAdmissionAfterPrint;
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -188,6 +189,9 @@ public class RoomServiceImpl implements RoomService {
         if (!roomDao.checkSeats(condition)) {
             throw new Exception("考场座位数不够容纳全部考生，请先确认考场座位！");
         }
+        if (!resetAdmissionAfterPrint && !roomDao.checkAdmission(condition)) {
+            throw new Exception("已有考生打印了准考证号，无法重新分配座位");
+        }
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -223,6 +227,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void resetUserSeat(UserSeatResetCommand cmd, BindException errors)
             throws Exception {
+        Admission ad = admissionDao.get(cmd.getUserId());
+        if (ad != null && ad.isPrintFlg() && !resetAdmissionAfterPrint) {
+            throw new Exception("考生已经打印准考证号，无法重新生成准考证号。");
+        }
         roomDao.removeSeat(cmd.getUserId());
         admissionDao.delete(cmd.getUserId());
         Exam exam = examDao.list().get(0);
@@ -415,6 +423,20 @@ public class RoomServiceImpl implements RoomService {
      */
     public void setAdmissionDao(AdmissionDao admissionDao) {
         this.admissionDao = admissionDao;
+    }
+
+    /**
+     * @return the resetAdmissionAfterPrint
+     */
+    public boolean isResetAdmissionAfterPrint() {
+        return resetAdmissionAfterPrint;
+    }
+
+    /**
+     * @param resetAdmissionAfterPrint the resetAdmissionAfterPrint to set
+     */
+    public void setResetAdmissionAfterPrint(boolean resetAdmissionAfterPrint) {
+        this.resetAdmissionAfterPrint = resetAdmissionAfterPrint;
     }
 
 }

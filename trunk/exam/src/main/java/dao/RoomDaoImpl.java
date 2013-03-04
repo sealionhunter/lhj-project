@@ -189,7 +189,7 @@ public class RoomDaoImpl implements RoomDao {
             public Object doInHibernate(Session session)
                     throws HibernateException, SQLException {
 
-                String sql = "select count(1) from (" + hql;
+                String sql = "select count(*) from (" + hql;
                 Map<String, Integer> params = new HashMap<String, Integer>();
                 if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
                     sql += " and office.departId = :departId";
@@ -241,5 +241,42 @@ public class RoomDaoImpl implements RoomDao {
             }
         }
         hibernateTemplate.flush();
+    }
+
+    @Override
+    public boolean checkAdmission(final RoomEditCommand cmd) throws Exception {
+
+        return (Boolean) hibernateTemplate.execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+
+                String sql = " select count(*) from apply A "
+                        + " inner join office O on A.officeId = O.id "
+                        + " inner join admission Ad on Ad.userId = A.userId "
+                        + " where Ad.printFlg = true ";
+                Map<String, Integer> params = new HashMap<String, Integer>();
+                if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
+                    sql += " and O.departId = :departId";
+                    params.put("departId", cmd.getDepartId());
+                }
+                if (cmd.getOfficeId() != null && cmd.getOfficeId() > 0) {
+                    sql += " and O.id = :officeId";
+                    params.put("officeId", cmd.getOfficeId());
+                }
+                SQLQuery query = session.createSQLQuery(sql);
+
+                for (Map.Entry<String, Integer> entry : params.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
+
+                Object obj = query.uniqueResult();
+                if (obj != null && ((Number) obj).intValue() > 0) {
+                    return Boolean.FALSE;
+                }
+                return Boolean.TRUE;
+            }
+        });
     }
 }

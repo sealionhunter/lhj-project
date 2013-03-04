@@ -36,4 +36,6 @@ public interface RoomDao {
     public boolean checkRoom(String code) throws Exception;
 
     public void removeSeat(Integer userId) throws Exception;
+
+    public boolean checkAdmission(RoomEditCommand condition) throws Exception;
 }
