@@ -311,6 +311,8 @@
 				<ref bean="admissionPrintValidator" />
 			</list>
 		</property>
+		<property name="beginDate" value="2013/03/12" />
+		<property name="endDate" value="2013/03/14" />
 	</bean>
 
 	<bean id="userPasswordService" class="service.UserPasswordServiceImpl">
