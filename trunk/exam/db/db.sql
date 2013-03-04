@@ -142,6 +142,7 @@ CREATE TABLE `seat` (
 CREATE TABLE `admission` (
   `userId` int(11) NOT NULL,
   `code` char(10) NOT NULL,
+  `printFlg` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`userId`),
   KEY `FK_admission_user_idx` (`userId`),
   CONSTRAINT `FK_admission_user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
