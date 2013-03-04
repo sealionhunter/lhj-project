@@ -418,5 +418,8 @@ public class RegistServiceImpl implements RegistService {
         }
         cmd.setExam(exam);
         cmd.setAdmission(admission);
+
+        admission.setPrintFlg(true);
+        admissionDao.update(admission);
     }
 }
