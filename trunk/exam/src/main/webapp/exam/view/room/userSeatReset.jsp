@@ -137,7 +137,7 @@ function doLogout() {
 									</tr>
 									<tr bgcolor="#ffffff">
 										<td align="right">考场编号：</td>
-										<td align="left">${UserSeatResetCommand.seat.room.name}(${UserSeatResetCommand.seat.room.code})</td>
+										<td align="left"><c:if test="${UserSeatResetCommand.seat != null }"> ${UserSeatResetCommand.seat.room.name}(${UserSeatResetCommand.seat.room.code})</c:if></td>
 										<td align="right">座位号：</td>
 										<td align="left">${UserSeatResetCommand.seat.code}</td>
 									</tr>
@@ -149,6 +149,7 @@ function doLogout() {
 								style="padding-left: 10px;"><b><span
 									style="color: #666666">重置考生座位</span></b></td>
 						</tr>
+						<c:if test="${fn:length(UserSeatResetCommand.rooms) > 0 }">
 						<tr bgcolor="#FFFFFF">
 							<td valign="top" align="center" height="200"
 								style="padding-top: 5px; padding-bottom: 5px;">
@@ -175,6 +176,7 @@ function doLogout() {
 									</tr>
 								</table>
 							</td>
+						</tr></c:if>
 						</tr>
 					</c:if>
 				</table>
