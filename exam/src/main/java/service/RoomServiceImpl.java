@@ -75,6 +75,8 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void editOk(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception {
+        cmd.setOffices(officeDao.list());
+        cmd.setDeparts(departDao.list());
         if (roomDao.checkRoom(cmd.getCode())) {
             errors.rejectValue("code", "code", "指定编号的考场已存在，请重新指定");
             return;
@@ -95,11 +97,13 @@ public class RoomServiceImpl implements RoomService {
             RoomEditCommand cmd, BindException errors) throws Exception {
         Exam exam = examDao.list().get(0);
 
-        checkCondition(exam);
         SignUpPersonSearchCommand condition = new SignUpPersonSearchCommand();
         condition.setState(2);
         condition.setDeptId(cmd.getDepartId());
         condition.setPostId(cmd.getOfficeId());
+
+        checkCondition(exam, cmd);
+
         List<Apply> applies = applyDao.list(condition);
         List<Admission> admissions = new ArrayList<Admission>(applies.size());
         List<Seat> seats = new ArrayList<Seat>(applies.size());
@@ -141,13 +145,16 @@ public class RoomServiceImpl implements RoomService {
             seats.add(seat);
             admissions.add(new Admission(apply.getUser().getId(), prefix
                     + room.getCode() + seat.getCode()));
+            roomDao.removeSeat(apply.getId().getUserid());
+            admissionDao.delete(apply.getId().getUserid());
         }
 
         roomDao.addSeat(seats);
         admissionDao.add(admissions);
     }
 
-    private void checkCondition(Exam exam) throws Exception {
+    private void checkCondition(Exam exam, RoomEditCommand condition)
+            throws Exception {
         Date date = exam.getExamDate();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String dateStr = sdf.format(date);
@@ -178,7 +185,7 @@ public class RoomServiceImpl implements RoomService {
         if (applyDao.hasUnVerified()) {
             throw new Exception("还有考生审核未完成，不能分配座位。请先审核完全部考生！");
         }
-        if (!roomDao.checkSeats()) {
+        if (!roomDao.checkSeats(condition)) {
             throw new Exception("考场座位数不够容纳全部考生，请先确认考场座位！");
         }
     }

@@ -42,6 +42,9 @@ function changeDeart() {
 	}
 }
 
+function generate() {
+	return confirm("如果以前分配过座位，点击确定将重新分配座位，生成新的准考证号。确定吗?");
+}
 function doLogout() {
 	adminLogoutForm.submit();
 }
@@ -92,7 +95,7 @@ function doLogout() {
 									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: center;" colspan="2"><input
 										type="submit" value="查询" style="width: 50px;" />&nbsp;&nbsp;<input
-										type="submit" value="座位分配/准考证号生成" style="width: 150px;" name="generateAdmission"/>&nbsp;&nbsp;<input
+										type="submit" value="座位分配/准考证号生成" style="width: 150px;" name="generateAdmission" onclick="return generate();"/>&nbsp;&nbsp;<input
 										type="button" value="返回" style="width: 50px;"
 										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
 									<td style="text-align: right; width: 10%;"></td>

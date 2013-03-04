@@ -84,6 +84,11 @@ public class ApplyDaoImpl implements ApplyDao {
             hql += "and U.degree LIKE ? ";
             paramList.add(getLikeStr(cmd.getDegree().trim()));
         }
+        if (cmd.getIdentity() != null
+                && Integer.parseInt(cmd.getIdentity()) >= 0) {
+            hql += "and U.identity = ? ";
+            paramList.add(cmd.getIdentity().trim());
+        }
         if (cmd.getAge() >= 0) {
             hql += "and (? - U.birthdayYear < ? AND (? - U.birthdayYear) >= ?)";
             Integer year = Calendar.getInstance().get(Calendar.YEAR);

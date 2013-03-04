@@ -19,6 +19,9 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
         adminAuthViewNameList.add("adminInit");
         adminAuthViewNameList.add("adminIndex");
         adminAuthViewNameList.add("userPasswordReset");
+        adminAuthViewNameList.add("userSeatReset");
+        adminAuthViewNameList.add("roomEdit");
+        adminAuthViewNameList.add("roomList");
     }
 
     public void postHandle(HttpServletRequest request,

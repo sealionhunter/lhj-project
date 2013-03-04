@@ -181,16 +181,31 @@ public class RoomDaoImpl implements RoomDao {
         });
     }
 
-    public boolean checkSeats() throws Exception {
+    public boolean checkSeats(final RoomEditCommand cmd) throws Exception {
 
         return (Boolean) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session)
                     throws HibernateException, SQLException {
+
                 String sql = "select count(1) from (" + hql;
+                Map<String, Integer> params = new HashMap<String, Integer>();
+                if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
+                    sql += " and office.departId = :departId";
+                    params.put("departId", cmd.getDepartId());
+                }
+                if (cmd.getOfficeId() != null && cmd.getOfficeId() > 0) {
+                    sql += " and office.id = :officeId";
+                    params.put("officeId", cmd.getOfficeId());
+                }
                 sql += " and (totalSeats is null OR totalUser > totalSeats)) offices";
                 SQLQuery query = session.createSQLQuery(sql);
+
+                for (Map.Entry<String, Integer> entry : params.entrySet()) {
+                    query.setParameter(entry.getKey(), entry.getValue());
+                }
+
                 Object obj = query.uniqueResult();
                 if (obj != null && ((Number) obj).intValue() > 0) {
                     return Boolean.FALSE;
@@ -221,8 +236,8 @@ public class RoomDaoImpl implements RoomDao {
         List<Seat> seats = (List<Seat>) hibernateTemplate.find(
                 "from model.Seat as seat where seat.userId = ? ", userId);
         if (seats != null) {
-            for (Seat seat :seats) {
-            hibernateTemplate.delete(seat);
+            for (Seat seat : seats) {
+                hibernateTemplate.delete(seat);
             }
         }
         hibernateTemplate.flush();
