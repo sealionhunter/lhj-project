@@ -31,7 +31,7 @@ public interface RoomDao {
 
     public List<Office> findOfficeInfo(RoomEditCommand cmd) throws Exception;
 
-    public boolean checkSeats() throws Exception;
+    public boolean checkSeats(RoomEditCommand cmd) throws Exception;
 
     public boolean checkRoom(String code) throws Exception;
 

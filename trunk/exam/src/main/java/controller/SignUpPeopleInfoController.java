@@ -48,8 +48,12 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         return model;
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.web.servlet.mvc.AbstractFormController#formBackingObject(javax.servlet.http.HttpServletRequest)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.web.servlet.mvc.AbstractFormController#formBackingObject
+     * (javax.servlet.http.HttpServletRequest)
      */
     @Override
     protected Object formBackingObject(HttpServletRequest request)
@@ -83,15 +87,13 @@ public class SignUpPeopleInfoController extends SimpleFormController {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private void initModel(Map model, SignUpPersonSearchCommand cmd)
             throws Exception {
-        List<Apply> applyList = registService.listApplyUser(cmd);
-        model.put("applyUsers", applyList);
 
         List<Depart> deptList = registService.listDepart();
 
-        Depart dept = new Depart();
-        dept.setId(-1);
-        dept.setName("");
-        deptList.add(0, dept);
+        // Depart dept = new Depart();
+        // dept.setId(-1);
+        // dept.setName("");
+        // deptList.add(0, dept);
         model.put("departs", deptList);
 
         List<Office> officeList = registService.listOffice();
@@ -101,6 +103,17 @@ public class SignUpPeopleInfoController extends SimpleFormController {
         office.setCode("");
         officeList.add(0, office);
         model.put("offices", officeList);
+
+        if ((cmd.getDeptId() == null || cmd.getDeptId() == -1)
+                && deptList != null && deptList.size() > 0) {
+            cmd.setDeptId(deptList.get(0).getId());
+        }
+        // if ((cmd.getPostId() == null || cmd.getPostId() == -1)
+        // && officeList != null && officeList.size() > 0) {
+        // cmd.setPostId(officeList.get(0).getId());
+        // }
+        List<Apply> applyList = registService.listApplyUser(cmd);
+        model.put("applyUsers", applyList);
     }
 
     /**
