@@ -7,5 +7,6 @@
 			<generator class="assigned" />
 		</id>
 		<property generated="never" lazy="false" name="code" />
+		<property generated="never" lazy="false" name="printFlg" />
 	</class>
 </hibernate-mapping>

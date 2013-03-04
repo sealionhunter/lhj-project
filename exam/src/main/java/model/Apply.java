@@ -50,6 +50,12 @@ public class Apply implements Serializable {
 
     private Depart depart;
 
+    private Admission admission;
+
+    private Seat seat;
+
+    private Room room;
+
     /**
      * @return the aplyUserPolitical
      */
@@ -319,5 +325,29 @@ public class Apply implements Serializable {
      */
     public void setDepart(Depart depart) {
         this.depart = depart;
+    }
+
+    public Admission getAdmission() {
+        return admission;
+    }
+
+    public void setAdmission(Admission admission) {
+        this.admission = admission;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

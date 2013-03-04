@@ -15,6 +15,7 @@ public class Admission implements Serializable {
 
     private int userId;
     private String code;
+    private boolean printFlg;
     private Seat seat;
 
     public Admission(int userId, String code) {
@@ -68,5 +69,13 @@ public class Admission implements Serializable {
      */
     public void setSeat(Seat seat) {
         this.seat = seat;
+    }
+
+    public boolean isPrintFlg() {
+        return printFlg;
+    }
+
+    public void setPrintFlg(boolean printFlg) {
+        this.printFlg = printFlg;
     }
 }

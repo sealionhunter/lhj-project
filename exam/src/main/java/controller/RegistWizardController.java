@@ -78,10 +78,10 @@ public class RegistWizardController extends AbstractWizardFormController {
                 } else if (today.before(exam.getApplyBeginDate())) {
                     throw new Exception("报名还未开始，请耐心等待！");
                     // errors.reject("test", "报名还未开始，请耐心等待！");
-                } else if (dataEditBefore != null) {
+                } else if ("1".equals(editFlg) && dataEditBefore != null) {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
                     Date d = sdf.parse(dataEditBefore);
-                    if ("1".equals(editFlg) && today.after(d)) {
+                    if (today.after(d)) {
                         throw new Exception("信息修改时间已结束，无法修改！");
                     }
                 }
