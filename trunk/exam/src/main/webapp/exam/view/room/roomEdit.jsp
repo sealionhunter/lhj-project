@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/exam/view/css/user.css" type="text/css"
 	media="all" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<%--
 <script type="text/javascript">
 <!--
 
@@ -32,7 +33,7 @@ function changeDeart() {
 	}
 }
 //-->
-</script>
+</script> --%>
 </head>
 <body>
 	<form:form name="roomEditForm" method="post"
@@ -76,7 +77,7 @@ function changeDeart() {
 										color="#ff0000">&nbsp;&nbsp;<form:errors
 												path="position" /></font></td>
 								</tr>
-
+<%-- 
 								<tr bgcolor="#f7f7f7">
 									<td align="right">报考部门：</td>
 									<td align="left"><form:select path="departId"
@@ -89,7 +90,7 @@ function changeDeart() {
 									<td align="left"><form:select path="officeId"
 											id="officeId">
 										</form:select></td>
-								</tr>
+								</tr> --%>
 								<tr bgcolor="#f7f7f7">
 									<td height="22" colspan="4">
 										<div align="center">
@@ -107,12 +108,12 @@ function changeDeart() {
 		</div>
 	</form:form>
 </body>
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 <!--
  changeDeart();
  if ('${RoomEditCommand.officeId}' != '') {
 	 document.getElementById("officeId").value='${RoomEditCommand.officeId}'; 
  }
 //-->
-</script>
+</script> --%>
 </html>

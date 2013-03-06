@@ -6,36 +6,54 @@ import command.RoomEditCommand;
 
 import model.Office;
 import model.Room;
+import model.RoomOffice;
 import model.Seat;
 
 public interface RoomDao {
-    public void add(Room room) throws Exception;
 
-    public List<Room> list() throws Exception;
+    public Room getRoom(Integer roomId) throws Exception;
 
-    public List<Room> list(Integer officeId) throws Exception;
+    public Seat getSeat(Integer seatId) throws Exception;
 
-    public Room get(Integer userId) throws Exception;
+    public RoomOffice getRoomOffice(Integer roomOfficeId) throws Exception;
 
-    public void update(Room room) throws Exception;
+    public Seat getSeatByRidAndCode(Integer roomId, String seatCode)
+            throws Exception;
 
-    public void addSeat(Seat admission) throws Exception;
+    public void addRoom(Room room) throws Exception;
 
-    public void addSeat(List<Seat> admissions) throws Exception;
+    public void addSeat(Seat seat) throws Exception;
 
-    public Seat getSeat(Integer userId) throws Exception;
+    public void addSeat(List<Seat> seats) throws Exception;
 
-    public List<Seat> findSeat(Integer roomId) throws Exception;
+    public void addRoomOffice(List<RoomOffice> roomOffices) throws Exception;
+
+    public void updateRoom(Room room) throws Exception;
 
     public void updateSeat(Seat admission) throws Exception;
 
-    public List<Office> findOfficeInfo(RoomEditCommand cmd) throws Exception;
+    public void removeRoom(Room room) throws Exception;
+
+    public void removeRoomOffice(RoomOffice roomOffice) throws Exception;
+
+    public void removeRoomOfficeByRid(Integer roomId) throws Exception;
+
+    public void removeSeatByUids(List<Integer> uids) throws Exception;
+
+    public List<Room> listRoom() throws Exception;
+
+    // public List<Room> listRoomByOid(Integer officeId) throws Exception;
+
+    public List<RoomOffice> listRoomOfficeByOid(Integer officeId)
+            throws Exception;
+
+    public List<Office> listOfficeByCond(RoomEditCommand cmd) throws Exception;
+
+    // public List<Seat> findSeat(Integer roomId) throws Exception;
 
     public boolean checkSeats(RoomEditCommand cmd) throws Exception;
 
     public boolean checkRoom(String code) throws Exception;
-
-    public void removeSeat(Integer userId) throws Exception;
 
     public boolean checkAdmission(RoomEditCommand condition) throws Exception;
 }

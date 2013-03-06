@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,8 @@ public class UserPasswordResetController extends SimpleFormController {
     public void setInitPassword(String initPassword) {
         this.initPassword = initPassword;
     }
-    
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
@@ -67,7 +67,8 @@ public class UserPasswordResetController extends SimpleFormController {
             cmd.setUser(user);
             cmd.setApply(apply);
             cmd.setShowDetail(true);
-            userPasswordService.resetUserPasswor(cmd.getIdCardNo(), initPassword);
+            userPasswordService.resetUserPasswor(cmd.getIdCardNo(),
+                    initPassword);
             Map model = errors.getModel();
             model.put("alert", true);
             return new ModelAndView(getFormView(), model);

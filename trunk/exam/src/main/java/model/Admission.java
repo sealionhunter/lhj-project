@@ -65,7 +65,8 @@ public class Admission implements Serializable {
     }
 
     /**
-     * @param seat the seat to set
+     * @param seat
+     *            the seat to set
      */
     public void setSeat(Seat seat) {
         this.seat = seat;

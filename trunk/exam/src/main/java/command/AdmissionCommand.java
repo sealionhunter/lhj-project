@@ -30,7 +30,8 @@ public class AdmissionCommand extends StatusSearchCommand {
     }
 
     /**
-     * @param exam the exam to set
+     * @param exam
+     *            the exam to set
      */
     public void setExam(Exam exam) {
         this.exam = exam;

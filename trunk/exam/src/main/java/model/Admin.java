@@ -56,7 +56,8 @@ public class Admin implements Serializable {
     }
 
     /**
-     * @param administratorId the administratorId to set
+     * @param administratorId
+     *            the administratorId to set
      */
     public void setAdministratorId(String administratorId) {
         this.administratorId = administratorId;

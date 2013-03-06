@@ -4,12 +4,12 @@
 <hibernate-mapping default-lazy="false">
 	<class name="model.Room" table="room">
 		<id name="id">
-			<generator class="identity" />
+			<generator class="assigned" />
 		</id>
 		<property generated="never" lazy="false" name="code" />
 		<property generated="never" lazy="false" name="name" />
-		<property generated="never" lazy="false" name="officeId" />
 		<property generated="never" lazy="false" name="position" />
 		<property generated="never" lazy="false" name="seats" />
+		<property generated="never" lazy="false" name="remainSeats" />
 	</class>
 </hibernate-mapping>

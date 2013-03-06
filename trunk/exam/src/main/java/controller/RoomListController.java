@@ -9,6 +9,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import service.RoomService;
 
@@ -42,8 +43,29 @@ public class RoomListController extends SimpleFormController {
         Map model = errors.getModel();
         if (request.getParameter("generateAdmission") != null) {
             roomService.generateAdmission(request, cmd, errors);
-            return new ModelAndView(getSuccessView(), model);
+        } else if (request.getParameter("generateRoom") != null) {
+            roomService.generateRoom(request, cmd, errors);
+        } else if (request.getParameter("addRoom") != null) {
+            return new ModelAndView(new RedirectView("roomEdit.action"));
+        } else if (request.getParameter("editRoom") != null) {
+            RedirectView rv = new RedirectView("roomEdit.action");
+            rv.setExposeModelAttributes(true);
+            model.put("roomId", cmd.getRoomId());
+            return new ModelAndView(new RedirectView("roomEdit.action"), model);
+        } else if (request.getParameter("deleteRoom") != null) {
+            roomService.deleteRoom(request, cmd, errors);
+        } else if (request.getParameter("removeAssign") != null) {
+            roomService.removeAssign(request, cmd, errors);
+        } else if (request.getParameter("assign") != null) {
+            RedirectView rv = new RedirectView("roomAssign.action");
+            rv.setExposeModelAttributes(true);
+            model.put("departId", cmd.getDepartId());
+            model.put("officeId", cmd.getOfficeId());
+            return new ModelAndView(new RedirectView("roomAssign.action"),
+                    model);
         }
+        cmd.setDepartId(-1);
+        cmd.setOfficeId(-1);
         model.putAll(roomService.initList(cmd));
         return new ModelAndView(getFormView(), model);
     }

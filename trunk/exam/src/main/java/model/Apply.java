@@ -23,7 +23,7 @@ public class Apply implements Serializable {
     private String idCardNo;
 
     private String applyUserName;
-    
+
     private String applyUserHomeTown;
 
     private String applyOfficeName;
@@ -279,7 +279,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param applyUserHomeTown the applyUserHomeTown to set
+     * @param applyUserHomeTown
+     *            the applyUserHomeTown to set
      */
     public void setApplyUserHomeTown(String applyUserHomeTown) {
         this.applyUserHomeTown = applyUserHomeTown;
@@ -293,7 +294,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param user the user to set
+     * @param user
+     *            the user to set
      */
     public void setUser(User user) {
         this.user = user;
@@ -307,7 +309,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param office the office to set
+     * @param office
+     *            the office to set
      */
     public void setOffice(Office office) {
         this.office = office;
@@ -321,7 +324,8 @@ public class Apply implements Serializable {
     }
 
     /**
-     * @param depart the depart to set
+     * @param depart
+     *            the depart to set
      */
     public void setDepart(Depart depart) {
         this.depart = depart;

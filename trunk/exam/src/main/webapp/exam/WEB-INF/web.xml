@@ -58,7 +58,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern><!-- 表示过滤所有的访问 -->
 	</filter-mapping>
-	
+
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>

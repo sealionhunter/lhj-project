@@ -139,6 +139,18 @@ function doLogout() {
 											itemValue="id.code">
 										</form:select></td>
 
+									<td style="text-align: right; width: 10%;">准考证打印状态：</td>
+									<td style="text-align: left; width: 15%"><form:select
+											path="admissionPrintFlg">
+											<option value="" label="" />
+											<form:option value="false">未打印</form:option>
+											<form:option value="true">已打印</form:option>
+										</form:select></td>
+								</tr>
+								<tr bgcolor="#ffffff">
+									<td style="text-align: right; width: 10%;"> </td>
+									<td style="text-align: left; width: 15%"> </td>
+
 									<td style="text-align: right; width: 10%;"></td>
 									<td style="text-align: left; width: 15%"><input
 										type="submit" value="筛选" style="width: 50px;" />&nbsp;&nbsp;<input

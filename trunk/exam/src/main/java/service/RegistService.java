@@ -35,7 +35,8 @@ public interface RegistService {
 
     public List<Exam> listExam() throws Exception;
 
-    public List<Apply> listApplyUser(SignUpPersonSearchCommand cmd) throws Exception;
+    public List<Apply> listApplyUser(SignUpPersonSearchCommand cmd)
+            throws Exception;
 
     public Apply getApply(Integer userId, Integer officeId) throws Exception;
 
@@ -65,5 +66,6 @@ public interface RegistService {
     public void modifyAdminPassword(AdminModifyCommand cmd, BindException errors)
             throws Exception;
 
-    public void printAdmission(AdmissionCommand cmd, BindException errors) throws Exception;
+    public void printAdmission(AdmissionCommand cmd, BindException errors)
+            throws Exception;
 }

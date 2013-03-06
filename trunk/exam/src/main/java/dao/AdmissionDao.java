@@ -13,5 +13,5 @@ public interface AdmissionDao {
 
     public void update(Admission admission) throws Exception;
 
-    public void delete(Integer userId) throws Exception;
+    public void deleteByUids(List<Integer> uids) throws Exception;
 }

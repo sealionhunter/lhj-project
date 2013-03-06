@@ -1,7 +1,6 @@
 package controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Apply;
+import model.Exam;
 import model.User;
 
 import org.springframework.validation.BindException;
@@ -20,12 +20,9 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 import service.RegistService;
 
 import command.AdmissionCommand;
-import command.RegistCommand;
 
 public class AdmissionController extends SimpleFormController {
     private RegistService registService;
-    private String beginDate;
-    private String endDate;
 
     /**
      * @return the registService
@@ -42,13 +39,26 @@ public class AdmissionController extends SimpleFormController {
         this.registService = registService;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.springframework.web.servlet.mvc.SimpleFormController#referenceData
+     * (javax.servlet.http.HttpServletRequest, java.lang.Object,
+     * org.springframework.validation.Errors)
+     */
+    @SuppressWarnings("rawtypes")
     @Override
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
-        Date now = new Date();
-        String pattern = "yyyy/MM/dd HH:mm:ss";
-        if (now.after(getEndTime(pattern)) || now.before(getBeginTime(pattern))) {
-            throw new Exception("当前时间段不在打印时间内！");
+        Exam exam = registService.listExam().get(0);
+        Date today = Calendar.getInstance().getTime();
+        Date start = exam.getAdmissionPrintStart() == null ? today : exam
+                .getAdmissionPrintStart();
+        Date end = exam.getAdmissionPrintEnd() == null ? today : exam
+                .getAdmissionPrintEnd();
+        if (today.before(start) || today.after(end)) {
+            throw new Exception("当前时间段不在打印时间内，请在规定时间段内打印笔试准考证！");
         }
         return super.referenceData(request, command, errors);
     }
@@ -81,39 +91,5 @@ public class AdmissionController extends SimpleFormController {
             registService.printAdmission(cmd, errors);
             return new ModelAndView(getSuccessView(), errors.getModel());
         }
-    }
-
-    public String getBeginDate() {
-        return beginDate;
-    }
-
-    public void setBeginDate(String beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    private Date getBeginTime(String pattern) throws Exception {
-        String timeStr = " 00:00:00";
-
-        return getTime(beginDate + timeStr, pattern);
-    }
-
-    private Date getEndTime(String pattern) throws Exception {
-        String timeStr = " 23:59:59";
-
-        return getTime(endDate + timeStr, pattern);
-    }
-
-    private Date getTime(String timeStr, String pattern) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-
-        return sdf.parse(timeStr);
     }
 }

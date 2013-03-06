@@ -48,7 +48,6 @@ public class OfficeDaoImpl implements OfficeDao {
                         office.setValidataCount(validateCount);
                     }
                     int recruits = office.getRecruits();
-//                    office.setScale(applyCount / recruits);
                     office.setScale(validateCount / recruits);
                 }
             }

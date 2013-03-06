@@ -2,37 +2,37 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-lazy="false">
- <class name="model.User" table="user">
-  <id name="id">
-   <generator class="identity"/>
-  </id>
-  <property generated="never" lazy="false" name="name"/>
-  <property generated="never" lazy="false" name="idCardNo"/>
-  <property generated="never" lazy="false" name="password"/>
-  <property generated="never" lazy="false" name="sex"/>
-  <property generated="never" lazy="false" name="nationCode"/>
-  <property generated="never" lazy="false" name="homeTown"/>
-  <property generated="never" lazy="false" name="birthdayYear"/>
-  <property generated="never" lazy="false" name="birthdayMonth"/>
-  <property generated="never" lazy="false" name="politicalCode"/>
-  <property generated="never" lazy="false" name="Married"/>
-  <property generated="never" lazy="false" name="degree"/>
-  <property generated="never" lazy="false" name="graduateSchool"/>
-  <property generated="never" lazy="false" name="major"/>
-  <property generated="never" lazy="false" name="computerSkill"/>
-  <property generated="never" lazy="false" name="languageSkill"/>
-  <property generated="never" lazy="false" name="height"/>
-  <property generated="never" lazy="false" name="telephone"/>
-  <property generated="never" lazy="false" name="description"/>
-  <property generated="never" lazy="false" name="graduateYear"/>
-  <property generated="never" lazy="false" name="graduateMonth"/>
-  <property generated="never" lazy="false" name="workyears"/>
-  <property generated="never" lazy="false" name="trainingExp"/>
-  <property generated="never" lazy="false" name="workExp"/>
-  <property generated="never" lazy="false" name="socialRel"/>
-  <property generated="never" lazy="false" name="identity"/>
-  <property name="photo" type="binary">
-   <column name="photo" sql-type="LONGBLOB"/>
-  </property>
- </class>
+	<class name="model.User" table="user">
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property generated="never" lazy="false" name="name" />
+		<property generated="never" lazy="false" name="idCardNo" />
+		<property generated="never" lazy="false" name="password" />
+		<property generated="never" lazy="false" name="sex" />
+		<property generated="never" lazy="false" name="nationCode" />
+		<property generated="never" lazy="false" name="homeTown" />
+		<property generated="never" lazy="false" name="birthdayYear" />
+		<property generated="never" lazy="false" name="birthdayMonth" />
+		<property generated="never" lazy="false" name="politicalCode" />
+		<property generated="never" lazy="false" name="Married" />
+		<property generated="never" lazy="false" name="degree" />
+		<property generated="never" lazy="false" name="graduateSchool" />
+		<property generated="never" lazy="false" name="major" />
+		<property generated="never" lazy="false" name="computerSkill" />
+		<property generated="never" lazy="false" name="languageSkill" />
+		<property generated="never" lazy="false" name="height" />
+		<property generated="never" lazy="false" name="telephone" />
+		<property generated="never" lazy="false" name="description" />
+		<property generated="never" lazy="false" name="graduateYear" />
+		<property generated="never" lazy="false" name="graduateMonth" />
+		<property generated="never" lazy="false" name="workyears" />
+		<property generated="never" lazy="false" name="trainingExp" />
+		<property generated="never" lazy="false" name="workExp" />
+		<property generated="never" lazy="false" name="socialRel" />
+		<property generated="never" lazy="false" name="identity" />
+		<property name="photo" type="binary">
+			<column name="photo" sql-type="LONGBLOB" />
+		</property>
+	</class>
 </hibernate-mapping>

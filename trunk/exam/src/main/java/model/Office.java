@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,11 +45,13 @@ public class Office implements Serializable {
     private int validataCount;
 
     private int scale;
-    
+
     private Integer totalUsers;
     private Integer totalSeats;
-    
+
     private List<Room> rooms;
+    private int assignedUsers = 0;
+    private List<RoomOffice> roomOffices = new ArrayList<RoomOffice>(5);
 
     public Office() {
     }
@@ -232,7 +235,8 @@ public class Office implements Serializable {
     }
 
     /**
-     * @param totalUsers the totalUsers to set
+     * @param totalUsers
+     *            the totalUsers to set
      */
     public void setTotalUsers(Integer totalUsers) {
         this.totalUsers = totalUsers;
@@ -246,7 +250,8 @@ public class Office implements Serializable {
     }
 
     /**
-     * @param totalSeats the totalSeats to set
+     * @param totalSeats
+     *            the totalSeats to set
      */
     public void setTotalSeats(Integer totalSeats) {
         this.totalSeats = totalSeats;
@@ -260,10 +265,39 @@ public class Office implements Serializable {
     }
 
     /**
-     * @param rooms the rooms to set
+     * @param rooms
+     *            the rooms to set
      */
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
 
+    public int getAssignedUsers() {
+        return assignedUsers;
+    }
+
+    public void setAssignedUsers(int assignedUsers) {
+        this.assignedUsers = assignedUsers;
+    }
+
+    public List<RoomOffice> getRoomOffices() {
+        return roomOffices;
+    }
+
+    public void setRoomOffices(List<RoomOffice> roomOffice) {
+        this.roomOffices = roomOffice;
+        assignedUsers = 0;
+        for (RoomOffice ro : roomOffice) {
+            assignedUsers += ro.getAssignSeats();
+        }
+    }
+
+    public void add(RoomOffice ro) {
+        roomOffices.add(ro);
+        assignedUsers += ro.getAssignSeats();
+    }
+
+    public int remain() {
+        return totalUsers - assignedUsers;
+    }
 }

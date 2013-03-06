@@ -2,37 +2,37 @@ package command;
 
 import java.util.List;
 
+import model.Admission;
 import model.Apply;
 import model.Room;
 import model.Seat;
 import model.User;
 
 public class UserSeatResetCommand {
+
+    private Integer userId;
+
     private String idCardNo;
 
     private Integer roomId;
 
     private String roomCode;
 
-    private String seatId;
+    private Integer seatId;
+
+    private String seatCode;
 
     private User user;
 
     private Apply apply;
 
-    // private Room room;
-
     private Seat seat;
 
-    private String admission;
+    private Admission admission;
 
     private List<Room> rooms;
 
-    private List<String> seats;
-
     private boolean showDetail = false;
-
-    private Integer userId;
 
     public String getIdCardNo() {
         return idCardNo;
@@ -82,11 +82,11 @@ public class UserSeatResetCommand {
         this.seat = seat;
     }
 
-    public String getAdmission() {
+    public Admission getAdmission() {
         return admission;
     }
 
-    public void setAdmission(String admission) {
+    public void setAdmission(Admission admission) {
         this.admission = admission;
     }
 
@@ -98,14 +98,6 @@ public class UserSeatResetCommand {
         this.rooms = rooms;
     }
 
-    public List<String> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(List<String> seats) {
-        this.seats = seats;
-    }
-
     public Integer getRoomId() {
         return roomId;
     }
@@ -114,18 +106,18 @@ public class UserSeatResetCommand {
         this.roomId = roomId;
     }
 
-    public String getSeatId() {
+    public Integer getSeatId() {
         return seatId;
     }
 
-    public void setSeatId(String seatId) {
+    public void setSeatId(Integer seatId) {
         this.seatId = seatId;
     }
 
     public Integer getUserId() {
         return userId;
     }
-    
+
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
@@ -136,5 +128,13 @@ public class UserSeatResetCommand {
 
     public void setRoomCode(String roomCode) {
         this.roomCode = roomCode;
+    }
+
+    public String getSeatCode() {
+        return seatCode;
+    }
+
+    public void setSeatCode(String seatCode) {
+        this.seatCode = seatCode;
     }
 }

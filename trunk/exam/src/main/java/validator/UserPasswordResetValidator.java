@@ -3,11 +3,11 @@ package validator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import command.StatusSearchCommand;
 import command.UserPasswordResetCommand;
 
 public class UserPasswordResetValidator implements Validator {
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public boolean supports(Class clazz) {
         return clazz.isAssignableFrom(UserPasswordResetCommand.class);

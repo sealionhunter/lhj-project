@@ -15,7 +15,7 @@ import service.RoomService;
 
 import command.RoomEditCommand;
 
-public class RoomEditController extends SimpleFormController {
+public class RoomAssignController extends SimpleFormController {
 
     private RoomService roomService;
 
@@ -31,23 +31,32 @@ public class RoomEditController extends SimpleFormController {
     protected Map referenceData(HttpServletRequest request, Object command,
             Errors errors) throws Exception {
         RoomEditCommand cmd = (RoomEditCommand) command;
-        String id = request.getParameter("roomId");
-        if (id != null && id.length() > 0) {
+        String departId = request.getParameter("departId");
+        if (departId != null && departId.length() > 0) {
             try {
-                cmd.setId(Integer.valueOf(id));
+                cmd.setDepartId(Integer.valueOf(departId));
             } catch (Exception e) {
             }
         }
-        return roomService.initEdit(cmd, id, errors);
+        String officeId = request.getParameter("officeId");
+        if (officeId != null && officeId.length() > 0) {
+            try {
+                cmd.setOfficeId(Integer.valueOf(officeId));
+            } catch (Exception e) {
+            }
+        }
+        return roomService.initRoomAssign(cmd, errors);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
             throws Exception {
         RoomEditCommand cmd = (RoomEditCommand) command;
-        roomService.editOk(request, cmd, errors);
+        roomService.assignRoom(request, cmd, errors);
         if (errors.hasErrors()) {
+            errors.getModel().putAll(roomService.initRoomAssign(cmd, errors));
             return new ModelAndView(getFormView(), errors.getModel());
         }
         return new ModelAndView(new RedirectView("roomList.action"),

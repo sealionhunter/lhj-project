@@ -19,10 +19,11 @@ public class VerifyValidator implements Validator {
         String reason = cmd.getVerifyReason();
         Integer state = Integer.valueOf(cmd.getVerifyState());
         boolean submitFlag = Boolean.valueOf(cmd.getSubmitFlag());
-        
+
         if (submitFlag && state == 1) {
             if (reason == null || reason.trim().isEmpty()) {
-                errors.rejectValue("verifyReason", "verifyReason", "不通过的原因必须填写!");
+                errors.rejectValue("verifyReason", "verifyReason",
+                        "不通过的原因必须填写!");
             }
         }
     }

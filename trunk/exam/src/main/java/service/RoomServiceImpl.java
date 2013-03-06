@@ -2,6 +2,9 @@ package service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +18,7 @@ import model.Depart;
 import model.Exam;
 import model.Office;
 import model.Room;
+import model.RoomOffice;
 import model.Seat;
 import model.User;
 
@@ -43,6 +47,7 @@ public class RoomServiceImpl implements RoomService {
     private ExamDao examDao;
     private AdmissionDao admissionDao;
     private boolean resetAdmissionAfterPrint;
+    private int seatsPerRoom = 30;
 
     @SuppressWarnings("rawtypes")
     @Override
@@ -51,23 +56,13 @@ public class RoomServiceImpl implements RoomService {
         cmd.setOffices(officeDao.list());
         cmd.setDeparts(departDao.list());
         if (id != null && id.length() > 0) {
-            Room room = roomDao.get(Integer.valueOf(id));
+            Room room = roomDao.getRoom(Integer.valueOf(id));
             if (room != null) {
                 cmd.setId(room.getId());
                 cmd.setCode(room.getCode());
                 cmd.setName(room.getName());
                 cmd.setPosition(room.getPosition());
                 cmd.setSeats(String.valueOf(room.getSeats()));
-                Integer officeId = room.getOfficeId();
-                cmd.setOfficeId(officeId);
-                if (officeId != null) {
-                    for (Office office : cmd.getOffices()) {
-                        if (office.getId() == officeId) {
-                            cmd.setDepartId(office.getDepartId());
-                            break;
-                        }
-                    }
-                }
             }
         }
         return null;
@@ -78,18 +73,131 @@ public class RoomServiceImpl implements RoomService {
             BindException errors) throws Exception {
         cmd.setOffices(officeDao.list());
         cmd.setDeparts(departDao.list());
-        if (roomDao.checkRoom(cmd.getCode())) {
+        if (cmd.getId() == null && roomDao.checkRoom(cmd.getCode())) {
             errors.rejectValue("code", "code", "指定编号的考场已存在，请重新指定");
             return;
         }
-        Room room = new Room();
-        room.setId(cmd.getId());
+        Room room;
+        int seats = Integer.parseInt(cmd.getSeats());
+        if (cmd.getId() != null) {
+            room = roomDao.getRoom(cmd.getId());
+            if (seats < room.getRemainSeats()) {
+                errors.rejectValue("seats", "seats", "座位数小于已分配的座位数");
+                return;
+            } else {
+                room.setRemainSeats(seats - room.getSeats() + room.getRemainSeats());
+            }
+        } else {
+            room = new Room();
+            room.setId(Integer.parseInt(cmd.getCode()));
+            room.setRemainSeats(seats);
+        }
         room.setCode(cmd.getCode());
         room.setName(cmd.getName());
         room.setPosition(cmd.getPosition());
-        room.setSeats(Integer.parseInt(cmd.getSeats()));
-        room.setOfficeId(cmd.getOfficeId());
-        roomDao.update(room);
+        room.setSeats(seats);
+        roomDao.updateRoom(room);
+    }
+
+    @Transactional
+    @Override
+    public void generateRoom(HttpServletRequest request, RoomEditCommand cmd,
+            BindException errors) throws Exception {
+        List<Office> offices = roomDao.listOfficeByCond(cmd);
+        int oCount = offices.size();
+        List<Room> rooms = new ArrayList<Room>();
+        int rid = 1;
+        int remainO = 0;
+        // rooms for single office
+        for (int i = 0; i < oCount; i++) {
+            Office o = offices.get(i);
+            while (o.remain() > seatsPerRoom) {
+                Room r = newRoom(rid++, seatsPerRoom);
+                rooms.add(r);
+                addRoomOffice(o, r, seatsPerRoom);
+            }
+            remainO += o.remain();
+        }
+        // rooms for share offices
+        int remainR = 0;
+        while (remainR < remainO) {
+            rooms.add(newRoom(rid++, seatsPerRoom));
+            remainR += seatsPerRoom;
+        }
+        // sort offices by remain
+        Collections.sort(offices, new Comparator<Office>() {
+            public int compare(Office o1, Office o2) {
+                return o2.remain() - o1.remain();
+            }
+        });
+        // calculate the share rooms
+        while (remainO > 0) {
+            for (Office o : offices) {
+                if (o.remain() <= 0) {
+                    continue;
+                }
+                Room rm = null;
+                // find room that it's remain is greater the the o's remain
+                for (Room r : rooms) {
+                    if (r.remain() <= 0) {
+                        continue;
+                    }
+                    if (o.remain() <= r.remain()) {
+                        if (rm == null) {
+                            rm = r;
+                        } else if (rm.remain() < r.remain()) {
+                            rm = r;
+                        }
+                    }
+                }
+                // there is no room that it's remain is greater then the o's
+                // remain
+                // then find room that has the largest remain
+                if (rm == null) {
+                    for (Room r : rooms) {
+                        if (r.remain() <= 0) {
+                            continue;
+                        }
+                        if (rm == null) {
+                            rm = r;
+                        } else if (rm.remain() < r.remain()) {
+                            rm = r;
+                        }
+                    }
+                    remainO -= rm.remain();
+                    addRoomOffice(o, rm, rm.remain());
+                } else {
+                    remainO -= o.remain();
+                    addRoomOffice(o, rm, o.remain());
+                }
+
+            }
+        }
+        for (Room r : rooms) {
+            roomDao.addRoom(r);
+            roomDao.addRoomOffice(r.getRoomOffices());
+        }
+    }
+
+    private Room newRoom(int rid, int seats) {
+        Room r = new Room();
+        r.setId(rid);
+        r.setCode(String.format("%02d", rid));
+        r.setSeats(seatsPerRoom);
+        r.setRemainSeats(seatsPerRoom);
+        r.setName("合肥工业大学附属中学");
+        r.setPosition("合肥市宁国南路103号");
+        return r;
+    }
+
+    private RoomOffice addRoomOffice(Office o, Room r, int assignSeats) {
+        RoomOffice ro = new RoomOffice();
+        ro.setOfficeId(o.getId());
+        ro.setRoomId(r.getId());
+        ro.setAssignSeats(assignSeats);
+        o.add(ro);
+        r.add(ro);
+        return ro;
     }
 
     @Transactional
@@ -98,58 +206,64 @@ public class RoomServiceImpl implements RoomService {
             RoomEditCommand cmd, BindException errors) throws Exception {
         Exam exam = examDao.list().get(0);
 
+        // check condition first
+        checkCondition(exam, cmd);
+        // yyMMddAABB
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+        String prefix = sdf.format(exam.getExamDate());
+
+        // get applies and rooms
         SignUpPersonSearchCommand condition = new SignUpPersonSearchCommand();
         condition.setState(2);
         condition.setDeptId(cmd.getDepartId());
         condition.setPostId(cmd.getOfficeId());
-
-        checkCondition(exam, cmd);
-
         List<Apply> applies = applyDao.list(condition);
+        List<RoomOffice> rooms = roomDao.listRoomOfficeByOid(-1);
+
+        // admissions and seats for insert
         List<Admission> admissions = new ArrayList<Admission>(applies.size());
         List<Seat> seats = new ArrayList<Seat>(applies.size());
-        List<Room> rooms = roomDao.list();
 
-        // yyMMddAABB
-        // TODO
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-        String prefix = sdf.format(exam.getExamDate());
-        Map<String, Integer> sequeses = new HashMap<String, Integer>();
-        // TODO
-        Room room = null;
+        // users for deleting admission and seats;
+        List<Integer> uids = new ArrayList<Integer>();
+        Map<Integer, Integer> seqs = new HashMap<Integer, Integer>();
         for (Apply apply : applies) {
-            room = null;
-            for (Room r : rooms) {
-                String key = apply.getOffice().getCode() + "room" + r.getId();
+            RoomOffice ro = null;
+            for (RoomOffice r : rooms) {
                 if (r.getOfficeId() == apply.getId().getOfficeid()
-                        && (!sequeses.containsKey(key) || sequeses.get(key) < r
-                                .getSeats())) {
-                    room = r;
+                        && (r.getAssignedSeat() < r.getAssignSeats())) {
+                    ro = r;
+                    ro.incSeats();
                     break;
                 }
             }
-            if (room == null) {
+            if (ro == null) {
                 continue;
             }
-            String key = apply.getOffice().getCode() + "room" + room.getId();
-            Integer seq = sequeses.get(key);
+
+            Integer seq = seqs.get(ro.getRoomId());
             if (seq == null) {
                 seq = 1;
+                seqs.put(ro.getRoomId(), seq);
             } else {
-                seq += 1;
+                seqs.put(ro.getRoomId(), ++seq);
             }
-            sequeses.put(key, seq);
+
+            Integer uid = apply.getUser().getId();
+            uids.add(uid);
+
             Seat seat = new Seat();
             seat.setCode(String.format("%02d", seq));
-            seat.setRoomId(room.getId());
-            seat.setUserId(apply.getId().getUserid());
+            seat.setRoomId(ro.getRoomId());
+            seat.setUserId(uid);
             seats.add(seat);
-            admissions.add(new Admission(apply.getUser().getId(), prefix
-                    + room.getCode() + seat.getCode()));
-            roomDao.removeSeat(apply.getId().getUserid());
-            admissionDao.delete(apply.getId().getUserid());
+
+            admissions.add(new Admission(uid, prefix + ro.getRoom().getCode()
+                    + seat.getCode()));
         }
 
+        roomDao.removeSeatByUids(uids);
+        admissionDao.deleteByUids(uids);
         roomDao.addSeat(seats);
         admissionDao.add(admissions);
     }
@@ -215,9 +329,10 @@ public class RoomServiceImpl implements RoomService {
         officeList.add(0, office);
         model.put("offices", officeList);
 
-        List<Office> offices = roomDao.findOfficeInfo(cmd);
+        List<Office> offices = roomDao.listOfficeByCond(cmd);
         for (Office office1 : offices) {
-            office1.setRooms(roomDao.list(office1.getId()));
+            // office1.setRooms(roomDao.list(office1.getId()));
+            office1.setRoomOffices(roomDao.listRoomOfficeByOid(office1.getId()));
         }
         cmd.setOffices(offices);
         return model;
@@ -231,32 +346,43 @@ public class RoomServiceImpl implements RoomService {
         if (ad != null && ad.isPrintFlg() && !resetAdmissionAfterPrint) {
             throw new Exception("考生已经打印准考证号，无法重新生成准考证号。");
         }
-        roomDao.removeSeat(cmd.getUserId());
-        admissionDao.delete(cmd.getUserId());
-        Exam exam = examDao.list().get(0);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
-        String prefix = sdf.format(exam.getExamDate());
-        Seat seat = new Seat();
-        seat.setCode(cmd.getSeatId());
-        seat.setUserId(cmd.getUserId());
-        seat.setRoomId(cmd.getRoomId());
-        Admission admission = new Admission(cmd.getUserId(), prefix
-                + cmd.getRoomCode() + seat.getCode());
-        roomDao.addSeat(seat);
-        admissionDao.add(admission);
-        seat = roomDao.getSeat(cmd.getUserId());
+        roomDao.removeSeatByUids(Arrays.asList(new Integer[] { cmd.getUserId() }));
+        admissionDao
+                .deleteByUids(Arrays.asList(new Integer[] { cmd.getUserId() }));
+        if (cmd.getSeatCode() != null && cmd.getSeatCode().length() > 0
+                && cmd.getRoomId() != null && cmd.getRoomId() > -1) {
+            Exam exam = examDao.list().get(0);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+            String prefix = sdf.format(exam.getExamDate());
+            Seat saveSeat = new Seat();
+            saveSeat.setCode(cmd.getSeatCode());
+            saveSeat.setUserId(cmd.getUserId());
+            saveSeat.setRoomId(cmd.getRoomId());
+            Admission saveAdmission = new Admission(cmd.getUserId(), prefix
+                    + cmd.getRoomCode() + saveSeat.getCode());
+            Seat old = roomDao.getSeatByRidAndCode(cmd.getRoomId(),
+                    cmd.getSeatCode());
+            if (old != null) {
+                roomDao.removeSeatByUids(Arrays.asList(new Integer[] { old
+                        .getUserId() }));
+                admissionDao.deleteByUids(Arrays.asList(new Integer[] { old
+                        .getUserId() }));
+            }
+            roomDao.addSeat(saveSeat);
+            admissionDao.add(saveAdmission);
+        }
+        Seat seat = roomDao.getSeat(cmd.getUserId());
         cmd.setSeat(seat);
         if (seat != null) {
-            cmd.setSeatId(seat.getCode());
+            cmd.setSeatCode(seat.getCode());
+            cmd.setSeatId(seat.getId());
             cmd.setRoomId(seat.getRoomId());
             if (seat.getRoom() != null) {
                 cmd.setRoomCode(seat.getRoom().getCode());
             }
         }
-        admission = admissionDao.get(cmd.getUserId());
-        if (admission != null) {
-            cmd.setAdmission(admission.getCode());
-        }
+        Admission admission = admissionDao.get(cmd.getUserId());
+        cmd.setAdmission(admission);
     }
 
     @Override
@@ -270,54 +396,51 @@ public class RoomServiceImpl implements RoomService {
         }
         List<Apply> applyList = applyDao.findApplyInfo(user.getId());
         if (applyList == null || applyList.isEmpty()) {
-            errors.rejectValue("idCardNo", "required.apply", "找不到该考生的报名信息");
+            errors.rejectValue("idCardNo", "required.idCardNo", "找不到该考生的报名信息!");
             return;
         }
         Apply a = applyList.get(0);
+        if (a.getState() != 2) {
+            errors.rejectValue("idCardNo", "required.idCardNo",
+                    "该考生未通过审核,无法分配座位!");
+            return;
+        }
         cmd.setUser(user);
         cmd.setUserId(user.getId());
         cmd.setApply(a);
         Seat seat = roomDao.getSeat(user.getId());
         cmd.setSeat(seat);
-        String seatCode = "";
         if (seat != null) {
-            cmd.setSeatId(seat.getCode());
-            seatCode = seat.getCode();
+            cmd.setSeatCode(seat.getCode());
+            cmd.setSeatId(seat.getId());
             cmd.setRoomId(seat.getRoomId());
             if (seat.getRoom() != null) {
                 cmd.setRoomCode(seat.getRoom().getCode());
             }
         }
         Admission admission = admissionDao.get(user.getId());
-        if (admission != null) {
-            cmd.setAdmission(admission.getCode());
-        }
-        List<Room> rooms = roomDao.list(a.getOffice().getId());
-        for (Room room : rooms) {
-            List<Seat> dbSeats = roomDao.findSeat(room.getId());
-            List<Seat> avliableSeats = new ArrayList<Seat>();
-            for (int i = 1; i <= room.getSeats(); i++) {
-                boolean findDbSeat = false;
-                for (Seat dbSeat : dbSeats) {
-                    if (i == Integer.parseInt(dbSeat.getCode())
-                            && !seatCode.equals(dbSeat.getCode())) {
-                        findDbSeat = true;
-                        break;
-                    }
-                }
-                if (findDbSeat) {
-                    continue;
-                }
+        cmd.setAdmission(admission);
+        cmd.setRooms(roomDao.listRoom());
+    }
 
-                Seat avliable = new Seat();
-                avliable.setCode(String.format("%02d", i));
-                avliable.setRoomId(room.getId());
-                avliable.setUserId(user.getId());
-                avliableSeats.add(avliable);
-            }
-            room.setSeatsSet(avliableSeats);
-        }
-        cmd.setRooms(rooms);
+    @Transactional
+    @Override
+    public void deleteRoom(HttpServletRequest request, RoomEditCommand cmd,
+            BindException errors) throws Exception {
+        Room r = roomDao.getRoom(cmd.getRoomId());
+        roomDao.removeRoom(r);
+        roomDao.removeRoomOfficeByRid(cmd.getRoomId());
+    }
+
+    @Transactional
+    @Override
+    public void removeAssign(HttpServletRequest request, RoomEditCommand cmd,
+            BindException errors) throws Exception {
+        RoomOffice ro = roomDao.getRoomOffice(cmd.getRoomOfficeId());
+        Room r = roomDao.getRoom(ro.getRoomId());
+        r.setRemainSeats(r.getRemainSeats() + ro.getAssignSeats());
+        roomDao.removeRoomOffice(ro);
+        roomDao.updateRoom(r);
     }
 
     /**
@@ -433,10 +556,54 @@ public class RoomServiceImpl implements RoomService {
     }
 
     /**
-     * @param resetAdmissionAfterPrint the resetAdmissionAfterPrint to set
+     * @param resetAdmissionAfterPrint
+     *            the resetAdmissionAfterPrint to set
      */
     public void setResetAdmissionAfterPrint(boolean resetAdmissionAfterPrint) {
         this.resetAdmissionAfterPrint = resetAdmissionAfterPrint;
+    }
+
+    public int getSeatsPerRoom() {
+        return seatsPerRoom;
+    }
+
+    public void setSeatsPerRoom(int seatsPerRoom) {
+        this.seatsPerRoom = seatsPerRoom;
+    }
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
+    public Map initRoomAssign(RoomEditCommand cmd, Errors errors)
+            throws Exception {
+
+        Map model = new HashMap();
+        List<Depart> deptList = departDao.list();
+        model.put("departs", deptList);
+
+        List<Office> officeList = officeDao.list();
+        model.put("offices", officeList);
+        model.put("rooms", roomDao.listRoom());
+        return model;
+    }
+
+    @Transactional
+    @Override
+    public void assignRoom(HttpServletRequest request, RoomEditCommand cmd,
+            BindException errors) throws Exception {
+        Room r = roomDao.getRoom(cmd.getRoomId());
+        if (r == null) {
+            errors.rejectValue("roomId", "roomId", "指定的考场不存在");
+            return;
+        }
+        int assignSeats = Integer.parseInt(cmd.getSeats());
+        if (assignSeats > r.getRemainSeats()) {
+            errors.rejectValue("seats", "seats", "座位数超过了指定考场的剩余座位数");
+            return;
+        }
+        Office o = officeDao.get(cmd.getOfficeId());
+        RoomOffice ro = addRoomOffice(o, r, assignSeats);
+        roomDao.updateRoom(r);
+        roomDao.addRoomOffice(Arrays.asList(new RoomOffice[] { ro }));
     }
 
 }

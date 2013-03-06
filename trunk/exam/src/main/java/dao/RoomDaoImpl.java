@@ -8,6 +8,7 @@ import java.util.Map;
 
 import model.Office;
 import model.Room;
+import model.RoomOffice;
 import model.Seat;
 
 import org.hibernate.HibernateException;
@@ -21,16 +22,16 @@ import command.RoomEditCommand;
 public class RoomDaoImpl implements RoomDao {
     private static final String hql = 
             " SELECT "
-            + "     office.id as id, "
-            + "     office.name as name, "
-            + "     office.code as code, "
-            + "     totalUser, "
-            + "     totalSeats, "
-            + "     office.departId as departId, "
-            + "     departName as departName "
+            + "     O.id as id, "
+            + "     O.name as name, "
+            + "     O.code as code, "
+            + "     U.totalUser, "
+            + "     RO.totalSeats, "
+            + "     O.departId as departId, "
+            + "     D.departName as departName "
             + " FROM "
-            + "     office office "
-            + "     left join (select id as departId, name as departName from depart) depart on office.departId = depart.departId "
+            + "     office O "
+            + "     left join (SELECT id as departId, name as departName from depart) D on O.departId = D.departId "
             + "     left join (SELECT "
             + "         officeId, "
             + "         count(1) as totalUser "
@@ -40,19 +41,18 @@ public class RoomDaoImpl implements RoomDao {
             + "         state = 2 "
             + "     GROUP BY "
             + "         officeId "
-            + "     ) users on users.officeId = office.id "
+            + "     ) U on U.officeId = O.id "
             + "     left join (SELECT "
             + "         officeId, "
-            + "         sum(seats) as totalSeats "
+            + "         sum(assignSeats) as totalSeats "
             + "     FROM "
-            + "         room "
+            + "         roomOffice "
             + "     GROUP BY "
             + "         officeId "
-            + "     ) rooms on rooms.officeId = office.id "
+            + "     ) RO on RO.officeId = O.id "
             + " where "
-            //+ "     (totalSeats is null OR totalUser > totalSeats) "
-            + "     1=1  "
-            ;
+            // + "     (totalSeats is null OR totalUser > totalSeats) "
+            + "     1=1  ";
     private HibernateTemplate hibernateTemplate;
 
     /**
@@ -70,31 +70,58 @@ public class RoomDaoImpl implements RoomDao {
         this.hibernateTemplate = hibernateTemplate;
     }
 
-    public void add(Room room) throws Exception {
-        hibernateTemplate.saveOrUpdate(room);
+    public void addRoom(Room room) throws Exception {
+        hibernateTemplate.save(room);
     }
 
     @Override
-    public Room get(Integer roomId) throws Exception {
+    public Room getRoom(Integer roomId) throws Exception {
         return (Room) hibernateTemplate.get(Room.class, roomId);
     }
 
     @Override
-    public void update(Room room) throws Exception {
+    public void updateRoom(Room room) throws Exception {
         hibernateTemplate.saveOrUpdate(room);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Room> list() throws Exception {
+    public List<Room> listRoom() throws Exception {
         return hibernateTemplate.loadAll(Room.class);
     }
 
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
+    // @Override
+    // public List<Room> listRoomByOid(Integer officeId) throws Exception {
+    // if (officeId == null || officeId == -1) {
+    // return hibernateTemplate.loadAll(Room.class);
+    // }
+    // return (List<Room>) hibernateTemplate.find(
+    // "from model.Room as room where room.officeId = ? ", officeId);
+    // }
+
+    @SuppressWarnings({ "rawtypes" })
     @Override
-    public List<Room> list(Integer officeId) throws Exception {
-        return (List<Room>) hibernateTemplate.find(
-                "from model.Room as room where room.officeId = ? ", officeId);
+    public List<RoomOffice> listRoomOfficeByOid(Integer officeId)
+            throws Exception {
+        List l;
+        if (officeId == null || officeId == -1) {
+            l = hibernateTemplate
+                    .find("from model.RoomOffice ro, model.Room  r where r.id = ro.roomId ");
+        } else {
+            l = hibernateTemplate
+                    .find("from model.RoomOffice ro, model.Room  r where r.id = ro.roomId and ro.officeId = ? ",
+                            officeId);
+        }
+        List<RoomOffice> rs = new ArrayList<RoomOffice>(l.size());
+        for (Object o : l) {
+            Object[] os = (Object[]) o;
+            RoomOffice ro = (RoomOffice) os[0];
+            Room r = (Room) os[1];
+            ro.setRoom(r);
+            rs.add(ro);
+        }
+        return rs;
     }
 
     @Override
@@ -123,6 +150,24 @@ public class RoomDaoImpl implements RoomDao {
         return seat;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public Seat getSeatByRidAndCode(Integer roomId, String seatCode)
+            throws Exception {
+        List<Seat> seats = (List<Seat>) hibernateTemplate
+                .find("from model.Seat as seat where seat.code = ? and seat.roomId = ?",
+                        new Object[] { seatCode, roomId });
+        if (seats == null || seats.isEmpty()) {
+            return null;
+        }
+        Seat seat = seats.get(0);
+        if (seat != null) {
+            seat.setRoom((Room) hibernateTemplate.get(Room.class,
+                    seat.getRoomId()));
+        }
+        return seat;
+    }
+
     @Override
     public void updateSeat(Seat seat) throws Exception {
         hibernateTemplate.saveOrUpdate(seat);
@@ -130,7 +175,7 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Office> findOfficeInfo(final RoomEditCommand cmd)
+    public List<Office> listOfficeByCond(final RoomEditCommand cmd)
             throws Exception {
 
         return hibernateTemplate.executeFind(new HibernateCallback() {
@@ -141,11 +186,11 @@ public class RoomDaoImpl implements RoomDao {
                 String sql = hql;
                 Map<String, Integer> params = new HashMap<String, Integer>();
                 if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
-                    sql += " and office.departId = :departId";
+                    sql += " and O.departId = :departId";
                     params.put("departId", cmd.getDepartId());
                 }
                 if (cmd.getOfficeId() != null && cmd.getOfficeId() > 0) {
-                    sql += " and office.id = :officeId";
+                    sql += " and O.id = :officeId";
                     params.put("officeId", cmd.getOfficeId());
                 }
                 SQLQuery query = session.createSQLQuery(sql);
@@ -192,11 +237,11 @@ public class RoomDaoImpl implements RoomDao {
                 String sql = "select count(*) from (" + hql;
                 Map<String, Integer> params = new HashMap<String, Integer>();
                 if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
-                    sql += " and office.departId = :departId";
+                    sql += " and O.departId = :departId";
                     params.put("departId", cmd.getDepartId());
                 }
                 if (cmd.getOfficeId() != null && cmd.getOfficeId() > 0) {
-                    sql += " and office.id = :officeId";
+                    sql += " and O.id = :officeId";
                     params.put("officeId", cmd.getOfficeId());
                 }
                 sql += " and (totalSeats is null OR totalUser > totalSeats)) offices";
@@ -215,12 +260,12 @@ public class RoomDaoImpl implements RoomDao {
         });
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Seat> findSeat(Integer roomId) throws Exception {
-        return (List<Seat>) hibernateTemplate.find(
-                "from model.Seat as seat where seat.roomId = ? ", roomId);
-    }
+    // @SuppressWarnings("unchecked")
+    // @Override
+    // public List<Seat> findSeat(Integer roomId) throws Exception {
+    // return (List<Seat>) hibernateTemplate.find(
+    // "from model.Seat as seat where seat.roomId = ? ", roomId);
+    // }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -230,17 +275,29 @@ public class RoomDaoImpl implements RoomDao {
         return rooms != null && rooms.size() > 0;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void removeSeat(Integer userId) throws Exception {
-        List<Seat> seats = (List<Seat>) hibernateTemplate.find(
-                "from model.Seat as seat where seat.userId = ? ", userId);
-        if (seats != null) {
-            for (Seat seat : seats) {
-                hibernateTemplate.delete(seat);
+    public void removeSeatByUids(final List<Integer> uids) throws Exception {
+        hibernateTemplate.execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                return session
+                        .createQuery(
+                                "delete from model.Seat as seat where seat.userId IN (:uids)")
+                        .setParameterList("uids", uids).executeUpdate();
             }
-        }
+        });
         hibernateTemplate.flush();
+    }
+
+    @Override
+    public void removeRoom(Room room) throws Exception {
+        hibernateTemplate.delete(room);
+    }
+
+    @Override
+    public void removeRoomOffice(RoomOffice roomOffice) throws Exception {
+        hibernateTemplate.delete(roomOffice);
     }
 
     @Override
@@ -278,5 +335,33 @@ public class RoomDaoImpl implements RoomDao {
                 return Boolean.TRUE;
             }
         });
+    }
+
+    @Override
+    public void addRoomOffice(List<RoomOffice> roomOffices) throws Exception {
+        for (RoomOffice ro : roomOffices) {
+            hibernateTemplate.save(ro);
+        }
+    }
+
+    @Override
+    public RoomOffice getRoomOffice(Integer roomOfficeId) throws Exception {
+        return (RoomOffice) hibernateTemplate.get(RoomOffice.class, roomOfficeId);
+    }
+
+    @Override
+    public void removeRoomOfficeByRid(final Integer roomId) throws Exception {
+        hibernateTemplate.execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                return session
+                        .createQuery(
+                                "delete from model.RoomOffice as ro where ro.roomId = :roomId")
+                        .setParameter("roomId", roomId).executeUpdate();
+            }
+        });
+        hibernateTemplate.flush();
+        
     }
 }
