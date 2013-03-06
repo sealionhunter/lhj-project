@@ -100,10 +100,10 @@ public class SignupDetailSearchController extends SimpleFormController {
 
         List<Depart> deptList = registService.listDepart();
 
-        // Depart dept = new Depart();
-        // dept.setId(-1);
-        // dept.setName("");
-        // deptList.add(0, dept);
+        Depart dept = new Depart();
+        dept.setId(-1);
+        dept.setName("");
+        deptList.add(0, dept);
         model.put("departs", deptList);
 
         List<Office> officeList = registService.listOffice();
@@ -127,17 +127,17 @@ public class SignupDetailSearchController extends SimpleFormController {
         List<Master> identities = registService.getMasters(4);
         Master master2 = new Master();
         MasterPK id2 = new MasterPK();
-        id2.setCategory(3);
+        id2.setCategory(4);
         id2.setCode(-1);
         master2.setName("");
         master2.setId(id);
         identities.add(0, master2);
         model.put("identities", identities);
 
-        if ((cmd.getDeptId() == null || cmd.getDeptId() == -1)
-                && deptList != null && deptList.size() > 0) {
-            cmd.setDeptId(deptList.get(0).getId());
-        }
+        // if ((cmd.getDeptId() == null || cmd.getDeptId() == -1)
+        // && deptList != null && deptList.size() > 0) {
+        // cmd.setDeptId(deptList.get(0).getId());
+        // }
         // if ((cmd.getPostId() == null || cmd.getPostId() == -1)
         // && officeList != null && officeList.size() > 0) {
         // cmd.setPostId(officeList.get(0).getId());

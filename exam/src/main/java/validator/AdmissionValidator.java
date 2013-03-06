@@ -4,7 +4,8 @@ import org.springframework.validation.Validator;
 
 import command.AdmissionCommand;
 
-public class AdmissionValidator extends StatusSearchValidator implements Validator {
+public class AdmissionValidator extends StatusSearchValidator implements
+        Validator {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public boolean supports(Class clazz) {

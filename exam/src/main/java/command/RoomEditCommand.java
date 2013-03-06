@@ -20,9 +20,15 @@ public class RoomEditCommand {
 
     private String seats;
 
+    private Integer roomId;
+
+    private Integer roomOfficeId;
+
     private List<Depart> departs;
 
     private List<Office> offices;
+    
+    private String actionType;
 
     /**
      * @return the id
@@ -157,5 +163,29 @@ public class RoomEditCommand {
      */
     public void setOffices(List<Office> offices) {
         this.offices = offices;
+    }
+
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
+
+    public Integer getRoomOfficeId() {
+        return roomOfficeId;
+    }
+
+    public void setRoomOfficeId(Integer roomOfficeId) {
+        this.roomOfficeId = roomOfficeId;
+    }
+
+    public String getActionType() {
+        return actionType;
+    }
+
+    public void setActionType(String actionType) {
+        this.actionType = actionType;
     }
 }

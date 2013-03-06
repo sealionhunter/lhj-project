@@ -7,10 +7,14 @@
 			<generator class="identity" />
 		</id>
 		<property generated="never" lazy="false" name="name" />
-        <property generated="never" lazy="false" name="applyBeginDate" />
+		<property generated="never" lazy="false" name="applyBeginDate" />
 		<property generated="never" lazy="false" name="applyDeadDate" />
 		<property generated="never" lazy="false" name="examDate" />
 		<property generated="never" lazy="false" name="examTime" />
 		<property generated="never" lazy="false" name="examPosition" />
+		<property generated="never" lazy="false" name="reApplyStart" />
+		<property generated="never" lazy="false" name="reApplyEnd" />
+		<property generated="never" lazy="false" name="admissionPrintStart" />
+		<property generated="never" lazy="false" name="admissionPrintEnd" />
 	</class>
 </hibernate-mapping>

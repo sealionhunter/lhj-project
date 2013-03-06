@@ -1,11 +1,15 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.Admission;
 import model.Room;
 import model.Seat;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class AdmissionDaoImpl implements AdmissionDao {
@@ -59,12 +63,23 @@ public class AdmissionDaoImpl implements AdmissionDao {
         hibernateTemplate.update(admission);
     }
 
+    @SuppressWarnings({ "unchecked" })
     @Override
-    public void delete(Integer userId) throws Exception {
-        Admission sdmission = (Admission) hibernateTemplate.get(
-                Admission.class, userId);
-        if (sdmission != null) {
-            hibernateTemplate.delete(sdmission);
+    public void deleteByUids(final List<Integer> uids) throws Exception {
+
+        List<Admission> ads = (List<Admission>) hibernateTemplate
+                .execute(new HibernateCallback() {
+                    @Override
+                    public Object doInHibernate(Session session)
+                            throws HibernateException, SQLException {
+                        return session
+                                .createQuery(
+                                        "from Admission where userId in (:uids)")
+                                .setParameterList("uids", uids).list();
+                    }
+                });
+        for (Admission ad : ads) {
+            hibernateTemplate.delete(ad);
         }
         hibernateTemplate.flush();
     }

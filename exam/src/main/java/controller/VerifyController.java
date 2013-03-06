@@ -46,12 +46,13 @@ public class VerifyController extends SimpleFormController {
             cmd.setUserId(Integer.valueOf(userId));
         }
         registService.initVerify(cmd);
-        request.getSession().setAttribute("photoData" + cmd.getUser().getIdCardNo(),
+        request.getSession().setAttribute(
+                "photoData" + cmd.getUser().getIdCardNo(),
                 cmd.getUser().getPhoto());
 
         return super.referenceData(request, command, errors);
     }
-    
+
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
@@ -69,9 +70,9 @@ public class VerifyController extends SimpleFormController {
         apply.setReason(reason);
         apply.setState(state);
         apply.setUdpateDate(new Date());
-        
+
         registService.verify(apply);
-        
+
         return new ModelAndView(new RedirectView("signuppeopleinfo.action"));
     }
 }

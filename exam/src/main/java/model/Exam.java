@@ -8,87 +8,124 @@ import java.util.Date;
  * 
  */
 public class Exam implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
-	private Date applyBeginDate;
-	private Date applyDeadDate;
+    private Date applyBeginDate;
+    private Date applyDeadDate;
 
-	private Date examDate;
+    private Date examDate;
 
-	private String examPosition;
+    private String examPosition;
 
-	private String examTime;
-	private String name;
+    private String examTime;
+    private String name;
 
-	private int recruits;
+    private Date reApplyStart;
+    private Date reApplyEnd;
+    private Date admissionPrintStart;
+    private Date admissionPrintEnd;
 
-	public Exam() {
-	}
+    private int recruits;
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Exam() {
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public Date getApplyBeginDate() {
-		return applyBeginDate;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setApplyBeginDate(Date applyBeginDate) {
-		this.applyBeginDate = applyBeginDate;
-	}
+    public Date getApplyBeginDate() {
+        return applyBeginDate;
+    }
 
-	public Date getApplyDeadDate() {
-		return applyDeadDate;
-	}
+    public void setApplyBeginDate(Date applyBeginDate) {
+        this.applyBeginDate = applyBeginDate;
+    }
 
-	public void setApplyDeadDate(Date applyDeadDate) {
-		this.applyDeadDate = applyDeadDate;
-	}
+    public Date getApplyDeadDate() {
+        return applyDeadDate;
+    }
 
-	public Date getExamDate() {
-		return this.examDate;
-	}
+    public void setApplyDeadDate(Date applyDeadDate) {
+        this.applyDeadDate = applyDeadDate;
+    }
 
-	public void setExamDate(Date examDate) {
-		this.examDate = examDate;
-	}
+    public Date getExamDate() {
+        return this.examDate;
+    }
 
-	public String getExamPosition() {
-		return this.examPosition;
-	}
+    public void setExamDate(Date examDate) {
+        this.examDate = examDate;
+    }
 
-	public void setExamPosition(String examPosition) {
-		this.examPosition = examPosition;
-	}
+    public String getExamPosition() {
+        return this.examPosition;
+    }
 
-	public String getExamTime() {
-		return this.examTime;
-	}
+    public void setExamPosition(String examPosition) {
+        this.examPosition = examPosition;
+    }
 
-	public void setExamTime(String examTime) {
-		this.examTime = examTime;
-	}
+    public String getExamTime() {
+        return this.examTime;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public void setExamTime(String examTime) {
+        this.examTime = examTime;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public int getRecruits() {
-		return this.recruits;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setRecruits(int recruits) {
-		this.recruits = recruits;
-	}
+    public int getRecruits() {
+        return this.recruits;
+    }
+
+    public void setRecruits(int recruits) {
+        this.recruits = recruits;
+    }
+
+    public Date getReApplyStart() {
+        return reApplyStart;
+    }
+
+    public void setReApplyStart(Date reApplyStart) {
+        this.reApplyStart = reApplyStart;
+    }
+
+    public Date getReApplyEnd() {
+        return reApplyEnd;
+    }
+
+    public void setReApplyEnd(Date reApplyEnd) {
+        this.reApplyEnd = reApplyEnd;
+    }
+
+    public Date getAdmissionPrintStart() {
+        return admissionPrintStart;
+    }
+
+    public void setAdmissionPrintStart(Date admissionPrintStart) {
+        this.admissionPrintStart = admissionPrintStart;
+    }
+
+    public Date getAdmissionPrintEnd() {
+        return admissionPrintEnd;
+    }
+
+    public void setAdmissionPrintEnd(Date admissionPrintEnd) {
+        this.admissionPrintEnd = admissionPrintEnd;
+    }
 
 }

@@ -21,7 +21,8 @@ public class Master implements Serializable {
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *            the id to set
      */
     public void setId(MasterPK id) {
         this.id = id;
@@ -35,7 +36,8 @@ public class Master implements Serializable {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;

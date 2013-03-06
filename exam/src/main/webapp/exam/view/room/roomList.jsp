@@ -10,6 +10,8 @@
 	media="all" />
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <script type="text/javascript">
+	
+<%-- 
 <!--
 var office = new Array();
 <c:forEach items="${offices}" var="office" varStatus="status">
@@ -41,14 +43,59 @@ function changeDeart() {
 		}
 	}
 }
+--%>
+	function generateR() {
+		document.getElementById("actionType").value = 'generateRoom';
+		return true; //confirm("如果以前分配过座位，点击确定将重新分配座位，生成新的准考证号。确定吗?");
+	}
+	function generateAd() {
+		document.getElementById("actionType").value = 'generateAdmission';
+		return confirm("如果以前分配过座位，点击确定将重新分配座位，生成新的准考证号。确定吗?");
+	}
 
-function generate() {
-	return confirm("如果以前分配过座位，点击确定将重新分配座位，生成新的准考证号。确定吗?");
-}
-function doLogout() {
-	adminLogoutForm.submit();
-}
+	function addR() {
+		document.getElementById("actionType").value = 'addRoom';
+		return true;
+	}
 
+	function editR(roomId) {
+		document.getElementById("actionType").value = 'editRoom';
+		document.getElementById("roomId").value = roomId;
+		return true;
+	}
+
+	function deleteR(roomId) {
+		if (!confirm("删除考场也会删除已分配给岗位的座位。确定吗?")) {
+			return false;
+		}
+		document.getElementById("actionType").value = 'deleteRoom';
+		document.getElementById("roomId").value = roomId;
+		return true;
+	}
+
+	function removeA(departId, officeId, roomId, roomOfficeId) {
+
+		if (!confirm("确定要取消考场的分配吗？")) {
+			return false;
+		}
+		document.getElementById("actionType").value = 'removeAssign';
+		document.getElementById("departId").value = departId;
+		document.getElementById("officeId").value = officeId;
+		document.getElementById("roomId").value = roomId;
+		document.getElementById("roomOfficeId").value = roomOfficeId;
+		return true;
+	}
+
+	function assignR(departId, officeId) {
+		document.getElementById("actionType").value = 'assign';
+		document.getElementById("departId").value = departId;
+		document.getElementById("officeId").value = officeId;
+		return true;
+	}
+
+	function doLogout() {
+		adminLogoutForm.submit();
+	}
 //-->
 </script>
 </head>
@@ -73,91 +120,118 @@ function doLogout() {
 							action="/exam/adminLogout.action" commandName="AdminLoginCommand">
 							<a href="#" onclick="doLogout();">注销</a>
 						</form:form></td>
-				</tr>
-				<tr bgcolor="#FFFFFF">
-					<td colspan="2" valign="top" align="center" height="25"
-						style="padding-top: 5px;"><form:form name="roomListForm"
+				</tr><form:form name="roomListForm"
 							method="post" action="/exam/roomList.action"
 							commandName="RoomListCommand">
-							<table width="85%" border="0" cellpadding="4" cellspacing="0"
+							<form:hidden path="officeId" />
+							<form:hidden path="departId" />
+							<form:hidden path="roomId" />
+							<form:hidden path="roomOfficeId" />
+							<form:hidden path="actionType" />
+				<tr bgcolor="#FFFFFF">
+					<td colspan="2" valign="top" align="center" height="25"
+						style="padding-top: 5px;">
+							<table width="95%" border="0" cellpadding="4" cellspacing="0"
 								bgcolor="#E1E1E1">
-								<tr bgcolor="#ffffff">
+								<%-- <tr bgcolor="#ffffff">
 									<td style="text-align: right; width: 10%;">部门：</td>
 									<td style="text-align: left; width: 15%"><form:select
-											path="departId" items="${departs}" id="departId" itemLabel="name"
-											itemValue="id" onchange="changeDeart();">
+											path="departId" items="${departs}" id="departId"
+											itemLabel="name" itemValue="id" onchange="changeDeart();">
 										</form:select></td>
 									<td style="text-align: right; width: 10%;">岗位类别：</td>
 									<td style="text-align: left; width: 20%"><form:select
 											path="officeId" id="officeId" /></td>
-								</tr>
+								</tr> --%>
 								<tr bgcolor="#ffffff">
-									<td style="text-align: right; width: 10%;"></td>
-									<td style="text-align: center;" colspan="2"><input
-										type="submit" value="查询" style="width: 50px;" />&nbsp;&nbsp;<input
-										type="submit" value="座位分配/准考证号生成" style="width: 150px;" name="generateAdmission" onclick="return generate();"/>&nbsp;&nbsp;<input
+									<td></td>
+									<td style="text-align: center;" colspan="2" nowrap="nowrap"><input
+										type="submit" value="查询" style="width: 50px;"/>&nbsp;&nbsp;<input
+										type="submit" value="考场自动生成" style="width: 100px;"
+										name="generateRoom" onclick="return generateR();" />&nbsp;&nbsp;<input
+										type="submit" value="考场添加" style="width: 77px;"
+										name="addRoom" onclick="return addR();" />&nbsp;&nbsp;<input
+										type="submit" value="座位分配/准考证号生成" style="width: 150px;"
+										name="generateAdmission" onclick="return generateAd();" />&nbsp;&nbsp;<input
 										type="button" value="返回" style="width: 50px;"
 										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
-									<td style="text-align: right; width: 10%;"></td>
+									<td></td>
 								</tr>
-							</table>
-						</form:form></td>
+							</table></td>
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td colspan="2" valign="top" align="center"
 						style="padding-top: 5px; padding-bottom: 5px;">
-						<table width="85%" border="0" cellpadding="4" cellspacing="1"
+						<table width="95%" border="0" cellpadding="4" cellspacing="1"
 							bgcolor="#E1E1E1">
 							<tr bgcolor="#f7f7f7">
-								<th rowspan="2" style="width: 14%;" nowrap="nowrap">报考部门</th>
-								<th rowspan="2" style="width: 16%;" nowrap="nowrap">岗位类别</th>
+								<th rowspan="2" style="width: 12%;" nowrap="nowrap">报考部门</th>
+								<th rowspan="2" style="width: 14%;" nowrap="nowrap">岗位类别</th>
 								<th rowspan="2" style="width: 6%;" nowrap="nowrap">报考人数</th>
 								<th nowrap="nowrap" colspan="4">考场信息</th>
-								<th rowspan="2" style="width: 8%;" nowrap="nowrap"></th>
+								<th rowspan="2" style="width: 7%;" nowrap="nowrap"></th>
 							</tr>
 							<tr bgcolor="#f7f7f7">
-								<th style="width: 6%;">编号</th>
-								<th style="width: 8%;">座位数</th>
-								<th style="width: 12%;" nowrap="nowrap">说明</th>
-								<th>位置</th>
+								<th style="width: 5%;">编号</th>
+								<th style="width: 7%;">座位数</th>
+								<th style="width: 9%;">分配座位数</th>
+								<th style="width: 9%;">剩余座位数</th>
 							</tr>
 							<c:set var="totalCount" value="0" />
 							<c:set var="totalPassed" value="0" />
 							<c:set var="totalUnPassed" value="0" />
 							<c:forEach items="${RoomListCommand.offices}" var="office">
 								<c:set var="totalSeats" value="0" />
-								<c:set var="roomCount" value="${fn:length(office.rooms)}" />
+								<c:set var="totalAssignSeats" value="0" />
+								<c:set var="roomCount" value="${fn:length(office.roomOffices)}" />
 								<c:choose>
 									<c:when test="${roomCount == 0 }">
 										<tr bgcolor="#ffffff">
 											<td>${office.departName}</td>
 											<td>${office.name}(${office.code})</td>
 											<td>${office.totalUsers}</td>
-											<td colspan="4">座位总计：${totalSeats}席<c:if test="${totalSeats - office.totalUsers < 0 }">&nbsp;&nbsp;<font color="red">座位数不够，还差${office.totalUsers -totalSeats}席</font></c:if></td>
-											<td><input type="button" value="追加" onclick="javascript:document.location='/exam/roomEdit.action?officeId=${office.id}&departId=${office.departId}'"/></td>
+											<td colspan="4" nowrap="nowrap">已分配考场：${roomCount}间&nbsp;&nbsp;分配座位：${totalAssignSeats}席<c:if
+													test="${totalAssignSeats - office.totalUsers < 0 }">&nbsp;&nbsp;<font
+														color="red">座位数不够，还差${office.totalUsers
+														-totalAssignSeats}席</font>
+												</c:if></td>
+											<td><input type="submit" value="分配考场" name="assign"
+												onclick="return assignR('${office.departId }','${office.id }')" style="width: 77px;"/></td>
 										</tr>
 									</c:when>
 									<c:when test="${roomCount >= 1 }">
 
-										<c:forEach items="${office.rooms }" var="room"
+										<c:forEach items="${office.roomOffices }" var="ro"
 											varStatus="status">
-											<c:set var="totalSeats" value="${totalSeats + room.seats }" />
+											<c:set var="totalSeats" value="${totalSeats + ro.room.seats}" />
+											<c:set var="totalAssignSeats"
+												value="${totalAssignSeats + ro.assignSeats}" />
 											<tr bgcolor="#ffffff">
 												<c:if test="${status.index == 0 }">
 													<td rowspan="${roomCount + 1 }">${office.departName}</td>
 													<td rowspan="${roomCount + 1 }">${office.name}(${office.code})</td>
 													<td rowspan="${roomCount + 1 }">${office.totalUsers}</td>
 												</c:if>
-												<td>${room.code }</td>
-												<td>${room.seats }</td>
-												<td>${room.name }</td>
-												<td>${room.position }</td>
-												<td nowrap="nowrap"><input type="button" value="修改" onclick="javascript:document.location='/exam/roomEdit.action?roomId=${room.id}'"/></td>
+												<td>${ro.room.code }</td>
+												<td>${ro.room.seats }</td>
+												<td><c:if test="${ro.assignSeats < ro.room.seats }"><font color="red"></c:if>${ro.assignSeats }<c:if test="${ro.assignSeats < ro.room.seats }"></font></c:if></td>
+												<td><c:if test="${ro.room.remainSeats > 0}"><font color="green"></c:if>${ro.room.remainSeats }<c:if test="${ro.room.remainSeats > 0}"></font></c:if></td>
+												<td nowrap="nowrap"><input type="submit" value="修改"
+													name="editRoom" onclick="return editR('${ro.room.id}')" style="width: 50px;"/>&nbsp;<input
+													type="submit" value="删除考场" name="deleteRoom"
+													onclick="return deleteR('${ro.room.id}');"style="width: 77px;" />&nbsp;<input
+													type="submit" value="取消分配" name="removeAssign"
+													onclick="return removeA('${office.departId }','${office.id }','${ro.room.id}','${ro.id }')" style="width: 77px;"/></td>
 											</tr>
 										</c:forEach>
 										<tr bgcolor="#ffffff">
-											<td colspan="4">座位总计：${totalSeats}席<c:if test="${totalSeats - office.totalUsers < 0 }">&nbsp;&nbsp;<font color="red">座位数不够，还差${office.totalUsers -totalSeats}席</font></c:if></td>
-											<td><input type="button" value="追加" onclick="javascript:document.location='/exam/roomEdit.action?officeId=${office.id}&departId=${office.departId}'"/></td>
+											<td colspan="4" nowrap="nowrap">已分配考场：${roomCount}间&nbsp;&nbsp;分配座位：${totalAssignSeats}席<c:if
+													test="${totalAssignSeats - office.totalUsers < 0 }">&nbsp;&nbsp;<font
+														color="red">座位数不够，还差${office.totalUsers
+														-totalAssignSeats}席</font>
+												</c:if></td>
+											<td><input type="submit" value="分配考场" name="assign"
+												onclick="return assignR('${office.departId }','${office.id }')" style="width: 77px;"/></td>
 										</tr>
 									</c:when>
 
@@ -166,10 +240,12 @@ function doLogout() {
 						</table>
 					</td>
 				</tr>
+						</form:form>
 			</table>
 		</div>
 	</div>
 </body>
+<%-- 
 <script type="text/javascript">
 <!--
  changeDeart();
@@ -178,4 +254,5 @@ function doLogout() {
  }
 //-->
 </script>
+--%>
 </html>

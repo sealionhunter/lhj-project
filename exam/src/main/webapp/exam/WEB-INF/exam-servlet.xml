@@ -47,6 +47,7 @@
 				<value>model/Room.hbm.xml</value>
 				<value>model/Seat.hbm.xml</value>
 				<value>model/Admission.hbm.xml</value>
+				<value>model/RoomOffice.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -69,7 +70,22 @@
 	<!-- use declarative transaction management -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<bean id="adminInterceptor" class="interceptor.AdminInterceptor" />
+	<bean id="adminInterceptor" class="interceptor.AdminInterceptor" >
+		<property name="adminUrls">
+			<list>
+				<value>/signuppeopleinfo.action</value>
+				<value>/verify.action</value>
+				<value>/signupdetailsearch.action</value>
+				<value>/adminInit.action</value>
+				<value>/modifyAdmin.action</value>
+				<value>/roomEdit.action</value>
+				<value>/roomList.action</value>
+				<value>/roomAssign.action</value>
+				<value>/userPasswordReset.action</value>
+				<value>/userSeatReset.action</value>
+			</list>
+		</property>
+	</bean>
 
 	<bean id="simpleUrlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -96,6 +112,7 @@
 				<prop key="/admissionPrint.action">admissionPrintController</prop>
 				<prop key="/userPasswordReset.action">userPasswordResetController</prop>
 				<prop key="/userSeatReset.action">userSeatResetController</prop>
+				<prop key="/roomAssign.action">roomAssignController</prop>
 			</props>
 		</property>
 	</bean>
@@ -143,16 +160,14 @@
 	</bean>
 	<bean id="roomService" class="service.RoomServiceImpl">
 		<property name="resetAdmissionAfterPrint" value="${resetAdmissionAfterPrint}" />
+		<property name="seatsPerRoom" value="${seatsPerRoom}" />
 		<property name="userDao" ref="userDao" />
 		<property name="departDao" ref="departDao" />
-		<!-- <property name="cityDao" ref="cityDao" /> -->
 		<property name="officeDao" ref="officeDao" />
 		<property name="roomDao" ref="roomDao" />
 		<property name="examDao" ref="examDao" />
 		<property name="applyDao" ref="applyDao" />
 		<property name="admissionDao" ref="admissionDao" />
-		<!-- <property name="masterDao" ref="masterDao" /> <property name="examDao" 
-			ref="examDao" /> <property name="adminDao" ref="adminDao" /> -->
 	</bean>
 	<bean id="registController" class="controller.RegistWizardController">
 		<property name="successView" value="success" />
@@ -291,6 +306,20 @@
 		</property>
 	</bean>
 
+	<bean id="roomAssignValidator" class="validator.RoomAssignValidator" />
+	<bean id="roomAssignController" class="controller.RoomAssignController">
+		<property name="formView" value="room/roomAssign" />
+		<property name="successView" value="adminIndex" />
+		<property name="commandName" value="RoomAssignCommand" />
+		<property name="commandClass" value="command.RoomEditCommand" />
+		<property name="roomService" ref="roomService" />
+		<property name="validators">
+			<list>
+				<ref bean="roomAssignValidator" />
+			</list>
+		</property>
+	</bean>
+
 	<bean id="roomListController" class="controller.RoomListController">
 		<property name="formView" value="room/roomList" />
 		<property name="successView" value="adminIndex" />
@@ -311,8 +340,6 @@
 				<ref bean="admissionPrintValidator" />
 			</list>
 		</property>
-		<property name="beginDate" value="2013/03/12" />
-		<property name="endDate" value="2013/03/14" />
 	</bean>
 
 	<bean id="userPasswordService" class="service.UserPasswordServiceImpl">

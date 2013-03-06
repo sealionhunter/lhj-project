@@ -14,6 +14,7 @@ public class SignUpPersonSearchCommand {
     private Integer age = -1;
     private String idCardNo;
     private String identity;
+    private Boolean admissionPrintFlg;
 
     /**
      * @return the deptId
@@ -61,7 +62,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param state the state to set
+     * @param state
+     *            the state to set
      */
     public void setState(Integer state) {
         this.state = state;
@@ -75,7 +77,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param sex the sex to set
+     * @param sex
+     *            the sex to set
      */
     public void setSex(Integer sex) {
         this.sex = sex;
@@ -89,7 +92,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param homeTown the homeTown to set
+     * @param homeTown
+     *            the homeTown to set
      */
     public void setHomeTown(String homeTown) {
         this.homeTown = homeTown;
@@ -103,7 +107,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param politicalCode the politicalCode to set
+     * @param politicalCode
+     *            the politicalCode to set
      */
     public void setPoliticalCode(Integer politicalCode) {
         this.politicalCode = politicalCode;
@@ -117,7 +122,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -131,7 +137,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param degree the degree to set
+     * @param degree
+     *            the degree to set
      */
     public void setDegree(String degree) {
         this.degree = degree;
@@ -145,7 +152,8 @@ public class SignUpPersonSearchCommand {
     }
 
     /**
-     * @param age the age to set
+     * @param age
+     *            the age to set
      */
     public void setAge(Integer age) {
         this.age = age;
@@ -165,5 +173,13 @@ public class SignUpPersonSearchCommand {
 
     public void setIdentity(String identity) {
         this.identity = identity;
+    }
+
+    public Boolean getAdmissionPrintFlg() {
+        return admissionPrintFlg;
+    }
+
+    public void setAdmissionPrintFlg(Boolean admissionPrintFlg) {
+        this.admissionPrintFlg = admissionPrintFlg;
     }
 }

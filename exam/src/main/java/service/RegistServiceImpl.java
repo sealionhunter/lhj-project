@@ -1,6 +1,5 @@
 package service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -384,32 +383,14 @@ public class RegistServiceImpl implements RegistService {
     public void printAdmission(AdmissionCommand cmd, BindException errors)
             throws Exception {
         Exam exam = examDao.list().get(0);
-
-        Date date = exam.getExamDate();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        String dateStr = sdf.format(date);
-        String timeStr = exam.getExamTime();
-        String[] timeArray = timeStr.split("-");
-
-        String from = dateStr + " " + timeArray[0];
-        String to = dateStr + " " + timeArray[1];
-
-        sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
-        Date fromTime = sdf.parse(from);
-        Date toTime = sdf.parse(to);
         Date now = new Date();
 
-        if (now.before(exam.getApplyBeginDate())) {
-            throw new Exception("报名还未开始，不能打印准考证");
-        }
-        if (now.before(exam.getApplyDeadDate())) {
-            throw new Exception("报名还未结束，不能打印准考证");
-        }
-        if (now.after(toTime)) {
-            throw new Exception("考试已经结束，不能打印准考证");
-        }
-        if (now.after(fromTime)) {
-            throw new Exception("考试已经开始，不能打印准考证");
+        Date start = exam.getAdmissionPrintStart() == null ? now : exam
+                .getAdmissionPrintStart();
+        Date end = exam.getAdmissionPrintEnd() == null ? now : exam
+                .getAdmissionPrintEnd();
+        if (now.before(start) || now.after(end)) {
+            throw new Exception("当前时间段不在打印时间内，请在规定时间段内打印笔试准考证！");
         }
 
         Admission admission = admissionDao.get(cmd.getUser().getId());

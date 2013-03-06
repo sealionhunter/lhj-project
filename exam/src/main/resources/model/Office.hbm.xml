@@ -2,19 +2,19 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-lazy="false">
- <class name="model.Office" table="office">
-  <id name="id">
-   <generator class="identity"/>
-  </id>
-  <property generated="never" lazy="false" name="name"/>
-  <property generated="never" lazy="false" name="code"/>
-  <property generated="never" lazy="false" name="major"/>
-  <property generated="never" lazy="false" name="degree"/>
-  <property generated="never" lazy="false" name="recruits"/>
-  <property generated="never" lazy="false" name="limitAge"/>
-  <property generated="never" lazy="false" name="description"/>
-  <property generated="never" lazy="false" name="examId"/>
-  <property generated="never" lazy="false" name="applyYear"/>
-  <property generated="never" lazy="false" name="departId"/>
- </class>
+	<class name="model.Office" table="office">
+		<id name="id">
+			<generator class="identity" />
+		</id>
+		<property generated="never" lazy="false" name="name" />
+		<property generated="never" lazy="false" name="code" />
+		<property generated="never" lazy="false" name="major" />
+		<property generated="never" lazy="false" name="degree" />
+		<property generated="never" lazy="false" name="recruits" />
+		<property generated="never" lazy="false" name="limitAge" />
+		<property generated="never" lazy="false" name="description" />
+		<property generated="never" lazy="false" name="examId" />
+		<property generated="never" lazy="false" name="applyYear" />
+		<property generated="never" lazy="false" name="departId" />
+	</class>
 </hibernate-mapping>

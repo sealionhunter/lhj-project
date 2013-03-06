@@ -44,9 +44,9 @@
 				</tr>
 				<tr bgcolor="#FFFFFF">
 					<td colspan="2" valign="top" align="center" height="200"
-						style="padding-top: 20px;padding-bottom: 5px;"><form:form id="verifyForm"
-							name="verifyForm" method="post" action="/exam/verify.action"
-							commandName="VerifyCommand">
+						style="padding-top: 20px; padding-bottom: 5px;"><form:form
+							id="verifyForm" name="verifyForm" method="post"
+							action="/exam/verify.action" commandName="VerifyCommand">
 							<form:hidden path="userId" />
 							<table width="80%" border="0" cellpadding="4" cellspacing="1"
 								bgcolor="#E1E1E1">
@@ -162,15 +162,24 @@
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right" nowrap="nowrap">学习/培训经历：</td>
-									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.trainingExp}</pre></div></td>
+									<td align="left" colspan="4"><div
+											style="width: 612px; overflow: auto">
+											<pre>${VerifyCommand.user.trainingExp}</pre>
+										</div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">工作经历：</td>
-									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.workExp}</pre></div></td>
+									<td align="left" colspan="4"><div
+											style="width: 612px; overflow: auto">
+											<pre>${VerifyCommand.user.workExp}</pre>
+										</div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">社会关系：</td>
-									<td align="left" colspan="4"><div style="width: 612px;overflow: auto"><pre>${VerifyCommand.user.socialRel}</pre></div></td>
+									<td align="left" colspan="4"><div
+											style="width: 612px; overflow: auto">
+											<pre>${VerifyCommand.user.socialRel}</pre>
+										</div></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="right">审核：</td>
@@ -183,8 +192,8 @@
 								<tr bgcolor="#ffffff">
 									<td align="right">原因：</td>
 									<td align="left" colspan="4"><form:textarea
-											path="verifyReason" cols="50" rows="4" /><font color="#ff0000"><form:errors
-											path="verifyReason" /></font></td>
+											path="verifyReason" cols="50" rows="4" /><font
+										color="#ff0000"><form:errors path="verifyReason" /></font></td>
 								</tr>
 								<tr bgcolor="#ffffff">
 									<td align="center" colspan="5"><form:hidden
