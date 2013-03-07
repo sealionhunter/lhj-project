@@ -104,6 +104,9 @@ public class RoomServiceImpl implements RoomService {
     public void generateRoom(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception {
         List<Office> offices = roomDao.listOfficeByCond(cmd);
+        if (roomDao.listRoom().size() > 0) {
+            throw new Exception("已经存在考场，无法自动生成，请使用考场添加功能，或者删除所有考场后再重试!");
+        }
         int oCount = offices.size();
         List<Room> rooms = new ArrayList<Room>();
         int rid = 1;
@@ -217,7 +220,15 @@ public class RoomServiceImpl implements RoomService {
         condition.setState(2);
         condition.setDeptId(cmd.getDepartId());
         condition.setPostId(cmd.getOfficeId());
+        
         List<Apply> applies = applyDao.list(condition);
+        List<Integer> uids = new ArrayList<Integer>();
+        for (Apply apply : applies) {
+            uids.add(apply.getUser().getId());
+        }
+        roomDao.removeSeatByUids(uids);
+        admissionDao.deleteByUids(uids);
+        
         List<RoomOffice> rooms = roomDao.listRoomOfficeByOid(-1);
 
         // admissions and seats for insert
@@ -225,7 +236,6 @@ public class RoomServiceImpl implements RoomService {
         List<Seat> seats = new ArrayList<Seat>(applies.size());
 
         // users for deleting admission and seats;
-        List<Integer> uids = new ArrayList<Integer>();
         Map<Integer, Integer> seqs = new HashMap<Integer, Integer>();
         for (Apply apply : applies) {
             RoomOffice ro = null;
@@ -250,7 +260,6 @@ public class RoomServiceImpl implements RoomService {
             }
 
             Integer uid = apply.getUser().getId();
-            uids.add(uid);
 
             Seat seat = new Seat();
             seat.setCode(String.format("%02d", seq));
@@ -261,9 +270,6 @@ public class RoomServiceImpl implements RoomService {
             admissions.add(new Admission(uid, prefix + ro.getRoom().getCode()
                     + seat.getCode()));
         }
-
-        roomDao.removeSeatByUids(uids);
-        admissionDao.deleteByUids(uids);
         roomDao.addSeat(seats);
         admissionDao.add(admissions);
     }

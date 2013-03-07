@@ -147,7 +147,11 @@ public class ApplyDaoImpl implements ApplyDao {
                             paramList.add(cmd.getIdentity().trim());
                         }
                         if (cmd.getAdmissionPrintFlg() != null) {
-                            hql += "and Ad.printFlg = ? ";
+                            if (cmd.getAdmissionPrintFlg()) {
+                                hql += "and Ad.printFlg = ? ";
+                            } else {
+                                hql += "and (Ad.printFlg is null or Ad.printFlg = ?) ";
+                            }
                             paramList.add(cmd.getAdmissionPrintFlg());
                         }
                         if (cmd.getAge() != null && cmd.getAge() >= 0) {
