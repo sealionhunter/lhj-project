@@ -1,12 +1,16 @@
 package dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import model.Apply;
 import model.City;
 import model.Depart;
 import model.Office;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 public class OfficeDaoImpl implements OfficeDao {
@@ -18,40 +22,32 @@ public class OfficeDaoImpl implements OfficeDao {
         return (Office) getHibernateTemplate().load(Office.class, id);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public List<Office> list() throws Exception {
-        List<Office> offices = getHibernateTemplate().loadAll(Office.class);
-        for (Office office : offices) {
-            if (office.getDepartId() != null) {
-                Depart depart = (Depart) getHibernateTemplate().load(
-                        Depart.class, office.getDepartId());
-                if (depart != null) {
-                    office.setDepartName(depart.getName());
-                }
-                City city = (City) getHibernateTemplate().load(City.class,
-                        depart.getCityId());
-                if (city != null) {
-                    office.setCityName(city.getName());
-                }
-                List<Apply> applys = getHibernateTemplate().find(
-                        "from Apply as apply where apply.id.officeid = ?",
-                        office.getId());
-                int applyCount = applys.size();
-                if (applys != null && applyCount != 0) {
-                    office.setApplyCount(applyCount);
-                    int validateCount = 0;
-                    for (Apply apply : applys) {
-                        if (apply.getState() == 2) {
-                            validateCount++;
-                        }
-                        office.setValidataCount(validateCount);
-                    }
-                    int recruits = office.getRecruits();
-                    office.setScale(validateCount / recruits);
-                }
-            }
+        String hql = "from Office O, Depart D, City C "
+                + " where O.departId=D.id and C.id = D.cityId ";
+        List<?> list = getHibernateTemplate().find(hql);
 
+        List<Office> offices = new ArrayList<Office>();
+        for (Object o : list) {
+            Object[] objects = (Object[]) o;
+            final Office office = (Office) objects[0];
+            office.setDepartName(((Depart) objects[1]).getName());
+            office.setCityName(((City) objects[2]).getName());
+            final String sql = "select count(*) as applyCount, "
+                    + " sum(case when state = 2 then 1 else 0 end) as validateCount "
+                    + " from Apply as apply where apply.officeid = ? ";
+            Object[] apply = (Object[]) getHibernateTemplate().execute(new HibernateCallback() {
+                public Object doInHibernate(Session session) throws HibernateException, SQLException {
+                    return (Object[]) session.createSQLQuery(sql)
+                            .setParameter(0, office.getId()).uniqueResult();
+                }
+            });
+            int validateCount = ((Number) apply[1]).intValue();
+            office.setApplyCount(((Number) apply[0]).intValue());
+            office.setValidataCount(validateCount);
+            office.setScale(validateCount / office.getRecruits());
+            offices.add(office);
         }
         return offices;
     }

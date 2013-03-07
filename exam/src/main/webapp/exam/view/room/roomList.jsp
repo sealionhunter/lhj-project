@@ -146,9 +146,9 @@ function changeDeart() {
 								<tr bgcolor="#ffffff">
 									<td></td>
 									<td style="text-align: center;" colspan="2" nowrap="nowrap"><input
-										type="submit" value="查询" style="width: 50px;"/>&nbsp;&nbsp;<input
+										type="submit" value="查询" style="width: 50px;"/><span id="gr">&nbsp;&nbsp;<input
 										type="submit" value="考场自动生成" style="width: 100px;"
-										name="generateRoom" onclick="return generateR();" />&nbsp;&nbsp;<input
+										name="generateRoom" onclick="return generateR();" />&nbsp;&nbsp;</span> <input
 										type="submit" value="考场添加" style="width: 77px;"
 										name="addRoom" onclick="return addR();" />&nbsp;&nbsp;<input
 										type="submit" value="座位分配/准考证号生成" style="width: 150px;"
@@ -178,12 +178,11 @@ function changeDeart() {
 								<th style="width: 9%;">剩余座位数</th>
 							</tr>
 							<c:set var="totalCount" value="0" />
-							<c:set var="totalPassed" value="0" />
-							<c:set var="totalUnPassed" value="0" />
 							<c:forEach items="${RoomListCommand.offices}" var="office">
 								<c:set var="totalSeats" value="0" />
 								<c:set var="totalAssignSeats" value="0" />
 								<c:set var="roomCount" value="${fn:length(office.roomOffices)}" />
+								<c:set var="totalCount" value="${totalCount + roomCount }" />
 								<c:choose>
 									<c:when test="${roomCount == 0 }">
 										<tr bgcolor="#ffffff">
@@ -245,13 +244,18 @@ function changeDeart() {
 		</div>
 	</div>
 </body>
-<%-- 
 <script type="text/javascript">
 <!--
+<%-- 
  changeDeart();
  if ('${RoomListCommand.officeId}' != '') {
 	 document.getElementById("officeId").value='${RoomListCommand.officeId}';
  }
+ 
+--%>
+<c:if test="${totalCount > 0}">
+document.getElementById("gr").style.display='none';
+</c:if>
 //-->
 </script>
 --%>

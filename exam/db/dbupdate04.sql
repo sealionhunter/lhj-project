@@ -1,3 +1,5 @@
+grant all privileges on exam.* to 'exam'@'localhost' identified by 'exam_20130221-0316';
+
 use exam;
 
 ALTER TABLE `exam` ADD COLUMN `reApplyStart` DATETIME NULL, ADD COLUMN `reApplyEnd` DATETIME NULL, ADD COLUMN `admissionPrintStart` DATETIME NULL, ADD COLUMN `admissionPrintEnd` DATETIME NULL;
