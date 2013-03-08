@@ -75,12 +75,12 @@ function goSubmit(type) {
 										</c:when>
 										<c:when test="${AdmissionPrintCommand.apply.state == '1'}">
 											<td style="height: 10px; text-align: left; color: #ff0000">
-												审核未通过，请仔细核对岗位要求与自身资料</td>
+												审核未通过，请仔细核对岗位要求与自身资料。</td>
 										</c:when>
 										<c:when test="${AdmissionPrintCommand.apply.state == '2'}">
 											<td style="height: 10px; text-align: left; color: #ff0000">
 												审核通过
-												<input type="button" value="生成准考证" onclick="goSubmit('print');" />
+												<input type="button" value="生成准考证" onclick="goSubmit('print');" />&nbsp;&nbsp;打印时请在一张A4纸上打印。
 											</td>
 										</c:when>
 										<c:otherwise>
