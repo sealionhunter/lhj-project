@@ -291,6 +291,21 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
+    public void removeSeatByRid(final Integer rid) throws Exception {
+        hibernateTemplate.execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session)
+                    throws HibernateException, SQLException {
+                return session
+                        .createQuery(
+                                "delete from model.Seat as seat where seat.roomId = :rid")
+                        .setParameter("rid", rid).executeUpdate();
+            }
+        });
+        hibernateTemplate.flush();
+    }
+
+    @Override
     public void removeRoom(Room room) throws Exception {
         hibernateTemplate.delete(room);
     }
@@ -312,6 +327,8 @@ public class RoomDaoImpl implements RoomDao {
                 String sql = " select count(*) from apply A "
                         + " inner join office O on A.officeId = O.id "
                         + " inner join admission Ad on Ad.userId = A.userId "
+                        + " inner join seat S on S.userId = A.userId "
+                        + " inner join Room R on R.id = S.roomId "
                         + " where Ad.printFlg = true ";
                 Map<String, Integer> params = new HashMap<String, Integer>();
                 if (cmd.getDepartId() != null && cmd.getDepartId() > 0) {
@@ -321,6 +338,10 @@ public class RoomDaoImpl implements RoomDao {
                 if (cmd.getOfficeId() != null && cmd.getOfficeId() > 0) {
                     sql += " and O.id = :officeId";
                     params.put("officeId", cmd.getOfficeId());
+                }
+                if (cmd.getRoomId() != null && cmd.getRoomId() > 0) {
+                    sql += " and R.id = :roomId";
+                    params.put("roomId", cmd.getRoomId());
                 }
                 SQLQuery query = session.createSQLQuery(sql);
 

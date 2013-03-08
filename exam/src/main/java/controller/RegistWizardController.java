@@ -1,6 +1,5 @@
 package controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,6 @@ public class RegistWizardController extends AbstractWizardFormController {
 
     private String successView;
     private String cancelView;
-    private String dataEditBefore;
 
     public String getCancelView() {
         return cancelView;
@@ -74,16 +72,12 @@ public class RegistWizardController extends AbstractWizardFormController {
                 if (!"1".equals(editFlg)
                         && today.after(exam.getApplyDeadDate())) {
                     throw new Exception("很抱歉，报名已经结束！");
-                    // errors.reject("test", "很抱歉，报名已经结束！");
                 } else if (today.before(exam.getApplyBeginDate())) {
                     throw new Exception("报名还未开始，请耐心等待！");
-                    // errors.reject("test", "报名还未开始，请耐心等待！");
-                } else if ("1".equals(editFlg) && dataEditBefore != null) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                    Date d = sdf.parse(dataEditBefore);
-                    if (today.after(d)) {
-                        throw new Exception("信息修改时间已结束，无法修改！");
-                    }
+                } else if ("1".equals(editFlg)
+                        && (today.after(exam.getReApplyEnd()) || today
+                                .before(exam.getReApplyStart()))) {
+                    throw new Exception("信息修改时间已结束，无法修改！");
                 }
             }
             if (!errors.hasErrors()) {
@@ -299,13 +293,4 @@ public class RegistWizardController extends AbstractWizardFormController {
     public void setRegistService(RegistService registService) {
         this.registService = registService;
     }
-
-    public String getDataEditBefore() {
-        return dataEditBefore;
-    }
-
-    public void setDataEditBefore(String dataEditBefore) {
-        this.dataEditBefore = dataEditBefore;
-    }
-
 }

@@ -43,8 +43,10 @@ public class RoomListController extends SimpleFormController {
         Map model = errors.getModel();
         if (request.getParameter("generateAdmission") != null) {
             roomService.generateAdmission(request, cmd, errors);
+            model.put("alert", "座位分配/准考证生成已经完成！");
         } else if (request.getParameter("generateRoom") != null) {
             roomService.generateRoom(request, cmd, errors);
+            model.put("alert", "考场自动生成已经完成！");
         } else if (request.getParameter("addRoom") != null) {
             return new ModelAndView(new RedirectView("roomEdit.action"));
         } else if (request.getParameter("editRoom") != null) {

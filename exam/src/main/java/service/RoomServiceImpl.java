@@ -433,15 +433,22 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void deleteRoom(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception {
+        if (!roomDao.checkAdmission(cmd)) {
+            throw new Exception("已有考生打印准考证，无法删除");
+        }
         Room r = roomDao.getRoom(cmd.getRoomId());
+        roomDao.removeSeatByRid(r.getId());
+        roomDao.removeRoomOfficeByRid(r.getId());
         roomDao.removeRoom(r);
-        roomDao.removeRoomOfficeByRid(cmd.getRoomId());
     }
 
     @Transactional
     @Override
     public void removeAssign(HttpServletRequest request, RoomEditCommand cmd,
             BindException errors) throws Exception {
+        if (!roomDao.checkAdmission(cmd)) {
+            throw new Exception("已有考生打印准考证，无法取消分配");
+        }
         RoomOffice ro = roomDao.getRoomOffice(cmd.getRoomOfficeId());
         Room r = roomDao.getRoom(ro.getRoomId());
         r.setRemainSeats(r.getRemainSeats() + ro.getAssignSeats());
@@ -586,7 +593,7 @@ public class RoomServiceImpl implements RoomService {
         List<Depart> deptList = departDao.list();
         model.put("departs", deptList);
 
-        List<Office> officeList = officeDao.list();
+        List<Office> officeList = roomDao.listOfficeByCond(new RoomEditCommand());
         model.put("offices", officeList);
         model.put("rooms", roomDao.listRoom());
         return model;

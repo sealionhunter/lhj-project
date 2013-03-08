@@ -66,6 +66,10 @@
 								<td style="height: 10px; text-align: left;"><a
 									href="/exam/userSeatReset.action">考生座位重置</a></td>
 							</tr>
+							<tr bgcolor="#ffffff">
+								<td style="height: 10px; text-align: left;"><a
+									href="/exam/seatList.action">考生座位一览</a></td>
+							</tr>
 						</table>
 					</td>
 				</tr>

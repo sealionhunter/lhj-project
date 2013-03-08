@@ -145,8 +145,8 @@ function changeDeart() {
 								</tr> --%>
 								<tr bgcolor="#ffffff">
 									<td></td>
-									<td style="text-align: center;" colspan="2" nowrap="nowrap"><input
-										type="submit" value="查询" style="width: 50px;"/><span id="gr">&nbsp;&nbsp;<input
+									<td style="text-align: center;" colspan="2" nowrap="nowrap"><%--<input
+										type="submit" value="查询" style="width: 50px;"/>--%>&nbsp;&nbsp;<span id="gr"><input
 										type="submit" value="考场自动生成" style="width: 100px;"
 										name="generateRoom" onclick="return generateR();" />&nbsp;&nbsp;</span> <input
 										type="submit" value="考场添加" style="width: 77px;"
@@ -214,7 +214,7 @@ function changeDeart() {
 												<td>${ro.room.code }</td>
 												<td>${ro.room.seats }</td>
 												<td><c:if test="${ro.assignSeats < ro.room.seats }"><font color="red"></c:if>${ro.assignSeats }<c:if test="${ro.assignSeats < ro.room.seats }"></font></c:if></td>
-												<td><c:if test="${ro.room.remainSeats > 0}"><font color="green"></c:if>${ro.room.remainSeats }<c:if test="${ro.room.remainSeats > 0}"></font></c:if></td>
+												<td>${ro.room.remainSeats }</td>
 												<td nowrap="nowrap"><input type="submit" value="修改"
 													name="editRoom" onclick="return editR('${ro.room.id}')" style="width: 50px;"/>&nbsp;<input
 													type="submit" value="删除考场" name="deleteRoom"
@@ -255,6 +255,10 @@ function changeDeart() {
 --%>
 <c:if test="${totalCount > 0}">
 document.getElementById("gr").style.display='none';
+</c:if>
+
+<c:if test="${alert != null}">
+alert('${alert}');
 </c:if>
 //-->
 </script>
