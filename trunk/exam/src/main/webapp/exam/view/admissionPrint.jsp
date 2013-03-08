@@ -156,7 +156,7 @@ style='font-size:12.0pt;font-family:SimSun'>*********** </span><span
 lang=ZH-CN style='font-size:12.0pt;font-family:SimSun'>特别提示：考生于考场内请勿携带贵重物品，否则后果自负。</span><span
 lang=EN-US style='font-size:12.0pt;font-family:SimSun'>************ </span></p>
 
-<p class=MsoNormal style='line-height:12.0pt'><span lang=EN-US
+<p class=MsoNormal style='line-height:10.0pt'><span lang=EN-US
 style='font-size:12.0pt;font-family:SimSun'>&nbsp; </span></p>
 
 <p class=MsoNormal style='text-indent:24.0pt;line-height:16.0pt'><span
@@ -206,7 +206,7 @@ lang=ZH-CN style='font-size:12.0pt;font-family:SimSun'>12.对违反考生须知�
 <p class=MsoNormal ><span
 lang=ZH-CN style='font-size:12.0pt;font-family:SimHei'>-------------------------------------成绩公布-----------------------------------</span></p>
 
-<p class=MsoNormal style='text-indent:24.0pt'><span
+<p class=MsoNormal style='text-indent:16.0pt'><span
 lang=ZH-CN style='font-size:12.0pt;font-family:FangSong_GB2312'>笔试结束后5天内在合肥猎头网（www.hfjyz.com）、阜阳合肥现代产业园区网（www.fhip.gov.cn）公布笔试成绩。</span></p>
 
 </div>
