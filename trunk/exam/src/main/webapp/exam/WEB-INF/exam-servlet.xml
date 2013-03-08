@@ -83,6 +83,7 @@
 				<value>/roomAssign.action</value>
 				<value>/userPasswordReset.action</value>
 				<value>/userSeatReset.action</value>
+				<value>/seatList.action</value>
 			</list>
 		</property>
 	</bean>
@@ -113,6 +114,7 @@
 				<prop key="/userPasswordReset.action">userPasswordResetController</prop>
 				<prop key="/userSeatReset.action">userSeatResetController</prop>
 				<prop key="/roomAssign.action">roomAssignController</prop>
+				<prop key="/seatList.action">seatListController</prop>
 			</props>
 		</property>
 	</bean>
@@ -173,7 +175,6 @@
 		<property name="successView" value="success" />
 		<property name="cancelView" value="init" />
 		<property name="commandName" value="RegistCommand" />
-		<property name="dataEditBefore" value="${dataEditBefore}" />
 		<property name="commandClass" value="command.RegistCommand" />
 		<property name="registService" ref="registService" />
 		<!---配置操作类 -->
@@ -328,6 +329,14 @@
 		<property name="roomService" ref="roomService" />
 	</bean>
 
+	<bean id="seatListController" class="controller.SeatListController">
+		<property name="sessionForm" value="true" />
+		<property name="formView" value="room/seatList" />
+		<property name="commandName" value="SeatListSearchCommand" />
+		<property name="commandClass" value="command.SignUpPersonSearchCommand" />
+		<property name="registService" ref="registService" />
+	</bean>
+	
 	<bean id="admissionPrintValidator" class="validator.AdmissionValidator" />
 	<bean id="admissionPrintController" class="controller.AdmissionController">
 		<property name="formView" value="admissionPrepare" />

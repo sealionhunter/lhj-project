@@ -20,7 +20,7 @@ var office = new Array();
             office[${status.index }].name = '';
         </c:when>
         <c:otherwise>
-            office[${status.index }].name = '${office.name}' + '(' +  '${office.code}' + ')';
+            office[${status.index }].name = '${office.name}(${office.code})--(${office.totalUsers - office.totalSeats })';
         </c:otherwise>
     </c:choose>
     office[${status.index }].departId = '${office.departId}';
@@ -84,7 +84,7 @@ function changeDeart() {
 											itemLabel="name" itemValue="id" onchange="changeDeart();">
 										</form:select></td>
 									<td style="text-align: right; width: 10%;">岗位类别：</td>
-									<td style="text-align: left; width: 20%"><form:select
+									<td style="text-align: left; width: 30%"><form:select
 											path="officeId" id="officeId" /></td>
 								</tr>
 								<tr bgcolor="#ffffff">
@@ -92,12 +92,14 @@ function changeDeart() {
 									<td style="text-align: left; width: 15%"><form:select
 											path="roomId" id="roomId">
 											<c:forEach items="${rooms }" var="r">
+												<c:if test="${r.remainSeats > 0 }">
 												<form:option value="${r.id }" label="${r.code }--${r.seats }--${r.remainSeats }"></form:option>
+												</c:if>
 											</c:forEach>
 										</form:select><font color="#ff0000">&nbsp;&nbsp;<form:errors
 												path="code" /></font></td>
 									<td style="text-align: right; width: 10%;">分配座位数：</td>
-									<td style="text-align: left; width: 20%"><form:input
+									<td style="text-align: left; width: 30%"><form:input
 											path="seats" id="seats" /><font color="#ff0000">&nbsp;&nbsp;<form:errors
 												path="seats" /></font></td>
 								</tr>
@@ -106,7 +108,7 @@ function changeDeart() {
 									<td style="text-align: center;" colspan="2" nowrap="nowrap"><input
 										type="submit" value="确定" style="width: 50px;" />&nbsp;&nbsp;<input
 										type="button" value="返回" style="width: 50px;"
-										onclick="javascript:document.location='/exam/adminInit.action'" /></td>
+										onclick="javascript:document.location='/exam/roomList.action'" /></td>
 									<td></td>
 								</tr>
 							</table>

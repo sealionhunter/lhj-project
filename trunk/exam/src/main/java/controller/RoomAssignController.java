@@ -48,7 +48,7 @@ public class RoomAssignController extends SimpleFormController {
         return roomService.initRoomAssign(cmd, errors);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request,
             HttpServletResponse response, Object command, BindException errors)
@@ -56,8 +56,9 @@ public class RoomAssignController extends SimpleFormController {
         RoomEditCommand cmd = (RoomEditCommand) command;
         roomService.assignRoom(request, cmd, errors);
         if (errors.hasErrors()) {
-            errors.getModel().putAll(roomService.initRoomAssign(cmd, errors));
-            return new ModelAndView(getFormView(), errors.getModel());
+            Map model = errors.getModel();
+            model.putAll(roomService.initRoomAssign(cmd, errors));
+            return new ModelAndView(getFormView(), model);
         }
         return new ModelAndView(new RedirectView("roomList.action"),
                 errors.getModel());

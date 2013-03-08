@@ -40,6 +40,8 @@ public interface RoomDao {
 
     public void removeSeatByUids(List<Integer> uids) throws Exception;
 
+    public void removeSeatByRid(final Integer rid) throws Exception;
+
     public List<Room> listRoom() throws Exception;
 
     // public List<Room> listRoomByOid(Integer officeId) throws Exception;
