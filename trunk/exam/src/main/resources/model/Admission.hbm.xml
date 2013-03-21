@@ -8,5 +8,6 @@
 		</id>
 		<property generated="never" lazy="false" name="code" />
 		<property generated="never" lazy="false" name="printFlg" />
+		<property generated="never" lazy="false" name="score" />
 	</class>
 </hibernate-mapping>
