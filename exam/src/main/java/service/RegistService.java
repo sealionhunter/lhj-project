@@ -17,6 +17,7 @@ import command.AdminModifyCommand;
 import command.AdmissionCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.ScoreSearchCommand;
 import command.SignUpPersonSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
@@ -67,5 +68,8 @@ public interface RegistService {
             throws Exception;
 
     public void printAdmission(AdmissionCommand cmd, BindException errors)
+            throws Exception;
+
+    public void searchScore(ScoreSearchCommand cmd, BindException errors)
             throws Exception;
 }

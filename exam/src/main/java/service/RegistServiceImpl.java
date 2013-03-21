@@ -22,6 +22,7 @@ import command.AdminModifyCommand;
 import command.AdmissionCommand;
 import command.ModifyPasswordCommand;
 import command.RegistCommand;
+import command.ScoreSearchCommand;
 import command.SignUpPersonSearchCommand;
 import command.StatusSearchCommand;
 import command.VerifyCommand;
@@ -402,5 +403,31 @@ public class RegistServiceImpl implements RegistService {
 
         admission.setPrintFlg(true);
         admissionDao.update(admission);
+    }
+
+    @Override
+    public void searchScore(ScoreSearchCommand cmd, BindException errors)
+            throws Exception {
+        User u = userDao.getByIdCardNo(cmd.getIdCardNo());
+        if (u == null) {
+            errors.rejectValue("idCardNo", "required.idCardNo", "身份证号不正确!");
+            return;
+        }
+        if (!cmd.getPassword().equals(u.getPassword())) {
+            errors.rejectValue("password", "required.password", "密码不正确!");
+            return;
+        }
+        cmd.setUser(u);
+        SignUpPersonSearchCommand condition = new SignUpPersonSearchCommand();
+        condition.setIdCardNo(cmd.getIdCardNo());
+        List<Apply> applyList = applyDao.list(condition);
+        if (applyList == null || applyList.isEmpty()
+                || applyList.get(0).getAdmission() == null
+                || applyList.get(0).getAdmission().getScore() == null) {
+            errors.rejectValue("idCardNo", "required.apply", "笔试成绩未找到");
+            return;
+        }
+        Apply a = applyList.get(0);
+        cmd.setApply(a);
     }
 }

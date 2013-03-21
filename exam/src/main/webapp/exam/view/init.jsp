@@ -61,6 +61,10 @@
 							</tr>
 							<tr bgcolor="#ffffff">
 								<td style="height: 10px; text-align: left;"><a
+									href="/exam/scoreSearch.action">查询笔试成绩</a></td>
+							</tr>
+							<tr bgcolor="#ffffff">
+								<td style="height: 10px; text-align: left;"><a
 									href="/exam/adminInit.action">管理员入口</a></td>
 							</tr>
 						</table>
