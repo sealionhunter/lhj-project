@@ -16,6 +16,7 @@ public class Admission implements Serializable {
     private int userId;
     private String code;
     private boolean printFlg;
+    private Double score;
     private Seat seat;
 
     public Admission(int userId, String code) {
@@ -78,5 +79,20 @@ public class Admission implements Serializable {
 
     public void setPrintFlg(boolean printFlg) {
         this.printFlg = printFlg;
+    }
+
+    /**
+     * @return the score
+     */
+    public Double getScore() {
+        return score;
+    }
+
+    /**
+     * @param score
+     *            the score to set
+     */
+    public void setScore(Double score) {
+        this.score = score;
     }
 }
