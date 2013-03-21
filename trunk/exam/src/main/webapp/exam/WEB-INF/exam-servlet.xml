@@ -115,6 +115,7 @@
 				<prop key="/userSeatReset.action">userSeatResetController</prop>
 				<prop key="/roomAssign.action">roomAssignController</prop>
 				<prop key="/seatList.action">seatListController</prop>
+				<prop key="/scoreSearch.action">scoreSearchController</prop>
 			</props>
 		</property>
 	</bean>
@@ -235,6 +236,22 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="scoreSearchValidator" class="validator.ScoreSearchValidator" />
+	<bean id="scoreSearchController" class="controller.ScoreSearchController">
+		<property name="sessionForm" value="true" />
+		<property name="formView" value="scoreSearch" />
+		<property name="successView" value="scorePrint" />
+		<property name="commandName" value="ScoreSearchCommand" />
+		<property name="commandClass" value="command.ScoreSearchCommand" />
+		<property name="registService" ref="registService" />
+		<property name="validators">
+			<list>
+				<ref bean="scoreSearchValidator" />
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="verifyValidator" class="validator.VerifyValidator" />
 	<bean id="verifyController" class="controller.VerifyController">
 		<property name="formView" value="verify" />
