@@ -84,6 +84,7 @@
 				<value>/userPasswordReset.action</value>
 				<value>/userSeatReset.action</value>
 				<value>/seatList.action</value>
+				<value>/scoreInput.action</value>
 			</list>
 		</property>
 	</bean>
@@ -115,6 +116,7 @@
 				<prop key="/userSeatReset.action">userSeatResetController</prop>
 				<prop key="/roomAssign.action">roomAssignController</prop>
 				<prop key="/seatList.action">seatListController</prop>
+				<prop key="/scoreInput.action">scoreInputController</prop>
 				<prop key="/scoreSearch.action">scoreSearchController</prop>
 			</props>
 		</property>
@@ -170,6 +172,9 @@
 		<property name="roomDao" ref="roomDao" />
 		<property name="examDao" ref="examDao" />
 		<property name="applyDao" ref="applyDao" />
+		<property name="admissionDao" ref="admissionDao" />
+	</bean>
+	<bean id="scoreService" class="service.ScoreServiceImpl">
 		<property name="admissionDao" ref="admissionDao" />
 	</bean>
 	<bean id="registController" class="controller.RegistWizardController">
@@ -397,6 +402,20 @@
 		<property name="validators">
 			<list>
 				<ref bean="userSeatResetValidator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="scoreInputValidator" class="validator.ScoreInputValidator" />
+	<bean id="scoreInputController" class="controller.ScoreInputController">
+		<property name="formView" value="score/scoreInput" />
+		<property name="successView" value="score/scoreInput" />
+		<property name="commandName" value="ScoreInputCommand" />
+		<property name="commandClass" value="command.ScoreInputCommand" />
+		<property name="scoreService" ref="scoreService" />
+		<property name="validators">
+			<list>
+				<ref bean="scoreInputValidator" />
 			</list>
 		</property>
 	</bean>
