@@ -31,13 +31,13 @@ function doLogout() {
 
 
 	<div class="midBox">
-		<div class="midTitle">管理员密码密码</div>
+		<div class="midTitle">管理员密码修改</div>
 		<div class="cnt">
 			<table width="100%" border="0" cellpadding="0" cellspacing="1"
 				bgcolor="#E1E1E1">
 				<tr>
 					<td height="32" align="left" bgcolor="#FFFFFF" valign="middle"
-						style="padding-left: 10px;"><span class="STYLE1">管理员密码密码</span></td>
+						style="padding-left: 10px;"><span class="STYLE1">管理员密码修改</span></td>
 					<td height="32" align="right" bgcolor="#FFFFFF" valign="middle"
 						style="padding-right: 10px;" width="30"><form:form
 							name="adminLogoutForm" method="post"

@@ -67,20 +67,30 @@ public class AdmissionDaoImpl implements AdmissionDao {
     @Override
     public void deleteByUids(final List<Integer> uids) throws Exception {
 
-        List<Admission> ads = (List<Admission>) hibernateTemplate
-                .execute(new HibernateCallback() {
-                    @Override
-                    public Object doInHibernate(Session session)
-                            throws HibernateException, SQLException {
-                        return session
-                                .createQuery(
-                                        "from Admission where userId in (:uids)")
-                                .setParameterList("uids", uids).list();
-                    }
-                });
+        List<Admission> ads = (List<Admission>) hibernateTemplate.execute(new HibernateCallback() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+                return session.createQuery("from Admission where userId in (:uids)").setParameterList("uids", uids)
+                        .list();
+            }
+        });
         for (Admission ad : ads) {
             hibernateTemplate.delete(ad);
         }
         hibernateTemplate.flush();
+    }
+
+    @Override
+    public Admission get(String idCardNo, String admissionCode) throws Exception {
+        String hql = "from Admission A, User U where A.userId=U.id and U.idCardNo=? and A.code=?";
+        Object[] params = new Object[] { idCardNo, admissionCode };
+        List<?> list = hibernateTemplate.find(hql, params);
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        Object obj = list.get(0);
+        Object[] o = (Object[]) obj;
+        Admission admission = (Admission) o[0];
+        return admission;
     }
 }
