@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="EdiAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="hibernate.log" />
+        <param name="Append" value="true" />
+        <param name="MaxFileSize" value="10240KB" />
+        <param name="MaxBackupIndex" value="20" />
+    </appender>
+    
+	<!--
+	<root>
+		<priority class="jp.co.sunjapan.sjfw.common.log.log4j.ExtendLog4jLevel" value ="trace" />
+		<appender-ref ref="EdiAppender"/>
+	</root>
+    -->
+	
+</log4j:configuration>

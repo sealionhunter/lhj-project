@@ -1,9 +1,18 @@
-DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
  `id` INT NOT NULL PRIMARY KEY,
  `name` VARCHAR(32),
  `shortName` VARCHAR(16),
- `deleteFlg` BIT(10)
+ `deleteFlg` BIT(1)
+);
+
+CREATE TABLE `subCategory` (
+ `id` INT NOT NULL PRIMARY KEY,
+ `categoryId` INT NOT NULL,
+ `name` VARCHAR(32),
+ `shortName` VARCHAR(16),
+ `deleteFlg` INT,
+
+ FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
 );
 
 
@@ -16,16 +25,6 @@ CREATE TABLE `customer` (
 );
 
 
-DROP TABLE IF EXISTS `subCategory`;
-CREATE TABLE `subCategory` (
- `id` INT NOT NULL PRIMARY KEY,
- `categoryId` INT NOT NULL,
- `name` VARCHAR(32),
- `shortName` VARCHAR(16),
- `deleteFlg` INT,
-
- FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`)
-);
 
 
 DROP TABLE IF EXISTS `organization`;
