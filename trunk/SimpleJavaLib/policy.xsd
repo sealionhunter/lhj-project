@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.fujixerox.co.jp/"
+           xmlns:fx="http://www.fujixerox.co.jp/"
+           targetNamespace="http://www.fujixerox.co.jp/"
+           elementFormDefault="qualified">
+    <!-- Policies -->
+    <xs:element name="Policies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Policy" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:unique name="PIDUnique">
+            <xs:selector xpath="fx:Policy"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+    </xs:element>
+    
+    <!-- Policy -->
+    <xs:element name="Policy">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Rule" minOccurs="1" maxOccurs="10"/>
+            </xs:sequence>
+            <xs:attribute name="ID" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Name" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Enabled" type="xs:boolean" use="required"/>
+        </xs:complexType>
+        <xs:unique name="IndexUnique">
+            <xs:selector xpath="fx:Rule"/>
+            <xs:field xpath="@Index"/>
+        </xs:unique>
+        <xs:unique name="RIDUnique">
+            <xs:selector xpath="fx:Rule"/>
+            <xs:field xpath="@ID"/>
+        </xs:unique>
+    </xs:element>
+
+    <!-- Rule -->
+    <xs:element name="Rule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Condition"/>
+                <xs:element name="Confirm" type="xs:boolean"/>
+                <xs:choice>
+                    <xs:element ref="Action"/>
+                    <xs:element name="Actions">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="Action" minOccurs="2" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                        <xs:unique name="InputUnique">
+                            <xs:selector xpath="fx:Action"/>
+                            <xs:field xpath="@Input"/>
+                        </xs:unique>
+                    </xs:element>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="ID" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="10"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Enabled" type="xs:boolean" use="required"/>
+            <xs:attribute name="Index" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Condition -->
+    <xs:element name="Condition">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="Equal"/>
+                <xs:element ref="LessThan"/>
+                <xs:element ref="LessThanEqual"/>
+                <xs:element ref="GreaterThan"/>
+                <xs:element ref="GreaterThanEqual"/>
+                <xs:element ref="Not"/>
+                <xs:element ref="And" />
+                <xs:element ref="Or"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Equal">
+        <xs:complexType>
+            <xs:group ref="SimpleConditionGroup"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LessThan">
+        <xs:complexType>
+            <xs:group ref="SimpleConditionGroup"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LessThanEqual">
+        <xs:complexType>
+            <xs:group ref="SimpleConditionGroup"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GreaterThan">
+        <xs:complexType>
+            <xs:group ref="SimpleConditionGroup"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GreaterThanEqual">
+        <xs:complexType>
+            <xs:group ref="SimpleConditionGroup"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Not">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element ref="Equal"/>
+                <xs:element ref="LessThan"/>
+                <xs:element ref="LessThanEqual"/>
+                <xs:element ref="GreaterThan"/>
+                <xs:element ref="GreaterThanEqual"/>
+                <xs:element ref="Not"/>
+                <xs:element ref="And"/>
+                <xs:element ref="Or"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="And">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element ref="Equal"/>
+                    <xs:element ref="LessThan"/>
+                    <xs:element ref="LessThanEqual"/>
+                    <xs:element ref="GreaterThan"/>
+                    <xs:element ref="GreaterThanEqual"/>
+                    <xs:element ref="Not"/>
+                    <xs:element ref="And" />
+                    <xs:element ref="Or"/>
+                </xs:choice>
+                <xs:choice>
+                    <xs:element ref="Equal"/>
+                    <xs:element ref="LessThan"/>
+                    <xs:element ref="LessThanEqual"/>
+                    <xs:element ref="GreaterThan"/>
+                    <xs:element ref="GreaterThanEqual"/>
+                    <xs:element ref="Not"/>
+                    <xs:element ref="And" />
+                    <xs:element ref="Or"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Or">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element ref="Equal"/>
+                    <xs:element ref="LessThan"/>
+                    <xs:element ref="LessThanEqual"/>
+                    <xs:element ref="GreaterThan"/>
+                    <xs:element ref="GreaterThanEqual"/>
+                    <xs:element ref="Not"/>
+                    <xs:element ref="And" />
+                    <xs:element ref="Or"/>
+                </xs:choice>
+                <xs:choice>
+                    <xs:element ref="Equal"/>
+                    <xs:element ref="LessThan"/>
+                    <xs:element ref="LessThanEqual"/>
+                    <xs:element ref="GreaterThan"/>
+                    <xs:element ref="GreaterThanEqual"/>
+                    <xs:element ref="Not"/>
+                    <xs:element ref="And" />
+                    <xs:element ref="Or"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- SimpleConditionGroup -->
+    <xs:group name="SimpleConditionGroup">
+        <xs:sequence>
+            <xs:element name="Item">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Application"/>
+                        <xs:enumeration value="ColorMode"/>
+                        <xs:enumeration value="Duplex"/>
+                        <xs:enumeration value="CO2Emission"/>
+                        <xs:enumeration value="AfterPrintEcoLevel"/>
+                        <xs:enumeration value="BeforePrintEcoLevel"/>
+                        <xs:enumeration value="NUp"/>
+                        <xs:enumeration value="PaperReductionRate"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Value">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+
+    <!-- Action -->
+    <xs:element name="Action">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Property" minOccurs="0" maxOccurs="3">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="TwoSided"/>
+                            <xs:enumeration value="BW"/>
+                            <xs:enumeration value="TonerSave"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="Output" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="Input" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="EcoPrint"/>
+                        <xs:enumeration value="NormalPrint"/>
+                        <xs:enumeration value="NotPrint"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+        <xs:unique name="PropertyUnique">
+            <xs:selector xpath="fx:Property"/>
+            <xs:field xpath="."/>
+        </xs:unique>
+    </xs:element>
+
+    <!-- Output -->
+    <xs:element name="Output">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Enu">
+				  <xs:complexType>
+				    <xs:sequence>
+					  <xs:element name="HtmlMsg">
+					    <xs:simpleType>
+						  <xs:restriction base="xs:string">
+						    <xs:minLength value="1"/>
+							<xs:maxLength value="256"/>
+						  </xs:restriction>
+						</xs:simpleType>
+					  </xs:element>
+					  <xs:element name="Message" minOccurs="0" maxOccurs="3">
+					    <xs:simpleType>
+						  <xs:restriction base="xs:string">
+						    <xs:minLength value="1"/>
+							<xs:maxLength value="256"/>
+						  </xs:restriction>
+						</xs:simpleType>
+					  </xs:element>
+					</xs:sequence>
+				  </xs:complexType>
+				</xs:element>
+                <xs:element name="Jpn">
+				  <xs:complexType>
+				    <xs:sequence>
+					  <xs:element name="HtmlMsg">
+					    <xs:simpleType>
+						  <xs:restriction base="xs:string">
+						    <xs:minLength value="1"/>
+							<xs:maxLength value="256"/>
+						  </xs:restriction>
+						</xs:simpleType>
+					  </xs:element>
+					  <xs:element name="Message" minOccurs="0" maxOccurs="3">
+					    <xs:simpleType>
+						  <xs:restriction base="xs:string">
+						    <xs:minLength value="1"/>
+							<xs:maxLength value="256"/>
+						  </xs:restriction>
+						</xs:simpleType>
+					  </xs:element>
+					</xs:sequence>
+				  </xs:complexType>
+				</xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
