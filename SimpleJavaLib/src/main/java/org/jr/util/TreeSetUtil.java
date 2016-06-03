@@ -1,41 +1,43 @@
 package org.jr.util;
+
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ26ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ26æ—¥
  * @author Cherami
  */
 import java.util.*;
 
 /**
- * ´ËÀàÖĞ·â×°Ò»Ğ©³£ÓÃµÄTreeSet²Ù×÷·½·¨¡£
- * ËùÓĞ·½·¨¶¼ÊÇ¾²Ì¬·½·¨£¬²»ĞèÒªÉú³É´ËÀàµÄÊµÀı£¬
- * Îª±ÜÃâÉú³É´ËÀàµÄÊµÀı£¬¹¹Ôì·½·¨±»ÉêÃ÷ÎªprivateÀàĞÍµÄ¡£
- * @since  0.5
+ * æ­¤ç±»ä¸­å°è£…ä¸€äº›å¸¸ç”¨çš„TreeSetæ“ä½œæ–¹æ³•ã€‚ æ‰€æœ‰æ–¹æ³•éƒ½æ˜¯é™æ€æ–¹æ³•ï¼Œä¸éœ€è¦ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œ ä¸ºé¿å…ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œæ„é€ æ–¹æ³•è¢«ç”³æ˜ä¸ºprivateç±»å‹çš„ã€‚
+ * 
+ * @since 0.5
  */
 
 public class TreeSetUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private TreeSetUtil() {
-  }
-  /**
-   * ½«Êı×é×ª»»ÎªTreeSet¡£
-   * @param array Êı×é
-   * @return ×ª»»ºóµÄTreeSet£¬Èç¹ûÊı×éÎªnullÔò·µ»Ønull
-   * @since  0.5
-   */
-  public static TreeSet ArrayToTreeSet(Object[] array) {
-    if (array != null) {
-      TreeSet<Object> treeSet = new TreeSet<Object>();
-      for (int i = 0; i < array.length; i++) {
-        treeSet.add(array[i]);
-      }
-      return treeSet;
-    }
-    else {
-      return null;
-    }
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private TreeSetUtil() {
+	}
+
+	/**
+	 * å°†æ•°ç»„è½¬æ¢ä¸ºTreeSetã€‚
+	 * 
+	 * @param array
+	 *            æ•°ç»„
+	 * @return è½¬æ¢åçš„TreeSetï¼Œå¦‚æœæ•°ç»„ä¸ºnullåˆ™è¿”å›null
+	 * @since 0.5
+	 */
+	public static TreeSet<Object> ArrayToTreeSet(Object[] array) {
+		if (array != null) {
+			TreeSet<Object> treeSet = new TreeSet<Object>();
+			for (int i = 0; i < array.length; i++) {
+				treeSet.add(array[i]);
+			}
+			return treeSet;
+		} else {
+			return null;
+		}
+	}
 }

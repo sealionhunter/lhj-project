@@ -3,161 +3,168 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ1ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ1æ—¥
  * @author Cherami
  */
 import java.lang.reflect.*;
 import java.util.*;
 import java.io.*;
+
 /**
- * Éæ¼°ÀàµÄ·½·¨µÈµÄ¹¤¾ßÀà¡£
- * @since  0.4
+ * æ¶‰åŠç±»çš„æ–¹æ³•ç­‰çš„å·¥å…·ç±»ã€‚
+ * 
+ * @since 0.4
  */
 
 public class ClassUtil {
 
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private ClassUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private ClassUtil() {
+	}
 
-  /**
-   * ¸ù¾İÀàÃûµÃµ½¸ÃÀàËùÓĞµÄpulbic³ÉÔ±·½·¨µÄ·½·¨Ãû¡£
-   * @param className ÀàÃû
-   * @return ËùÓĞµÄpulbic³ÉÔ±·½·¨µÄ·½·¨ÃûÊı×é
-   * @since  0.4
-   */
-  public static String[] getMethods(String className) {
-    String methodNames[];
-    try {
-      Class c = Class.forName(className);
-      Method methods[] = c.getMethods();
-      methodNames = new String[methods.length];
-      for (int i = 0; i < methods.length; i++) {
-        methodNames[i] = methods[i].toString();
-      }
-      return methodNames;
-    }
+	/**
+	 * æ ¹æ®ç±»åå¾—åˆ°è¯¥ç±»æ‰€æœ‰çš„pulbicæˆå‘˜æ–¹æ³•çš„æ–¹æ³•åã€‚
+	 * 
+	 * @param className
+	 *            ç±»å
+	 * @return æ‰€æœ‰çš„pulbicæˆå‘˜æ–¹æ³•çš„æ–¹æ³•åæ•°ç»„
+	 * @since 0.4
+	 */
+	public static String[] getMethods(String className) {
+		String methodNames[];
+		try {
+			Class<?> c = Class.forName(className);
+			Method methods[] = c.getMethods();
+			methodNames = new String[methods.length];
+			for (int i = 0; i < methods.length; i++) {
+				methodNames[i] = methods[i].toString();
+			}
+			return methodNames;
+		}
 
-    catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-  /**
-   * ¸ù¾İÀàÃûµÃµ½¸ÃÀàËùÉêÃ÷µÄ·½·¨µÄ·½·¨Ãû¡£
-   * @param className ÀàÃû
-   * @return ËùÉêÃ÷µÄ·½·¨µÄ·½·¨ÃûÊı×é
-   * @since  0.4
-   */
-  public static String[] getDeclaredMethods(String className) {
-    String methodNames[];
-    try {
-      Class c = Class.forName(className);
-      Method methods[] = c.getDeclaredMethods();
-      methodNames = new String[methods.length];
-      for (int i = 0; i < methods.length; i++) {
-        methodNames[i] = methods[i].toString();
-      }
-      return methodNames;
-    }
+	/**
+	 * æ ¹æ®ç±»åå¾—åˆ°è¯¥ç±»æ‰€ç”³æ˜çš„æ–¹æ³•çš„æ–¹æ³•åã€‚
+	 * 
+	 * @param className
+	 *            ç±»å
+	 * @return æ‰€ç”³æ˜çš„æ–¹æ³•çš„æ–¹æ³•åæ•°ç»„
+	 * @since 0.4
+	 */
+	public static String[] getDeclaredMethods(String className) {
+		String methodNames[];
+		try {
+			Class<?> c = Class.forName(className);
+			Method methods[] = c.getDeclaredMethods();
+			methodNames = new String[methods.length];
+			for (int i = 0; i < methods.length; i++) {
+				methodNames[i] = methods[i].toString();
+			}
+			return methodNames;
+		}
 
-    catch (ClassNotFoundException e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
-  /**
-   * ÅĞ¶ÏÒ»¸ö¶ÔÏóÊı×éÊÇ·ñÊÇÍ¬ÖÊÊı×é¡£
-   * ÕâÀïµÄÍ¬ÖÊÊÇÑÏ¸ñµÄÍ¬ÖÊ£¬¼´ËûÃÇµÄÊµ¼ÊÀàÀàĞÍ±ØĞëÍêÈ«ÏàÍ¬¡£
-   * @param objects Òª±È½ÏµÄ¶ÔÏóÊı×é
-   * @return ËùÓĞÔªËØµÄÀàÀàĞÍÍêÈ«ÏàÍ¬Ê±·µ»Øtrue£¬Èç¹ûÊı×éÖĞÖ»ÓĞÒ»¸öÔªËØÊ±Ò²·µ»Øtrue£¬·ñÔò·µ»Øfalse
-   * @since  0.5
-   */
-  public static boolean isSameClassType(Object[] objects) {
-    if (objects.length == 1) {
-      return true;
-    }
-    Class c = objects[0].getClass();
-    for (int i = 1; i < objects.length; i++) {
-      if (!c.equals(objects[i].getClass())) {
-        return false;
-      }
-    }
-    return true;
-  }
+	/**
+	 * åˆ¤æ–­ä¸€ä¸ªå¯¹è±¡æ•°ç»„æ˜¯å¦æ˜¯åŒè´¨æ•°ç»„ã€‚ è¿™é‡Œçš„åŒè´¨æ˜¯ä¸¥æ ¼çš„åŒè´¨ï¼Œå³ä»–ä»¬çš„å®é™…ç±»ç±»å‹å¿…é¡»å®Œå…¨ç›¸åŒã€‚
+	 * 
+	 * @param objects
+	 *            è¦æ¯”è¾ƒçš„å¯¹è±¡æ•°ç»„
+	 * @return æ‰€æœ‰å…ƒç´ çš„ç±»ç±»å‹å®Œå…¨ç›¸åŒæ—¶è¿”å›trueï¼Œå¦‚æœæ•°ç»„ä¸­åªæœ‰ä¸€ä¸ªå…ƒç´ æ—¶ä¹Ÿè¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @since 0.5
+	 */
+	public static boolean isSameClassType(Object[] objects) {
+		if (objects.length == 1) {
+			return true;
+		}
+		Class<?> c = objects[0].getClass();
+		for (int i = 1; i < objects.length; i++) {
+			if (!c.equals(objects[i].getClass())) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-  /**
-   * ÅĞ¶ÏÒ»¸ö¶ÔÏóÊı×éÊÇ·ñÊÇÍ¬ÖÊÊı×éÇÒÊÇÖ¸¶¨µÄÀàÀàĞÍ¡£
-   * ÕâÀïµÄÍ¬ÖÊÊÇÑÏ¸ñµÄÍ¬ÖÊ£¬¼´ËûÃÇµÄÊµ¼ÊÀàÀàĞÍ±ØĞëÍêÈ«ÏàÍ¬¡£
-   * @param objects Òª±È½ÏµÄ¶ÔÏóÊı×é
-   * @param c ÀàÀàĞÍ
-   * @return ËùÓĞÔªËØµÄÀàÀàĞÍºÍcÍêÈ«ÏàÍ¬Ê±·µ»Øtrue£¬Èç¹ûÊı×éÖĞÖ»ÓĞÒ»¸öÔªËØÊ±Ò²·µ»Øtrue£¬·ñÔò·µ»Øfalse
-   * @since  0.5
-   */
-  public static boolean isSameClassType(Object[] objects, Class c) {
-    if (objects.length == 1) {
-      return true;
-    }
-    for (int i = 1; i < objects.length; i++) {
-      if (!c.equals(objects[i].getClass())) {
-        return false;
-      }
-    }
-    return true;
-  }
+	/**
+	 * åˆ¤æ–­ä¸€ä¸ªå¯¹è±¡æ•°ç»„æ˜¯å¦æ˜¯åŒè´¨æ•°ç»„ä¸”æ˜¯æŒ‡å®šçš„ç±»ç±»å‹ã€‚ è¿™é‡Œçš„åŒè´¨æ˜¯ä¸¥æ ¼çš„åŒè´¨ï¼Œå³ä»–ä»¬çš„å®é™…ç±»ç±»å‹å¿…é¡»å®Œå…¨ç›¸åŒã€‚
+	 * 
+	 * @param objects
+	 *            è¦æ¯”è¾ƒçš„å¯¹è±¡æ•°ç»„
+	 * @param c
+	 *            ç±»ç±»å‹
+	 * @return æ‰€æœ‰å…ƒç´ çš„ç±»ç±»å‹å’Œcå®Œå…¨ç›¸åŒæ—¶è¿”å›trueï¼Œå¦‚æœæ•°ç»„ä¸­åªæœ‰ä¸€ä¸ªå…ƒç´ æ—¶ä¹Ÿè¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @since 0.5
+	 */
+	public static boolean isSameClassType(Object[] objects, Class<?> c) {
+		if (objects.length == 1) {
+			return true;
+		}
+		for (int i = 1; i < objects.length; i++) {
+			if (!c.equals(objects[i].getClass())) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-  /**
-   * ÅĞ¶ÏchildÊÇ·ñÊÇcµÄÒ»¸ö×ÓÀà¡£
-   * @param c ¸¸Àà
-   * @param child ÒªÅĞ¶ÏµÄ¿ÉÄÜµÄ×ÓÀà
-   * @return childÊÇcµÄ×ÓÀàµÄÊ±ºò·µ»Øtrue£¬ÆäËûËùÓĞÇé¿öÏÂ¶¼·µ»Øfalse
-   * @since  0.5
-   */
-  public static boolean isSubclass(Class c, Class child) {
-    try {
-      if (c.isInstance(child.newInstance())) {
-        return true;
-      }
-      return false;
-    }
-    catch (IllegalAccessException e) {
-      return false;
-    }
-    catch (InstantiationException ie) {
-      return false;
-    }
-    catch (Exception oe) {
-      return false;
-    }
-  }
-  /**
-   * µÃµ½JDK1.4ËùÓĞµÄÀàÃû¼¯ºÏ£¬Ö»°üº¬org,java,javax°ü¼°Æä×Ó°üÏÂµÄÀàµÄÀàÃû¡£
-   * Ã¿¸öÔªËØµÄÖµÖ»ÊÇÀàÃû£¬Ã»ÓĞ°üÃûÒÔ¼°À©Õ¹Ãûjava¡£
-   * @return ÀàÃûµÄ¼¯ºÏ
-   * @since  0.5
-   */
-  public static TreeSet getAllClassname() {
-    TreeSet classnameSet=new TreeSet();
-    try {
-      InputStream istream = ClassUtil.class.getResourceAsStream("allclassname.treeset");
-      ObjectInputStream p = new ObjectInputStream(istream);
-      classnameSet = (TreeSet)p.readObject();
-      istream.close();
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-    catch (ClassNotFoundException e1) {
-      e1.printStackTrace();
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-    }
-    return classnameSet;
-  }
+	/**
+	 * åˆ¤æ–­childæ˜¯å¦æ˜¯cçš„ä¸€ä¸ªå­ç±»ã€‚
+	 * 
+	 * @param c
+	 *            çˆ¶ç±»
+	 * @param child
+	 *            è¦åˆ¤æ–­çš„å¯èƒ½çš„å­ç±»
+	 * @return childæ˜¯cçš„å­ç±»çš„æ—¶å€™è¿”å›trueï¼Œå…¶ä»–æ‰€æœ‰æƒ…å†µä¸‹éƒ½è¿”å›false
+	 * @since 0.5
+	 */
+	public static boolean isSubclass(Class<?> c, Class<?> child) {
+		try {
+			if (c.isInstance(child.newInstance())) {
+				return true;
+			}
+			return false;
+		} catch (IllegalAccessException e) {
+			return false;
+		} catch (InstantiationException ie) {
+			return false;
+		} catch (Exception oe) {
+			return false;
+		}
+	}
+
+	/**
+	 * å¾—åˆ°JDK1.4æ‰€æœ‰çš„ç±»åé›†åˆï¼ŒåªåŒ…å«org,java,javaxåŒ…åŠå…¶å­åŒ…ä¸‹çš„ç±»çš„ç±»åã€‚ æ¯ä¸ªå…ƒç´ çš„å€¼åªæ˜¯ç±»åï¼Œæ²¡æœ‰åŒ…åä»¥åŠæ‰©å±•åjavaã€‚
+	 * 
+	 * @return ç±»åçš„é›†åˆ
+	 * @since 0.5
+	 */
+	public static TreeSet<?> getAllClassname() {
+		TreeSet<?> classnameSet = null;
+		try {
+			InputStream istream = ClassUtil.class.getResourceAsStream("allclassname.treeset");
+			ObjectInputStream p = new ObjectInputStream(istream);
+			classnameSet = (TreeSet<?>) p.readObject();
+			istream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return classnameSet;
+	}
 
 }

@@ -15,11 +15,9 @@ public class TimerTest {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		ScheduledExecutorService executorService = Executors
-				.newScheduledThreadPool(10);
+		ScheduledExecutorService executorService = Executors.newScheduledThreadPool(10);
 		for (int i = 0; i < 10; i++) {
-			ScheduledFuture<?> future = executorService.schedule(new Task(i),
-					0, TimeUnit.MILLISECONDS);
+			ScheduledFuture<?> future = executorService.schedule(new Task(i), 0, TimeUnit.MILLISECONDS);
 			Object o = future.get();
 			System.out.println(o);
 		}

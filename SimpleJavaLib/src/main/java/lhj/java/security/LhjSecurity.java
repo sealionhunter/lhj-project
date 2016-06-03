@@ -1,12 +1,12 @@
 package lhj.java.security;
 
 /**
- * @author sealion
+ * @author Sealion Hunter
  * @version Create On 2006/03/18
  */
 public class LhjSecurity {
-    private static final String strName = "lianghaijin19820227";
-    public static final byte[] byteName = strName.getBytes();
+    private static final String SEED_STR = "lianghaijin19820227";
+    private static final byte[] SEED_BYTES = SEED_STR.getBytes();
 
     public static int[] save(byte[] msg) {
         if (msg == null) {
@@ -14,8 +14,8 @@ public class LhjSecurity {
         }
         int[] retInt = new int[msg.length];
         for (int i = 0; i < msg.length; i++) {
-            for (int j = 0; j < byteName.length && i < msg.length; j++) {
-                retInt[i] = msg[i++] + byteName[j];
+            for (int j = 0; j < SEED_BYTES.length && i < msg.length; j++) {
+                retInt[i] = msg[i++] + SEED_BYTES[j];
             }
             i--;
         }
@@ -28,8 +28,8 @@ public class LhjSecurity {
         }
         byte[] retByte = new byte[msg.length];
         for (int i = 0; i < msg.length; i++) {
-            for (int j = 0; j < byteName.length && i < msg.length; j++) {
-                retByte[i] = (byte) (msg[i++] - byteName[j]);
+            for (int j = 0; j < SEED_BYTES.length && i < msg.length; j++) {
+                retByte[i] = (byte) (msg[i++] - SEED_BYTES[j]);
             }
             i--;
         }

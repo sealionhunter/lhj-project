@@ -3,7 +3,7 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê2ÔÂ25ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´2æœˆ25æ—¥
  * @author Cherami
  */
 
@@ -18,140 +18,140 @@ import javax.swing.*;
 import org.jr.io.*;
 
 /**
- * ¼ò»¯ÌáÈ¡´ò°üÔÚJar»òÕßZipÎÄ¼şÖĞµÄ×ÊÔ´¡£
- * ´ËÀàÌá¹©Ò»Ğ©·½·¨¸ü·½±ãµÄ´ÓJar»òÕßZipÎÄ¼şÖĞµÃµ½×ÊÔ´¡£
- * @since  0.4
+ * ç®€åŒ–æå–æ‰“åŒ…åœ¨Jaræˆ–è€…Zipæ–‡ä»¶ä¸­çš„èµ„æºã€‚ æ­¤ç±»æä¾›ä¸€äº›æ–¹æ³•æ›´æ–¹ä¾¿çš„ä»Jaræˆ–è€…Zipæ–‡ä»¶ä¸­å¾—åˆ°èµ„æºã€‚
+ * 
+ * @since 0.4
  */
 public final class JarResource {
 
-  private HashMap<Object, Object> entries = new HashMap<Object, Object>();
-  private HashMap<Object, Object> names = new HashMap<Object, Object>();
+	private HashMap<Object, Object> entries = new HashMap<Object, Object>();
+	private HashMap<Object, Object> names = new HashMap<Object, Object>();
 
-  private String fileName;
-  private ZipFile file;
+	private String fileName;
+	private ZipFile file;
 
-  /**
-   * ¸ù¾İÖ¸¶¨µÄÎÄ¼şÃû´´½¨JarResource¡£
-   * @param fileName ÎÄ¼şÃû
-   * @since  0.4
-   */
-  public JarResource(String fileName) {
-    this.fileName = fileName;
-    init();
-  }
+	/**
+	 * æ ¹æ®æŒ‡å®šçš„æ–‡ä»¶ååˆ›å»ºJarResourceã€‚
+	 * 
+	 * @param fileName
+	 *            æ–‡ä»¶å
+	 * @since 0.4
+	 */
+	public JarResource(String fileName) {
+		this.fileName = fileName;
+		init();
+	}
 
-  /**
-   * ¸ù¾İÎÄ¼şÃûµÃµ½ÔÚÑ¹Ëõ°üÖĞµÄZipEntry¡£
-   * ¿ÉÄÜÒ»¸öÎÄ¼şÃû»áÓĞ¶à¸ö¿ÉÄÜµÄ¶ÔÓ¦Ïî£¬¾ßÌå¶ÔÓ¦ÄÇÒ»Ïî²»ÄÜÈ·¶¨¡£¶ÔÓÚÕâÑùµÄÇé¿öÇëÊ¹ÓÃÈ«ÏŞ¶¨Â·¾¶¡£
-   * @param fileName ÎÄ¼şÃû
-   * @return ¶ÔÓ¦µÄÑ¹Ëõ°üÖĞµÄZipEntry£¬²»´æÔÚÊ±·µ»Ønull
-   */
-  private ZipEntry getEntry(String fileName) {
-    ZipEntry entry = (ZipEntry) entries.get(fileName);
-    if (entry == null) {
-      String entryName = (String) names.get(fileName);
-      if (entryName != null) {
-        return (ZipEntry) entries.get(entryName);
-      }
-      else {
-        return null;
-      }
-    }
-    else {
-      return entry;
-    }
+	/**
+	 * æ ¹æ®æ–‡ä»¶åå¾—åˆ°åœ¨å‹ç¼©åŒ…ä¸­çš„ZipEntryã€‚ å¯èƒ½ä¸€ä¸ªæ–‡ä»¶åä¼šæœ‰å¤šä¸ªå¯èƒ½çš„å¯¹åº”é¡¹ï¼Œå…·ä½“å¯¹åº”é‚£ä¸€é¡¹ä¸èƒ½ç¡®å®šã€‚å¯¹äºè¿™æ ·çš„æƒ…å†µè¯·ä½¿ç”¨å…¨é™å®šè·¯å¾„ã€‚
+	 * 
+	 * @param fileName
+	 *            æ–‡ä»¶å
+	 * @return å¯¹åº”çš„å‹ç¼©åŒ…ä¸­çš„ZipEntryï¼Œä¸å­˜åœ¨æ—¶è¿”å›null
+	 */
+	private ZipEntry getEntry(String fileName) {
+		ZipEntry entry = (ZipEntry) entries.get(fileName);
+		if (entry == null) {
+			String entryName = (String) names.get(fileName);
+			if (entryName != null) {
+				return (ZipEntry) entries.get(entryName);
+			} else {
+				return null;
+			}
+		} else {
+			return entry;
+		}
 
-  }
+	}
 
-  /**
-   * ÌáÈ¡Ö¸¶¨µÄÎÄ¼şÄÚÈİ²¢·µ»ØÒ»¸ö×Ö½ÚÊı×é¡£
-   * @param fileName ×ÊÔ´µÄÎÄ¼şÃû
-   * @return Ö¸¶¨µÄÎÄ¼şÄÚÈİµÄ×Ö½ÚÊı×é
-   * @since  0.4
-   */
-  public byte[] getResource(String fileName) {
-    ZipEntry entry = getEntry(fileName);
-    if (entry != null) {
-      try {
-        InputStream inputStream = file.getInputStream(entry);
-        int length = inputStream.available();
-        byte contents[] = new byte[length];
-        inputStream.read(contents);
-        inputStream.close();
-        return contents;
-      }
-      catch (IOException e) {
-        return null;
-      }
-    }
-    else {
-      return null;
-    }
-  }
+	/**
+	 * æå–æŒ‡å®šçš„æ–‡ä»¶å†…å®¹å¹¶è¿”å›ä¸€ä¸ªå­—èŠ‚æ•°ç»„ã€‚
+	 * 
+	 * @param fileName
+	 *            èµ„æºçš„æ–‡ä»¶å
+	 * @return æŒ‡å®šçš„æ–‡ä»¶å†…å®¹çš„å­—èŠ‚æ•°ç»„
+	 * @since 0.4
+	 */
+	public byte[] getResource(String fileName) {
+		ZipEntry entry = getEntry(fileName);
+		if (entry != null) {
+			try {
+				InputStream inputStream = file.getInputStream(entry);
+				int length = inputStream.available();
+				byte contents[] = new byte[length];
+				inputStream.read(contents);
+				inputStream.close();
+				return contents;
+			} catch (IOException e) {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 
-  /**
-   * ÌáÈ¡Ö¸¶¨µÄÎÄ¼şËù´ú±íµÄÍ¼Ïñ¡£
-   * @param fileName ×ÊÔ´µÄÎÄ¼şÃû
-   * @return Ö¸¶¨µÄÎÄ¼şËù´ú±íµÄÍ¼Ïñ
-   * @since  0.4
-   */
-  public Image getImage(String fileName) {
-    ZipEntry entry = getEntry(fileName);
-    if (entry != null) {
-      StringBuffer url = new StringBuffer("jar:file:/");
-      url.append(FileUtil.getUNIXfilePath(this.fileName));
-      url.append("!/");
-      url.append(entry.getName());
-      try {
-        URL fileURL = new URL(url.toString());
-        return new ImageIcon(fileURL).getImage();
-      }
-      catch (MalformedURLException e) {
-        return null;
-      }
-    }
-    else {
-      return null;
-    }
-  }
+	/**
+	 * æå–æŒ‡å®šçš„æ–‡ä»¶æ‰€ä»£è¡¨çš„å›¾åƒã€‚
+	 * 
+	 * @param fileName
+	 *            èµ„æºçš„æ–‡ä»¶å
+	 * @return æŒ‡å®šçš„æ–‡ä»¶æ‰€ä»£è¡¨çš„å›¾åƒ
+	 * @since 0.4
+	 */
+	public Image getImage(String fileName) {
+		ZipEntry entry = getEntry(fileName);
+		if (entry != null) {
+			StringBuffer url = new StringBuffer("jar:file:/");
+			url.append(FileUtil.getUNIXfilePath(this.fileName));
+			url.append("!/");
+			url.append(entry.getName());
+			try {
+				URL fileURL = new URL(url.toString());
+				return new ImageIcon(fileURL).getImage();
+			} catch (MalformedURLException e) {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 
-  /**
-   * ÌáÈ¡Ö¸¶¨µÄÎÄ¼şËù´ú±íµÄ×Ö·û´®¡£
-   * @param fileName ×ÊÔ´µÄÎÄ¼şÃû
-   * @return Ö¸¶¨µÄÎÄ¼şËù´ú±íµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public String getString(String fileName) {
-    byte contents[] = getResource(fileName);
-    if (contents != null) {
-      return new String(contents);
-    }
-    else {
-      return null;
-    }
-  }
+	/**
+	 * æå–æŒ‡å®šçš„æ–‡ä»¶æ‰€ä»£è¡¨çš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param fileName
+	 *            èµ„æºçš„æ–‡ä»¶å
+	 * @return æŒ‡å®šçš„æ–‡ä»¶æ‰€ä»£è¡¨çš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public String getString(String fileName) {
+		byte contents[] = getResource(fileName);
+		if (contents != null) {
+			return new String(contents);
+		} else {
+			return null;
+		}
+	}
 
-  /**
-   * ³õÊ¼»¯ÄÚ²¿µÄ×ÊÔ´ÏîHashMap¡£
-   */
-  private void init() {
-    try {
-      file = new ZipFile(fileName);
-      Enumeration enumeration = file.entries();
-      while (enumeration.hasMoreElements()) {
-        ZipEntry entry = (ZipEntry) enumeration.nextElement();
-        if (!entry.isDirectory()) {
-          entries.put(entry.getName(), entry);
-          names.put(FileUtil.getFileName(entry.getName()), entry.getName());
-        }
-      }
-    }
-    catch (FileNotFoundException e) {
-      e.printStackTrace();
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
+	/**
+	 * åˆå§‹åŒ–å†…éƒ¨çš„èµ„æºé¡¹HashMapã€‚
+	 */
+	private void init() {
+		try {
+			file = new ZipFile(fileName);
+			Enumeration<?> enumeration = file.entries();
+			while (enumeration.hasMoreElements()) {
+				ZipEntry entry = (ZipEntry) enumeration.nextElement();
+				if (!entry.isDirectory()) {
+					entries.put(entry.getName(), entry);
+					names.put(FileUtil.getFileName(entry.getName()), entry.getName());
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

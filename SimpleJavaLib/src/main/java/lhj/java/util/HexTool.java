@@ -6,6 +6,8 @@ package lhj.java.util;
 
 import java.io.UnsupportedEncodingException;
 
+import lhj.java.exception.HexException;
+
 /**
  * Hex tool
  * 
@@ -44,11 +46,12 @@ public class HexTool {
 	 */
 	public static final char[] byteToHexChars(byte[] data) {
 		checkNull(data);
-		char[] retChar = new char[data.length << 1];
-		for (int i = 0; i < data.length; i++) {
+		final int l = data.length;
+		char[] retChar = new char[l << 1];
+		for (int i = 0, j = 0; i < l; i++) {
 			char temp[] = byteToHexChars(data[i]);
-			retChar[i * 2] = temp[0];
-			retChar[i * 2 + 1] = temp[1];
+			retChar[j++] = temp[0];
+			retChar[j++] = temp[1];
 		}
 		return retChar;
 	}

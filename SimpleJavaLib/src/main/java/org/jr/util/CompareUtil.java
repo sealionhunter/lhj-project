@@ -3,136 +3,144 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ4ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ4æ—¥
  * @author Cherami
  */
 
 import org.jr.*;
 
 /**
- * ÅÅĞò¹¤¾ßÀà£¬Ìá¹©³£¼ûµÄĞèÒªÅÅĞòµ«ÊÇÓÖÃ»ÓĞÊµÏÖComparable½Ó¿ÚµÄÀà¡£
- * ´ËÀàÒ²Ìá¹©Ò»Ğ©´´½¨µÄÅÅĞòËã·¨µÄ·¶Àı¡£
- * @since  0.5
+ * æ’åºå·¥å…·ç±»ï¼Œæä¾›å¸¸è§çš„éœ€è¦æ’åºä½†æ˜¯åˆæ²¡æœ‰å®ç°Comparableæ¥å£çš„ç±»ã€‚ æ­¤ç±»ä¹Ÿæä¾›ä¸€äº›åˆ›å»ºçš„æ’åºç®—æ³•çš„èŒƒä¾‹ã€‚
+ * 
+ * @since 0.5
  */
 
 public class CompareUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private CompareUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private CompareUtil() {
+	}
 
-  /**
-   * ±È½ÏÁ½¸öÊı×Ö¡£
-   * Õâ¸ö·½·¨È¡NumberµÄdoubleÖµ½øĞĞ±È½Ï£¬Òò´ËÖ»ÓĞÔÚÁ½¸öÊıÑÏ¸ñÏàµÈµÄÇé¿öÏÂ²Å·µ»Ø0£¬
-   * ÓÖ¿ÉÄÜÒòÎªJavaÖĞDoubleĞÍºÍFloatµÄ¾«¶È²»Í¬¶øµ¼ÖÂÁ½¸öÏàµÈµÄÊı²»·µ»Ø0¡£
-   * @param o1 µÚÒ»¸öÊı×Ö
-   * @param o2 µÚ¶ş¸öÊı×Ö
-   * @return µÚÒ»¸öÊı×Ö´óÓÚµÚ¶ş¸ö·µ»Ø1£¬µÈÓÚ·µ»Ø0£¬·ñÔò·µ»Ø£­1
-   * @since  0.5
-   */
-  public static int compare(Number o1, Number o2) {
-    double n1 = o1.doubleValue();
-    double n2 = o2.doubleValue();
-    if (n1 < n2) {
-      return -1;
-    }
-    else if (n1 > n2) {
-      return 1;
-    }
-    else {
-      return 0;
-    }
-  }
+	/**
+	 * æ¯”è¾ƒä¸¤ä¸ªæ•°å­—ã€‚ è¿™ä¸ªæ–¹æ³•å–Numberçš„doubleå€¼è¿›è¡Œæ¯”è¾ƒï¼Œå› æ­¤åªæœ‰åœ¨ä¸¤ä¸ªæ•°ä¸¥æ ¼ç›¸ç­‰çš„æƒ…å†µä¸‹æ‰è¿”å›0ï¼Œ
+	 * åˆå¯èƒ½å› ä¸ºJavaä¸­Doubleå‹å’ŒFloatçš„ç²¾åº¦ä¸åŒè€Œå¯¼è‡´ä¸¤ä¸ªç›¸ç­‰çš„æ•°ä¸è¿”å›0ã€‚
+	 * 
+	 * @param o1
+	 *            ç¬¬ä¸€ä¸ªæ•°å­—
+	 * @param o2
+	 *            ç¬¬äºŒä¸ªæ•°å­—
+	 * @return ç¬¬ä¸€ä¸ªæ•°å­—å¤§äºç¬¬äºŒä¸ªè¿”å›1ï¼Œç­‰äºè¿”å›0ï¼Œå¦åˆ™è¿”å›ï¼1
+	 * @since 0.5
+	 */
+	public static int compare(Number o1, Number o2) {
+		double n1 = o1.doubleValue();
+		double n2 = o2.doubleValue();
+		if (n1 < n2) {
+			return -1;
+		} else if (n1 > n2) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
-  /**
-   * ±È½ÏÁ½¸ö²¼¶ûĞÍÖµ¡£
-   * Èç¹ûÁ½¸öµÄÖµ²»Í¬£¬true±»ÈÏÎªµÈÓÚ1£¬¶øfalseµÈÓÚ0¡£
-   * @param o1 µÚÒ»¸öÖµ
-   * @param o2 µÚ¶ş¸öÖµ
-   * @return µÚÒ»¸öÖµ´óÓÚµÚ¶ş¸ö·µ»Ø1£¬µÈÓÚ·µ»Ø0£¬·ñÔò·µ»Ø-1
-   * @since  0.5
-   */
-  public static int compare(Boolean o1, Boolean o2) {
-    boolean b1 = o1.booleanValue();
-    boolean b2 = o2.booleanValue();
-    if (b1 == b2) {
-      return 0;
-    }
-    else if (b1) {
-      return 1;
-    }
-    else {
-      return -1;
-    }
-  }
+	/**
+	 * æ¯”è¾ƒä¸¤ä¸ªå¸ƒå°”å‹å€¼ã€‚ å¦‚æœä¸¤ä¸ªçš„å€¼ä¸åŒï¼Œtrueè¢«è®¤ä¸ºç­‰äº1ï¼Œè€Œfalseç­‰äº0ã€‚
+	 * 
+	 * @param o1
+	 *            ç¬¬ä¸€ä¸ªå€¼
+	 * @param o2
+	 *            ç¬¬äºŒä¸ªå€¼
+	 * @return ç¬¬ä¸€ä¸ªå€¼å¤§äºç¬¬äºŒä¸ªè¿”å›1ï¼Œç­‰äºè¿”å›0ï¼Œå¦åˆ™è¿”å›-1
+	 * @since 0.5
+	 */
+	public static int compare(Boolean o1, Boolean o2) {
+		boolean b1 = o1.booleanValue();
+		boolean b2 = o2.booleanValue();
+		if (b1 == b2) {
+			return 0;
+		} else if (b1) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
 
-  /**
-   * Ã°ÅİÅÅĞò·¨ÅÅĞò¡£
-   * @param objects ÅÅĞò¶ÔÏó
-   * @param isAscent ÅÅĞòË³Ğò
-   * @return ÅÅĞòºóÓ¦¸ÃÓĞµÄË÷ÒıÊı×é
-   * @since  0.5
-   */
-  public static int[] n2sort(Comparable<Object>[] objects, boolean isAscent) {
-    int length = objects.length;
-    int[] indexes = ArrayUtil.getInitedIntArray(length);
-    for (int i = 0; i < length; i++) {
-      for (int j = i + 1; j < length; j++) {
-        if (isAscent == true) {
-          if (objects[indexes[i]].compareTo(objects[indexes[j]]) > 0) {
-            swap(indexes, i, j);
-          }
-        }
-        else {
-          if (objects[indexes[i]].compareTo(objects[indexes[j]]) < 0) {
-            swap(indexes, i, j);
-          }
-        }
-      }
-    }
-    return indexes;
-  }
+	/**
+	 * å†’æ³¡æ’åºæ³•æ’åºã€‚
+	 * 
+	 * @param objects
+	 *            æ’åºå¯¹è±¡
+	 * @param isAscent
+	 *            æ’åºé¡ºåº
+	 * @return æ’åºååº”è¯¥æœ‰çš„ç´¢å¼•æ•°ç»„
+	 * @since 0.5
+	 */
+	public static int[] n2sort(Comparable<Object>[] objects, boolean isAscent) {
+		int length = objects.length;
+		int[] indexes = ArrayUtil.getInitedIntArray(length);
+		for (int i = 0; i < length; i++) {
+			for (int j = i + 1; j < length; j++) {
+				if (isAscent == true) {
+					if (objects[indexes[i]].compareTo(objects[indexes[j]]) > 0) {
+						swap(indexes, i, j);
+					}
+				} else {
+					if (objects[indexes[i]].compareTo(objects[indexes[j]]) < 0) {
+						swap(indexes, i, j);
+					}
+				}
+			}
+		}
+		return indexes;
+	}
 
-  /**
-   * Ã°ÅİÅÅĞò·¨ÅÅĞò¡£
-   * @param objects ÅÅĞò¶ÔÏó
-   * @param key ÅÅĞò¹Ø¼ü×Ö
-   * @param isAscent ÅÅĞòË³Ğò
-   * @return ÅÅĞòºóÓ¦¸ÃÓĞµÄË÷ÒıÊı×é
-   * @since  0.5
-   */
-  public static int[] n2sort(PropertyComparable[] objects, int key,
-                             boolean isAscent) {
-    int length = objects.length;
-    int[] indexes = ArrayUtil.getInitedIntArray(length);
-    for (int i = 0; i < length; i++) {
-      for (int j = i + 1; j < length; j++) {
-        if (isAscent == true) {
-          if (objects[indexes[i]].compareTo(objects[indexes[j]], key) > 0) {
-            swap(indexes, i, j);
-          }
-        }
-        else {
-          if (objects[indexes[i]].compareTo(objects[indexes[j]], key) < 0) {
-            swap(indexes, i, j);
-          }
-        }
-      }
-    }
-    return indexes;
-  }
+	/**
+	 * å†’æ³¡æ’åºæ³•æ’åºã€‚
+	 * 
+	 * @param objects
+	 *            æ’åºå¯¹è±¡
+	 * @param key
+	 *            æ’åºå…³é”®å­—
+	 * @param isAscent
+	 *            æ’åºé¡ºåº
+	 * @return æ’åºååº”è¯¥æœ‰çš„ç´¢å¼•æ•°ç»„
+	 * @since 0.5
+	 */
+	public static int[] n2sort(PropertyComparable[] objects, int key, boolean isAscent) {
+		int length = objects.length;
+		int[] indexes = ArrayUtil.getInitedIntArray(length);
+		for (int i = 0; i < length; i++) {
+			for (int j = i + 1; j < length; j++) {
+				if (isAscent == true) {
+					if (objects[indexes[i]].compareTo(objects[indexes[j]], key) > 0) {
+						swap(indexes, i, j);
+					}
+				} else {
+					if (objects[indexes[i]].compareTo(objects[indexes[j]], key) < 0) {
+						swap(indexes, i, j);
+					}
+				}
+			}
+		}
+		return indexes;
+	}
 
-  /**
-   * ½»»»Á½¸öÔªËØµÄÖµ¡£
-   * @param indexes Ô­Ë÷ÒıÊı×é
-   * @param i µÚÒ»ĞĞ
-   * @param j µÚ¶şĞĞ
-   */
-  private static void swap(int[] indexes, int i, int j) {
-    int tmp = indexes[i];
-    indexes[i] = indexes[j];
-    indexes[j] = tmp;
-  }
+	/**
+	 * äº¤æ¢ä¸¤ä¸ªå…ƒç´ çš„å€¼ã€‚
+	 * 
+	 * @param indexes
+	 *            åŸç´¢å¼•æ•°ç»„
+	 * @param i
+	 *            ç¬¬ä¸€è¡Œ
+	 * @param j
+	 *            ç¬¬äºŒè¡Œ
+	 */
+	private static void swap(int[] indexes, int i, int j) {
+		int tmp = indexes[i];
+		indexes[i] = indexes[j];
+		indexes[j] = tmp;
+	}
 
 }

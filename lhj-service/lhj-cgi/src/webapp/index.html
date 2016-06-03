@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>XUX Library Download Builder</title>
+<!-- CSS Replace Start -->
+<!-- CSS Replace End -->
+<!-- Script Replace Start -->
+<script src="${xux.baseuri}/xux-js/xux-basg-minimum-${xux.version}.js"></script>
+<script>
+	xuxInitialize({
+		prefix: "${xux.baseuri}/"
+	});
+</script>
+<script src="${xux.baseuri}/xux-js/xux-basg-fujixerox-${xux.version}.js"></script>
+<!-- Script Replace End -->
+<script src="scripts/download.js"></script>
+</head>
+<body>
+<header>
+<a href="index.html">XUX JavaScript Library</a>
+<nav>
+	<ul>
+		<li><a href="http://xux.rdh.fujixerox.co.jp/blog/">XUX Portal Page</a></li>
+	</ul>
+</nav>
+</header>
+<main>
+<form id="paramForm">
+	<article id="indexArticle">
+		<section>
+			<h2>XUX Download Builder</h2>
+		</section>
+		<hr>
+		<section id="sectionVersion">
+			<h2>Version</h2>
+			<div>
+				<label></label>
+				<input type="radio" name="xuxVersion" id="version130" value="1.3.0-alpha-07" checked><label for="version130">1.3.0</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionComponentsAll">
+			<h2>Components</h2>
+			<div>
+				<label></label>
+				<input type="checkbox" name="compAll" id="compAll" value="all"><label for="compAll">Toggle All</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionStyle">
+			<h2>Type</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="packageType" id="style_All" value="all"><label for="style_All">Toggle All</label>
+				<input type="checkbox" name="packageType" id="style_Basg" value="basg"><label for="style_Basg">BASG</label>
+				<input type="checkbox" name="packageType" id="style_Easg" value="easg"><label for="style_Easg">EASG</label>
+				<input type="checkbox" name="packageType" id="style_Graph" value="graph"><label for="style_Graph">GRAPH</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionBasgSize">
+			<h2>BASG style size</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="size" id="basgSizeAll" value="all"><label for="basgSizeAll">Toggle All</label>
+				<input type="checkbox" name="size" id="basgSizeNormal" value="normal"><label for="basgSizeNormal">nomal size set</label>
+				<input type="checkbox" name="size" id="basgSizeMinimum" value="minimum"><label for="basgSizeMinimum">minimum size set</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionBasgLang">
+			<h2>BASG additional language</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="basgLang" id="basgLang_All" value="all"><label for="basgLang_All">Toggle All</label>
+				<input type="checkbox" name="basgLang" id="basgLang_JA" value="ja"><label for="basgLang_JA">ja</label>
+				<input type="checkbox" name="basgLang" id="basgLang_KO" value="ko"><label for="basgLang_KO">ko</label>
+				<input type="checkbox" name="basgLang" id="basgLang_ZH_SC" value="zh_SC"><label for="basgLang_ZH_SC">zh_SC</label>
+				<input type="checkbox" name="basgLang" id="basgLang_ZH_TW" value="zh-TW"><label for="basgLang_ZH_TW">zh_TW</label>
+				<input type="checkbox" name="basgLang" id="basgLang_TH" value="th"><label for=basgLang_TH>th</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionBasgGlobalization">
+			<h2>BASG Globalization</h2>
+			<div>
+				<input type="checkbox" name="useBasgGlobalization" id="useBasgGlobalization" value="true">
+				<label for="useBasgGlobalization">need to support Globalization</label>
+			</div>
+			<div class="divToggleAll basgCulture">
+				<label>Culture</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_All" value="all"><label for="basgCulture_All">Toggle All</label>
+			</div>
+			<div class="leading basgCulture">
+				<label></label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-AU" value="en-AU"><label for="basgCulture_en-AU">en-AU</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-NZ" value="en-NZ"><label for="basgCulture_en-NZ">en-NZ</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-PH" value="en-PH"><label for="basgCulture_en-PH">en-PH</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-SG" value="en-SG"><label for="basgCulture_en-SG">en-SG</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-US" value="en-US"><label for="basgCulture_en-US">en-US</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_en-MY" value="en-MY"><label for="basgCulture_en-MY">en-MY</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_ja" value="ja"><label for="basgCulture_ja">ja</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_ja-JP" value="ja-JP"><label for="basgCulture_ja-JP">ja-JP</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_ko" value="ko"   ><label for="basgCulture_ko">ko</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_ko-KR" value="ko-KR"><label for="basgCulture_ko-KR">ko-KR</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_zh-CN" value="zh-CN"><label for="basgCulture_zh-CN">zh-CN</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_zh-TW" value="zh-TW"><label for="basgCulture_zh-TW">zh-TW</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_id-ID" value="id-ID"><label for="basgCulture_id-ID">id-ID</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_zh-HK" value="zh-HK"><label for="basgCulture_zh-HK">zh-HK</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_lo-LA" value="lo-LA"><label for="basgCulture_lo-LA">lo-LA</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_km-KH" value="km-KH"><label for="basgCulture_km-KH">km-KH</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_th" value="th"   ><label for="basgCulture_th">th</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_th-TH" value="th-TH"><label for="basgCulture_th-TH">th-TH</label>
+				<input type="checkbox" name="basgCulture" id="basgCulture_vi-VN" value="vi-VN"><label for="basgCulture_vi-VN">vi-VN</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionUsePIE">
+			<h2>IE8, 9 support</h2>
+			<div>
+				<label></label>
+				<input type="checkbox" name="usePIE" id="usePIE" value="true"><label for="usePIE">need to support IE8,9</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionAdditionalStyle">
+			<h2>BASG additional style</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="additionalStyle" id="extStyleBasgAll" value="all"><label for="extStyleBasgAll">Toggle All</label>
+				<input type="checkbox" name="additionalStyle" id="extStyleBasgFXLogo" value="FXLogo"><label for="extStyleBasgFXLogo">FujiXerox Logo</label>
+				<input type="checkbox" name="additionalStyle" id="extStyleBasgHC" value="highContrast"><label for="extStyleBasgHC">high contrast</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionBasgComps">
+			<h2>BASG Component</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompAll" value="all"><label for="basgCompAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label>Page Control</label>
+				<input type="checkbox" name="basgModule" id="basgCompPage" value="page" data-dependencies="footer,sidebar,header,navigationbar"><label for="basgCompPage">Page</label>
+			</div>
+			<div class="leading">
+				<label>GlobalNavigation Control</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="basgCompGlobalNavAll" value="all"><label for="basgCompGlobalNavAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompGlobalNavHeader" value="header"><label for="basgCompGlobalNavHeader">Header</label>
+				<input type="checkbox" name="basgModule" id="basgCompGlobalNavFooter" value="footer"><label for="basgCompGlobalNavFooter">Footer</label>
+				<input type="checkbox" name="basgModule" id="basgCompGlobalNavNavigationBar" value="navigationbar" data-dependencies="boundingbox"><label for="basgCompGlobalNavNavigationBar">NavigationBar</label>
+				<input type="checkbox" name="basgModule" id="basgCompGlobalNavSideBar" value="sidebar"><label for="basgCompGlobalNavSideBar">Sidebar</label>
+			</div>
+			<div class="leading">
+				<label>LocalNavigation Control</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="basgCompLocalNavAll" value="all"><label for="basgCompLocalNavAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompLocalNavBreadcrumbs" value="breadcrumbs"><label for="basgCompLocalNavBreadcrumbs">Breadcrumbs</label>
+				<input type="checkbox" name="basgModule" id="basgCompLocalNavHyperlink" value="hyperlink"><label for="basgCompLocalNavHyperlink">Hyperlink</label>
+				<input type="checkbox" name="basgModule" id="basgCompLocalNavActionableLinks" value="actionablelink"><label for="basgCompLocalNavActionableLinks">Actionable Links</label>
+				<input type="checkbox" name="basgModule" id="basgCompLocalNavPageNav" value="pagenavigation"><label for="basgCompLocalNavPageNav">Page Navigation</label>
+				<input type="checkbox" name="basgModule" id="basgCompLocalNavSiteMap" value="sitemap"><label for="basgCompLocalNavSiteMap">Site Map</label>
+			</div>
+			<div class="leading">
+				<label>Bounding Controls</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="basgCompBoundCtrlAll" value="all"><label for="basgCompBoundCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompBoundCtrlBoundingbox" value="boundingbox"><label for="basgCompBoundCtrlBoundingbox">Bounding Box</label>
+				<input type="checkbox" name="basgModule" id="basgCompBoundCtrlTabbedset" value="tabbedset" data-dependencies="boundingbox"><label for="basgCompBoundCtrlTabbedset">Tabbed Set</label>
+				<input type="checkbox" name="basgModule" id="basgCompBoundCtrlDecoratedtabbedset" value="decoratedtabbedset" data-dependencies="tabbedset"><label for="basgCompBoundCtrlDecoratedtabbedset">Decorated Tabbed Set</label>
+				<input type="checkbox" name="basgModule" id="basgCompBoundCtrlWizard" value="wizard" data-dependencies="boundingbox,stepindicator"><label for="basgCompBoundCtrlWizard">Wizard</label>
+				<input type="checkbox" name="basgModule" id="basgCompBoundCtrlContextmenu" value="contextmenu"><label for="basgCompBoundCtrlContextmenu">Context Menu</label>
+			</div>
+			<div class="leading">
+				<label>Form Controls &amp; Utilities</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="basgCompFormCtrlAll" value="all"><label for="basgCompFormCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlButton" value="button"><label for="basgCompFormCtrlButton">Button</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlCheckbox" value="checkbox"><label for="basgCompFormCtrlCheckbox">Checkbox</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlRadio" value="radio"><label for="basgCompFormCtrlRadio">Radio</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlSuggestion" value="suggestion"><label for="basgCompFormCtrlSuggestion">Suggestion</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlTextfield" value="textfield"><label for="basgCompFormCtrlTextfield">Text Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlPasswordfield" value="passwordfield"><label for="basgCompFormCtrlPasswordfield">Password Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlEmailfield" value="emailfield"><label for="basgCompFormCtrlEmailfield">E-Mail Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlTelephonefield" value="telfield"><label for="basgCompFormCtrlTelephonefield">Telephone Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlUrlfield" value="urlfield"><label for="basgCompFormCtrlUrlfield">URL Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlNumberfield" value="numberfield"><label for="basgCompFormCtrlNumberfield">Number Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlCurrencyfield" value="currencyfield" data-dependencies="numberfield"><label for="basgCompFormCtrlCurrencyfield">Currency Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlDatefield" value="datefield"><label for="basgCompFormCtrlDatefield">Date Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlTimefield" value="timefield"><label for="basgCompFormCtrlTimefield">Time Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlDropdownlist" value="dropdown"><label for="basgCompFormCtrlDropdownlist">Drop Down List</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlList" value="list"><label for="basgCompFormCtrlList">List</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlTwosidedlist" value="twosidedlist" data-dependencies="list,searchfield,button"><label for="basgCompFormCtrlTwosidedlist">Two Sided List</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlTextarea" value="textarea"><label for="basgCompFormCtrlTextarea">Text Area</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlFileupload" value="fileupload" data-dependencies="button"><label for="basgCompFormCtrlFileupload">File Upload</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlStatictext" value="statictext"><label for="basgCompFormCtrlStatictext">Static Text</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlSearchfield" value="searchfield"><label for="basgCompFormCtrlSearchfield">Search Field</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlBoxandlayoutapply" value="applyboxandlayout"><label for="basgCompFormCtrlBoxandlayoutapply">Box and Layout Applier</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlRequireditems" value="requireditems"><label for="basgCompFormCtrlRequireditems">Required items</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlMultipliablebox" value="multipliablebox" data-dependencies="table,applyboxandlayout"><label for="basgCompFormCtrlMultipliablebox">MultipliableBox</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlMultipliabletable" value="multipliabletable" data-dependencies="table,applyboxandlayout"><label for="basgCompFormCtrlMultipliabletable">MultipliableTable</label>
+				<input type="checkbox" name="basgModule" id="basgCompFormCtrlValidate" value="validate"><label for="basgCompFormCtrlValidate">Validate</label>
+			</div>
+			<div class="leading">
+				<label>Basic Controls &amp; Utilities</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="basgCompBasicCtrlAll" value="all"><label for="basgCompBasicCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlTable" value="table" data-dependencies="checkbox"><label for="basgCompBasicCtrlTable">Table</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlDecoratedtable" value="decoratedtable" data-dependencies="table, searchfield, button, dropdown"><label for="basgCompBasicCtrlDecoratedtable">Decorated Table</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlTree" value="tree"><label for="basgCompBasicCtrlTree">Tree</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlModalwindow" value="modalwindow" data-dependencies="button,buttonbox"><label for="basgCompBasicCtrlModalwindow">Modal Window</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlInfotip" value="infotip"><label for="basgCompBasicCtrlInfotip">Infotip</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlIndicator" value="indicator"><label for="basgCompBasicCtrlIndicator">Indicator</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlProgressmodalwindow" value="progressmodalwindow" data-dependencies="modalwindow"><label for="basgCompBasicCtrlProgressmodalwindow">Progress Modal Window</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlTonerlevelindicator" value="tonerindicator"><label for="basgCompBasicCtrlTonerlevelindicator">Toner Level Indicator</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlTraylevelindicator" value="trayindicator"><label for="basgCompBasicCtrlTraylevelindicator">Tray Level Indicator</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlStepindicator" value="stepindicator"><label for="basgCompBasicCtrlStepindicator">Step Indicator</label>
+				<input type="checkbox" name="basgModule" id="basgCompBasicCtrlFormat" value="format"><label for="basgCompBasicCtrlFormat">Format</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionEasgLang">
+			<h2>EASG additional language</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="easgLang" id="easgLang_All" value="all"><label for="easgLang_All">Toggle All</label>
+				<input type="checkbox" name="easgLang" id="easgLang_JA" value="ja"><label for="easgLang_JA">ja</label>
+				<input type="checkbox" name="easgLang" id="easgLang_KO" value="ko"><label for="easgLang_KO">ko</label>
+				<input type="checkbox" name="easgLang" id="easgLang_ZH_SC" value="zh_SC"><label for="easgLang_ZH_SC">zh_SC</label>
+				<input type="checkbox" name="easgLang" id="easgLang_ZH_TW" value="zh_TW"><label for="easgLang_ZH_TW">zh_TW</label>
+				<input type="checkbox" name="easgLang" id="easgLang_TH" value="th"><label for=easgLang_TH>th</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionEasgGlobalization">
+			<h2>EASG Globalization</h2>
+			<div>
+				<label></label>
+				<input type="checkbox" name="useEasgGlobalization" id="useEasgGlobalization" value="true">
+				<label for="useEasgGlobalization">need to support Globalization</label>
+			</div>
+			<div class="divToggleAll easgCulture">
+				<label>Culture</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_All" value="all"><label for="easgCulture_All">Toggle All</label>
+			</div>
+			<div class="leading easgCulture">
+				<label></label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-AU" value="en-AU"><label for="easgCulture_en-AU">en-AU</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-NZ" value="en-NZ"><label for="easgCulture_en-NZ">en-NZ</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-PH" value="en-PH"><label for="easgCulture_en-PH">en-PH</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-SG" value="en-SG"><label for="easgCulture_en-SG">en-SG</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-US" value="en-US"><label for="easgCulture_en-US">en-US</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_en-MY" value="en-MY"><label for="easgCulture_en-MY">en-MY</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_ja" value="ja"><label for="easgCulture_ja">ja</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_ja-JP" value="ja-JP"><label for="easgCulture_ja-JP">ja-JP</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_ko" value="ko"><label for="easgCulture_ko">ko</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_ko-KR" value="ko-KR"><label for="easgCulture_ko-KR">ko-KR</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_zh-CN" value="zh-CN"><label for="easgCulture_zh-CN">zh-CN</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_zh-TW" value="zh-TW"><label for="easgCulture_zh-TW">zh-TW</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_id-ID" value="id-ID"><label for="easgCulture_id-ID">id-ID</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_zh-HK" value="zh-HK"><label for="easgCulture_zh-HK">zh-HK</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_lo-LA" value="lo-LA"><label for="easgCulture_lo-LA">lo-LA</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_km-KH" value="km-KH"><label for="easgCulture_km-KH">km-KH</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_th" value="th"><label for="easgCulture_th">th</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_th-TH" value="th-TH"><label for="easgCulture_th-TH">th-TH</label>
+				<input type="checkbox" name="easgCulture" id="easgCulture_vi-VN" value="vi-VN"><label for="easgCulture_vi-VN">vi-VN</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionEasgVer">
+			<h2>EWB version</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="ewbVersion" id="easgVerAll" value="all"><label for="easgVerAll">Toggle All</label>
+				<input type="checkbox" name="ewbVersion" id="easgVerV4" value="v4"><label for="easgVerV4">v4</label>
+				<input type="checkbox" name="ewbVersion" id="easgVerV5" value="v5"><label for="easgVerV5">v5</label>
+			</div>
+		</section>
+		<hr>
+		<section id="sectionEasgComps">
+			<h2>EASG Component</h2>
+			<div class="columnLeft">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompAll" value="all"><label for="easgCompAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label>Page Control</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="easgCompPageAll" value="all"><label for="easgCompPageAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompPagePage" value="page" data-dependencies="header"><label for="easgCompPagePage">Page</label>
+				<input type="checkbox" name="easgModule" id="easgCompPageHomeMenu" value="homemenu" data-dependencies="contextmenu"><label for="easgCompPageHomeMenu">HomeMenu</label>
+				<input type="checkbox" name="easgModule" id="easgCompPageHeader" value="header"><label for="easgCompPageHeader">Header</label>
+				<input type="checkbox" name="easgModule" id="easgCompPageSideBar" value="sidebar"><label for="easgCompPageSideBar">Sidebar</label>
+			</div>
+			<div class="leading">
+				<label>LocalNavigation Control</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="easgCompLocalNavAll" value="all"><label for="easgCompLocalNavAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompLocalNavBreadcrumbs" value="breadcrumbs"><label for="easgCompLocalNavBreadcrumbs">Breadcrumbs</label>
+				<input type="checkbox" name="easgModule" id="easgCompLocalNavHyperlink" value="hyperlink"><label for="easgCompLocalNavHyperlink">Hyperlink</label>
+				<input type="checkbox" name="easgModule" id="easgCompLocalNavActionableLinks" value="actionablelink"><label for="easgCompLocalNavActionableLinks">Actionable Links</label>
+				<input type="checkbox" name="easgModule" id="easgCompLocalNavPageNav" value="pagenavigation"><label for="easgCompLocalNavPageNav">Page Navigation</label>
+				<input type="checkbox" name="easgModule" id="easgCompLocalNavSiteMap" value="sitemap"><label for="easgCompLocalNavSiteMap">Site Map</label>
+			</div>
+			<div class="leading">
+				<label>Bounding Controls</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="easgCompBoundCtrlAll" value="all"><label for="easgCompBoundCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompBoundCtrlBoundingbox" value="boundingbox"><label for="easgCompBoundCtrlBoundingbox">Bounding Box</label>
+				<input type="checkbox" name="easgModule" id="easgCompBoundCtrlTabbedset" value="tabbedset" data-dependencies="labelandicon"><label for="easgCompBoundCtrlTabbedset">Tabbed Set</label>
+				<input type="checkbox" name="easgModule" id="easgCompBoundCtrlContextmenu" value="contextmenu" data-dependencies="popuppanel,ajax"><label for="easgCompBoundCtrlContextmenu">Context Menu</label>
+			</div>
+			<div class="leading">
+				<label>Form Controls &amp; Utilities</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="easgCompFormCtrlAll" value="all"><label for="easgCompFormCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlButton" value="button"><label for="easgCompFormCtrlButton">Button</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlLinkbutton" value="linkbutton"><label for="easgCompFormCtrlLinkbutton">LinkButton</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlCheckbox" value="checkbox" data-dependencies="button"><label for="easgCompFormCtrlCheckbox">Checkbox</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlRadio" value="radio"><label for="easgCompFormCtrlRadio">Radio Button</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlSuggestion" value="suggestion"><label for="easgCompFormCtrlSuggestion">Suggestion</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlHalfKeyboard" value="halfkeyboard"><label for="easgCompFormCtrlHalfKeyboard">Half Keyboard</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlTextfield" value="textfield"><label for="easgCompFormCtrlTextfield">Text Field</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlPasswordfield" value="passwordfield"><label for="easgCompFormCtrlPasswordfield">Password Field</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlNumberfield" value="numberfield"><label for="easgCompFormCtrlNumberfield">Number Field</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlEmailfield" value=emailfield><label for="easgCompFormCtrlEmailfield">Email Field</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlDropdownlist" value="dropdown" data-dependencies="popuppanel"><label for="easgCompFormCtrlDropdownlist">Drop Down List</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlList" value="list"><label for="easgCompFormCtrlList">List</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlTextarea" value="textarea"><label for="easgCompFormCtrlTextarea">Text Area</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlFileupload" value="fileupload"><label for="easgCompFormCtrlFileupload">File Upload</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlStatictext" value="statictext"><label for="easgCompFormCtrlStatictext">Static Text</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlSearchfield" value="searchfield" data-dependencies="button"><label for="easgCompFormCtrlSearchfield">Search Field</label>
+				<input type="checkbox" name="easgModule" id="easgCompFormCtrlBoxandlayoutapply" value="applyboxandlayout" data-dependencies="statictext"><label for="easgCompFormCtrlBoxandlayoutapply">Box and Layout Applier</label>
+			</div>
+			<div class="leading">
+				<label>Basic Controls &amp; Utilities</label>
+			</div>
+			<div class="divToggleAll">
+				<input type="checkbox" id="easgCompBasicCtrlAll" value="all"><label for="easgCompBasicCtrlAll">Toggle All</label>
+			</div>
+			<div class="leading">
+				<label></label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlTable" value="table" data-dependencies="checkbox,radio"><label for="easgCompBasicCtrlTable">Table</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlDecoratedtable" value="decoratedtable" data-dependencies="applyboxandlayout,table,pagenavigation,searchfield"><label for="easgCompBasicCtrlDecoratedtable">Decorated Table</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlModalwindow" value="modalwindow" data-dependencies="button"><label for="easgCompBasicCtrlModalwindow">Modal Window</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlPopupPanel" value="popuppanel"><label for="easgCompBasicCtrlPopupPanel">PopupPanel</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlInfotip" value="infotip"><label for="easgCompBasicCtrlInfotip">Infotip</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlLabelAndIcon" value="labelandicon"><label for="easgCompBasicCtrlLabelAndIcon">LabelAndIcon</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlSettingAndStart" value="settingandstart"><label for="easgCompBasicCtrlSettingAndStart">SettingAndStart</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlSlideMessage" value="slidemessage"><label for="easgCompBasicCtrlSlideMessage">SlideMessage</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlPrint" value="print" data-dependencies="settingandstart,button,radio"><label for="easgCompBasicCtrlPrint">Print</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicFileView" value="fileview" data-dependencies="tabbedset,textfield,decoratedtable,radio,boundingbox"><label for="easgCompBasicFileView">File View</label>
+				<input type="checkbox" name="easgModule" id="easgCompBasicCtrlScan" value="scan" data-dependencies="settingandstart,checkbox"><label for="easgCompBasicCtrlScan">Scan</label>
+			</div>
+		</section>
+		<hr/>
+		<section>
+			<div>
+				<button type="button" id="download">Download</button>
+			</div>
+		</section>
+	</article>
+</form>
+</main>
+<footer>
+FUJI XEROX INTERNAL USE ONLY: Copyright(C) 2013-2015 by Fuji Xerox Co., Ltd. All rights reserved
+</footer>
+<form id="downloadForm" action="download" method="get">
+	<input type="hidden" id="buildNum" name="buildNum" />
+</form>
+<div id="process">
+	<h2>building xux...</h2>
+	<button type="button" id="btnCancel">Cancel</button>
+</div>
+</body>
+</html>

@@ -1,8 +1,3 @@
-/*
- * $Id: DBToJava.java,v 1.1 2007/08/25 18:19:10 ostore Exp $
- * 
- * Copyright (c) 2005-2007 Sun Japan Corporation. All Rights Reserved.
- */
 package lhj.java.test;
 
 import java.io.FileWriter;
@@ -23,14 +18,7 @@ import java.util.StringTokenizer;
 import lhj.java.util.PassWordCrypter;
 
 /**
- * <p>
- * [���@��] �N���X����
- * </p>
- * <p>
- * [�@�@�\] �N���X�̋@�\���L�q����B
- * </p>
- * 
- * @author hjliang
+ * @author Sealion Hunter
  * @version $Revision: 1.1 $ $Date: 2007/08/25 18:19:10 $
  */
 public class DBToJava {
@@ -42,7 +30,7 @@ public class DBToJava {
 			getTypeString(0);
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			con = DriverManager.getConnection(
-					"jdbc:oracle:thin:@sjns-guojq:1521:edi", "DEV", "DEV");
+					"jdbc:oracle:thin:@localhost:1521:edi", "DEV", "DEV");
 			createAdminUser(con);
 			DatabaseMetaData dbmd = con.getMetaData();
 			ResultSet rs;

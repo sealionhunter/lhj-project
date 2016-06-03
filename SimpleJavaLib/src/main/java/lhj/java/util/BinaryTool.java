@@ -6,6 +6,8 @@ package lhj.java.util;
 
 import java.io.UnsupportedEncodingException;
 
+import lhj.java.exception.HexException;
+
 /**
  * Binary tool
  * 

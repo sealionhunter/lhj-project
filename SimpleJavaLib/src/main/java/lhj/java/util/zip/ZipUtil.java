@@ -230,11 +230,16 @@ public class ZipUtil {
 
 	public static void extract(final String zipFileName, final String fileName)
 			throws IOException {
+		ZipFile z = null;
 		try {
-			new ZipFile(zipFileName);
+			z = new ZipFile(zipFileName);
 			zipExtract(zipFileName, fileName);
 		} catch (ZipException zex) {
 			gzipExtract(zipFileName, fileName);
+		} finally {
+			if (z != null) {
+				z.close();
+			}
 		}
 	}
 

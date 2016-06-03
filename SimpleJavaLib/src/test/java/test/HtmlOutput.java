@@ -77,7 +77,7 @@ public class HtmlOutput {
 		context.put("TableValue", tblValue);
 		Template template = Velocity.getTemplate("src/main/resources/htmlTemplate.vm");
 		StringWriter sw = new StringWriter();
-		FileWriter fw = new FileWriter("out/output.html");
+		FileWriter fw = new FileWriter("target/output.html");
 		template.merge(context, sw);
 		System.out.println(sw.toString());
 		template.merge(context, fw);

@@ -5,7 +5,9 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -21,7 +23,7 @@ import java.util.zip.DeflaterOutputStream;
 /**
  * zip -> secret -> zip
  * 
- * @author hjliang
+ * @author Sealion Hunter
  */
 public class KeyEncodor {
     private static final BigInteger X = new BigInteger("768378061284635723515030294014136322184160170876");
@@ -37,6 +39,21 @@ public class KeyEncodor {
      * @throws NoSuchProviderException
      */
     public static void main(String[] args) throws Exception {
+    }
+    
+    public static String encodeObject(Serializable obj) throws Exception {
+    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    	ObjectOutputStream oos = new ObjectOutputStream(baos);
+    	oos.writeObject(obj);
+    	oos.flush();
+    	oos.close();
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+        DeflaterOutputStream dos = new DeflaterOutputStream(new BufferedOutputStream(baos2), new Deflater());
+        encode(bais, dos);
+        dos.close();
+        bais.close();
+        return Base64.getEncoder().encodeToString(baos2.toByteArray());
     }
 
     public static String encodeFile(String src) throws Exception {

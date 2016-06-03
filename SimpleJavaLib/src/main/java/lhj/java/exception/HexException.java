@@ -7,7 +7,7 @@ package lhj.java.exception;
 /**
  * Hex Exception
  * 
- * @author hjliang
+ * @author Sealion Hunter
  * 
  */
 public class HexException extends RuntimeException {

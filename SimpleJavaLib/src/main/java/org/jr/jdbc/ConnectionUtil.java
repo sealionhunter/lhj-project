@@ -3,95 +3,116 @@ package org.jr.jdbc;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê2ÔÂ19ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´2æœˆ19æ—¥
  * @author Cherami
  */
 
 /**
- * »ñÈ¡¸÷ÖÖÊı¾İ¿âÁ¬½ÓµÄ×Ö·û´®µÄ¹¤¾ßÀà¡£
- * @since  0.4
+ * è·å–å„ç§æ•°æ®åº“è¿æ¥çš„å­—ç¬¦ä¸²çš„å·¥å…·ç±»ã€‚
+ * 
+ * @since 0.4
  */
-
 public class ConnectionUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private ConnectionUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private ConnectionUtil() {
+	}
 
-  /**
-   * ¸ù¾İ²ÎÊıÖµ¹¹ÔìÒ»¸öMysqlµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®¡£
-   * @param host Ö÷»úÃû£¬Ò²¿ÉÒÔÊÇIPµØÖ·¡£
-   * @param database Êı¾İ¿âÃû
-   * @param userName ÓÃ»§Ãû
-   * @param password ÃÜÂë
-   * @param options ÆäËûÑ¡Ïî£¬µ¥¸öÑ¡ÏîÊ±µÄÖµÊÇ"option1=value1"µÄĞÎÊ½£¬¶à¸öµÄÊ±ºòÊ¹ÓÃ"&"Á¬½Ó£¬ÀıÈç"option1=value1&option2=value2"¡£
-   * @return MysqlµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public static String getMysqlConnection(String host, String database,
-                                          String userName, String password,
-                                          String options) {
-    if (options != null && options.length() > 0) {
-      return "jdbc:mysql://" + host + "/" + database + "?user=" + userName +
-          "&password=" + password + "&+" + options;
-    }
-    else {
-      return "jdbc:mysql://" + host + "/" + database + "?user=" + userName +
-          "&password=" + password;
-    }
-  }
+	/**
+	 * æ ¹æ®å‚æ•°å€¼æ„é€ ä¸€ä¸ªMysqlçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param host
+	 *            ä¸»æœºåï¼Œä¹Ÿå¯ä»¥æ˜¯IPåœ°å€ã€‚
+	 * @param database
+	 *            æ•°æ®åº“å
+	 * @param userName
+	 *            ç”¨æˆ·å
+	 * @param password
+	 *            å¯†ç 
+	 * @param options
+	 *            å…¶ä»–é€‰é¡¹ï¼Œå•ä¸ªé€‰é¡¹æ—¶çš„å€¼æ˜¯"option1=value1"çš„å½¢å¼ï¼Œå¤šä¸ªçš„æ—¶å€™ä½¿ç”¨"&"è¿æ¥ï¼Œ
+	 *            ä¾‹å¦‚"option1=value1&option2=value2"ã€‚
+	 * @return Mysqlçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public static String getMysqlConnection(String host, String database, String userName, String password,
+			String options) {
+		if (options != null && options.length() > 0) {
+			return "jdbc:mysql://" + host + "/" + database + "?user=" + userName + "&password=" + password + "&+"
+					+ options;
+		} else {
+			return "jdbc:mysql://" + host + "/" + database + "?user=" + userName + "&password=" + password;
+		}
+	}
 
-  /**
-   * ¸ù¾İ²ÎÊıÖµ¹¹ÔìÒ»¸öSysbaseµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®¡£
-   * @param tds tdsÃû
-   * @param host Ö÷»úÃû
-   * @param port ¶Ë¿ÚºÅ
-   * @return SysbaseµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public static String getSysbaseConnection(String tds, String host,
-                                            String port) {
-    return "jdbc:sybase:" + tds + ":" + host + ":" + port;
-  }
+	/**
+	 * æ ¹æ®å‚æ•°å€¼æ„é€ ä¸€ä¸ªSysbaseçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param tds
+	 *            tdså
+	 * @param host
+	 *            ä¸»æœºå
+	 * @param port
+	 *            ç«¯å£å·
+	 * @return Sysbaseçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public static String getSysbaseConnection(String tds, String host, String port) {
+		return "jdbc:sybase:" + tds + ":" + host + ":" + port;
+	}
 
-  /**
-   * ¸ù¾İ²ÎÊıÖµ¹¹ÔìÒ»¸öOracleµÄthin·½Ê½µÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®¡£
-   * @param serverName ·şÎñÃû
-   * @param port ¶Ë¿ÚºÅ
-   * @param userName ÓÃ»§Ãû
-   * @param password ÃÜÂë
-   * @return OracleµÄthin·½Ê½µÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public static String getOracleThinConnection(String serverName, String port,
-                                               String userName, String password) {
-    return "jdbc:oracle:thin:@" + serverName + ":" + port + ":ORCL?user=" +
-        userName + ";password=tiger";
-  }
+	/**
+	 * æ ¹æ®å‚æ•°å€¼æ„é€ ä¸€ä¸ªOracleçš„thinæ–¹å¼çš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param serverName
+	 *            æœåŠ¡å
+	 * @param port
+	 *            ç«¯å£å·
+	 * @param userName
+	 *            ç”¨æˆ·å
+	 * @param password
+	 *            å¯†ç 
+	 * @return Oracleçš„thinæ–¹å¼çš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public static String getOracleThinConnection(String serverName, String port, String userName, String password) {
+		return "jdbc:oracle:thin:@" + serverName + ":" + port + ":ORCL?user=" + userName + ";password=tiger";
+	}
 
-  /**
-   * ¸ù¾İ²ÎÊıÖµ¹¹ÔìÒ»¸öOracleµÄoci8·½Ê½µÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®¡£
-   * @param localeServerName Net8µÄ±¾µØ·şÎñÃû
-   * @return OracleµÄoci8·½Ê½µÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public static String getOracleOCI8Connection(String localeServerName) {
-    return "jdbc:oracle:oci8:@" + localeServerName;
-  }
-  
-  /**
-   * ¸ù¾İ²ÎÊıÖµ¹¹ÔìÒ»¸öSQL ServerµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   * @param host Ö÷»úÃû£¬Ò²¿ÉÒÔÊÇIPµØÖ·¡£
-   * @param instance Êı¾İ¿âÊµÀı
-   * @param port ¶Ë¿ÚºÅ
-   * @param dbName Êı¾İ¿âÃû
-   * @param userName ÓÃ»§Ãû
-   * @param password ÃÜÂë
-   * @param options ÆäËûÑ¡Ïî£¬µ¥¸öÑ¡ÏîÊ±µÄÖµÊÇ"option1=value1"µÄĞÎÊ½£¬¶à¸öµÄÊ±ºòÊ¹ÓÃ"&"Á¬½Ó£¬ÀıÈç"option1=value1&option2=value2"¡£
-   * @return SQL ServerµÄÊı¾İ¿âÁ¬½ÓËùĞèµÄ×Ö·û´®
-   */
-  public static String getSqlServerConnection(String host, String port, String dbName) {
-	  return "jdbc:sqlserver://" + host + ":" + port + ";DatabaseName=" + dbName;
-  }
+	/**
+	 * æ ¹æ®å‚æ•°å€¼æ„é€ ä¸€ä¸ªOracleçš„oci8æ–¹å¼çš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param localeServerName
+	 *            Net8çš„æœ¬åœ°æœåŠ¡å
+	 * @return Oracleçš„oci8æ–¹å¼çš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public static String getOracleOCI8Connection(String localeServerName) {
+		return "jdbc:oracle:oci8:@" + localeServerName;
+	}
+
+	/**
+	 * æ ¹æ®å‚æ•°å€¼æ„é€ ä¸€ä¸ªSQL Serverçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 * 
+	 * @param host
+	 *            ä¸»æœºåï¼Œä¹Ÿå¯ä»¥æ˜¯IPåœ°å€ã€‚
+	 * @param instance
+	 *            æ•°æ®åº“å®ä¾‹
+	 * @param port
+	 *            ç«¯å£å·
+	 * @param dbName
+	 *            æ•°æ®åº“å
+	 * @param userName
+	 *            ç”¨æˆ·å
+	 * @param password
+	 *            å¯†ç 
+	 * @param options
+	 *            å…¶ä»–é€‰é¡¹ï¼Œå•ä¸ªé€‰é¡¹æ—¶çš„å€¼æ˜¯"option1=value1"çš„å½¢å¼ï¼Œå¤šä¸ªçš„æ—¶å€™ä½¿ç”¨"&"è¿æ¥ï¼Œ
+	 *            ä¾‹å¦‚"option1=value1&option2=value2"ã€‚
+	 * @return SQL Serverçš„æ•°æ®åº“è¿æ¥æ‰€éœ€çš„å­—ç¬¦ä¸²
+	 */
+	public static String getSqlServerConnection(String host, String port, String dbName) {
+		return "jdbc:sqlserver://" + host + ":" + port + ";DatabaseName=" + dbName;
+	}
 }

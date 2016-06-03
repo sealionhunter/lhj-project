@@ -1,12 +1,12 @@
 /*
- * Created on 2005/09/24 *
+ * Created on 2005/09/24
  */
 package lhj.java.test;
 
 import lhj.java.exception.LhjException;
 
 /**
- * @author sealion Created on 2005/09/24
+ * @author Sealion Hunter
  * 
  */
 public class LhjTestManager {

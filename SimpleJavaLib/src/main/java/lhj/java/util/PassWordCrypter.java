@@ -5,7 +5,6 @@ import java.security.MessageDigest;
 public final class PassWordCrypter {
 
 	/**
-	 * �Í����Z�@�iMD5�j
 	 */
 	private static final String CRYPTOR_MD5 = "MD5";
 
@@ -17,15 +16,11 @@ public final class PassWordCrypter {
 	}
 
 	/**
-	 * MD5�Ńp�X���[�h�̈Í���
 	 * 
 	 * @param password
-	 *            �p�X���[�h
 	 * 
-	 * @return String �Í��������p�X���[�h
-	 * 
+	 * @return String
 	 * @throws Exception
-	 *             ��O�����������ꍇ
 	 */
 	public static String crypt(String password) throws Exception {
 		byte[] pwd = null;
@@ -37,19 +32,15 @@ public final class PassWordCrypter {
 		} else {
 			pwd = new byte[0];
 		}
-		System.out.println(HexTool.byteToHexChars(pwd));
 		return byte2hex(pwd);
 	}
 
 	/**
-	 * MD5�ňÍ��������p�X���[�h�̔F��
 	 * 
 	 * @param password
-	 *            �p�X���[�h
 	 * @param spwd
-	 *            �Í��������p�X���[�h�i������j
 	 * 
-	 * @return boolean true:�p�X���[�hOK false:�G���[
+	 * @return boolean
 	 * 
 	 */
 	public static boolean isCrypt(String password, String spwd) {
@@ -70,12 +61,10 @@ public final class PassWordCrypter {
 	}
 
 	/**
-	 * ��s��������̓]��
 	 * 
 	 * @param b
-	 *            �p�X���[�h�i������j
 	 * 
-	 * @return String �p�X���[�h
+	 * @return String
 	 */
 	private static String byte2hex(byte[] b) {
 		String hs = "";
@@ -84,7 +73,6 @@ public final class PassWordCrypter {
 		for (int i = 0; i < len; i++) {
 			stmp = (Integer.toHexString(b[i] & 0XFF));
 
-			// �]�������p�X���[�h���P�̏ꍇ
 			if (stmp.length() == 1) {
 				stmp = "0".concat(stmp);
 			}

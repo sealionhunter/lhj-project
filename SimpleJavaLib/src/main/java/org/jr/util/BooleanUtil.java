@@ -3,192 +3,205 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ11ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ11æ—¥
  * @author Cherami
  */
 
 /**
- * booleanÀàĞÍÏà¹ØÄÚÈİµÄ²Ù×÷¹¤¾ßÀà£¬Ìá¹©³£¼ûµÄbooleanÀàĞÍ²Ù×÷ĞèÒªµÄ·½·¨¡£
- * @since  0.5
+ * booleanç±»å‹ç›¸å…³å†…å®¹çš„æ“ä½œå·¥å…·ç±»ï¼Œæä¾›å¸¸è§çš„booleanç±»å‹æ“ä½œéœ€è¦çš„æ–¹æ³•ã€‚
+ * 
+ * @since 0.5
  */
 
 public class BooleanUtil {
 
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private BooleanUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private BooleanUtil() {
+	}
 
-  /**
-   * ½«ÕûĞÍµÄÊı×ª»»ÎªbooleanÊı×é£¬Èç¹û¶ÔÓ¦µÄÎ»µÄÖµÎª1Ôò½«Êı×éÖĞµÄ¶ÔÓ¦µÄÔªËØ¸³ÖµÎªtrue£¬·ñÔòÎªfalse¡£
-   * ÀıÈçvalueÎª5£¬ÔòµÃµ½Ò»¸ö³¤¶ÈÎª32£¬Ö»ÓĞ0ºÍ2Á½¸öÔªËØµÄÖµÎªtrueµÄÊı×é¡£
-   * @param value Öµ
-   * @return ×ª»»ºóµÄbooleanÊı×é
-   * @since  0.5
-   */
-  public static boolean[] convertToArray(int value) {
-    int length = 32;
-    boolean[] result = new boolean[length];
-    int mark = 1;
-    for (int i = 0; i < length; i++) {
-      if ( (mark & value) != 0) {
-        result[i] = true;
-      }
-      else {
-        result[i] = false;
-      }
-      mark = mark << 1;
-    }
-    return result;
-  }
+	/**
+	 * å°†æ•´å‹çš„æ•°è½¬æ¢ä¸ºbooleanæ•°ç»„ï¼Œå¦‚æœå¯¹åº”çš„ä½çš„å€¼ä¸º1åˆ™å°†æ•°ç»„ä¸­çš„å¯¹åº”çš„å…ƒç´ èµ‹å€¼ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
+	 * ä¾‹å¦‚valueä¸º5ï¼Œåˆ™å¾—åˆ°ä¸€ä¸ªé•¿åº¦ä¸º32ï¼Œåªæœ‰0å’Œ2ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueçš„æ•°ç»„ã€‚
+	 * 
+	 * @param value
+	 *            å€¼
+	 * @return è½¬æ¢åçš„booleanæ•°ç»„
+	 * @since 0.5
+	 */
+	public static boolean[] convertToArray(int value) {
+		int length = 32;
+		boolean[] result = new boolean[length];
+		int mark = 1;
+		for (int i = 0; i < length; i++) {
+			if ((mark & value) != 0) {
+				result[i] = true;
+			} else {
+				result[i] = false;
+			}
+			mark = mark << 1;
+		}
+		return result;
+	}
 
-  /**
-   * ½«×Ö½ÚĞÍµÄÊı×ª»»ÎªbooleanÊı×é£¬Èç¹û¶ÔÓ¦µÄÎ»µÄÖµÎª1Ôò½«Êı×éÖĞµÄ¶ÔÓ¦µÄÔªËØ¸³ÖµÎªtrue£¬·ñÔòÎªfalse¡£
-   * ÀıÈçvalueÎª5£¬ÔòµÃµ½Ò»¸ö³¤¶ÈÎª8£¬Ö»ÓĞ0ºÍ2Á½¸öÔªËØµÄÖµÎªtrueµÄÊı×é¡£
-   * @param value Öµ
-   * @return ×ª»»ºóµÄbooleanÊı×é
-   * @since  0.5
-   */
-  public static boolean[] convertToArray(byte value) {
-    int length = 8;
-    boolean[] result = new boolean[length];
-    int mark = 1;
-    for (int i = 0; i < length; i++) {
-      if ( (mark & value) != 0) {
-        result[i] = true;
-      }
-      else {
-        result[i] = false;
-      }
-      mark = mark << 1;
-    }
-    return result;
-  }
+	/**
+	 * å°†å­—èŠ‚å‹çš„æ•°è½¬æ¢ä¸ºbooleanæ•°ç»„ï¼Œå¦‚æœå¯¹åº”çš„ä½çš„å€¼ä¸º1åˆ™å°†æ•°ç»„ä¸­çš„å¯¹åº”çš„å…ƒç´ èµ‹å€¼ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
+	 * ä¾‹å¦‚valueä¸º5ï¼Œåˆ™å¾—åˆ°ä¸€ä¸ªé•¿åº¦ä¸º8ï¼Œåªæœ‰0å’Œ2ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueçš„æ•°ç»„ã€‚
+	 * 
+	 * @param value
+	 *            å€¼
+	 * @return è½¬æ¢åçš„booleanæ•°ç»„
+	 * @since 0.5
+	 */
+	public static boolean[] convertToArray(byte value) {
+		int length = 8;
+		boolean[] result = new boolean[length];
+		int mark = 1;
+		for (int i = 0; i < length; i++) {
+			if ((mark & value) != 0) {
+				result[i] = true;
+			} else {
+				result[i] = false;
+			}
+			mark = mark << 1;
+		}
+		return result;
+	}
 
-  /**
-   * ½«³¤ÕûĞÍµÄÊı×ª»»ÎªbooleanÊı×é£¬Èç¹û¶ÔÓ¦µÄÎ»µÄÖµÎª1Ôò½«Êı×éÖĞµÄ¶ÔÓ¦µÄÔªËØ¸³ÖµÎªtrue£¬·ñÔòÎªfalse¡£
-   * ÀıÈçvalueÎª5£¬ÔòµÃµ½Ò»¸ö³¤¶ÈÎª64£¬Ö»ÓĞ0ºÍ2Á½¸öÔªËØµÄÖµÎªtrueµÄÊı×é¡£
-   * @param value Öµ
-   * @return ×ª»»ºóµÄbooleanÊı×é
-   * @since  0.5
-   */
-  public static boolean[] convertToArray(long value) {
-    int length = 64;
-    boolean[] result = new boolean[length];
-    long mark = 1;
-    for (int i = 0; i < length; i++) {
-      if ( (mark & value) != 0) {
-        result[i] = true;
-      }
-      else {
-        result[i] = false;
-      }
-      mark = mark << 1;
-    }
-    return result;
-  }
+	/**
+	 * å°†é•¿æ•´å‹çš„æ•°è½¬æ¢ä¸ºbooleanæ•°ç»„ï¼Œå¦‚æœå¯¹åº”çš„ä½çš„å€¼ä¸º1åˆ™å°†æ•°ç»„ä¸­çš„å¯¹åº”çš„å…ƒç´ èµ‹å€¼ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
+	 * ä¾‹å¦‚valueä¸º5ï¼Œåˆ™å¾—åˆ°ä¸€ä¸ªé•¿åº¦ä¸º64ï¼Œåªæœ‰0å’Œ2ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueçš„æ•°ç»„ã€‚
+	 * 
+	 * @param value
+	 *            å€¼
+	 * @return è½¬æ¢åçš„booleanæ•°ç»„
+	 * @since 0.5
+	 */
+	public static boolean[] convertToArray(long value) {
+		int length = 64;
+		boolean[] result = new boolean[length];
+		long mark = 1;
+		for (int i = 0; i < length; i++) {
+			if ((mark & value) != 0) {
+				result[i] = true;
+			} else {
+				result[i] = false;
+			}
+			mark = mark << 1;
+		}
+		return result;
+	}
 
-  /**
-   * ½«¶Ì½ÚĞÍµÄÊı×ª»»ÎªbooleanÊı×é£¬Èç¹û¶ÔÓ¦µÄÎ»µÄÖµÎª1Ôò½«Êı×éÖĞµÄ¶ÔÓ¦µÄÔªËØ¸³ÖµÎªtrue£¬·ñÔòÎªfalse¡£
-   * ÀıÈçvalueÎª5£¬ÔòµÃµ½Ò»¸ö³¤¶ÈÎª16£¬Ö»ÓĞ0ºÍ2Á½¸öÔªËØµÄÖµÎªtrueµÄÊı×é¡£
-   * @param value Öµ
-   * @return ×ª»»ºóµÄbooleanÊı×é
-   * @since  0.5
-   */
-  public static boolean[] convertToArray(short value) {
-    int length = 16;
-    boolean[] result = new boolean[length];
-    long mark = 1;
-    for (int i = 0; i < length; i++) {
-      if ( (mark & value) != 0) {
-        result[i] = true;
-      }
-      else {
-        result[i] = false;
-      }
-      mark = mark << 1;
-    }
-    return result;
-  }
+	/**
+	 * å°†çŸ­èŠ‚å‹çš„æ•°è½¬æ¢ä¸ºbooleanæ•°ç»„ï¼Œå¦‚æœå¯¹åº”çš„ä½çš„å€¼ä¸º1åˆ™å°†æ•°ç»„ä¸­çš„å¯¹åº”çš„å…ƒç´ èµ‹å€¼ä¸ºtrueï¼Œå¦åˆ™ä¸ºfalseã€‚
+	 * ä¾‹å¦‚valueä¸º5ï¼Œåˆ™å¾—åˆ°ä¸€ä¸ªé•¿åº¦ä¸º16ï¼Œåªæœ‰0å’Œ2ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueçš„æ•°ç»„ã€‚
+	 * 
+	 * @param value
+	 *            å€¼
+	 * @return è½¬æ¢åçš„booleanæ•°ç»„
+	 * @since 0.5
+	 */
+	public static boolean[] convertToArray(short value) {
+		int length = 16;
+		boolean[] result = new boolean[length];
+		long mark = 1;
+		for (int i = 0; i < length; i++) {
+			if ((mark & value) != 0) {
+				result[i] = true;
+			} else {
+				result[i] = false;
+			}
+			mark = mark << 1;
+		}
+		return result;
+	}
 
-  /**
-   * ½«booleanÊı×é×ª»»ÎªÒ»¸öÕûĞÍÖµ£¬Êı×éµÄ³¤¶ÈÈç¹û´óÓÚ32£¬¶àÓàµÄ²¿·Ö±»ºöÂÔ¡£
-   * ÀıÈçÒ»¸ö³¤¶ÈÎª8µÄÊı×é£¬Ö»ÓĞ0ºÍ3Á½¸öÔªËØµÄÖµÎªtrue£¬½«·µ»ØÖµ9¡£
-   * @param values booleanÊı×é
-   * @return ×ª»»ºóµÄÕûĞÍÖµ
-   * @since  0.5
-   */
-  public static int convertToInt(boolean[] values) {
-    int length = 8;
-    int value = 0;
-    int mark = 1;
-    for (int i = 0; i < length; i++) {
-      if (values[i] == true) {
-        value = value + mark;
-      }
-      mark = mark << 1;
-    }
-    return value;
-  }
+	/**
+	 * å°†booleanæ•°ç»„è½¬æ¢ä¸ºä¸€ä¸ªæ•´å‹å€¼ï¼Œæ•°ç»„çš„é•¿åº¦å¦‚æœå¤§äº32ï¼Œå¤šä½™çš„éƒ¨åˆ†è¢«å¿½ç•¥ã€‚
+	 * ä¾‹å¦‚ä¸€ä¸ªé•¿åº¦ä¸º8çš„æ•°ç»„ï¼Œåªæœ‰0å’Œ3ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueï¼Œå°†è¿”å›å€¼9ã€‚
+	 * 
+	 * @param values
+	 *            booleanæ•°ç»„
+	 * @return è½¬æ¢åçš„æ•´å‹å€¼
+	 * @since 0.5
+	 */
+	public static int convertToInt(boolean[] values) {
+		int length = 8;
+		int value = 0;
+		int mark = 1;
+		for (int i = 0; i < length; i++) {
+			if (values[i] == true) {
+				value = value + mark;
+			}
+			mark = mark << 1;
+		}
+		return value;
+	}
 
-  /**
-   * ½«booleanÊı×é×ª»»ÎªÒ»¸ö×Ö½ÚĞÍÖµ£¬Êı×éµÄ³¤¶ÈÈç¹û´óÓÚ8£¬¶àÓàµÄ²¿·Ö±»ºöÂÔ¡£
-   * ÀıÈçÒ»¸ö³¤¶ÈÎª8µÄÊı×é£¬Ö»ÓĞ0ºÍ3Á½¸öÔªËØµÄÖµÎªtrue£¬½«·µ»ØÖµ9¡£
-   * @param values booleanÊı×é
-   * @return ×ª»»ºóµÄ×Ö½ÚĞÍÖµ
-   * @since  0.5
-   */
-  public static byte convertToByte(boolean[] values) {
-    int length = 8;
-    byte value = 0;
-    byte mark = 1;
-    for (int i = 0; i < length; i++) {
-      if (values[i] == true) {
-        value = (byte) (value + mark);
-      }
-      mark = (byte) (mark << 1);
-    }
-    return value;
-  }
+	/**
+	 * å°†booleanæ•°ç»„è½¬æ¢ä¸ºä¸€ä¸ªå­—èŠ‚å‹å€¼ï¼Œæ•°ç»„çš„é•¿åº¦å¦‚æœå¤§äº8ï¼Œå¤šä½™çš„éƒ¨åˆ†è¢«å¿½ç•¥ã€‚
+	 * ä¾‹å¦‚ä¸€ä¸ªé•¿åº¦ä¸º8çš„æ•°ç»„ï¼Œåªæœ‰0å’Œ3ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueï¼Œå°†è¿”å›å€¼9ã€‚
+	 * 
+	 * @param values
+	 *            booleanæ•°ç»„
+	 * @return è½¬æ¢åçš„å­—èŠ‚å‹å€¼
+	 * @since 0.5
+	 */
+	public static byte convertToByte(boolean[] values) {
+		int length = 8;
+		byte value = 0;
+		byte mark = 1;
+		for (int i = 0; i < length; i++) {
+			if (values[i] == true) {
+				value = (byte) (value + mark);
+			}
+			mark = (byte) (mark << 1);
+		}
+		return value;
+	}
 
-  /**
-   * ½«booleanÊı×é×ª»»ÎªÒ»¸ö¶ÌÕûĞÍÖµ£¬Êı×éµÄ³¤¶ÈÈç¹û´óÓÚ16£¬¶àÓàµÄ²¿·Ö±»ºöÂÔ¡£
-   * ÀıÈçÒ»¸ö³¤¶ÈÎª8µÄÊı×é£¬Ö»ÓĞ0ºÍ3Á½¸öÔªËØµÄÖµÎªtrue£¬½«·µ»ØÖµ9¡£
-   * @param values booleanÊı×é
-   * @return ×ª»»ºóµÄ¶ÌÕûĞÍÖµ
-   * @since  0.5
-   */
-  public static short convertToShort(boolean[] values) {
-    int length = 16;
-    short value = 0;
-    short mark = 1;
-    for (int i = 0; i < length; i++) {
-      if (values[i] == true) {
-        value = (short) (value + mark);
-      }
-      mark = (short) (mark << 1);
-    }
-    return value;
-  }
+	/**
+	 * å°†booleanæ•°ç»„è½¬æ¢ä¸ºä¸€ä¸ªçŸ­æ•´å‹å€¼ï¼Œæ•°ç»„çš„é•¿åº¦å¦‚æœå¤§äº16ï¼Œå¤šä½™çš„éƒ¨åˆ†è¢«å¿½ç•¥ã€‚
+	 * ä¾‹å¦‚ä¸€ä¸ªé•¿åº¦ä¸º8çš„æ•°ç»„ï¼Œåªæœ‰0å’Œ3ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueï¼Œå°†è¿”å›å€¼9ã€‚
+	 * 
+	 * @param values
+	 *            booleanæ•°ç»„
+	 * @return è½¬æ¢åçš„çŸ­æ•´å‹å€¼
+	 * @since 0.5
+	 */
+	public static short convertToShort(boolean[] values) {
+		int length = 16;
+		short value = 0;
+		short mark = 1;
+		for (int i = 0; i < length; i++) {
+			if (values[i] == true) {
+				value = (short) (value + mark);
+			}
+			mark = (short) (mark << 1);
+		}
+		return value;
+	}
 
-  /**
-   * ½«booleanÊı×é×ª»»ÎªÒ»¸ö³¤ÕûĞÍÖµ£¬Êı×éµÄ³¤¶ÈÈç¹û´óÓÚ64£¬¶àÓàµÄ²¿·Ö±»ºöÂÔ¡£
-   * ÀıÈçÒ»¸ö³¤¶ÈÎª8µÄÊı×é£¬Ö»ÓĞ0ºÍ3Á½¸öÔªËØµÄÖµÎªtrue£¬½«·µ»ØÖµ9¡£
-   * @param values booleanÊı×é
-   * @return ×ª»»ºóµÄ³¤ÕûĞÍÖµ
-   * @since  0.5
-   */
-  public static long convertToLong(boolean[] values) {
-    int length = 64;
-    long value = 0;
-    long mark = 1;
-    for (int i = 0; i < length; i++) {
-      if (values[i] == true) {
-        value = value + mark;
-      }
-      mark = mark << 1;
-    }
-    return value;
-  }
+	/**
+	 * å°†booleanæ•°ç»„è½¬æ¢ä¸ºä¸€ä¸ªé•¿æ•´å‹å€¼ï¼Œæ•°ç»„çš„é•¿åº¦å¦‚æœå¤§äº64ï¼Œå¤šä½™çš„éƒ¨åˆ†è¢«å¿½ç•¥ã€‚
+	 * ä¾‹å¦‚ä¸€ä¸ªé•¿åº¦ä¸º8çš„æ•°ç»„ï¼Œåªæœ‰0å’Œ3ä¸¤ä¸ªå…ƒç´ çš„å€¼ä¸ºtrueï¼Œå°†è¿”å›å€¼9ã€‚
+	 * 
+	 * @param values
+	 *            booleanæ•°ç»„
+	 * @return è½¬æ¢åçš„é•¿æ•´å‹å€¼
+	 * @since 0.5
+	 */
+	public static long convertToLong(boolean[] values) {
+		int length = 64;
+		long value = 0;
+		long mark = 1;
+		for (int i = 0; i < length; i++) {
+			if (values[i] == true) {
+				value = value + mark;
+			}
+			mark = mark << 1;
+		}
+		return value;
+	}
 }

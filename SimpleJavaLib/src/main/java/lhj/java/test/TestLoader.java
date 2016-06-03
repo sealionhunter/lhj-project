@@ -18,21 +18,18 @@ public class TestLoader extends SecureClassLoader {
 		TestLoader loader = new TestLoader();
 		InputStream in = null;
 		try {
-			in = new FileInputStream(
-					"target/classes/lhj/java/test/Test.class");
+			in = new FileInputStream("target/classes/lhj/java/test/ProxyTest.class");
 			byte[] cl = new byte[0];
 			byte[] bt = new byte[10240];
 			int len;
 			while ((len = in.read(bt)) != -1) {
 				byte[] temp = new byte[cl.length + len];
 				System.arraycopy(cl, 0, temp, 0, cl.length);
-				System.arraycopy(bt, 0, temp, cl.length == 0 ? 0
-						: cl.length - 1, len);
+				System.arraycopy(bt, 0, temp, cl.length == 0 ? 0 : cl.length - 1, len);
 				cl = temp;
 			}
-			Class<?> test = loader.defineClass("lhj.java.test.Test", cl, 0,
-					cl.length);
-			Method print = test.getMethod("print", new Class[] {});
+			Class<?> test = loader.defineClass("lhj.java.test.ProxyTest", cl, 0, cl.length);
+			Method print = test.getMethod("proxyTest", new Class[] {});
 			print.invoke(test.newInstance(), new Object[] {});
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

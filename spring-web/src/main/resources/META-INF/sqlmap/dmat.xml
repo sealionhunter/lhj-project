@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="dmat">
+    <select id="dmat.getDetails" resultClass="com.ustcsoft.generalsolution.dmat.webui.dmat.DmatDetail" parameterClass="java.util.Date">
+        SELECT
+            d.dmatId,
+            d.startDate,
+            d.duration,
+            d.userId,
+            d.guestDeptId,
+            gd.name as guestDeptName,
+            d.projectId,
+            p.name as projectName,
+            d.categoryId,
+            c.name as categoryName,
+            d.subcategoryId,
+            sc.name as subcategoryName,
+            d.details,
+            d.updateUserId,
+            d.updateDate,
+            u.name as updateUserName
+        FROM
+            dmatDetail d LEFT JOIN guestDeptInfo gd ON gd.guestDeptId = d.guestDeptId
+            LEFT JOIN projectInfo p ON p.projectId = d.projectId
+            LEFT JOIN category c ON c.categoryId = d.categoryId
+            LEFT JOIN subCategory sc ON sc.subcategoryId = d.subcategoryId
+            LEFT JOIN userInfo u ON u.userId = d.updateUserId
+        WHERE
+            d.startDate = #startDate#
+    </select>
+    
+    <insert id="dmat.addDetail" parameterClass="com.ustcsoft.generalsolution.dmat.webui.dmat.DmatDetail">
+        INSERT INTO dmatDetail(startDate,duration,userId,guestDeptId,projectId,categoryId,subcategoryId,details,updateUserId,updateDate)
+        VALUES (#startDate#,#duration#,#userId#,#guestDeptId#,#projectId#,#categoryId#,#subcategoryId#,#details#,#updateUserId#,#updateDate#)
+    </insert>
+    
+    <delete id="dmat.deleteDetail" parameterClass="java.lang.Long">
+        DELETE FROM dmatDetail WHERE dmatId = #dmatId#
+    </delete>
+</sqlMap>

@@ -1,12 +1,11 @@
 /*
  * Created on 2005-9-14
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package lhj.java.test;
 
 import java.io.BufferedReader;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
@@ -34,9 +33,7 @@ import org.apache.commons.lang.StringUtils;
 import com.sun.org.apache.bcel.internal.util.ClassLoader;
 
 /**
- * @author hjliang
- * 
- * 
+ * @author Sealion Hunter
  */
 @SuppressWarnings("restriction")
 public class JavaMain {
@@ -100,7 +97,7 @@ public class JavaMain {
 		// ZipOutputStream out =
 		// new ZipOutputStream(
 		// new BufferedOutputStream(csum, BUFFER));
-		//    	
+		//
 		// ZipEntry entry = new ZipEntry(new String(name.getBytes("UTF-8"),
 		// "UTF-8"));
 		// out.putNextEntry(entry);
@@ -184,10 +181,8 @@ public class JavaMain {
 		String home = prop.getProperty("java.home");
 		if (home.endsWith("jre")) {
 			home = home.substring(0, home.indexOf("jre") - 1);
-			File java = new File(home + File.separator + "bin" + File.separator
-					+ "java.exe");
-			File javac = new File(home + File.separator + "bin"
-					+ File.separator + "javac.exe");
+			File java = new File(home + File.separator + "bin" + File.separator + "java.exe");
+			File javac = new File(home + File.separator + "bin" + File.separator + "javac.exe");
 			if (javac.exists() && java.exists()) {
 				return home;
 			}
@@ -233,13 +228,9 @@ public class JavaMain {
 
 	public void javac(String fileName) {
 		try {
-			Process javac = Runtime
-					.getRuntime()
-					.exec(
-							getJavaToolPath()
-									+ File.separator
-									+ "javac.exe -d ./ E:\\hjliang\\src\\lhj\\util\\*.java",
-							new String[] {}, new File("E:\\hjliang\\"));
+			Process javac = Runtime.getRuntime().exec(
+					getJavaToolPath() + File.separator + "javac.exe -d ./ E:\\hjliang\\src\\lhj\\util\\*.java",
+					new String[] {}, new File("E:\\hjliang\\"));
 			InputStream out = javac.getErrorStream();
 			byte[] msg = new byte[1024];
 			int length;
@@ -270,17 +261,12 @@ public class JavaMain {
 		j.setName("in");
 
 		System.out.println("��this����?".getBytes().length);
-		System.out.println(rightPad("����̓e�X�g�ł��I", 30, '!', "UTF-8")
-				+ "test");
-		System.out.println(rightPad("this is a tes�I", 30, '!', "ISO-8859-1")
-				+ "test");
-		System.out.println(rightPad("����̓e�X�g�ł��I", 30, "Shift-jis")
-				+ "test");
+		System.out.println(rightPad("����̓e�X�g�ł��I", 30, '!', "UTF-8") + "test");
+		System.out.println(rightPad("this is a tes�I", 30, '!', "ISO-8859-1") + "test");
+		System.out.println(rightPad("����̓e�X�g�ł��I", 30, "Shift-jis") + "test");
 		System.out.println(rightPad("this is a test!", 30, "UTF-8") + "test");
-		System.out
-				.println(StringUtils.rightPad("����̓e�X�g�ł��I", 30) + "test");
-		System.out
-				.println(StringUtils.rightPad("this is a test!", 30) + "test");
+		System.out.println(StringUtils.rightPad("����̓e�X�g�ł��I", 30) + "test");
+		System.out.println(StringUtils.rightPad("this is a test!", 30) + "test");
 	}
 
 	String priStr = "private String ";
@@ -307,8 +293,7 @@ public class JavaMain {
 
 	private static final String HANKAKU_SJIS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~���������������������������������������������������������������";
 
-	public static String rightPad(String source, int length, char padChar,
-			String charset) {
+	public static String rightPad(String source, int length, char padChar, String charset) {
 		try {
 			source = new String(source.getBytes("SJIS"), "SJIS");
 		} catch (UnsupportedEncodingException ex) {
@@ -367,8 +352,7 @@ public class JavaMain {
 
 	public static void testFile() {
 		try {
-			File f = new File(
-					"D:\\Sealion\\Project\\Test\\000000000001_image.jpg");
+			File f = new File("D:\\Sealion\\Project\\Test\\000000000001_image.jpg");
 			System.out.println(f.exists());
 			if (f.exists() && f.isFile()) {
 				FileInputStream in = new FileInputStream(f);
@@ -393,16 +377,14 @@ public class JavaMain {
 	}
 
 	public void printMovie() throws Exception {
-		OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(
-				"C:\\Sealion\\MovieList.txt"), "UTF-8");
+		OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream("C:\\Sealion\\MovieList.txt"), "UTF-8");
 		int index = 1;
 		printMovieName(new File("G:\\Movie"), out, index);
 		printMovieName(new File("G:\\movie 1"), out, index);
 		out.close();
 	}
 
-	private void printMovieName(File file, OutputStreamWriter out, int index)
-			throws Exception {
+	private void printMovieName(File file, OutputStreamWriter out, int index) throws Exception {
 		out.append(file.getName() + "\n");
 
 		FileFilter filter = new FileFilter() {
@@ -460,8 +442,7 @@ public class JavaMain {
 	public void getGB2312() throws Exception {
 		String fileName = "G:\\Learn\\Unihan.txt";
 		BufferedReader in = new BufferedReader(new FileReader(fileName));
-		BufferedWriter out = new BufferedWriter(new FileWriter(
-				"C:\\Sealion\\Projects\\GB7.dat"));
+		BufferedWriter out = new BufferedWriter(new FileWriter("C:\\Sealion\\Projects\\GB7.dat"));
 		String buff = in.readLine();
 		int count = 0;
 		while (buff != null && buff.length() > 0) {

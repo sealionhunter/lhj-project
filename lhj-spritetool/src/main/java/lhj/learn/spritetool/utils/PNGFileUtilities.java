@@ -74,7 +74,7 @@ public class PNGFileUtilities {
                     bufferedImage.getWidth(), bufferedImage.getHeight(),
                     imgRGB, 0, bufferedImage.getWidth());
         }
-        writeImageLocal(outputFile, sprite);
+        PNGFileUtilities.writeImageLocal(outputFile, sprite);
     }
 
     /**
@@ -94,7 +94,7 @@ public class PNGFileUtilities {
         return new SizeBean();
     }
 
-	public static void writeImageLocal(final File file, final BufferedImage image)
+    public static void writeImageLocal(final File file, final BufferedImage image)
             throws Exception {
 
         if (file == null) {

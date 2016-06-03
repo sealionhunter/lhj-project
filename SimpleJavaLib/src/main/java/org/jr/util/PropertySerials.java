@@ -3,121 +3,133 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê2ÔÂ12ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´2æœˆ12æ—¥
  * @author Cherami
  */
 
 import java.util.regex.*;
 
 /**
- * ´ËÀàÊÇÊôĞÔĞòÁĞµÄ³éÏó¡£
- * ËùÎ½µÄÊôĞÔĞòÁĞÊÇÖ¸ÒÔÒ»¶¨µÄ·Ö¸ô·û·Ö¸ôµÄÒ»¸öÊôĞÔ¼¯ºÏ×Ö·û´®¡£
- * Õâ¸öÀàºÍ±¾°üÖĞµÄÁíÒ»¸öÀàµÄÒ»¸ö·½·¨¾ßÓĞÀàËÆµÄ×óÓÒ£¬µ«ÊÇÕâ¸öÀàÒòÎª¿ÉÒÔÊ¹ÓÃ¹æÔò±í´ïÊ½£¬
- * Òò´Ë¹¦ÄÜÒªÇ¿´óÒ»Ğ©¡£
+ * æ­¤ç±»æ˜¯å±æ€§åºåˆ—çš„æŠ½è±¡ã€‚ æ‰€è°“çš„å±æ€§åºåˆ—æ˜¯æŒ‡ä»¥ä¸€å®šçš„åˆ†éš”ç¬¦åˆ†éš”çš„ä¸€ä¸ªå±æ€§é›†åˆå­—ç¬¦ä¸²ã€‚
+ * è¿™ä¸ªç±»å’Œæœ¬åŒ…ä¸­çš„å¦ä¸€ä¸ªç±»çš„ä¸€ä¸ªæ–¹æ³•å…·æœ‰ç±»ä¼¼çš„å·¦å³ï¼Œä½†æ˜¯è¿™ä¸ªç±»å› ä¸ºå¯ä»¥ä½¿ç”¨è§„åˆ™è¡¨è¾¾å¼ï¼Œ å› æ­¤åŠŸèƒ½è¦å¼ºå¤§ä¸€äº›ã€‚
+ * 
  * @see StringUtil#split(String source, String delim) split
- * @since  0.1
+ * @since 0.1
  */
 
 public class PropertySerials {
-  private char splitChar = '\u0000';
-  protected String sourceString;
-  protected String result[];
-  protected String splitPattern;
-  protected Pattern pattern;
-  /**
-   * ¹¹Ôì·½·¨£¬¸ù¾İ×Ö·û´®Éú³ÉÒ»¸öÊôĞÔĞòÁĞÀàÊµÀı¡£
-   * ·Ö¸ô·ûÊ¹ÓÃÈ±Ê¡µÄ'\u0000'¡£
-   * @param source ÊôĞÔĞòÁĞµÄÔ­Ê¼×Ö·û´®
-   * @since  0.1
-   */
-  public PropertySerials(String source) {
-    splitPattern = new String("[" + splitChar + "]{1}");
-    pattern = Pattern.compile(splitPattern);
-    sourceString = source;
-  }
+	private char splitChar = '\u0000';
+	protected String sourceString;
+	protected String result[];
+	protected String splitPattern;
+	protected Pattern pattern;
 
-  /**
-   * ¹¹Ôì·½·¨£¬¸ù¾İ×Ö·û´®ºÍ·Ö¸ô·ûÉú³ÉÒ»¸öÊôĞÔĞòÁĞÀàÊµÀı¡£
-   * @param source ÊôĞÔĞòÁĞµÄÔ­Ê¼×Ö·û´®
-   * @param splitChar ·Ö¸ô·û
-   * @since  0.1
-   */
-  public PropertySerials(String source, char splitChar) {
-    this.splitChar = splitChar;
-    splitPattern = new String("[" + splitChar + "]{1}");
-    pattern = Pattern.compile(splitPattern);
-    sourceString = source;
-  }
+	/**
+	 * æ„é€ æ–¹æ³•ï¼Œæ ¹æ®å­—ç¬¦ä¸²ç”Ÿæˆä¸€ä¸ªå±æ€§åºåˆ—ç±»å®ä¾‹ã€‚ åˆ†éš”ç¬¦ä½¿ç”¨ç¼ºçœçš„'\u0000'ã€‚
+	 * 
+	 * @param source
+	 *            å±æ€§åºåˆ—çš„åŸå§‹å­—ç¬¦ä¸²
+	 * @since 0.1
+	 */
+	public PropertySerials(String source) {
+		splitPattern = new String("[" + splitChar + "]{1}");
+		pattern = Pattern.compile(splitPattern);
+		sourceString = source;
+	}
 
-  /**
-   * ½«ÊôĞÔĞòÁĞ×Ö·û´®·Ö½âµÃµ½ÊôĞÔÊı×é¡£
-   * @return ·Ö½âºóµÄÊôĞÔÊı×é¡£Èç¹ûÔ­ÊôĞÔĞòÁĞ×Ö·û´®ÎªnullÔò·µ»Ønull¡£
-   * @since  0.1
-   */
-  public String[] getSerials() {
-    if (sourceString == null) {
-      return null;
-    }
-    result = pattern.split(sourceString);
-    return result;
-  }
+	/**
+	 * æ„é€ æ–¹æ³•ï¼Œæ ¹æ®å­—ç¬¦ä¸²å’Œåˆ†éš”ç¬¦ç”Ÿæˆä¸€ä¸ªå±æ€§åºåˆ—ç±»å®ä¾‹ã€‚
+	 * 
+	 * @param source
+	 *            å±æ€§åºåˆ—çš„åŸå§‹å­—ç¬¦ä¸²
+	 * @param splitChar
+	 *            åˆ†éš”ç¬¦
+	 * @since 0.1
+	 */
+	public PropertySerials(String source, char splitChar) {
+		this.splitChar = splitChar;
+		splitPattern = new String("[" + splitChar + "]{1}");
+		pattern = Pattern.compile(splitPattern);
+		sourceString = source;
+	}
 
-  /**
-   * ÉèÖÃ·Ö¸ô·û¡£
-   * @param split ·Ö¸ô·û
-   * @since  0.1
-   */
-  public void setSplitChar(char split) {
-    splitChar = split;
-    splitPattern = new String("[" + splitChar + "]{1}");
-    pattern = Pattern.compile(splitPattern);
-  }
+	/**
+	 * å°†å±æ€§åºåˆ—å­—ç¬¦ä¸²åˆ†è§£å¾—åˆ°å±æ€§æ•°ç»„ã€‚
+	 * 
+	 * @return åˆ†è§£åçš„å±æ€§æ•°ç»„ã€‚å¦‚æœåŸå±æ€§åºåˆ—å­—ç¬¦ä¸²ä¸ºnullåˆ™è¿”å›nullã€‚
+	 * @since 0.1
+	 */
+	public String[] getSerials() {
+		if (sourceString == null) {
+			return null;
+		}
+		result = pattern.split(sourceString);
+		return result;
+	}
 
-  /**
-   * µÃµ½Ê¹ÓÃµÄ·Ö¸ô·û¡£
-   * @return Ê¹ÓÃµÄ·Ö¸ô·û
-   * @deprecated  ±¾·½·¨²»ÔŞ³ÉÊ¹ÓÃ£¬ÒòÎªÔÚÒ»°ãÇé¿öÏÂÍÆ¼öÊ¹ÓÃ¹æÔò±í´ïÊ½Ä£Ê½¶ø²»ÊÇµ¥¶ÀµÄ×Ö·û·Ö¸ô·û¡£
-   *              ²¢ÇÒÔÚÖ±½ÓÊ¹ÓÃ¹æÔò±í´ïÊ½Ä£Ê½Éú³ÉÀàÊµÀı»òÕßµ÷ÓÃsetSplitPattern·½·¨ºó±¾·½·¨µÄ·µ»ØÖµÃ»ÓĞÒâÒå¡£
-   * @since  0.1
-   */
-  public char getSplitChar() {
-    return splitChar;
-  }
+	/**
+	 * è®¾ç½®åˆ†éš”ç¬¦ã€‚
+	 * 
+	 * @param split
+	 *            åˆ†éš”ç¬¦
+	 * @since 0.1
+	 */
+	public void setSplitChar(char split) {
+		splitChar = split;
+		splitPattern = new String("[" + splitChar + "]{1}");
+		pattern = Pattern.compile(splitPattern);
+	}
 
-  /**
-   * ÉèÖÃ·Ö¸ôÄ£Ê½¡£
-   * @param splitPattern ·Ö¸ôÄ£Ê½£¬¾ßÌåµÄÄ£Ê½¹æÔòÇë²Î¿¼java.util.regex.PatternÀàµÄËµÃ÷¡£
-   * @since  0.1
-   */
-  public void setSplitPattern(String splitPattern) {
-    if ( (splitPattern != null) && (!splitPattern.equals(this.splitPattern))) {
-      this.splitPattern = splitPattern;
-      pattern = Pattern.compile(splitPattern);
-    }
-  }
+	/**
+	 * å¾—åˆ°ä½¿ç”¨çš„åˆ†éš”ç¬¦ã€‚
+	 * 
+	 * @return ä½¿ç”¨çš„åˆ†éš”ç¬¦
+	 * @deprecated æœ¬æ–¹æ³•ä¸èµæˆä½¿ç”¨ï¼Œå› ä¸ºåœ¨ä¸€èˆ¬æƒ…å†µä¸‹æ¨èä½¿ç”¨è§„åˆ™è¡¨è¾¾å¼æ¨¡å¼è€Œä¸æ˜¯å•ç‹¬çš„å­—ç¬¦åˆ†éš”ç¬¦ã€‚
+	 *             å¹¶ä¸”åœ¨ç›´æ¥ä½¿ç”¨è§„åˆ™è¡¨è¾¾å¼æ¨¡å¼ç”Ÿæˆç±»å®ä¾‹æˆ–è€…è°ƒç”¨setSplitPatternæ–¹æ³•åæœ¬æ–¹æ³•çš„è¿”å›å€¼æ²¡æœ‰æ„ä¹‰ã€‚
+	 * @since 0.1
+	 */
+	public char getSplitChar() {
+		return splitChar;
+	}
 
-  /**
-   * µÃµ½Ê¹ÓÃµÄ·Ö¸ôÄ£Ê½¡£
-   * @return Ê¹ÓÃµÄ·Ö¸ôÄ£Ê½
-   * @since  0.1
-   */
-  public String getSplitPattern() {
-    return splitPattern;
-  }
+	/**
+	 * è®¾ç½®åˆ†éš”æ¨¡å¼ã€‚
+	 * 
+	 * @param splitPattern
+	 *            åˆ†éš”æ¨¡å¼ï¼Œå…·ä½“çš„æ¨¡å¼è§„åˆ™è¯·å‚è€ƒjava.util.regex.Patternç±»çš„è¯´æ˜ã€‚
+	 * @since 0.1
+	 */
+	public void setSplitPattern(String splitPattern) {
+		if ((splitPattern != null) && (!splitPattern.equals(this.splitPattern))) {
+			this.splitPattern = splitPattern;
+			pattern = Pattern.compile(splitPattern);
+		}
+	}
 
-  /**
-   * ·µ»ØÀàÊµÀıµÄ×Ö·û´®±íÊ¾¡£
-   * @return ÀàÊµÀıµÄ×Ö·û´®±íÊ¾
-   * @since  0.1
-   */
-  public String toString() {
-    StringBuffer temp = new StringBuffer();
-    for (int i = 0; i < result.length - 1; i++) {
-      temp.append(result[i]);
-      temp.append(splitChar);
-    }
-    temp.append(result[result.length - 1]);
-    return temp.toString();
-  }
+	/**
+	 * å¾—åˆ°ä½¿ç”¨çš„åˆ†éš”æ¨¡å¼ã€‚
+	 * 
+	 * @return ä½¿ç”¨çš„åˆ†éš”æ¨¡å¼
+	 * @since 0.1
+	 */
+	public String getSplitPattern() {
+		return splitPattern;
+	}
+
+	/**
+	 * è¿”å›ç±»å®ä¾‹çš„å­—ç¬¦ä¸²è¡¨ç¤ºã€‚
+	 * 
+	 * @return ç±»å®ä¾‹çš„å­—ç¬¦ä¸²è¡¨ç¤º
+	 * @since 0.1
+	 */
+	public String toString() {
+		StringBuffer temp = new StringBuffer();
+		for (int i = 0; i < result.length - 1; i++) {
+			temp.append(result[i]);
+			temp.append(splitChar);
+		}
+		temp.append(result[result.length - 1]);
+		return temp.toString();
+	}
 
 }

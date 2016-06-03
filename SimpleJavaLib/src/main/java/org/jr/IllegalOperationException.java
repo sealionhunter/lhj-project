@@ -2,35 +2,41 @@ package org.jr;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ26ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ26æ—¥
  * @author Cherami
  */
 
 /**
- * ·Ç·¨²Ù×÷Òì³£¡£
- * Ò»°ãÔÚĞèÒªºÜ¶à²ÎÊıµ«ÊÇÓĞĞ©ĞèÒªµÄ²ÎÊıµÄÖµÃ»ÓĞÉèÖÃÊ±¾Íµ÷ÓÃĞèÒªÄÇĞ©²ÎÊıµÄ·½·¨Ê±Å×³ö´ËÒì³£¡£
- * ÕâÊÇÒ»¸öÔËĞĞÊ±Òì³££¬²»ÓÃ½øĞĞ²¶»ñ¡£
- * @since  0.5
+ * éæ³•æ“ä½œå¼‚å¸¸ã€‚
+ * ä¸€èˆ¬åœ¨éœ€è¦å¾ˆå¤šå‚æ•°ä½†æ˜¯æœ‰äº›éœ€è¦çš„å‚æ•°çš„å€¼æ²¡æœ‰è®¾ç½®æ—¶å°±è°ƒç”¨éœ€è¦é‚£äº›å‚æ•°çš„æ–¹æ³•æ—¶æŠ›å‡ºæ­¤å¼‚å¸¸ã€‚ 
+ * è¿™æ˜¯ä¸€ä¸ªè¿è¡Œæ—¶å¼‚å¸¸ï¼Œä¸ç”¨è¿›è¡Œæ•è·ã€‚
+ * 
+ * @since 0.5
  */
 
 public class IllegalOperationException extends RuntimeException {
-  /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2051771842731814909L;
-/**
-   * ¹¹ÔìÒ»¸öIllegalOperationException¡£
-   * @since  0.5
-   */
-  public IllegalOperationException() {
-    super("You can not invoke the method in current status!");
-  }
-  /**
-   * ÒÔÖ¸¶¨µÄĞÅÏ¢¹¹ÔìÒ»¸öIllegalOperationException¡£
-   * @param message ´íÎóĞÅÏ¢¡£
-   * @since  0.5
-   */
-  public IllegalOperationException(String message) {
-    super(message);
-  }
+
+	/**
+	 * æ„é€ ä¸€ä¸ªIllegalOperationExceptionã€‚
+	 * 
+	 * @since 0.5
+	 */
+	public IllegalOperationException() {
+		super("You can not invoke the method in current status!");
+	}
+
+	/**
+	 * ä»¥æŒ‡å®šçš„ä¿¡æ¯æ„é€ ä¸€ä¸ªIllegalOperationExceptionã€‚
+	 * 
+	 * @param message
+	 *            é”™è¯¯ä¿¡æ¯ã€‚
+	 * @since 0.5
+	 */
+	public IllegalOperationException(String message) {
+		super(message);
+	}
 }

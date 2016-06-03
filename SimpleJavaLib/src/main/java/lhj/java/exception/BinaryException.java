@@ -7,7 +7,7 @@ package lhj.java.exception;
 /**
  * Binary Exception
  * 
- * @author hjliang
+ * @author Sealion Hunter
  * 
  */
 public class BinaryException extends RuntimeException {

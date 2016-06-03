@@ -3,41 +3,40 @@ package org.jr.awt;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ5ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ5æ—¥
  * @author Cherami
  */
-
 import java.awt.*;
 
 /**
- * AWT¹¤¾ßÀà£¬Ìá¹©³£¼ûµÄAWTÏà¹ØµÄ¹¤¾ß·½·¨¡£
- * @since  0.5
+ * AWTå·¥å…·ç±»ï¼Œæä¾›å¸¸è§çš„AWTç›¸å…³çš„å·¥å…·æ–¹æ³•ã€‚
+ * 
+ * @since 0.5
  */
-
 public class AWTUtil {
 
-  /**
-   * ´ÓHTML¸ñÊ½µÄ×Ö·û´®µÃµ½Color¶ÔÏó¡£
-   * ÆäÇ°µ¼'#'·ûºÅÊÇ¿ÉÑ¡µÄ¡£
-   * @param color ×Ö·û´®¸ñÊ½µÄÑÕÉ«Öµ
-   * @return ¶ÔÓ¦µÄÑÕÉ«£¬×Ö·û´®²»ÊÇºÏ·¨¸ñÊ½Ê±·µ»Ønull
-   * @since  0.5
-   */
-  public static Color getColor(String color) {
-    if (color.charAt(0) == '#') {
-      color = color.substring(1);
-    }
-    if (color.length() != 6) {
-      return null;
-    }
-    try {
-      int r = Integer.parseInt(color.substring(0, 2), 16);
-      int g = Integer.parseInt(color.substring(2, 4), 16);
-      int b = Integer.parseInt(color.substring(4), 16);
-      return new Color(r, g, b);
-    }
-    catch (NumberFormatException e) {
-      return null;
-    }
-  }
+	/**
+	 * ä»HTMLæ ¼å¼çš„å­—ç¬¦ä¸²å¾—åˆ°Colorå¯¹è±¡ã€‚ å…¶å‰å¯¼'#'ç¬¦å·æ˜¯å¯é€‰çš„ã€‚
+	 * 
+	 * @param color
+	 *            å­—ç¬¦ä¸²æ ¼å¼çš„é¢œè‰²å€¼
+	 * @return å¯¹åº”çš„é¢œè‰²ï¼Œå­—ç¬¦ä¸²ä¸æ˜¯åˆæ³•æ ¼å¼æ—¶è¿”å›null
+	 * @since 0.5
+	 */
+	public static Color getColor(String color) {
+		if (color.charAt(0) == '#') {
+			color = color.substring(1);
+		}
+		if (color.length() != 6) {
+			return null;
+		}
+		try {
+			int r = Integer.parseInt(color.substring(0, 2), 16);
+			int g = Integer.parseInt(color.substring(2, 4), 16);
+			int b = Integer.parseInt(color.substring(4), 16);
+			return new Color(r, g, b);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
 }

@@ -3,7 +3,7 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê2ÔÂ19ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´2æœˆ19æ—¥
  * @author Cherami
  */
 
@@ -11,264 +11,286 @@ import java.io.*;
 import java.util.*;
 
 /**
- * ´ËÀàÖĞ·â×°Ò»Ğ©³£ÓÃµÄ×Ö·û´®²Ù×÷¡£
- * ËùÓĞ·½·¨¶¼ÊÇ¾²Ì¬·½·¨£¬²»ĞèÒªÉú³É´ËÀàµÄÊµÀı£¬
- * Îª±ÜÃâÉú³É´ËÀàµÄÊµÀı£¬¹¹Ôì·½·¨±»ÉêÃ÷ÎªprivateÀàĞÍµÄ¡£
- * @since  0.1
+ * æ­¤ç±»ä¸­å°è£…ä¸€äº›å¸¸ç”¨çš„å­—ç¬¦ä¸²æ“ä½œã€‚ æ‰€æœ‰æ–¹æ³•éƒ½æ˜¯é™æ€æ–¹æ³•ï¼Œä¸éœ€è¦ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œ ä¸ºé¿å…ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œæ„é€ æ–¹æ³•è¢«ç”³æ˜ä¸ºprivateç±»å‹çš„ã€‚
+ * 
+ * @since 0.1
  */
 public class StringUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private StringUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private StringUtil() {
+	}
 
-  /**
-   * ´Ë·½·¨½«¸ø³öµÄ×Ö·û´®sourceÊ¹ÓÃdelim»®·ÖÎªµ¥´ÊÊı×é¡£
-   * @param source ĞèÒª½øĞĞ»®·ÖµÄÔ­×Ö·û´®
-   * @param delim µ¥´ÊµÄ·Ö¸ô×Ö·û´®
-   * @return »®·ÖÒÔºóµÄÊı×é£¬Èç¹ûsourceÎªnullµÄÊ±ºò·µ»ØÒÔsourceÎªÎ¨Ò»ÔªËØµÄÊı×é£¬
-   *         Èç¹ûdelimÎªnullÔòÊ¹ÓÃ¶ººÅ×÷Îª·Ö¸ô×Ö·û´®¡£
-   * @since  0.1
-   */
-  public static String[] split(String source, String delim) {
-    String[] wordLists;
-    if (source == null) {
-      wordLists = new String[1];
-      wordLists[0] = source;
-      return wordLists;
-    }
-    if (delim == null) {
-      delim = ",";
-    }
-    StringTokenizer st = new StringTokenizer(source, delim);
-    int total = st.countTokens();
-    wordLists = new String[total];
-    for (int i = 0; i < total; i++) {
-      wordLists[i] = st.nextToken();
-    }
-    return wordLists;
-  }
+	/**
+	 * æ­¤æ–¹æ³•å°†ç»™å‡ºçš„å­—ç¬¦ä¸²sourceä½¿ç”¨delimåˆ’åˆ†ä¸ºå•è¯æ•°ç»„ã€‚
+	 * 
+	 * @param source
+	 *            éœ€è¦è¿›è¡Œåˆ’åˆ†çš„åŸå­—ç¬¦ä¸²
+	 * @param delim
+	 *            å•è¯çš„åˆ†éš”å­—ç¬¦ä¸²
+	 * @return åˆ’åˆ†ä»¥åçš„æ•°ç»„ï¼Œå¦‚æœsourceä¸ºnullçš„æ—¶å€™è¿”å›ä»¥sourceä¸ºå”¯ä¸€å…ƒç´ çš„æ•°ç»„ï¼Œ
+	 *         å¦‚æœdelimä¸ºnullåˆ™ä½¿ç”¨é€—å·ä½œä¸ºåˆ†éš”å­—ç¬¦ä¸²ã€‚
+	 * @since 0.1
+	 */
+	public static String[] split(String source, String delim) {
+		String[] wordLists;
+		if (source == null) {
+			wordLists = new String[1];
+			wordLists[0] = source;
+			return wordLists;
+		}
+		if (delim == null) {
+			delim = ",";
+		}
+		StringTokenizer st = new StringTokenizer(source, delim);
+		int total = st.countTokens();
+		wordLists = new String[total];
+		for (int i = 0; i < total; i++) {
+			wordLists[i] = st.nextToken();
+		}
+		return wordLists;
+	}
 
-  /**
-   * ´Ë·½·¨½«¸ø³öµÄ×Ö·û´®sourceÊ¹ÓÃdelim»®·ÖÎªµ¥´ÊÊı×é¡£
-   * @param source ĞèÒª½øĞĞ»®·ÖµÄÔ­×Ö·û´®
-   * @param delim µ¥´ÊµÄ·Ö¸ô×Ö·û
-   * @return »®·ÖÒÔºóµÄÊı×é£¬Èç¹ûsourceÎªnullµÄÊ±ºò·µ»ØÒÔsourceÎªÎ¨Ò»ÔªËØµÄÊı×é¡£
-   * @since  0.2
-   */
-  public static String[] split(String source, char delim) {
-    return split(source, String.valueOf(delim));
-  }
+	/**
+	 * æ­¤æ–¹æ³•å°†ç»™å‡ºçš„å­—ç¬¦ä¸²sourceä½¿ç”¨delimåˆ’åˆ†ä¸ºå•è¯æ•°ç»„ã€‚
+	 * 
+	 * @param source
+	 *            éœ€è¦è¿›è¡Œåˆ’åˆ†çš„åŸå­—ç¬¦ä¸²
+	 * @param delim
+	 *            å•è¯çš„åˆ†éš”å­—ç¬¦
+	 * @return åˆ’åˆ†ä»¥åçš„æ•°ç»„ï¼Œå¦‚æœsourceä¸ºnullçš„æ—¶å€™è¿”å›ä»¥sourceä¸ºå”¯ä¸€å…ƒç´ çš„æ•°ç»„ã€‚
+	 * @since 0.2
+	 */
+	public static String[] split(String source, char delim) {
+		return split(source, String.valueOf(delim));
+	}
 
-  /**
-   * ´Ë·½·¨½«¸ø³öµÄ×Ö·û´®sourceÊ¹ÓÃ¶ººÅ»®·ÖÎªµ¥´ÊÊı×é¡£
-   * @param source ĞèÒª½øĞĞ»®·ÖµÄÔ­×Ö·û´®
-   * @return »®·ÖÒÔºóµÄÊı×é£¬Èç¹ûsourceÎªnullµÄÊ±ºò·µ»ØÒÔsourceÎªÎ¨Ò»ÔªËØµÄÊı×é¡£
-   * @since  0.1
-   */
-  public static String[] split(String source) {
-    return split(source, ",");
-  }
+	/**
+	 * æ­¤æ–¹æ³•å°†ç»™å‡ºçš„å­—ç¬¦ä¸²sourceä½¿ç”¨é€—å·åˆ’åˆ†ä¸ºå•è¯æ•°ç»„ã€‚
+	 * 
+	 * @param source
+	 *            éœ€è¦è¿›è¡Œåˆ’åˆ†çš„åŸå­—ç¬¦ä¸²
+	 * @return åˆ’åˆ†ä»¥åçš„æ•°ç»„ï¼Œå¦‚æœsourceä¸ºnullçš„æ—¶å€™è¿”å›ä»¥sourceä¸ºå”¯ä¸€å…ƒç´ çš„æ•°ç»„ã€‚
+	 * @since 0.1
+	 */
+	public static String[] split(String source) {
+		return split(source, ",");
+	}
 
-  /**
-   * Ñ­»·´òÓ¡×Ö·û´®Êı×é¡£
-   * ×Ö·û´®Êı×éµÄ¸÷ÔªËØ¼äÒÔÖ¸¶¨×Ö·û·Ö¸ô£¬Èç¹û×Ö·û´®ÖĞÒÑ¾­°üº¬Ö¸¶¨×Ö·ûÔòÔÚ×Ö·û´®µÄÁ½¶Ë¼ÓÉÏË«ÒıºÅ¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param delim ·Ö¸ô·û
-   * @param out ´òÓ¡µ½µÄÊä³öÁ÷
-   * @since  0.4
-   */
-  public static void printStrings(String[] strings, String delim,
-                                  OutputStream out) {
-    try {
-      if (strings != null) {
-        int length = strings.length - 1;
-        for (int i = 0; i < length; i++) {
-          if (strings[i] != null) {
-            if (strings[i].indexOf(delim) > -1) {
-              out.write( ("\"" + strings[i] + "\"" + delim).getBytes());
-            }
-            else {
-              out.write( (strings[i] + delim).getBytes());
-            }
-          }
-          else {
-            out.write("null".getBytes());
-          }
-        }
-        if (strings[length] != null) {
-          if (strings[length].indexOf(delim) > -1) {
-            out.write( ("\"" + strings[length] + "\"").getBytes());
-          }
-          else {
-            out.write(strings[length].getBytes());
-          }
-        }
-        else {
-          out.write("null".getBytes());
-        }
-      }
-      else {
-        out.write("null".getBytes());
-      }
-      out.write(Constants.LINE_SEPARATOR.getBytes());
-    }
-    catch (IOException e) {
+	/**
+	 * å¾ªç¯æ‰“å°å­—ç¬¦ä¸²æ•°ç»„ã€‚ å­—ç¬¦ä¸²æ•°ç»„çš„å„å…ƒç´ é—´ä»¥æŒ‡å®šå­—ç¬¦åˆ†éš”ï¼Œå¦‚æœå­—ç¬¦ä¸²ä¸­å·²ç»åŒ…å«æŒ‡å®šå­—ç¬¦åˆ™åœ¨å­—ç¬¦ä¸²çš„ä¸¤ç«¯åŠ ä¸ŠåŒå¼•å·ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param delim
+	 *            åˆ†éš”ç¬¦
+	 * @param out
+	 *            æ‰“å°åˆ°çš„è¾“å‡ºæµ
+	 * @since 0.4
+	 */
+	public static void printStrings(String[] strings, String delim, OutputStream out) {
+		try {
+			if (strings != null) {
+				int length = strings.length - 1;
+				for (int i = 0; i < length; i++) {
+					if (strings[i] != null) {
+						if (strings[i].indexOf(delim) > -1) {
+							out.write(("\"" + strings[i] + "\"" + delim).getBytes());
+						} else {
+							out.write((strings[i] + delim).getBytes());
+						}
+					} else {
+						out.write("null".getBytes());
+					}
+				}
+				if (strings[length] != null) {
+					if (strings[length].indexOf(delim) > -1) {
+						out.write(("\"" + strings[length] + "\"").getBytes());
+					} else {
+						out.write(strings[length].getBytes());
+					}
+				} else {
+					out.write("null".getBytes());
+				}
+			} else {
+				out.write("null".getBytes());
+			}
+			out.write(Constants.LINE_SEPARATOR.getBytes());
+		} catch (IOException e) {
 
-    }
-  }
+		}
+	}
 
-  /**
-   * Ñ­»·´òÓ¡×Ö·û´®Êı×éµ½±ê×¼Êä³ö¡£
-   * ×Ö·û´®Êı×éµÄ¸÷ÔªËØ¼äÒÔÖ¸¶¨×Ö·û·Ö¸ô£¬Èç¹û×Ö·û´®ÖĞÒÑ¾­°üº¬Ö¸¶¨×Ö·ûÔòÔÚ×Ö·û´®µÄÁ½¶Ë¼ÓÉÏË«ÒıºÅ¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param delim ·Ö¸ô·û
-   * @since  0.4
-   */
-  public static void printStrings(String[] strings, String delim) {
-    printStrings(strings, delim, System.out);
-  }
+	/**
+	 * å¾ªç¯æ‰“å°å­—ç¬¦ä¸²æ•°ç»„åˆ°æ ‡å‡†è¾“å‡ºã€‚ å­—ç¬¦ä¸²æ•°ç»„çš„å„å…ƒç´ é—´ä»¥æŒ‡å®šå­—ç¬¦åˆ†éš”ï¼Œå¦‚æœå­—ç¬¦ä¸²ä¸­å·²ç»åŒ…å«æŒ‡å®šå­—ç¬¦åˆ™åœ¨å­—ç¬¦ä¸²çš„ä¸¤ç«¯åŠ ä¸ŠåŒå¼•å·ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param delim
+	 *            åˆ†éš”ç¬¦
+	 * @since 0.4
+	 */
+	public static void printStrings(String[] strings, String delim) {
+		printStrings(strings, delim, System.out);
+	}
 
-  /**
-   * Ñ­»·´òÓ¡×Ö·û´®Êı×é¡£
-   * ×Ö·û´®Êı×éµÄ¸÷ÔªËØ¼äÒÔ¶ººÅ·Ö¸ô£¬Èç¹û×Ö·û´®ÖĞÒÑ¾­°üº¬¶ººÅÔòÔÚ×Ö·û´®µÄÁ½¶Ë¼ÓÉÏË«ÒıºÅ¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param out ´òÓ¡µ½µÄÊä³öÁ÷
-   * @since  0.2
-   */
-  public static void printStrings(String[] strings, OutputStream out) {
-    printStrings(strings, ",", out);
-  }
+	/**
+	 * å¾ªç¯æ‰“å°å­—ç¬¦ä¸²æ•°ç»„ã€‚ å­—ç¬¦ä¸²æ•°ç»„çš„å„å…ƒç´ é—´ä»¥é€—å·åˆ†éš”ï¼Œå¦‚æœå­—ç¬¦ä¸²ä¸­å·²ç»åŒ…å«é€—å·åˆ™åœ¨å­—ç¬¦ä¸²çš„ä¸¤ç«¯åŠ ä¸ŠåŒå¼•å·ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param out
+	 *            æ‰“å°åˆ°çš„è¾“å‡ºæµ
+	 * @since 0.2
+	 */
+	public static void printStrings(String[] strings, OutputStream out) {
+		printStrings(strings, ",", out);
+	}
 
-  /**
-   * Ñ­»·´òÓ¡×Ö·û´®Êı×éµ½ÏµÍ³±ê×¼Êä³öÁ÷System.out¡£
-   * ×Ö·û´®Êı×éµÄ¸÷ÔªËØ¼äÒÔ¶ººÅ·Ö¸ô£¬Èç¹û×Ö·û´®ÖĞÒÑ¾­°üº¬¶ººÅÔòÔÚ×Ö·û´®µÄÁ½¶Ë¼ÓÉÏË«ÒıºÅ¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @since  0.2
-   */
-  public static void printStrings(String[] strings) {
-    printStrings(strings, ",", System.out);
-  }
+	/**
+	 * å¾ªç¯æ‰“å°å­—ç¬¦ä¸²æ•°ç»„åˆ°ç³»ç»Ÿæ ‡å‡†è¾“å‡ºæµSystem.outã€‚ å­—ç¬¦ä¸²æ•°ç»„çš„å„å…ƒç´ é—´ä»¥é€—å·åˆ†éš”ï¼Œå¦‚æœå­—ç¬¦ä¸²ä¸­å·²ç»åŒ…å«é€—å·åˆ™åœ¨å­—ç¬¦ä¸²çš„ä¸¤ç«¯åŠ ä¸ŠåŒå¼•å·ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @since 0.2
+	 */
+	public static void printStrings(String[] strings) {
+		printStrings(strings, ",", System.out);
+	}
 
-  /**
-   * ½«×Ö·û´®ÖĞµÄ±äÁ¿Ê¹ÓÃvaluesÊı×éÖĞµÄÄÚÈİ½øĞĞÌæ»»¡£
-   * Ìæ»»µÄ¹ı³ÌÊÇ²»½øĞĞÇ¶Ì×µÄ£¬¼´Èç¹ûÌæ»»µÄÄÚÈİÖĞ°üº¬±äÁ¿±í´ïÊ½Ê±²»»áÌæ»»¡£
-   * @param prefix ±äÁ¿Ç°×º×Ö·û´®
-   * @param source ´ø²ÎÊıµÄÔ­×Ö·û´®
-   * @param values Ìæ»»ÓÃµÄ×Ö·û´®Êı×é
-   * @return Ìæ»»ºóµÄ×Ö·û´®¡£
-   *         Èç¹ûÇ°×ºÎªnullÔòÊ¹ÓÃ¡°%¡±×÷ÎªÇ°×º£»
-   *         Èç¹ûsource»òÕßvaluesÎªnull»òÕßvaluesµÄ³¤¶ÈÎª0Ôò·µ»Øsource£»
-   *         Èç¹ûvaluesµÄ³¤¶È´óÓÚ²ÎÊıµÄ¸öÊı£¬¶àÓàµÄÖµ½«±»ºöÂÔ£»
-   *         Èç¹ûvaluesµÄ³¤¶ÈĞ¡ÓÚ²ÎÊıµÄ¸öÊı£¬ÔòºóÃæµÄËùÓĞ²ÎÊı¶¼Ê¹ÓÃ×îºóÒ»¸öÖµ½øĞĞÌæ»»¡£
-   * @since  0.2
-   */
-  public static String getReplaceString(String prefix, String source,
-                                        String[] values) {
-    String result = source;
-    if (source == null || values == null || values.length < 1) {
-      return source;
-    }
-    if (prefix == null) {
-      prefix = "%";
-    }
+	/**
+	 * å°†å­—ç¬¦ä¸²ä¸­çš„å˜é‡ä½¿ç”¨valuesæ•°ç»„ä¸­çš„å†…å®¹è¿›è¡Œæ›¿æ¢ã€‚ æ›¿æ¢çš„è¿‡ç¨‹æ˜¯ä¸è¿›è¡ŒåµŒå¥—çš„ï¼Œå³å¦‚æœæ›¿æ¢çš„å†…å®¹ä¸­åŒ…å«å˜é‡è¡¨è¾¾å¼æ—¶ä¸ä¼šæ›¿æ¢ã€‚
+	 * 
+	 * @param prefix
+	 *            å˜é‡å‰ç¼€å­—ç¬¦ä¸²
+	 * @param source
+	 *            å¸¦å‚æ•°çš„åŸå­—ç¬¦ä¸²
+	 * @param values
+	 *            æ›¿æ¢ç”¨çš„å­—ç¬¦ä¸²æ•°ç»„
+	 * @return æ›¿æ¢åçš„å­—ç¬¦ä¸²ã€‚ å¦‚æœå‰ç¼€ä¸ºnullåˆ™ä½¿ç”¨â€œ%â€ä½œä¸ºå‰ç¼€ï¼›
+	 *         å¦‚æœsourceæˆ–è€…valuesä¸ºnullæˆ–è€…valuesçš„é•¿åº¦ä¸º0åˆ™è¿”å›sourceï¼›
+	 *         å¦‚æœvaluesçš„é•¿åº¦å¤§äºå‚æ•°çš„ä¸ªæ•°ï¼Œå¤šä½™çš„å€¼å°†è¢«å¿½ç•¥ï¼›
+	 *         å¦‚æœvaluesçš„é•¿åº¦å°äºå‚æ•°çš„ä¸ªæ•°ï¼Œåˆ™åé¢çš„æ‰€æœ‰å‚æ•°éƒ½ä½¿ç”¨æœ€åä¸€ä¸ªå€¼è¿›è¡Œæ›¿æ¢ã€‚
+	 * @since 0.2
+	 */
+	public static String getReplaceString(String prefix, String source, String[] values) {
+		String result = source;
+		if (source == null || values == null || values.length < 1) {
+			return source;
+		}
+		if (prefix == null) {
+			prefix = "%";
+		}
 
-    for (int i = 0; i < values.length; i++) {
-      String argument = prefix + Integer.toString(i + 1);
-      int index = result.indexOf(argument);
-      if (index != -1) {
-        String temp = result.substring(0, index);
-        if (i < values.length) {
-          temp += values[i];
-        }
-        else {
-          temp += values[values.length - 1];
-        }
-        temp += result.substring(index + 2);
-        result = temp;
-      }
-    }
-    return result;
-  }
+		for (int i = 0; i < values.length; i++) {
+			String argument = prefix + Integer.toString(i + 1);
+			int index = result.indexOf(argument);
+			if (index != -1) {
+				String temp = result.substring(0, index);
+				if (i < values.length) {
+					temp += values[i];
+				} else {
+					temp += values[values.length - 1];
+				}
+				temp += result.substring(index + 2);
+				result = temp;
+			}
+		}
+		return result;
+	}
 
-  /**
-   * ½«×Ö·û´®ÖĞµÄ±äÁ¿£¨ÒÔ¡°%¡±ÎªÇ°µ¼ºó½ÓÊı×Ö£©Ê¹ÓÃvaluesÊı×éÖĞµÄÄÚÈİ½øĞĞÌæ»»¡£
-   * Ìæ»»µÄ¹ı³ÌÊÇ²»½øĞĞÇ¶Ì×µÄ£¬¼´Èç¹ûÌæ»»µÄÄÚÈİÖĞ°üº¬±äÁ¿±í´ïÊ½Ê±²»»áÌæ»»¡£
-   * @param source ´ø²ÎÊıµÄÔ­×Ö·û´®
-   * @param values Ìæ»»ÓÃµÄ×Ö·û´®Êı×é
-   * @return Ìæ»»ºóµÄ×Ö·û´®
-   * @since  0.1
-   */
-  public static String getReplaceString(String source, String[] values) {
-    return getReplaceString("%", source, values);
-  }
+	/**
+	 * å°†å­—ç¬¦ä¸²ä¸­çš„å˜é‡ï¼ˆä»¥â€œ%â€ä¸ºå‰å¯¼åæ¥æ•°å­—ï¼‰ä½¿ç”¨valuesæ•°ç»„ä¸­çš„å†…å®¹è¿›è¡Œæ›¿æ¢ã€‚
+	 * æ›¿æ¢çš„è¿‡ç¨‹æ˜¯ä¸è¿›è¡ŒåµŒå¥—çš„ï¼Œå³å¦‚æœæ›¿æ¢çš„å†…å®¹ä¸­åŒ…å«å˜é‡è¡¨è¾¾å¼æ—¶ä¸ä¼šæ›¿æ¢ã€‚
+	 * 
+	 * @param source
+	 *            å¸¦å‚æ•°çš„åŸå­—ç¬¦ä¸²
+	 * @param values
+	 *            æ›¿æ¢ç”¨çš„å­—ç¬¦ä¸²æ•°ç»„
+	 * @return æ›¿æ¢åçš„å­—ç¬¦ä¸²
+	 * @since 0.1
+	 */
+	public static String getReplaceString(String source, String[] values) {
+		return getReplaceString("%", source, values);
+	}
 
-  /**
-   * ×Ö·û´®Êı×éÖĞÊÇ·ñ°üº¬Ö¸¶¨µÄ×Ö·û´®¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param string ×Ö·û´®
-   * @param caseSensitive ÊÇ·ñ´óĞ¡Ğ´Ãô¸Ğ
-   * @return °üº¬Ê±·µ»Øtrue£¬·ñÔò·µ»Øfalse
-   * @since  0.4
-   */
-  public static boolean contains(String[] strings, String string,
-                                 boolean caseSensitive) {
-    for (int i = 0; i < strings.length; i++) {
-      if (caseSensitive == true) {
-        if (strings[i].equals(string)) {
-          return true;
-        }
-      }
-      else {
-        if (strings[i].equalsIgnoreCase(string)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
+	/**
+	 * å­—ç¬¦ä¸²æ•°ç»„ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šçš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param string
+	 *            å­—ç¬¦ä¸²
+	 * @param caseSensitive
+	 *            æ˜¯å¦å¤§å°å†™æ•æ„Ÿ
+	 * @return åŒ…å«æ—¶è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @since 0.4
+	 */
+	public static boolean contains(String[] strings, String string, boolean caseSensitive) {
+		for (int i = 0; i < strings.length; i++) {
+			if (caseSensitive == true) {
+				if (strings[i].equals(string)) {
+					return true;
+				}
+			} else {
+				if (strings[i].equalsIgnoreCase(string)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-  /**
-   * ×Ö·û´®Êı×éÖĞÊÇ·ñ°üº¬Ö¸¶¨µÄ×Ö·û´®¡£´óĞ¡Ğ´Ãô¸Ğ¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param string ×Ö·û´®
-   * @return °üº¬Ê±·µ»Øtrue£¬·ñÔò·µ»Øfalse
-   * @since  0.4
-   */
-  public static boolean contains(String[] strings, String string) {
-    return contains(strings, string, true);
-  }
+	/**
+	 * å­—ç¬¦ä¸²æ•°ç»„ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šçš„å­—ç¬¦ä¸²ã€‚å¤§å°å†™æ•æ„Ÿã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param string
+	 *            å­—ç¬¦ä¸²
+	 * @return åŒ…å«æ—¶è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @since 0.4
+	 */
+	public static boolean contains(String[] strings, String string) {
+		return contains(strings, string, true);
+	}
 
-  /**
-   * ²»Çø·Ö´óĞ¡Ğ´ÅĞ¶¨×Ö·û´®Êı×éÖĞÊÇ·ñ°üº¬Ö¸¶¨µÄ×Ö·û´®¡£
-   * @param strings ×Ö·û´®Êı×é
-   * @param string ×Ö·û´®
-   * @return °üº¬Ê±·µ»Øtrue£¬·ñÔò·µ»Øfalse
-   * @since  0.4
-   */
-  public static boolean containsIgnoreCase(String[] strings, String string) {
-    return contains(strings, string, false);
-  }
+	/**
+	 * ä¸åŒºåˆ†å¤§å°å†™åˆ¤å®šå­—ç¬¦ä¸²æ•°ç»„ä¸­æ˜¯å¦åŒ…å«æŒ‡å®šçš„å­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param strings
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param string
+	 *            å­—ç¬¦ä¸²
+	 * @return åŒ…å«æ—¶è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+	 * @since 0.4
+	 */
+	public static boolean containsIgnoreCase(String[] strings, String string) {
+		return contains(strings, string, false);
+	}
 
-  /**
-   * ½«×Ö·û´®Êı×éÊ¹ÓÃÖ¸¶¨µÄ·Ö¸ô·ûºÏ²¢³ÉÒ»¸ö×Ö·û´®¡£
-   * @param array ×Ö·û´®Êı×é
-   * @param delim ·Ö¸ô·û£¬ÎªnullµÄÊ±ºòÊ¹ÓÃ""×÷Îª·Ö¸ô·û£¨¼´Ã»ÓĞ·Ö¸ô·û£©
-   * @return ºÏ²¢ºóµÄ×Ö·û´®
-   * @since  0.4
-   */
-  public static String combineStringArray(String[] array, String delim) {
-    int length = array.length - 1;
-    if (delim == null) {
-      delim = "";
-    }
-    StringBuffer result = new StringBuffer(length * 8);
-    for (int i = 0; i < length; i++) {
-      result.append(array[i]);
-      result.append(delim);
-    }
-    result.append(array[length]);
-    return result.toString();
-  }
+	/**
+	 * å°†å­—ç¬¦ä¸²æ•°ç»„ä½¿ç”¨æŒ‡å®šçš„åˆ†éš”ç¬¦åˆå¹¶æˆä¸€ä¸ªå­—ç¬¦ä¸²ã€‚
+	 * 
+	 * @param array
+	 *            å­—ç¬¦ä¸²æ•°ç»„
+	 * @param delim
+	 *            åˆ†éš”ç¬¦ï¼Œä¸ºnullçš„æ—¶å€™ä½¿ç”¨""ä½œä¸ºåˆ†éš”ç¬¦ï¼ˆå³æ²¡æœ‰åˆ†éš”ç¬¦ï¼‰
+	 * @return åˆå¹¶åçš„å­—ç¬¦ä¸²
+	 * @since 0.4
+	 */
+	public static String combineStringArray(String[] array, String delim) {
+		int length = array.length - 1;
+		if (delim == null) {
+			delim = "";
+		}
+		StringBuffer result = new StringBuffer(length * 8);
+		for (int i = 0; i < length; i++) {
+			result.append(array[i]);
+			result.append(delim);
+		}
+		result.append(array[length]);
+		return result.toString();
+	}
 }

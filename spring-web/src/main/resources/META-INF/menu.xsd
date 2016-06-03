@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ustcsoft.com/menu"
+	xmlns:menu="http://www.ustcsoft.com/menu" elementFormDefault="qualified">
+
+	<simpleType name="menuType">
+		<restriction base="string">
+			<enumeration value="folder" />
+			<enumeration value="item" />
+		</restriction>
+	</simpleType>
+	<complexType name="menu">
+		<choice>
+			<element name="item" type="menu:menu" maxOccurs="unbounded"
+				minOccurs="0" />
+		</choice>
+		<attribute name="id" type="string"></attribute>
+		<attribute name="name" type="string"></attribute>
+		<attribute name="type" type="menu:menuType"></attribute>
+		<attribute name="order" type="int"></attribute>
+		<attribute name="href" type="string" use="optional"></attribute>
+	</complexType>
+
+	<element name="menuRoot">
+		<complexType>
+			<sequence>
+				<element name="item" type="menu:menu" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+</schema>

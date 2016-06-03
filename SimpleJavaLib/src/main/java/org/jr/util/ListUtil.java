@@ -3,88 +3,92 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ4ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ4æ—¥
  * @author Cherami
  */
 
 import java.util.*;
 
 /**
- * ´ËÀàÖĞ·â×°Ò»Ğ©³£ÓÃµÄList²Ù×÷·½·¨¡£
- * ËùÓĞ·½·¨¶¼ÊÇ¾²Ì¬·½·¨£¬²»ĞèÒªÉú³É´ËÀàµÄÊµÀı£¬
- * Îª±ÜÃâÉú³É´ËÀàµÄÊµÀı£¬¹¹Ôì·½·¨±»ÉêÃ÷ÎªprivateÀàĞÍµÄ¡£
- * @since  0.5
+ * æ­¤ç±»ä¸­å°è£…ä¸€äº›å¸¸ç”¨çš„Listæ“ä½œæ–¹æ³•ã€‚ æ‰€æœ‰æ–¹æ³•éƒ½æ˜¯é™æ€æ–¹æ³•ï¼Œä¸éœ€è¦ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œ ä¸ºé¿å…ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œæ„é€ æ–¹æ³•è¢«ç”³æ˜ä¸ºprivateç±»å‹çš„ã€‚
+ * 
+ * @since 0.5
  */
 
 public class ListUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private ListUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private ListUtil() {
+	}
 
-  /**
-   * ½«Êı×é×ª»»ÎªÒ»¸öList£¬Êµ¼ÊÉÏÊÇÒ»¸öArrayList¡£
-   * @param array Ô­Êı×é
-   * @return Ô­Êı×é²»ÎªnullµÄÊ±ºò·µ»Ø°üº¬Êı×éÄÚÈİµÄArrayList£¬·ñÔò·µ»Ønull
-   * @since  0.5
-   */
-  public static List ArrayToList(Object[] array) {
-    if (array != null) {
-      ArrayList<Object> list = new ArrayList<Object>(array.length);
-      for (int i = 0; i < array.length; i++) {
-        list.add(array[i]);
-      }
-      return list;
-    }
-    else {
-      return null;
-    }
-  }
+	/**
+	 * å°†æ•°ç»„è½¬æ¢ä¸ºä¸€ä¸ªListï¼Œå®é™…ä¸Šæ˜¯ä¸€ä¸ªArrayListã€‚
+	 * 
+	 * @param array
+	 *            åŸæ•°ç»„
+	 * @return åŸæ•°ç»„ä¸ä¸ºnullçš„æ—¶å€™è¿”å›åŒ…å«æ•°ç»„å†…å®¹çš„ArrayListï¼Œå¦åˆ™è¿”å›null
+	 * @since 0.5
+	 */
+	public static List<Object> ArrayToList(Object[] array) {
+		return array != null ? Arrays.asList(array) : null;
+	}
 
-  /**
-   * ½«Êı×éÖĞµÄÄÚÈİÈ«²¿Ìí¼Óµ½ÁĞ±íÖĞ¡£
-   * @param array Êı×é
-   * @param list ÁĞ±í
-   * @since  0.5
-   */
-  public static void addArrayToList(Object[] array, List<Object> list) {
-    if (array == null || list == null || array.length == 0) {
-      return;
-    }
-    for (int i = 0; i < array.length; i++) {
-      list.add(array[i]);
-    }
-  }
+	/**
+	 * å°†æ•°ç»„ä¸­çš„å†…å®¹å…¨éƒ¨æ·»åŠ åˆ°åˆ—è¡¨ä¸­ã€‚
+	 * 
+	 * @param array
+	 *            æ•°ç»„
+	 * @param list
+	 *            åˆ—è¡¨
+	 * @since 0.5
+	 */
+	public static void addArrayToList(Object[] array, List<Object> list) {
+		if (array == null || list == null || array.length == 0) {
+			return;
+		}
+		for (int i = 0; i < array.length; i++) {
+			list.add(array[i]);
+		}
+	}
 
-  /**
-   * ½«Êı×éÖĞµÄÄÚÈİÈ«²¿Ìí¼Óµ½ÁĞ±íÖĞ¡£
-   * @param array Êı×é
-   * @param list ÁĞ±í
-   * @param start ¿ªÊ¼Î»ÖÃ
-   * @since  0.5
-   */
-  public static void addArrayToList(Object[] array, List<Object> list, int start) {
-    if (array == null || list == null || array.length == 0) {
-      return;
-    }
-    for (int i = 0; i < array.length; i++) {
-      list.add(start + i, array[i]);
-    }
-  }
+	/**
+	 * å°†æ•°ç»„ä¸­çš„å†…å®¹å…¨éƒ¨æ·»åŠ åˆ°åˆ—è¡¨ä¸­ã€‚
+	 * 
+	 * @param array
+	 *            æ•°ç»„
+	 * @param list
+	 *            åˆ—è¡¨
+	 * @param start
+	 *            å¼€å§‹ä½ç½®
+	 * @since 0.5
+	 */
+	public static void addArrayToList(Object[] array, List<Object> list, int start) {
+		if (array == null || list == null || array.length == 0) {
+			return;
+		}
+		for (int i = 0; i < array.length; i++) {
+			list.add(start + i, array[i]);
+		}
+	}
 
-  /**
-   * ÒÆ¶¯ÁĞ±íÖĞµÄÔªËØ
-   * @param list ÁĞ±í
-   * @param start ÒÆ¶¯µÄÔªËØµÄ¿ªÊ¼Ë÷Òı
-   * @param end ÒÆ¶¯µÄÔªËØµÄ×îºóË÷Òı£¬²»°üÀ¨Õâ¸ö
-   * @param to ÒÆ¶¯µ½µÄÎ»ÖÃ
-   * @since  0.5
-   */
-  public static void moveElements(List<Object> list, int start, int end, int to) {
-    List<Object> subList = new ArrayList<Object>(list.subList(start, end));
-    list.removeAll(subList);
-    list.addAll(to, subList);
-  }
+	/**
+	 * ç§»åŠ¨åˆ—è¡¨ä¸­çš„å…ƒç´ 
+	 * 
+	 * @param list
+	 *            åˆ—è¡¨
+	 * @param start
+	 *            ç§»åŠ¨çš„å…ƒç´ çš„å¼€å§‹ç´¢å¼•
+	 * @param end
+	 *            ç§»åŠ¨çš„å…ƒç´ çš„æœ€åç´¢å¼•ï¼Œä¸åŒ…æ‹¬è¿™ä¸ª
+	 * @param to
+	 *            ç§»åŠ¨åˆ°çš„ä½ç½®
+	 * @since 0.5
+	 */
+	public static void moveElements(List<Object> list, int start, int end, int to) {
+		List<Object> subList = new ArrayList<Object>(list.subList(start, end));
+		list.removeAll(subList);
+		list.addAll(to, subList);
+	}
 
 }

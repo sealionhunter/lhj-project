@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu:menuRoot xmlns:menu="http://www.ustcsoft.com/menu"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ustcsoft.com/menu menu.xsd ">
+	<menu:item type="item" id="home" href="/" name="home" order="0"/>
+	<menu:item type="folder" id="dmat" name="dmat" order="1">
+		<menu:item type="item" href="dmat/dmatInput" id="dmatInput" name="dmatInput" order="0" />
+		<menu:item type="item" href="dmat/dmatSearch" id="dmatSearch" name="dmatSearch" order="1" />
+	</menu:item>
+	<menu:item type="folder" id="statistics" name="Statistics" order="2">
+		<menu:item type="item" href="statistics/departmentStatistics" id="departmentStatistics" name="departmentStatistics" order="0" />
+		<menu:item type="item" href="statistics/categoryStatistics" id="categoryStatistics" name="categoryStatistics" order="1" />
+		<menu:item type="item" href="statistics/memberStatistics" id="memberStatistics" name="memberStatistics" order="2" />
+	</menu:item>
+	<menu:item type="folder" id="depart" name="depart" order="3">
+		<menu:item type="item" href="depart/customerList" id="customerList" name="customerList" order="0" />
+		<menu:item type="item" href="depart/solutionList" id="solutionList" name="solutionList" order="1" />
+		<menu:item type="item" href="depart/developList" id="developList" name="developList" order="2" />
+	</menu:item>
+	<menu:item type="folder" id="project" name="project" order="4">
+		<menu:item type="item" href="project/projectList" id="projectList" name="projectList" order="0" />
+		<menu:item type="item" href="project/memberList" id="memberList" name="memberList" order="1" />
+	</menu:item>
+	<menu:item type="folder" id="category" name="category" order="5">
+		<menu:item type="item" href="category/categoryList" id="categoryList" name="categoryList" order="0" />
+		<menu:item type="item" href="category/subCategoryList" id="subCategoryList" name="subCategoryList" order="1" />
+	</menu:item>
+	<menu:item type="folder" id="user" name="user" order="6">
+		<menu:item type="item" href="user/userList" id="userList" name="userList" order="0" />
+		<menu:item type="item" href="notice/noticeList" id="noticeList" name="noticeList" order="1" />
+	</menu:item>
+</menu:menuRoot>

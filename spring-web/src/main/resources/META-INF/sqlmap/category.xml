@@ -1,0 +1,18 @@
+<sqlMap namespace="Category">
+
+  <resultMap id="result" class="examples.Account">
+    <result property="name" column="NAME" columnIndex="1"/>
+    <result property="email" column="EMAIL" columnIndex="2"/>
+  </resultMap>
+
+  <select id="getAccountByEmail" resultMap="result">
+    select ACCOUNT.NAME, ACCOUNT.EMAIL
+    from ACCOUNT
+    where ACCOUNT.EMAIL = #value#
+  </select>
+
+  <insert id="insertCategory" >
+    insert into category (name, delFlg,updateUserId,updateDate) values (#name#, #delFlg#,#updateUserId#,#updateDate#)
+  </insert>
+
+</sqlMap>

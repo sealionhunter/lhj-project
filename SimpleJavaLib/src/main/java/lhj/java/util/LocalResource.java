@@ -1,8 +1,5 @@
 /*
  * Created on 2005-9-17
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package lhj.java.util;
 
@@ -14,9 +11,6 @@ import java.io.InputStream;
 
 /**
  * @author IBM USER
- * 
- *         TODO To change the template for this generated type comment go to
- *         Window - Preferences - Java - Code Style - Code Templates
  */
 public class LocalResource {
 	File clazzFile = null;
@@ -42,8 +36,7 @@ public class LocalResource {
 			while ((len = in.read(bt)) != -1) {
 				byte[] temp = new byte[cl.length + len];
 				System.arraycopy(cl, 0, temp, 0, cl.length);
-				System.arraycopy(bt, 0, temp, cl.length == 0 ? 0
-						: cl.length - 1, len);
+				System.arraycopy(bt, 0, temp, cl.length == 0 ? 0 : cl.length - 1, len);
 				cl = temp;
 			}
 			return cl;

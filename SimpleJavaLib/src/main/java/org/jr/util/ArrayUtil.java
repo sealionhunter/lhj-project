@@ -3,139 +3,156 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ11ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ11æ—¥
  * @author Cherami
  */
 
 /**
- * Êı×é²Ù×÷¹¤¾ßÀà£¬Ìá¹©³£¼ûµÄÊı×é²Ù×÷ĞèÒªµÄ·½·¨¡£
- * @since  0.5
+ * æ•°ç»„æ“ä½œå·¥å…·ç±»ï¼Œæä¾›å¸¸è§çš„æ•°ç»„æ“ä½œéœ€è¦çš„æ–¹æ³•ã€‚
+ * 
+ * @since 0.5
  */
 
 public class ArrayUtil {
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private ArrayUtil() {
-  }
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private ArrayUtil() {
+	}
 
-  /**
-   * µÃµ½³õÊ¼»¯ºÃµÄintÊı×é¡£
-   * @param length Êı×é³¤¶È
-   * @return ³õÊ¼»¯ºóµÄintÊı×é£¬¸÷¸öÔªËØµÄÖµºÍÆäË÷ÒıÖµÏàµÈ¡£
-   * @since  0.5
-   */
-  public static int[] getInitedIntArray(int length) {
-    int[] indexes = new int[length];
-    for (int i = 0; i < length; i++) {
-      indexes[i] = i;
-    }
-    return indexes;
-  }
+	/**
+	 * å¾—åˆ°åˆå§‹åŒ–å¥½çš„intæ•°ç»„ã€‚
+	 * 
+	 * @param length
+	 *            æ•°ç»„é•¿åº¦
+	 * @return åˆå§‹åŒ–åçš„intæ•°ç»„ï¼Œå„ä¸ªå…ƒç´ çš„å€¼å’Œå…¶ç´¢å¼•å€¼ç›¸ç­‰ã€‚
+	 * @since 0.5
+	 */
+	public static int[] getInitedIntArray(int length) {
+		int[] indexes = new int[length];
+		for (int i = 0; i < length; i++) {
+			indexes[i] = i;
+		}
+		return indexes;
+	}
 
-  /**
-   * µÃµ½³õÊ¼»¯ºÃµÄintÊı×é¡£
-   * @param length Êı×é³¤¶È
-   * @param value ³õÊ¼Öµ
-   * @return ³õÊ¼»¯ºóµÄintÊı×é£¬¸÷¸öÔªËØµÄÖµ¶¼µÈÓÚÖ¸¶¨µÄvalue¡£
-   * @since  0.5
-   */
-  public static int[] getInitedIntArray(int length, int value) {
-    int[] indexes = new int[length];
-    for (int i = 0; i < length; i++) {
-      indexes[i] = value;
-    }
-    return indexes;
-  }
+	/**
+	 * å¾—åˆ°åˆå§‹åŒ–å¥½çš„intæ•°ç»„ã€‚
+	 * 
+	 * @param length
+	 *            æ•°ç»„é•¿åº¦
+	 * @param value
+	 *            åˆå§‹å€¼
+	 * @return åˆå§‹åŒ–åçš„intæ•°ç»„ï¼Œå„ä¸ªå…ƒç´ çš„å€¼éƒ½ç­‰äºæŒ‡å®šçš„valueã€‚
+	 * @since 0.5
+	 */
+	public static int[] getInitedIntArray(int length, int value) {
+		int[] indexes = new int[length];
+		for (int i = 0; i < length; i++) {
+			indexes[i] = value;
+		}
+		return indexes;
+	}
 
-  /**
-   * µÃµ½³õÊ¼»¯ºÃµÄbooleanÊı×é¡£
-   * @param length Êı×é³¤¶È
-   * @param value ³õÊ¼Öµ
-   * @return ³õÊ¼»¯ºóµÄbooleanÊı×é£¬¸÷¸öÔªËØµÄÖµ¶¼µÈÓÚvalue¡£
-   * @since  0.5
-   */
-  public static boolean[] getInitedBooleanArray(int length, boolean value) {
-    boolean[] indexes = new boolean[length];
-    for (int i = 0; i < length; i++) {
-      indexes[i] = value;
-    }
-    return indexes;
-  }
+	/**
+	 * å¾—åˆ°åˆå§‹åŒ–å¥½çš„booleanæ•°ç»„ã€‚
+	 * 
+	 * @param length
+	 *            æ•°ç»„é•¿åº¦
+	 * @param value
+	 *            åˆå§‹å€¼
+	 * @return åˆå§‹åŒ–åçš„booleanæ•°ç»„ï¼Œå„ä¸ªå…ƒç´ çš„å€¼éƒ½ç­‰äºvalueã€‚
+	 * @since 0.5
+	 */
+	public static boolean[] getInitedBooleanArray(int length, boolean value) {
+		boolean[] indexes = new boolean[length];
+		for (int i = 0; i < length; i++) {
+			indexes[i] = value;
+		}
+		return indexes;
+	}
 
-  /**
-   * µÃµ½Ö¸¶¨µÄ¶ÔÏóÔÚ¶ÔÏóÊı×éÖĞµÄË÷Òı¡£
-   * @param objects ¶ÔÏóÊı×é
-   * @param object ¶ÔÏó
-   * @return ¶ÔÏóÔÚ¶ÔÏóÊı×éÖĞµÄÎ»ÖÃ£¬²»´æÔÚÓÚÊı×éÖĞÊ±·µ»Ø-1
-   * @since  0.5
-   */
-  public static int indexOf(Object[] objects, Object object) {
-    for (int i = 0; i < objects.length; i++) {
-      if (objects[i].equals(object)) {
-        return i;
-      }
-    }
-    return -1;
-  }
+	/**
+	 * å¾—åˆ°æŒ‡å®šçš„å¯¹è±¡åœ¨å¯¹è±¡æ•°ç»„ä¸­çš„ç´¢å¼•ã€‚
+	 * 
+	 * @param objects
+	 *            å¯¹è±¡æ•°ç»„
+	 * @param object
+	 *            å¯¹è±¡
+	 * @return å¯¹è±¡åœ¨å¯¹è±¡æ•°ç»„ä¸­çš„ä½ç½®ï¼Œä¸å­˜åœ¨äºæ•°ç»„ä¸­æ—¶è¿”å›-1
+	 * @since 0.5
+	 */
+	public static int indexOf(Object[] objects, Object object) {
+		for (int i = 0; i < objects.length; i++) {
+			if (objects[i].equals(object)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
-  /**
-   * ½«Ô­Êı×éµÄÖµ¿½±´µ½Ä¿±êÊı×é¡£
-   * Ä¿±êÊı×éµÄ´óĞ¡±ØĞë´óÓÚµÈÓÚÔ­Êı×é£¬Ò»°ãÓ¦¸ÃÊÇ´óĞ¡ÏàµÈ£¬Èç¹ûÄ¿±êÊı×éµÄ´óĞ¡½Ï´óÔò´óÓÚµÄ²¿·Ö±£ÁôÔ­Öµ¡£
-   * @param orginalArray Ô­Êı×é
-   * @param targetArray Ä¿±êÊı×é
-   * @since  0.5
-   */
-  public static void copyArrayValue(int[] orginalArray, int[] targetArray) {
-    for (int i = 0; i < orginalArray.length; i++) {
-      targetArray[i] = orginalArray[i];
-    }
-  }
+	/**
+	 * å°†åŸæ•°ç»„çš„å€¼æ‹·è´åˆ°ç›®æ ‡æ•°ç»„ã€‚ ç›®æ ‡æ•°ç»„çš„å¤§å°å¿…é¡»å¤§äºç­‰äºåŸæ•°ç»„ï¼Œä¸€èˆ¬åº”è¯¥æ˜¯å¤§å°ç›¸ç­‰ï¼Œå¦‚æœç›®æ ‡æ•°ç»„çš„å¤§å°è¾ƒå¤§åˆ™å¤§äºçš„éƒ¨åˆ†ä¿ç•™åŸå€¼ã€‚
+	 * 
+	 * @param orginalArray
+	 *            åŸæ•°ç»„
+	 * @param targetArray
+	 *            ç›®æ ‡æ•°ç»„
+	 * @since 0.5
+	 */
+	public static void copyArrayValue(int[] orginalArray, int[] targetArray) {
+		for (int i = 0; i < orginalArray.length; i++) {
+			targetArray[i] = orginalArray[i];
+		}
+	}
 
-  /**
-   * ½«Êı×éÖĞµÄÖµÒÆÎ»¡£
-   * ÒÆ¶¯µÄ·½Ê½ÊÇ½«Ö¸¶¨Î»ÖÃÒÔºóµÄÃ¿¸öÔªËØÒÀ´ÎÍùÇ°ÒÆ¶¯Ò»Î»£¬Ö¸¶¨Î»ÖÃµÄÖµÒÆµ½×îºó¡£
-   * @param array Êı×é
-   * @param index Î»ÖÃ
-   */
-  public static void shiftArray(int[] array, int index) {
-    int temp = array[index];
-    int length = array.length - 1;
-    for (int i = index; i < length; i++) {
-      array[i] = array[i + 1];
-    }
-    array[length] = temp;
-  }
+	/**
+	 * å°†æ•°ç»„ä¸­çš„å€¼ç§»ä½ã€‚ ç§»åŠ¨çš„æ–¹å¼æ˜¯å°†æŒ‡å®šä½ç½®ä»¥åçš„æ¯ä¸ªå…ƒç´ ä¾æ¬¡å¾€å‰ç§»åŠ¨ä¸€ä½ï¼ŒæŒ‡å®šä½ç½®çš„å€¼ç§»åˆ°æœ€åã€‚
+	 * 
+	 * @param array
+	 *            æ•°ç»„
+	 * @param index
+	 *            ä½ç½®
+	 */
+	public static void shiftArray(int[] array, int index) {
+		int temp = array[index];
+		int length = array.length - 1;
+		for (int i = index; i < length; i++) {
+			array[i] = array[i + 1];
+		}
+		array[length] = temp;
+	}
 
-  /**
-   * ´òÓ¡Êı×éµÄÖµ¡£
-   * Êı×éÇ°ºóÎªÒ»¸ö"["ºÍ"]"£¬ÖĞ¼äÓÃ¶ººÅ·Ö¸ô¡£
-   * @param array Êı×é
-   */
-  public static void printArray(int[] array) {
-    int length = array.length - 1;
-    StringBuffer buffer = new StringBuffer(length * 5);
-    buffer.append("[");
-    for (int i = 0; i < length; i++) {
-      buffer.append(array[i]);
-      buffer.append(",");
-    }
-    buffer.append(array[length] + "]");
-    System.out.println(buffer.toString());
-  }
+	/**
+	 * æ‰“å°æ•°ç»„çš„å€¼ã€‚ æ•°ç»„å‰åä¸ºä¸€ä¸ª"["å’Œ"]"ï¼Œä¸­é—´ç”¨é€—å·åˆ†éš”ã€‚
+	 * 
+	 * @param array
+	 *            æ•°ç»„
+	 */
+	public static void printArray(int[] array) {
+		int length = array.length - 1;
+		StringBuffer buffer = new StringBuffer(length * 5);
+		buffer.append("[");
+		for (int i = 0; i < length; i++) {
+			buffer.append(array[i]);
+			buffer.append(",");
+		}
+		buffer.append(array[length] + "]");
+		System.out.println(buffer.toString());
+	}
 
-  /**
-   * ½«Ö¸¶¨µÄÖµ²åÈëµ½Êı×éÖĞµÄÖ¸¶¨Î»ÖÃ¡£
-   * Êı×é×îºóÒ»¸öÔªËØµÄÖµ½«±»¶ªÆú¡£
-   * @param array
-   * @param index
-   * @param value
-   */
-  public static void insertValueToArray(int[] array, int index, int value) {
-    int length = array.length - 1;
-    for (int i = length; i > index; i--) {
-      array[i] = array[i - 1];
-    }
-    array[index] = value;
-  }
+	/**
+	 * å°†æŒ‡å®šçš„å€¼æ’å…¥åˆ°æ•°ç»„ä¸­çš„æŒ‡å®šä½ç½®ã€‚ æ•°ç»„æœ€åä¸€ä¸ªå…ƒç´ çš„å€¼å°†è¢«ä¸¢å¼ƒã€‚
+	 * 
+	 * @param array
+	 * @param index
+	 * @param value
+	 */
+	public static void insertValueToArray(int[] array, int index, int value) {
+		int length = array.length - 1;
+		for (int i = length; i > index; i--) {
+			array[i] = array[i - 1];
+		}
+		array[index] = value;
+	}
 }

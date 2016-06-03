@@ -3,43 +3,43 @@ package org.jr.util;
 /**
  * <p>Copyright: Copyright (c) 2002-2003</p>
  * <p>Company: JavaResearch(http://www.javaresearch.org)</p>
- * <p>×îºó¸üĞÂÈÕÆÚ:2003Äê3ÔÂ28ÈÕ
+ * <p>æœ€åæ›´æ–°æ—¥æœŸ:2003å¹´3æœˆ28æ—¥
  * @author Cherami
  */
 
 /**
- * ´ËÀàÖĞÊÕ¼¯Java±à³ÌÖĞ³£ÓÃµÄ³£Á¿¡£
- * ²»¾ÖÏŞÓÚÄ³¸ö°üÖĞ£¬µ±È»²»°üÀ¨MathÀàÖĞµÄÄÇĞ©³£Á¿¡£
- * Îª±ÜÃâÉú³É´ËÀàµÄÊµÀı£¬¹¹Ôì·½·¨±»ÉêÃ÷ÎªprivateÀàĞÍµÄ¡£
- * @since  0.12
+ * æ­¤ç±»ä¸­æ”¶é›†Javaç¼–ç¨‹ä¸­å¸¸ç”¨çš„å¸¸é‡ã€‚ ä¸å±€é™äºæŸä¸ªåŒ…ä¸­ï¼Œå½“ç„¶ä¸åŒ…æ‹¬Mathç±»ä¸­çš„é‚£äº›å¸¸é‡ã€‚ ä¸ºé¿å…ç”Ÿæˆæ­¤ç±»çš„å®ä¾‹ï¼Œæ„é€ æ–¹æ³•è¢«ç”³æ˜ä¸ºprivateç±»å‹çš„ã€‚
+ * 
+ * @since 0.12
  */
 
 public class Constants {
-  /**
-   * »»ĞĞ·û¡£
-   * <b>ÓÉÓÚÔÚÉè¼ÆµÄÊ±ºòÍü¼Çfinal±äÁ¿ÊÇ»á¾­¹ıÔ¤±àÒëÓÅ»¯µÄ£¬Òò´Ë¶¨ÒåÎªfinal±äÁ¿¾ÍÃ»ÓĞ¿çÆ½Ì¨µÄÄÜÁ¦ÁË¡£Òò´ËÔÚ0.5beta°æÖĞÈ¡ÏûÁËfinalÉùÃ÷¡£</b>
-   * @since  0.12
-   */
-  public static String LINE_SEPARATOR = System.getProperty(
-      "line.separator");
-  /**
-   * ÎÄ¼ş·Ö¸ô·û¡£
-   * <b>ÓÉÓÚÔÚÉè¼ÆµÄÊ±ºòÍü¼Çfinal±äÁ¿ÊÇ»á¾­¹ıÔ¤±àÒëÓÅ»¯µÄ£¬Òò´Ë¶¨ÒåÎªfinal±äÁ¿¾ÍÃ»ÓĞ¿çÆ½Ì¨µÄÄÜÁ¦ÁË¡£Òò´ËÔÚ0.5beta°æÖĞÈ¡ÏûÁËfinalÉùÃ÷¡£</b>
-   * @since  0.12
-   */
-  public static String FILE_SEPARATOR = System.getProperty(
-      "file.separator");
-  /**
-   * Â·¾¶·Ö¸ô·û¡£
-   * <b>ÓÉÓÚÔÚÉè¼ÆµÄÊ±ºòÍü¼Çfinal±äÁ¿ÊÇ»á¾­¹ıÔ¤±àÒëÓÅ»¯µÄ£¬Òò´Ë¶¨ÒåÎªfinal±äÁ¿¾ÍÃ»ÓĞ¿çÆ½Ì¨µÄÄÜÁ¦ÁË¡£Òò´ËÔÚ0.5beta°æÖĞÈ¡ÏûÁËfinalÉùÃ÷¡£</b>
-   * @since  0.12
-   */
-  public static String PATH_SEPARATOR = System.getProperty(
-      "path.separator");
-  /**
-   * Ë½ÓĞ¹¹Ôì·½·¨£¬·ÀÖ¹ÀàµÄÊµÀı»¯£¬ÒòÎª¹¤¾ßÀà²»ĞèÒªÊµÀı»¯¡£
-   */
-  private Constants() {
-  }
+	/**
+	 * æ¢è¡Œç¬¦ã€‚ <b>ç”±äºåœ¨è®¾è®¡çš„æ—¶å€™å¿˜è®°finalå˜é‡æ˜¯ä¼šç»è¿‡é¢„ç¼–è¯‘ä¼˜åŒ–çš„ï¼Œå› æ­¤å®šä¹‰ä¸ºfinalå˜é‡å°±æ²¡æœ‰è·¨å¹³å°çš„èƒ½åŠ›äº†ã€‚å› æ­¤åœ¨0.
+	 * 5betaç‰ˆä¸­å–æ¶ˆäº†finalå£°æ˜ã€‚</b>
+	 * 
+	 * @since 0.12
+	 */
+	public static String LINE_SEPARATOR = System.getProperty("line.separator");
+	/**
+	 * æ–‡ä»¶åˆ†éš”ç¬¦ã€‚ <b>ç”±äºåœ¨è®¾è®¡çš„æ—¶å€™å¿˜è®°finalå˜é‡æ˜¯ä¼šç»è¿‡é¢„ç¼–è¯‘ä¼˜åŒ–çš„ï¼Œå› æ­¤å®šä¹‰ä¸ºfinalå˜é‡å°±æ²¡æœ‰è·¨å¹³å°çš„èƒ½åŠ›äº†ã€‚å› æ­¤åœ¨0.
+	 * 5betaç‰ˆä¸­å–æ¶ˆäº†finalå£°æ˜ã€‚</b>
+	 * 
+	 * @since 0.12
+	 */
+	public static String FILE_SEPARATOR = System.getProperty("file.separator");
+	/**
+	 * è·¯å¾„åˆ†éš”ç¬¦ã€‚ <b>ç”±äºåœ¨è®¾è®¡çš„æ—¶å€™å¿˜è®°finalå˜é‡æ˜¯ä¼šç»è¿‡é¢„ç¼–è¯‘ä¼˜åŒ–çš„ï¼Œå› æ­¤å®šä¹‰ä¸ºfinalå˜é‡å°±æ²¡æœ‰è·¨å¹³å°çš„èƒ½åŠ›äº†ã€‚å› æ­¤åœ¨0.
+	 * 5betaç‰ˆä¸­å–æ¶ˆäº†finalå£°æ˜ã€‚</b>
+	 * 
+	 * @since 0.12
+	 */
+	public static String PATH_SEPARATOR = System.getProperty("path.separator");
+
+	/**
+	 * ç§æœ‰æ„é€ æ–¹æ³•ï¼Œé˜²æ­¢ç±»çš„å®ä¾‹åŒ–ï¼Œå› ä¸ºå·¥å…·ç±»ä¸éœ€è¦å®ä¾‹åŒ–ã€‚
+	 */
+	private Constants() {
+	}
 
 }
